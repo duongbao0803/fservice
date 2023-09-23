@@ -1,0 +1,146 @@
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;            
+    height: 500px;          
+    background-image: url('../img/vệ sinh sofa.jpg');
+    background-position: center;  
+    background-size: cover;      
+    background-repeat: no-repeat; 
+}
+
+.banner-text{
+    color: #fff;
+    margin-left: 5%;
+}
+
+.banner-text p {
+    font-size: 18px;
+    padding: 0;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ex-btn {
+    background-color: #ff8228;
+    border: none; 
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease; 
+    font-size: 18px;
+}
+    
+.ex-btn:hover {
+    background-color: rgb(152, 152, 152);
+}
+
+.service-container {
+    margin-top: 40px;
+    overflow: hidden;
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: center;
+}
+
+.package {
+    padding-top: 45px;
+    box-sizing: border-box;
+    text-align: justify;
+    width: 100%;
+    height: auto;
+    flex: 1;
+    max-width: calc(25% - 20px);
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.package img {
+    max-width: 100%;
+    height: auto;
+}
+
+.package-detail {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.package-detail strong {
+    color: #ff8228;
+    padding: 10px;
+}
+
+strong {
+    display: block;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.fa-star {
+    color: #ff8228;
+}
+
+.left-content-package-detail span {
+    color: #ff8228;
+    padding-left: 10px;
+}
+
+#days {
+    margin: 10px;
+}
+#start-date {
+    margin-top: 15px;
+    margin: 10px;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#order-now-button {
+    background-color: #ff8228;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    width: 150px;
+    font-size: 15px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#order-now-button:hover {
+    background-color: rgb(152, 152, 152);
+}
+
+.right-why span {
+    text-decoration: underline;
+    color: #ff8228;
+}
+.right-why p {
+    padding-bottom: 5px;
+}
+
+.right-why strong {
+    text-align: left;
+    display: block;
+}
+
+
