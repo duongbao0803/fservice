@@ -20,30 +20,10 @@
 </head>
 
 <body>
+      <!-- Header -->
+<div id="header"></div>
 
-
-  <!-- banner -->
-  <!-- <div class="container-fluid">
-    <div class="row banner">
-      <div class=" banner-img position-relative">
-          <img src="./img/vệ sinh sofa.jpg" alt="Vệ sinh sofa - rèm - đệm - thảm" class="img-fluid">
-          <div class="row img-overlay">
-            <div class="col-md position-absolute text-white">
-              <h1 class="banner-title mb-3">Vệ sinh
-                <br>Sofa - Rèm - Đệm - Thảm
-              </h1>
-              <p>Vệ sinh sofa, rèm, đệm, thảm định kỳ là công việc cần
-                thực hiện để đảm bảo an toàn cho không gian sống
-                của gia đình luôn sạch sẽ, an toàn, loại bỏ mọi vết bẩn cứng
-                đầu khiến bạn mệt mỏi.</p>
-              <div class="d-grid gap-2 col-12 mx-auto">
-                <button class=" ex-btn" type="button">Trải nghiệm dịch vụ</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+<section>
   <div class="container-fluid">
     <div class="row d-flex align-items-center">
       <div class="banner-img position-relative"></div>
@@ -58,14 +38,15 @@
         <div>
           <button class="ex-btn" type="button" style="color: #fff;">Trải nghiệm dịch vụ</button>
       </div>
+      
     </div>
   </div>
+  
 
   <!-- end banner -->
   <div class="container service-container">
-    <section>
       <div class="row row-content">
-        <div class="col-12 col-sm-12 col-md-3 package-detail">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 package-detail">
           <!-- sofa -->
           <div class="package-img">
             <img src="./img/vệ sinh sofa.jpg" alt="Vệ sinh sofa" class="w-100" style="height: 220px;">
@@ -80,7 +61,7 @@
         </div>
 
         <!-- rèm -->
-        <div class="col-12 col-sm-12 col-md-3 package-detail">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 package-detail">
           <div class="package-img">
             <img src="./img/vệ sinh sofa.jpg" alt="Vệ sinh sofa" class="w-100" style="height: 220px;">
           </div>
@@ -94,7 +75,7 @@
         </div>
 
         <!-- đệm -->
-        <div class="col-12 col-sm-12 col-md-3 package-detail">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 package-detail">
           <div class="package-img">
             <img src="./img/vệ sinh sofa.jpg" alt="Vệ sinh sofa" class="w-100" style="height: 220px;">
           </div>
@@ -108,7 +89,7 @@
         </div>
 
         <!-- thảm -->
-        <div class="col-12 col-sm-12 col-md-3 package-detail">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 package-detail">
           <div class="package-img">
             <img src="./img/vệ sinh sofa.jpg" alt="Vệ sinh sofa" class="w-100" style="height: 220px;">
           </div>
@@ -122,8 +103,9 @@
           </div>
         </div>
       </div>
-  </div>
-  </section>
+    </div>
+
+  
   <!-- package-detail -->
   <div class="container mt-4">
     <div class="row">
@@ -174,7 +156,7 @@
 
 
   <!-- tại sao -->
-  <div class="container mt-4">
+  <div class="reason container mt-4">
     <div class="Why row">
       <div class="col-md-12" >
         <strong>Tại sao nên chọn dịch vụ vệ sinh 
@@ -197,8 +179,40 @@
       </div>
     </div>
   </div>
+  </section>
 
+  <!-- footer -->
+  <div id="footer"></div>
 
+  <script>
+    fetch("./header.html")
+      .then((response) => response.text())
+      .then((html) => {
+        document.getElementById("header").innerHTML = html;
+      });
+
+    fetch("./footer.html")
+      .then((response) => response.text())
+      .then((html) => {
+        document.getElementById("footer").innerHTML = html;
+      });
+  </script>
+
+<script
+src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"
+></script>
 </body>
 
 </html>
