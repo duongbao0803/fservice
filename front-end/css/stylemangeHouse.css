@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f2f6fa;
+}
+
+.first-line {
+  margin-bottom: 50px;
+}
+
+.main_info-list .user {
+  line-height: 45px;
+  padding: 0 20px 0 15px;
+  border: 1px solid #f2f6fa;
+  cursor: pointer;
+}
+
+.left-bar .user i {
+  color: #ff8228;
+}
+
+.left-bar .info-buiding:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar .info-package:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar .info-order:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar .info-account:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar .logout:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.right_bar-main {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.right_bar-main .house-info {
+  border: 2px solid #ffa15d;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.house_info-address {
+  padding: 0 20px 10px 20px;
+}
+
+.house_info-address tr td:first-child {
+  width: 85px;
+  vertical-align: top;
+}

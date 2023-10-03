@@ -16,13 +16,6 @@
   border-radius: 20px;
 }
 
-#back {
-  width: 50px;
-  height: 50px;
-  color: #ffffff;
-  background-color: #ff6905;
-}
-
 /* .container-fluid {
   background-color: #ff8228;
 } */
@@ -37,31 +30,27 @@
   width: 100%;
 }
 
-section .row-content {
-  margin: 30px;
-}
-strong {
-  font-size: 30px;
+.service-list {
+  margin-top: 30px;
 }
 
 .content {
   margin-bottom: 100px;
+}
+.content h3 {
+  margin-bottom: 30px;
 }
 
 .service-details {
   text-align: justify;
 }
 
-.service-details strong {
-  font-size: 20px;
-}
-
-.row-content .chooseService-img {
+.chooseService-img {
   margin-bottom: 20px;
 }
 
-.row-content .service-img {
-  margin-bottom: 30px;
+.service-img {
+  margin-bottom: 15px;
 }
 
 .service-processing .processing-img {
@@ -117,6 +106,38 @@ footer {
   background-color: #f8f8f8;
 }
 
+footer h4 {
+  font-weight: 700;
+  color: #8d8d8d;
+  padding-bottom: 5px;
+}
+
+footer ul {
+  margin-bottom: 30px;
+}
+
+footer li:last-child {
+  list-style-type: none;
+  word-spacing: 7px;
+}
+
+footer .footer_component {
+  margin-bottom: 30px;
+}
+
+footer .footer_component ul {
+  line-height: 40px;
+  list-style-type: none;
+}
+
+footer .footer_component-last {
+  border-top: 1px solid #cccccc;
+}
+
+.footer_component-last .footer-last {
+  padding: 16px 0 0px 0;
+}
+
 @media only screen and (max-width: 450px) {
   .service-details p {
     text-align: left;
@@ -126,16 +147,7 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
-  .row-content {
+   {
     text-align: center;
-  }
-}
-
-@media only screen and (max-width: 992px) {
-  #footer .certi img {
-    width: 72px;
-  }
-  html {
-    font-size: 14px;
   }
 }
