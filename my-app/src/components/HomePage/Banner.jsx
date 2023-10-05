@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "../css/style.css";
+import "../../css/styleBanner.css";
 
 function Banner() {
   const [data, setData] = useState([]);
@@ -19,19 +19,15 @@ function Banner() {
       });
   }, []);
 
-  if (loading) {
-    return <div>Loading Banner...</div>;
-  }
-
   return (
     <>
       <div className="banner">
         <div
           id="carouselExampleFade"
-          className="carousel slide carousel-fade"
+          className="carousel slide carousel-fade "
           data-ride="carousel"
         >
-          <div className="carousel-inner">
+          <div className="carousel-inner w-100" style={{ maxHeight: "600px" }}>
             {data.map((service) => (
               <div className="carousel-item active">
                 <img src={service.image} className="d-block w-100" alt="..." />

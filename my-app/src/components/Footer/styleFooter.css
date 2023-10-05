@@ -1,0 +1,35 @@
+footer {
+  background-color: #f8f8f8;
+}
+
+footer h4 {
+  font-weight: 700;
+  color: #8d8d8d;
+  padding-bottom: 5px;
+}
+
+footer ul {
+  margin-bottom: 30px;
+}
+
+footer li:last-child {
+  list-style-type: none;
+  word-spacing: 7px;
+}
+
+footer .footer_component {
+  margin-bottom: 30px;
+}
+
+footer .footer_component ul {
+  line-height: 40px;
+  list-style-type: none;
+}
+
+footer .footer_component-last {
+  border-top: 1px solid #cccccc;
+}
+
+.footer_component-last .footer-last {
+  padding: 16px 0 0px 0;
+}

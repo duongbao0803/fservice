@@ -1,0 +1,32 @@
+.nav-item {
+  padding: 0 15px;
+}
+.nav-link {
+  width: max-content;
+}
+
+.navbar-nav .nav-link {
+  color: red;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.navbar-nav .nav-item .nav-link::before {
+  content: "";
+  background-color: grey;
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  transition: 0.2s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav .nav-item .nav-link:hover::before {
+  content: "";
+  width: 80%;
+}

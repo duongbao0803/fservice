@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "../css/style.css";
 
 function ServiceList() {
   const [data, setData] = useState([]);
@@ -21,17 +20,17 @@ function ServiceList() {
       });
   }, []);
 
-  if (loading) {
-    return <div>Loading Service...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading Service...</div>;
+  // }
 
   return (
-    <div className="container">
-      <>
-        <div className="content service-list">
-          <div className="row row-content">
+    <>
+      <div className="container mb-5 mt-5 ">
+        <div className="content service-list ">
+          <div className="row row-content mb-3">
             <div className="col-12 col-sm-12 col-md-12">
-              <span>Những gói dịch vụ chúng tôi cung cấp</span>
+              <h3 className="mb-4">Những gói dịch vụ chúng tôi cung cấp</h3>
             </div>
           </div>
 
@@ -45,19 +44,19 @@ function ServiceList() {
                     style={{ width: "100%" }}
                   />
                 </div>
-                <div className="service-details">
-                  <p>{service.name}</p>
+                <div className="service-details text-justify">
+                  <h5>{service.name}</h5>
                   <p>{service.description}</p>
                   <p>
-                    <a href="">Tìm hiểu thêm</a>
+                    <a href="#">Tìm hiểu thêm</a>
                   </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -1,72 +1,73 @@
 import React from "react";
+// import "../css/style.css";
 
 function UserProcess() {
   return (
-    <div className="container">
-      <>
-        <div className="content service-processing">
-          <div className="row row-content">
+    <>
+      <div className="container mb-5 mt-5">
+        <div className="content service-processing mb-5  ">
+          <div className="row row-content mb-3">
             <div className="col-12 col-sm-12 col-md-12">
-              <p>Quy trình sử dụng dịch vụ</p>
+              <h3>Quy trình sử dụng dịch vụ</h3>
             </div>
           </div>
           <div className="row row-content">
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
-              <div className="processing-img">
+              <div className="processing-img text-center">
                 <img
-                  src={require("../img/chooseService.png")}
+                  src={require("../../img/chooseService.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
                 />
               </div>
-              <div className="service-details">
-                <p>Chọn dịch vụ</p>
+              <div className="service-details text-center">
+                <h5>Chọn dịch vụ</h5>
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
-              <div className="processing-img">
+              <div className="processing-img text-center">
                 <img
-                  src={require("../img/chooseHouse.png")}
+                  src={require("../../img/chooseHouse.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
                 />
               </div>
-              <div className="service-details">
-                <p>Chọn căn hộ</p>
+              <div className="service-details text-center">
+                <h5>Chọn căn hộ</h5>
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
-              <div className="processing-img ">
+              <div className="processing-img text-center">
                 <img
-                  src={require("../img/process.png")}
+                  src={require("../../img/process.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
                 />
               </div>
-              <div className="service-details">
-                <p>Tiến hành thực hiện</p>
+              <div className="service-details text-center">
+                <h5>Tiến hành thực hiện</h5>
               </div>
             </div>
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
-              <div className="processing-img ">
+              <div className="processing-img text-center">
                 <img
-                  src={require("../img/feedback.png")}
+                  src={require("../../img/feedback.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
                 />
               </div>
-              <div className="service-details">
-                <p>Đánh giá và xếp hạng</p>
+              <div className="service-details text-center">
+                <h5>Đánh giá và xếp hạng</h5>
               </div>
             </div>
           </div>
         </div>
-      </>
-    </div>
+      </div>
+    </>
   );
 }
 

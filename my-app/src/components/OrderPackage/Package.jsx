@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "../css/styleorderPackage.css";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import "../../css/styleorderPackage.css";
 
 function Package() {
   const [data, setData] = useState([]);
@@ -23,12 +23,13 @@ function Package() {
       });
   }, []);
 
-  if (loading) {
-    return <div>Loading Banner...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading Banner...</div>;
+  // }
 
   return (
     <>
+      <Header></Header>
       <div className="banner" />
       <div className="container">
         <div className="search-filter">
@@ -41,7 +42,7 @@ function Package() {
             <div className="col-md-6 col-sm-6 col-6">
               <div className="filter">
                 <span>Sắp xếp theo: </span>
-                <select name id>
+                <select name="" id="">
                   <option value={1}>Sort nè</option>
                   <option value={1}>Sort</option>
                   <option value={1}>Sort</option>
@@ -77,6 +78,7 @@ function Package() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }

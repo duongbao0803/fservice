@@ -1,0 +1,41 @@
+.register {
+  background-color: #ff8228;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register .register-field {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.register .register-field span:first-child {
+  margin-bottom: 2px;
+}
+
+.register .register-field a {
+  background-color: #ffffff;
+  padding: 7px 15px;
+  width: 157px;
+  color: #ff822f;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: none;
+  transition: 0.1s ease-in-out;
+}
+
+.register .register-field a:hover {
+  text-decoration: none;
+  background-color: rgb(247, 247, 247);
+  color: #ff6905;
+}
+
+.register .register-field a:active {
+  transform: scale(0.93);
+  text-decoration: none;
+}

@@ -16,6 +16,28 @@
   border-radius: 20px;
 }
 
+.nav-item {
+  position: relative;
+}
+
+.navbar-nav .nav-item .nav-link::before {
+  content: "";
+  background-color: #ec9f9f;
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  transition: 0.2s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav .nav-item .nav-link:hover::before {
+  content: "";
+  width: 80%;
+}
+
 /* .container-fluid {
   background-color: #ff8228;
 } */

@@ -1,16 +1,12 @@
 import React from "react";
-import Banner from "../components/Banner";
-import ServiceList from "../components/ServiceList";
-import Reason from "../components/Reason";
-import UseProcess from "../components/UseProcess";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Package from "../components/Package";
+import Footer from "../components/Footer/Footer";
+// import Header from "../components/Header";
+import Package from "../components/OrderPackage/Package";
+// import "../css/style.css";
 
 function HomePage() {
   return (
     <div className="PackagePage">
-      {/* <Header></Header> */}
       <Package></Package>
     </div>
   );
