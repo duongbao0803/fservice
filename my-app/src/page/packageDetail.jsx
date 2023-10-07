@@ -14,7 +14,6 @@ function PackageDetail() {
       <BannerPackage />
       <ListPackage />
       <Frame />
-      <WhyPackage />
       <Footer />
     </>
   );

@@ -11,17 +11,19 @@ import PD from "./page/packageDetail";
 import Login from "./components/Authen/Login";
 import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
+import PackageDetail from "./page/packageDetail";
 
 function App() {
   return (
     <>
-      <Routes>
+    <PackageDetail/>
+      {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
         <Route path="/about" element={<PD />} />
         <Route path="/contact" element={<InfoUser />} />
         <Route path="/package" element={<PackagePage />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

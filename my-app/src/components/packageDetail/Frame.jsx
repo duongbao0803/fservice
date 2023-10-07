@@ -2,33 +2,35 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import PackageDetail from "../../page/packageDetail";
 import { useParams } from "react-router-dom";
-
+import axios from "axios";
 const Frame = () => {
-  const [APIData, setAPIData] = useState();
-  const [APIData1, setAPIData1] = useState();
+  const [APIData, setAPIData] = useState({});
+  const [serviceData, setServiceData] = useState([]);
+  const [packageDetails, setPackageDetails] = useState([]);
   let { id } = useParams();
-  const baseURL = `https://fservices.azurewebsites.net/api/packages/6`;
+  const baseURL = `https://fservices.azurewebsites.net/api/packages/${1}`;
 
   useEffect(() => {
     async function fetchUserData() {
-      const res = await fetch(baseURL);
-      if (res.ok) {
-        const data = await res.json();
-        setAPIData(data);
-        console.log(data.packageDetails[0].serviceId);
-        const respone = await fetch(
-          `https://fservices.azurewebsites.net/api/services/${data.packageDetails[0].serviceId}`
-        );
-        if (respone.ok) {
-          const data = await respone.json();
-          setAPIData1(data);
-          console.log(data.name);
-        }
-      } else throw new Error(`HTTP Status: ${res.status}`);
-    }
-    fetchUserData();
-  }, []);
+      try {
+        const response = await axios.get(baseURL);
+        setAPIData(response.data);
+        
+        const details = response.data.packageDetails;
+        setPackageDetails(details);
+        
+        const serviceIds = details.map(detail => detail.serviceId);
+        const serviceResponses = await Promise.all(serviceIds.map(id => axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)));
+        const services = serviceResponses.map(resp => resp.data);
 
+        setServiceData(services);
+      } catch (error) {
+        console.error("There was an error fetching the data:", error);
+      }
+    }
+
+    fetchUserData();
+  }, [id]);
   return (
     <>
       {/* package-detail */}
@@ -44,10 +46,10 @@ const Frame = () => {
                 <span className="fa fa-star checked" />
               </p>
               <p className="package-duration">
-                Hình thức: mỗi tuần {APIData?.duration} lần.{" "}
+                Thời hạn: {APIData?.duration} tuần
               </p>
               <p>
-                Giá: <span> {APIData?.price}/4 tuần</span>
+                Giá: <span> {APIData?.price}</span> đồng
               </p>
               <div className="button-container">
                 <button type="button" id="order-now-button">
@@ -62,13 +64,15 @@ const Frame = () => {
               <p>{APIData?.description}</p>
               <div className="Include">
                 <p>Gói dịch vụ bao gồm: </p>
-                <p>
+                {serviceData.map((service, idx) => (
+                <p key={idx}>
                   <i
                     className="fa-solid fa-check"
                     style={{ color: "#03AC00" }}
                   />
-                  {APIData1?.name}
+                 <span> {packageDetails[idx]?.quantity}</span> lần <span>{service.name}</span>
                 </p>
+                  ))}
               </div>
             </div>
           </div>
