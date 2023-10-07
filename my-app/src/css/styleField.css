@@ -1,21 +1,11 @@
 .register {
   background-color: #ff8228;
   height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .register .register-field {
   padding-left: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   color: white;
-}
-
-.register .register-field span:first-child {
-  margin-bottom: 2px;
 }
 
 .register .register-field a {

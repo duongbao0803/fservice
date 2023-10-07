@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+  <title>Login and Register</title>
+  <style>
+    .initialSize {
+      width: 200px;
+      height: 200px;
+      background-color: lightblue;
+      transition: width 0.3s, height 0.3s;
+    }
+
+    .expandedSize {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+  <button id="toggleButton">Toggle Container Size</button>
+  <div id="myContainer" class="initialSize">This is a container.</div>
+  <button id="toggleButton">Toggle Container Size</button>
+  <div id="myContainer" class="initialSize">This is a container.</div>  <button id="toggleButton">Toggle Container Size</button>
+  <div id="myContainer" class="initialSize">This is a container.</div>
+
+
+
+
+  <script>
+    const toggleButton = document.getElementById("toggleButton");
+    const myContainer = document.getElementById("myContainer");
+
+    toggleButton.addEventListener("click", function () {
+      myContainer.classList.toggle("expandedSize");
+    });
+
+  </script>
+  </body>
+
+</html>

@@ -14,7 +14,6 @@ footer ul {
 
 footer li:last-child {
   list-style-type: none;
-  word-spacing: 7px;
 }
 
 footer .footer_component {

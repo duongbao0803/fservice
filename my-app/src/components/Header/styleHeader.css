@@ -15,7 +15,7 @@
 
 .navbar-nav .nav-item .nav-link::before {
   content: "";
-  background-color: grey;
+  background-color: #ff8228;
   position: absolute;
   left: 10px;
   bottom: 0;

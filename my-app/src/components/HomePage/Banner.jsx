@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "../../css/styleBanner.css";
 
 function Banner() {
   const [data, setData] = useState([]);
@@ -21,7 +20,7 @@ function Banner() {
 
   return (
     <>
-      <div className="banner">
+      <div className="banner-dynamic">
         <div
           id="carouselExampleFade"
           className="carousel slide carousel-fade "

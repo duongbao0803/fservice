@@ -39,9 +39,9 @@ function Footer() {
                   </li>
                   <li>
                     <img src={require("../../img/fb_logo.png")} alt="" />
-                    &nbsp;
+                    &nbsp; &nbsp;
                     <img src={require("../../img/tw_logo.png")} alt="" />
-                    &nbsp;
+                    &nbsp; &nbsp;
                     <img src={require("../../img/ig_logo.png")} alt="" />
                   </li>
                 </ul>

@@ -81,8 +81,8 @@
                 <a href="">Căn hộ 2</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="">Căn hộ 3</a>
               </div>
-              <div class="orderdPackage">
-                <div class="orderdPackage_main d-flex justify-content-between">
+              <div class="orderedPackage">
+                <div class="orderedPackage_main d-flex justify-content-between">
                   <div class="orderedPackage-name">
                     <span>COMBO VỆ SINH NHÀ Ở (Cho căn 1PN)</span>
                   </div>
@@ -93,23 +93,13 @@
                 </div>
                 <div class="info-ordered">
                   <table class="info_ordered-table">
+                    <tr></tr>
+                    <tr></tr>
                     <tr>
-                      <td>Loại:</td>
-                      <td>Dùng 1 lần</td>
-                    </tr>
-                    <tr>
-                      <td>Giờ làm việc:</td>
-                      <td>08:00 AM</td>
-                    </tr>
-                    <tr>
-                      <td>Ngày bắt đầu:</td>
+                      <td>Áp dụng từ:</td>
                       <td>27/09/2023</td>
-                      <td>Ngày kết thúc:</td>
+                      <td>Đến</td>
                       <td>27/09/2023</td>
-                    </tr>
-                    <tr class="sex">
-                      <td>Số lần còn lại:</td>
-                      <td>1</td>
                     </tr>
                   </table>
                   <div class="button d-flex justify-content-end">
@@ -117,8 +107,8 @@
                   </div>
                 </div>
               </div>
-              <div class="orderdPackage">
-                <div class="orderdPackage_main d-flex justify-content-between">
+              <div class="orderedPackage">
+                <div class="orderedPackage_main d-flex justify-content-between">
                   <div class="orderedPackage-name">
                     <span>COMBO VỆ SINH NHÀ Ở (Cho căn 1PN)</span>
                   </div>
@@ -129,23 +119,39 @@
                 </div>
                 <div class="info-ordered">
                   <table class="info_ordered-table">
+                    <tr></tr>
+                    <tr></tr>
                     <tr>
-                      <td>Loại:</td>
-                      <td>Dùng 1 lần</td>
-                    </tr>
-                    <tr>
-                      <td>Giờ làm việc:</td>
-                      <td>08:00 AM</td>
-                    </tr>
-                    <tr>
-                      <td>Ngày bắt đầu:</td>
+                      <td>Áp dụng từ:</td>
                       <td>27/09/2023</td>
-                      <td>Ngày kết thúc:</td>
+                      <td>Đến</td>
                       <td>27/09/2023</td>
                     </tr>
-                    <tr class="sex">
-                      <td>Số lần còn lại:</td>
-                      <td>1</td>
+                  </table>
+                  <div class="button d-flex justify-content-end">
+                    <button>Xem chi tiết</button>
+                  </div>
+                </div>
+              </div>
+              <div class="orderedPackage">
+                <div class="orderedPackage_main d-flex justify-content-between">
+                  <div class="orderedPackage-name">
+                    <span>COMBO VỆ SINH NHÀ Ở (Cho căn 1PN)</span>
+                  </div>
+                  <div class="orderedPackage-status">
+                    <span>Trạng thái: </span>
+                    <span>ĐÃ HỦY</span>
+                  </div>
+                </div>
+                <div class="info-ordered">
+                  <table class="info_ordered-table">
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                      <td>Áp dụng từ:</td>
+                      <td>27/09/2023</td>
+                      <td>Đến</td>
+                      <td>27/09/2023</td>
                     </tr>
                   </table>
                   <div class="button d-flex justify-content-end">
@@ -158,5 +164,17 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const button = document.querySelectorAll(".button");
+      const container = document.querySelectorAll(".orderedPackage");
+
+      button.forEach(function (button, index) {
+        button.addEventListener("click", function () {
+          const containers = container[index];
+          containers.classList.toggle("expand");
+        });
+      });
+    </script>
   </body>
 </html>

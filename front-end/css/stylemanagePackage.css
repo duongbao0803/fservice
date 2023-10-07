@@ -68,23 +68,23 @@ td:nth-child(4) {
   padding: 7px 25px 0 0;
 }
 
-.orderdPackage {
+.orderedPackage {
   border: 2px solid #ff8228;
   border-radius: 10px;
   padding: 10px 15px;
   margin-bottom: 40px;
 }
-.orderdPackage_main {
+.orderedPackage_main {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 5px;
 }
 
-.orderdPackage_main .orderedPackage-name span {
+.orderedPackage_main .orderedPackage-name span {
   color: #ff8228;
   font-weight: 650;
 }
 
-.orderdPackage_main .orderedPackage-status span:nth-child(1) {
+.orderedPackage_main .orderedPackage-status span:nth-child(1) {
   color: #757575;
   /* background-color: #9aa14b; */
   padding: 0 15px;
@@ -92,7 +92,7 @@ td:nth-child(4) {
   font-weight: none;
 }
 
-.orderdPackage_main .orderedPackage-status span:nth-child(2) {
+.orderedPackage_main .orderedPackage-status span:nth-child(2) {
   color: white;
   background-color: #9aa14b;
   padding: 0 15px;
@@ -111,4 +111,22 @@ td:nth-child(4) {
 
 .chooseHouse span {
   cursor: pointer;
+}
+
+.orderedPackage .button button {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  outline: none;
+}
+
+.orderedPackage {
+  height: 200px;
+  transition: 10s ease-out;
+  overflow: hidden;
+  position: relative;
+}
+
+.expand {
+  height: 500px;
 }

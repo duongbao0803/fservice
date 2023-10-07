@@ -23,10 +23,6 @@ function Package() {
       });
   }, []);
 
-  // if (loading) {
-  //   return <div>Loading Banner...</div>;
-  // }
-
   return (
     <>
       <Header></Header>

@@ -24,3 +24,21 @@ export const reasonList = [
       "Người làm uy tín, luôn có hồ sơ lý lịch rõ ràng và được Công ty giám sát trong suốt quá trình làm việc.",
   },
 ];
+
+export const service = [
+  {
+    image: require("./img/giặt giũ.jpg"),
+    title: "Vip1",
+    description: "Combo siêu cấp",
+  },
+  {
+    image: require("./img/tổng vệ sinh.jpg"),
+    title: "Vip2",
+    description: "Combo siêu cấp vip",
+  },
+  {
+    image: require("./img/vệ sinh sofa.jpg"),
+    title: "Vip3",
+    description: "Combo siêu cấp vip promax",
+  },
+];

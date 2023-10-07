@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
+// import { service } from "../../data";
 
 function ServiceList() {
   const [data, setData] = useState([]);
@@ -37,7 +40,7 @@ function ServiceList() {
           <div className="row row-content service d-flex justify-center">
             {data.map((service) => (
               <div className="col-12 col-sm-12 col-md-6 col-lg-4">
-                <div className="service-img">
+                <div className="service-img mb-3">
                   <img
                     src={service.image}
                     alt="Dọn phòng"
@@ -45,10 +48,10 @@ function ServiceList() {
                   />
                 </div>
                 <div className="service-details text-justify">
-                  <h5>{service.name}</h5>
+                  <h5>{service.title}</h5>
                   <p>{service.description}</p>
                   <p>
-                    <a href="#">Tìm hiểu thêm</a>
+                    <Link to="/package">Tìm hiểu thêm</Link>
                   </p>
                 </div>
               </div>
