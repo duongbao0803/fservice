@@ -14,7 +14,6 @@ function InfoUser() {
       setListUser(res.data);
     }
   };
-  console.log(listUser);
 
   return (
     <div className="container">
