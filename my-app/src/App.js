@@ -16,6 +16,7 @@ import NotFound from "./components/NotFound/NotFound";
 function App() {
   return (
     <>
+      <PackageDetail />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
