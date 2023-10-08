@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/styleLogin.css";
 import { useState, useEffect } from "react";
-import { LoginAPI } from "../../services/UserService";
+import { loginAPI } from "../../services/UserService";
 import { toast } from "react-toastify";
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ function Login() {
       toast.error("Error! Incorrect Username or Password");
       return;
     }
-    let res = await LoginAPI(email, password);
+    let res = await loginAPI(email, password);
     console.log("check login: ", res);
   };
 

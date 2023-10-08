@@ -11,6 +11,7 @@ import PD from "./page/packageDetail";
 import Login from "./components/Authen/Login";
 import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" element={<PD />} />
         <Route path="/contact" element={<InfoUser />} />
         <Route path="/package" element={<PackagePage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
