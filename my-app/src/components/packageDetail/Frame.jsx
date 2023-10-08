@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import PackageDetail from "../../page/packageDetail";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { Routes, Route, Link, redirect } from "react-router-dom";
+
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
   const [serviceData, setServiceData] = useState([]);
@@ -15,13 +17,17 @@ const Frame = () => {
       try {
         const response = await axios.get(baseURL);
         setAPIData(response.data);
-        
+
         const details = response.data.packageDetails;
         setPackageDetails(details);
-        
-        const serviceIds = details.map(detail => detail.serviceId);
-        const serviceResponses = await Promise.all(serviceIds.map(id => axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)));
-        const services = serviceResponses.map(resp => resp.data);
+
+        const serviceIds = details.map((detail) => detail.serviceId);
+        const serviceResponses = await Promise.all(
+          serviceIds.map((id) =>
+            axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
+          )
+        );
+        const services = serviceResponses.map((resp) => resp.data);
 
         setServiceData(services);
       } catch (error) {
@@ -53,7 +59,8 @@ const Frame = () => {
               </p>
               <div className="button-container">
                 <button type="button" id="order-now-button">
-                  Đặt ngay
+                  {" "}
+                  <Link to="/orderPage">Đặt mua</Link>
                 </button>
               </div>
             </div>
@@ -65,14 +72,15 @@ const Frame = () => {
               <div className="Include">
                 <p>Gói dịch vụ bao gồm: </p>
                 {serviceData.map((service, idx) => (
-                <p key={idx}>
-                  <i
-                    className="fa-solid fa-check"
-                    style={{ color: "#03AC00" }}
-                  />
-                 <span> {packageDetails[idx]?.quantity}</span> lần <span>{service.name}</span>
-                </p>
-                  ))}
+                  <p key={idx}>
+                    <i
+                      className="fa-solid fa-check"
+                      style={{ color: "#03AC00" }}
+                    />
+                    <span> {packageDetails[idx]?.quantity}</span> lần{" "}
+                    <span>{service.name}</span>
+                  </p>
+                ))}
               </div>
             </div>
           </div>

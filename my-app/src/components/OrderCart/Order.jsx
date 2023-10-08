@@ -1,7 +1,7 @@
 import React from "react";
-import "../../css/styleOrder.css";
+import { Routes, Route, Link, redirect } from "react-router-dom";
 
-// import { IntroService } from "../data";
+import "../../css/styleOrder.css";
 
 function Order() {
   return (
@@ -23,14 +23,14 @@ function Order() {
         </div>
       </div>
       <div className="container mb-5">
-        <div className="form-title text-center">
+        <div className="form-content text-center">
           <span>VỆ SINH PHÒNG KHÁCH</span>
         </div>
         <div className="main-form">
           <div className="row">
             <div className="col-md-6">
               <div className="work-info">
-                <div className="title work_info-title">
+                <div className="content work_info-title">
                   <span>
                     <strong>THÔNG TIN LÀM VIỆC</strong>
                   </span>
@@ -115,7 +115,7 @@ function Order() {
                 </div>
               </div>
               <div className="service-info mb-4">
-                <div className="title service_info-title">
+                <div className="content service_info-title">
                   <span>
                     <strong>THÔNG TIN DỊCH VỤ</strong>
                   </span>
@@ -146,7 +146,7 @@ function Order() {
             </div>
             <div className="col-md-6">
               <div className="contact-info">
-                <div className="title contact_info-title">
+                <div className="content contact_info-title">
                   <span>
                     <strong>THÔNG TIN LIÊN HỆ</strong>
                   </span>
@@ -219,7 +219,7 @@ function Order() {
                 </div>
               </div>
               <div className="payment-info">
-                <div className="title payment_info-title">
+                <div className="content payment_info-title">
                   <span>
                     <strong>THÔNG TIN THANH TOÁN</strong>
                   </span>
@@ -262,7 +262,9 @@ function Order() {
                   </div>
                   <div className="order-confirm">
                     <button type="submit">Hủy đơn</button>
-                    <button type="submit">Xác nhận</button>
+                    <button type="submit">
+                      <Link to="/confirm">Xác nhận</Link>
+                    </button>
                   </div>
                 </div>
               </div>

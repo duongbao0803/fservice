@@ -1,76 +1,76 @@
 * {
-    font-family: "Segoe UI", sans-serif;
-    scroll-behavior: smooth;
-  }
+  font-family: "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+}
 .title strong {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 .form-title {
-    display: inline-block; 
-    background-color: #ff8228;
-    padding: 8px 12px; 
+  display: inline-block;
+  background-color: #ff8228;
+  padding: 8px 12px;
 }
 .title {
-    padding-left: 20px;
-    margin-bottom: 10px;
+  padding-left: 20px;
+  margin-bottom: 10px;
 }
 
 .icon-title {
-    float: left;
+  float: left;
 }
 /* Chỉnh sửa biểu đồ ảnh và văn bản để ảnh không quá lớn */
 .img-fluid {
-    max-height: 50px;
-    width: auto;
+  max-height: 50px;
+  width: auto;
 }
 
 .card-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .card {
-    width: 600px;
+  width: 600px;
 }
 .form-check {
-    padding-left: 20px ;
+  padding-left: 20px;
 }
 .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;   /* Optional, if you want some spacing above the button */
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Optional, if you want some spacing above the button */
 }
 .table-custom {
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
 .table-custom td {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .table-custom td p {
-    margin: 0;
+  margin: 0;
 }
 .table-custom td:first-child {
-    min-width: 350px;
-    padding-left: 20px;
-    font-size: 16px;
+  min-width: 350px;
+  padding-left: 20px;
+  font-size: 16px;
 }
 
 .table-custom td:last-child {
-    font-weight: 500;
-    font-size: 16px;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .done-btn {
-    background-color: #ff8228;  /* Arbitrary color for the background */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px;
-    width: 20%;
+  background-color: #ff8228; /* Arbitrary color for the background */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  width: 20%;
 }
 
 .done-btn:hover {
-    background-color:rgb(152, 152, 152);
+  background-color: rgb(152, 152, 152);
 }

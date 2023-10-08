@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { Routes, Route, Link, redirect } from "react-router-dom";
 import "../../css/styleorderPackage.css";
 
 function Package() {
@@ -67,6 +68,9 @@ function Package() {
                       Chỉ từ: <span style={{ color: "FF8228" }} />
                       {packageList.price}
                     </span>
+                    <div>
+                      <Link to="/packageDetail">Tìm hiểu thêm</Link>
+                    </div>
                   </div>
                 </>
               </div>

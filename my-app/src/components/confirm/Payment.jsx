@@ -10,7 +10,6 @@ export default function Payment() {
           >
             THÔNG TIN THANH TOÁN
           </h2>
-          <div className="line" />
         </div>
         <div className="table-custom">
           <table>

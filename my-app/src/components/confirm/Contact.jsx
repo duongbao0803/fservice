@@ -10,7 +10,6 @@ export default function Contact() {
           >
             THÔNG TIN LIÊN HỆ
           </h2>
-          <div className="line" />
         </div>
         <div className="table-custom">
           <table>

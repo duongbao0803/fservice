@@ -1,5 +1,4 @@
 import { Routes, Route, Link, redirect } from "react-router-dom";
-
 import "./App.css";
 import HomePage from "./page/HomePage";
 import PackagePage from "./page/PackagePage";
@@ -12,17 +11,19 @@ import Login from "./components/Authen/Login";
 import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
 import NotFound from "./components/NotFound/NotFound";
+import PackageDetail from "./page/packageDetail";
 
 function App() {
   return (
     <>
-      <PackageDetail />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/service" element={<PackagePage />} />
-        <Route path="/about" element={<PD />} />
-        <Route path="/contact" element={<InfoUser />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<InfoUser />} />
         <Route path="/package" element={<PackagePage />} />
+        <Route path="/packageDetail" element={<PackageDetail />} />
+        <Route path="/orderPage" element={<OrderPage />} />
+        <Route path="/confirm" element={<Confirm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

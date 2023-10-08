@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import BannerPackage from "../components/packageDetail/BannerPackage";
 import ListPackage from "../components/packageDetail/listpackage";
 import Frame from "../components/packageDetail/Frame";
@@ -10,6 +11,11 @@ import "../css/stylepackageDetail.css";
 function PackageDetail() {
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>FService | Detail</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <Header />
       <BannerPackage />
       <ListPackage />

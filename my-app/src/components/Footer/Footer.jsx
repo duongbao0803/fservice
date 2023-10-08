@@ -96,7 +96,7 @@ function Footer() {
             </div>
             <div className="footer_component-last row">
               <div className="footer-last col-md-6 col-sm-6 col-12">
-                <p className="float-left">
+                <p className="float-left" style={{ margin: "0" }}>
                   Copyright ©2023 All rights reserved | FService
                 </p>
               </div>

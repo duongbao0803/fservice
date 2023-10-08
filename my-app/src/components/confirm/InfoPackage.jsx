@@ -10,7 +10,6 @@ export default function InfoPackage() {
           >
             CHI TIẾT CÔNG VIỆC
           </h2>
-          <div className="line" />
         </div>
         <div className="table-custom">
           <table>

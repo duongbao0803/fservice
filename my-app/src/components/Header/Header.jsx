@@ -52,7 +52,9 @@ function Header() {
               className="nav-item"
               style={{ display: "flex", alignItems: "center" }}
             >
-              <i className="fa-solid fa-circle-user" />
+              <Link to="/admin">
+                <i className="fa-solid fa-circle-user" />
+              </Link>
             </li>
           </ul>
         </div>

@@ -10,14 +10,14 @@
   position: relative;
 }
 
-.form-title {
+.form-content {
   background-color: #ff8228;
   color: white;
   font-weight: 800;
   padding: 7px 0;
 }
 
-.title {
+.content {
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -64,7 +64,31 @@
   padding: 0 25px;
   border-radius: 8px;
 }
+.radio-fake {
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgb(196, 196, 207);
+  border-radius: 50%;
+  margin-right: 5px;
+  position: relative;
+  z-index: 1;
+  color: rgb(120, 120, 120);
+  flex-shrink: 0;
+  cursor: pointer;
+}
 
+.radio-fake::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(11, 116, 229);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s ease 0s;
+}
 .order-confirm button:first-child {
   margin-left: 30px;
   color: black;
