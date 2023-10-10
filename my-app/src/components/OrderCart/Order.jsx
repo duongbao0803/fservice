@@ -3,7 +3,7 @@ import { Routes, Route, Link, redirect } from "react-router-dom";
 
 import "../../css/styleOrder.css";
 
-function Order() {
+const Order = () => {
   return (
     <>
       <div className="container mb-5 mt-4">
@@ -275,6 +275,6 @@ function Order() {
       </div>
     </>
   );
-}
+};
 
 export default Order;

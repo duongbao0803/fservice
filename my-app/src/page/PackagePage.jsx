@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 // import "../css/style.css";
 
-function PackagePage() {
+const PackagePage = () => {
   return (
     <>
       <Helmet>
@@ -18,6 +18,6 @@ function PackagePage() {
       <Package></Package>
     </>
   );
-}
+};
 
 export default PackagePage;

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import { fetchUser } from "../../services/UserService";
 import Table from "react-bootstrap/Table";
 import EditModal from "../TableUser/EditModal";
@@ -6,14 +8,17 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
+import ReactPaginate from "react-paginate";
 import _ from "lodash";
 
-function InfoUser() {
+const ListUser = () => {
   const [listUser, setListUser] = useState([]);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [dataUserEdit, setDataUserEdit] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
+  const [total, setTotal] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   const handleClose = () => {
     setShowModalEdit(false);
@@ -21,15 +26,9 @@ function InfoUser() {
   };
 
   useEffect(() => {
-    getListUser();
+    // getListUser();
+    getUser();
   }, []);
-
-  const getListUser = async () => {
-    let res = await fetchUser();
-    if (res && res.data) {
-      setListUser(res.data);
-    }
-  };
 
   const handleEditUser = (user) => {
     setDataUserEdit(user);
@@ -52,6 +51,25 @@ function InfoUser() {
     setListUser(cloneListUser);
   };
 
+  const getUser = async () => {
+    try {
+      let res = await fetchUser();
+      console.log("check user", res.headers);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
+
+  // console.log("check name", res.data);
+
+  // setListUser(res.data.data);
+  // setTotal(res.data.total);
+  // setTotalPage(res.data.total_pages);
+
+  const handlePageClick = (e) => {
+    getUser(+e.selected + 1);
+  };
+
   return (
     <div className="container">
       <div className="button">
@@ -71,7 +89,7 @@ function InfoUser() {
         <tbody>
           {listUser.map((item, index) => (
             <tr>
-              <td>{item.name}</td>
+              <td>{item.id}</td>
               <td>{item.phoneNumber}</td>
               <td>{item.email}</td>
               <td>{item.address}</td>
@@ -86,6 +104,25 @@ function InfoUser() {
           ))}
         </tbody>
       </Table>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        // pageRangeDisplayed={0}
+        pageCount={totalPage}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
 
       <EditModal
         show={showModalEdit}
@@ -101,5 +138,5 @@ function InfoUser() {
       />
     </div>
   );
-}
-export default InfoUser;
+};
+export default ListUser;

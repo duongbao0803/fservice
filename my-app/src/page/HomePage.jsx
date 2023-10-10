@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Field from "../components/HomePage/Field";
 
-function HomePage() {
+const HomePage = () => {
   return (
     <div className="homePage">
       <Helmet>
@@ -26,6 +26,6 @@ function HomePage() {
       <Footer />
     </div>
   );
-}
+};
 
 export default HomePage;

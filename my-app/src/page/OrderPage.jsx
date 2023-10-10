@@ -10,7 +10,7 @@ import Header from "../components/Header/Header";
 import Field from "../components/HomePage/Field";
 import Order from "../components/OrderCart/Order";
 
-function OrderPage() {
+const OrderPage = () => {
   return (
     <div className="homePage">
       <Header></Header>
@@ -18,6 +18,6 @@ function OrderPage() {
       <Footer></Footer>
     </div>
   );
-}
+};
 
 export default OrderPage;

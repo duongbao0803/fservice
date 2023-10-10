@@ -8,7 +8,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import "../css/stylepackageDetail.css";
 
-function PackageDetail() {
+const PackageDetail = () => {
   return (
     <>
       <Helmet>
@@ -23,6 +23,6 @@ function PackageDetail() {
       <Footer />
     </>
   );
-}
+};
 
 export default PackageDetail;

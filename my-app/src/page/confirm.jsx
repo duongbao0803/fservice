@@ -10,12 +10,12 @@ import ConfirmButton from "../components/confirm/ConfirmButton";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
-function Confirm() {
+const Confirm = () => {
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>FService | About</title>
+        <title>FService | Confirm</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <Header />
@@ -38,6 +38,6 @@ function Confirm() {
       <Footer />
     </>
   );
-}
+};
 
 export default Confirm;
