@@ -10,7 +10,7 @@ export default function Payment() {
           >
             THÔNG TIN THANH TOÁN
           </h2>
-          <div className="line-confirm" />
+          <div className="line-cf-vn" />
         </div>
         <div className="table-custom">
           <table>
@@ -25,11 +25,19 @@ export default function Payment() {
               </tr>
               <tr>
                 <td>Phương thức thanh toán</td>
-                <td>Tiền mặt</td>
+                <td>VNPAY</td>
               </tr>
               <tr>
                 <td>Trạng thái thanh toán</td>
-                <td>Chưa thanh toán</td>
+                <td>Đã thanh toán</td>
+              </tr>
+              <tr>
+                <td>Thời gian thanh toán</td>
+                <td>23/09/2023 06:50 PM</td>
+              </tr>
+              <tr>
+                <td>Mã giao dịch</td>
+                <td>897482374823749</td>
               </tr>
             </tbody>
           </table>

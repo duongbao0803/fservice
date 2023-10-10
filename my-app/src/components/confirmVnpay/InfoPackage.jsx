@@ -12,7 +12,7 @@ export default function InfoPackage() {
           </h2>
           <div className="line-confirm" />
         </div>
-        <div className="table-custom">
+        <div className="table-custom-vn">
           <table>
             <tbody>
               <tr>

@@ -1,5 +1,5 @@
 
-.form-title-cf{
+.form-title-cf-vn{
     background-color: #ff8228;
     padding: 8px 12px; 
 }
@@ -11,7 +11,7 @@
 .icon-title {
     float: left;
 }
-.line-confirm {
+.line-cf-vn {
     width: 100%;
     height: 2px;
     background-color: #333;  
@@ -23,7 +23,7 @@
     max-height: 50px;
     width: auto;
 }
-.confirm {
+.confirm-vnpay {
     padding: 50px;
 }
 .card {
@@ -37,23 +37,23 @@
     justify-content: center;
     margin-top: 10px;   
 }
-.table-custom {
+.table-custom-vn{
     table-layout: fixed;
     width: 100%;
 }
-.table-custom td {
+.table-custom-vn td {
     padding: 10px 0;
 }
-.table-custom td p {
+.table-custom-vn td p {
     margin: 0;
 }
-.table-custom td:first-child {
+.table-custom-vn td:first-child {
     min-width: 350px;
     padding-left: 20px;
     font-size: 16px;
 }
 
-.table-custom td:last-child {
+.table-custom-vn td:last-child {
     font-weight: 500;
     font-size: 16px;
 }

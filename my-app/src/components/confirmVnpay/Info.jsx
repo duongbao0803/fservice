@@ -3,8 +3,8 @@ import React, { Component } from "react";
 export default function Info() {
   return (
     // form
-    <div className="card-confirm" style={{ backgroundColor: "#F8F8F8" }}>
-      <h3 className="form-title-cf text-center mb-3" style={{ color: "white" }}>
+    <div className="card-cf-vn" style={{ backgroundColor: "#F8F8F8" }}>
+      <h3 className="form-title-cf-vn text-center mb-3" style={{ color: "white" }}>
         VỆ SINH PHÒNG KHÁCH
       </h3>
       <div className="title" style={{ display: "flex", alignItems: "center" }}>

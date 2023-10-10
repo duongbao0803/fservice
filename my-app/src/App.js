@@ -12,11 +12,13 @@ import Login from "./components/Authen/Login";
 import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
 import PackageDetail from "./page/packageDetail";
+import ConfirmVnpay from "./page/confirmVnpay";
+
 
 function App() {
   return (
     <>
-    <PackageDetail/>
+      <ConfirmVnpay/>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
