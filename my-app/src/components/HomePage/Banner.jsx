@@ -2,22 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 function Banner() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get("https://fservices.azurewebsites.net/api/banners?page=home")
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  }, []);
-
   return (
     <>
       <div className="banner-dynamic">
@@ -27,11 +11,14 @@ function Banner() {
           data-ride="carousel"
         >
           <div className="carousel-inner w-100" style={{ maxHeight: "600px" }}>
-            {data.map((service) => (
-              <div className="carousel-item active">
-                <img src={service.image} className="d-block w-100" alt="..." />
-              </div>
-            ))}
+            <div className="carousel-item active">
+              <img
+                src={require("../../img/vệ sinh theo giờ.jpg")}
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+
             <a
               className="carousel-control-prev"
               href="#carouselExampleFade"

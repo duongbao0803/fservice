@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const fetchUser = () => {
-  // return axios.get(`https://reqres.in/api/users?page=${page}`);
+const fetchUser = (page) => {
   const token =
-    "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiIxMDA1aGFuaHBodWNAZ21haWwuY29tIiwianRpIjoiMDk4YTQyODEtYzI3Yi00ODY1LWI4NzctMDYwOGY1NTE1ZWI4IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE2OTY4NzI2NjAsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODAiLCJhdWQiOiJVc2VyRlNlcnZpY2VzIn0.6-6bY3kWj-t_CnTU7pzZYJAddGGGlSfnapXQzPcinN1mhX81Zeay_5nA6vJYqvs6pgpMVD3_StEhqfDiJmRltA";
+    "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiIxMDA1aGFuaHBodWNAZ21haWwuY29tIiwianRpIjoiNTY3MWQwY2EtNWY3MC00ZWNhLWIwNDQtMGExMjJiNGYyYWE2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE2OTY5MTY1MjIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODAiLCJhdWQiOiJVc2VyRlNlcnZpY2VzIn0.5aaG3VhC51sL1bW7F1YwCuf0NL75gW5OgiPe0ICodPfooq31sxYqVDbXqFZbDOoZyLT6O3X3Q-P9yn_-hRvyNw";
   return axios.get(
-    "https://fservices.azurewebsites.net/api/packages"
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // });
+    `https://fservices.azurewebsites.net/api/accounts?PageNumber=${page}&PageSize=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
 };
 
@@ -27,8 +27,21 @@ const editUser = (name, phoneNumber) => {
   });
 };
 
-const deleteUser = (id) => {
-  return axios.delete(`https://reqres.in/api/users/${id}`);
+// const deleteUser = (id) => {
+//   return axios.delete(`https://reqres.in/api/users/${id}`);
+// };
+
+const deleteUser = () => {
+  const token =
+    "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiIxMDA1aGFuaHBodWNAZ21haWwuY29tIiwianRpIjoiNTY3MWQwY2EtNWY3MC00ZWNhLWIwNDQtMGExMjJiNGYyYWE2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE2OTY5MTY1MjIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODAiLCJhdWQiOiJVc2VyRlNlcnZpY2VzIn0.5aaG3VhC51sL1bW7F1YwCuf0NL75gW5OgiPe0ICodPfooq31sxYqVDbXqFZbDOoZyLT6O3X3Q-P9yn_-hRvyNw";
+  return axios.delete(
+    "https://fservices.azurewebsites.net/api/accounts/3b4b1e75-3f6d-424b-a815-d462e88c65d3",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 export { fetchUser, loginAPI, editUser, deleteUser };

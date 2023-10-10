@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 export default function BannerPackage() {
   const [APIData, setAPIData] = useState();
   const [APIData1, setAPIData1] = useState();
- 
+
   let { image } = useParams();
   const baseURL = `https://fservices.azurewebsites.net/api/packages/1`;
 
@@ -28,7 +28,7 @@ export default function BannerPackage() {
     fetchUserData();
   }, []);
   const bannerStyle = {
-    backgroundImage: `url(${APIData?.image})`, 
+    backgroundImage: `url(${APIData?.image})`,
   };
   return (
     <div>
@@ -36,15 +36,13 @@ export default function BannerPackage() {
       <section>
         <div className="container-fluid">
           <div className="row d-flex align-items-center">
-          <div style={bannerStyle} className="banner-img position-relative" />
+            <div style={bannerStyle} className="banner-img position-relative" />
             <div className="position-absolute banner-text">
               <h1 className="banner-title mb-3">
-              {APIData?.name}
+                {APIData?.name}
                 <br />
               </h1>
-              <p className="col-md-5">
-              {APIData?.description}
-              </p>
+              <p className="col-md-5">{APIData?.description}</p>
               <div>
                 <button
                   className="ex-btn"

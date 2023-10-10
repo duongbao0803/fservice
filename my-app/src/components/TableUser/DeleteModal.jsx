@@ -14,17 +14,20 @@ const DeleteModal = ({
   handleDeleteInfoUser,
 }) => {
   const confirmDelete = async () => {
-    let res = await deleteUser(dataUserDelete.id);
-    console.log(res);
-    if (res && +res.status === 204) {
-      toast.success("Xóa thành công");
-      handleDeleteInfoUser(dataUserDelete);
-      handleClose();
-    } else {
-      toast.error("Xóa thất bại");
+    try {
+      let res = await deleteUser(dataUserDelete);
+
+      // if (res && +res.status === 204) {
+      //   toast.success("Xóa thành công");
+      //   handleDeleteInfoUser(dataUserDelete);
+      //   handleClose();
+      // } else {
+      //   toast.error("Xóa thất bại");
+      // }
+    } catch (error) {
+      console.log("Fetching deleteUser error", error);
     }
   };
-
   return (
     <>
       <Modal show={show} onHide={handleClose}>

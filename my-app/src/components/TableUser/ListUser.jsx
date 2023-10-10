@@ -27,7 +27,7 @@ const ListUser = () => {
 
   useEffect(() => {
     // getListUser();
-    getUser();
+    getUser(1);
   }, []);
 
   const handleEditUser = (user) => {
@@ -51,20 +51,26 @@ const ListUser = () => {
     setListUser(cloneListUser);
   };
 
-  const getUser = async () => {
+  const getUser = async (page, pageSize) => {
     try {
-      let res = await fetchUser();
-      console.log("check user", res.headers);
+      let res = await fetchUser(page);
+
+      if (res && res.data) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        // console.log("check user", xPaginationHeader);
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalPages;
+          setTotalPage(sumPage);
+        }
+        setListUser(res.data);
+      }
+
+      // console.log("check username", res.data[1].name);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   };
-
-  // console.log("check name", res.data);
-
-  // setListUser(res.data.data);
-  // setTotal(res.data.total);
-  // setTotalPage(res.data.total_pages);
 
   const handlePageClick = (e) => {
     getUser(+e.selected + 1);
@@ -87,9 +93,9 @@ const ListUser = () => {
           </tr>
         </thead>
         <tbody>
-          {listUser.map((item, index) => (
+          {listUser.map((item) => (
             <tr>
-              <td>{item.id}</td>
+              <td>{item.name}</td>
               <td>{item.phoneNumber}</td>
               <td>{item.email}</td>
               <td>{item.address}</td>
@@ -107,8 +113,9 @@ const ListUser = () => {
       <ReactPaginate
         nextLabel="next >"
         onPageChange={handlePageClick}
-        // pageRangeDisplayed={0}
+        pageRangeDisplayed={1}
         pageCount={totalPage}
+        marginPagesDisplayed={1}
         previousLabel="< previous"
         pageClassName="page-item"
         pageLinkClassName="page-link"
@@ -123,7 +130,6 @@ const ListUser = () => {
         activeClassName="active"
         renderOnZeroPageCount={null}
       />
-
       <EditModal
         show={showModalEdit}
         handleClose={handleClose}

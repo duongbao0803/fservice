@@ -15,12 +15,15 @@ const EditModal = ({ show, handleClose, dataUserEdit, handleEditInfoUser }) => {
   const handleEditUser = async () => {
     let res = await editUser(name, phoneNumber);
     if (res && res.updateAt) {
+      toast.success("Lưu thành công");
       handleEditInfoUser({
         phoneNumber: phoneNumber,
         name: name,
       });
+      handleClose();
+    } else {
+      toast.error("Lưu thất bại");
     }
-    toast.success("Lưu thành công");
   };
 
   useEffect(() => {
