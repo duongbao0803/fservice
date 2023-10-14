@@ -6,13 +6,11 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import About from "./components/AboutUs/About";
 import OrderPage from "./page/OrderPage";
-import PD from "./page/packageDetail";
 import Login from "./components/Authen/Login";
 import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
 import NotFound from "./components/NotFound/NotFound";
 import PackageDetail from "./page/packageDetail";
-import ListPackage from "./components/packageDetail/ListPackage";
 import ListUser from "./components/TableUser/ListUser";
 import ConfirmVnpay from "./page/confirmVnpay";
 

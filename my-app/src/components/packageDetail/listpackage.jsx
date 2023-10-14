@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function ListPackage() {
-  const { id, packageDetails } = useParams();
+const ListPackage = () => {
+  const { id } = useParams();
   const [data, setData] = useState({ packageDetails: [], serviceDetails: [] });
   const [loading, setLoading] = useState(true);
 
@@ -28,9 +28,7 @@ export default function ListPackage() {
             )
           );
           console.log("check serviceRes", serviceResponses);
-
           const services = serviceResponses.map((response) => response.data);
-
           setData({
             packageDetails: initialResponse.data.packageDetails,
             serviceDetails: services,
@@ -76,4 +74,6 @@ export default function ListPackage() {
       </div>
     </div>
   );
-}
+};
+
+export default ListPackage;

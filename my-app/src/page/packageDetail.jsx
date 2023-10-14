@@ -1,9 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import BannerPackage from "../components/packageDetail/BannerPackage";
-import ListPackage from "../components/packageDetail/ListPackage";
-import Frame from "../components/packageDetail/Frame";
+import BannerPackage from "../components/PackageDetail/BannerPackage";
+import Frame from "../components/PackageDetail/Frame";
 import "../css/stylepackageDetail.css";
+import ListPackage from "../components/PackageDetail/ListPackage";
 
 const PackageDetail = () => {
   return (

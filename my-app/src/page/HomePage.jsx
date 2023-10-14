@@ -18,7 +18,6 @@ const HomePage = () => {
       </Helmet>
       <Slider slides={slides} />
       <ServiceList />
-
       <Reason />
       <UseProcess />
       <Field />

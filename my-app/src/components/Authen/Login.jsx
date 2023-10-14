@@ -54,16 +54,14 @@ function Loginv2() {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      toast.error("Error! Fill in email or password");
+      toast.error("Error! You must fill both email and password");
       return;
     }
     let res = await loginAPI(email, password);
-    if (
-      res.data !== "UserName does not exist!" &&
-      res.data !== "Error! Incorrect Username or Password!"
-    ) {
-      if (res && res.data && res.status !== 400) {
-        Cookies.set("token", res.data);
+    console.log("check mail", res.data.status);
+    if (res.status !== 401 && res.status !== 400) {
+      if (res && res.data && res.data.status === true) {
+        Cookies.set("token", res.data.jwtToken);
         if (rememberMe) {
           localStorage.setItem("rememberEmail", email);
           localStorage.setItem("rememberPassword", password);
@@ -72,13 +70,11 @@ function Loginv2() {
           localStorage.removeItem("rememberPassword");
         }
         navigate("/");
-      } else if (res.email) {
-        toast.error(res.email);
       } else {
         toast.error(res.data);
       }
     } else {
-      toast.error(res.data);
+      toast.error(res.message || res.data.errors.Email[0]);
     }
   };
 

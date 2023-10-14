@@ -6,17 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 const config = axios.create({
   baseURL: "https://fservices.azurewebsites.net",
   headers: {
-    Authorization: `Bearer ${"eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiIxMDA1aGFuaHBodWNAZ21haWwuY29tIiwianRpIjoiMzVhZWM5NjctOTk5MC00Y2U4LTg5YTctMzkwMzUyYjkyMWE1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE2OTcxMjA2ODcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODAiLCJhdWQiOiJVc2VyRlNlcnZpY2VzIn0.Fe0sB6UfNYnGXeGJ1jB8TEmgFavNMSSHzXrQsc_2QtPtDy46zAFBGtU8n5EZI2A5uytPB11osF8EgSEOUG-CgQ"}`,
+    Authorization: `Bearer ${"eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiIxMDA1aGFuaHBodWNAZ21haWwuY29tIiwianRpIjoiNzE0NTY5YTQtNjNjOS00ODBmLWE0OWMtY2FkYzg5YTRiMTZhIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU4iLCJleHAiOjE2OTcyOTgzNDYsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODAiLCJhdWQiOiJVc2VyRlNlcnZpY2VzIn0.eRJRvoNPkmHDTbdPKaYwUaLZdlzqbHMMTYWwqGhTJQstZ_n7jLXUoFqh0fuaRSSlwV8ZyVjvbDbLdihL_vKajg"}`,
   },
 });
-
-// res.data = error.response.data;
-//       res.headers = error.response.headers;
-//       res.status = error.response.status;
-//       res.data.title = error.response.data.title;
-//       res.data.email = error.response.data.errors
-//         ? error.response.data.errors.Email[0]
-//         : {};
 
 config.interceptors.response.use(
   function (response) {
@@ -30,11 +22,7 @@ config.interceptors.response.use(
       res.data = eRes.data;
       res.headers = eRes.headers;
       res.status = eRes.status;
-      // res.data.title = eRes.data.title;
-      res.email = error.response.data.errors.Email[0];
-      //         ? error.response.data.errors.Email[0]
-      //         : {};;
-      console.log("cehckkk", error.response.data.errors.Email[0]);
+      res.message = eRes.data.message;
     } else if (error.request) {
       console.log(error.request);
     } else {
