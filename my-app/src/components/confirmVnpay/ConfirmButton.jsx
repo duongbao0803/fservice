@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 export default function ConfirmButton() {
   return (
     <div className="container-cf-btn">
@@ -14,7 +13,7 @@ export default function ConfirmButton() {
             id="defaultCheck"
           />
           <label className="form-check-label" htmlFor="defaultCheck">
-            Xác nhận 
+            Xác nhận
           </label>
         </div>
         <div className="btn-container">
