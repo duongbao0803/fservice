@@ -131,7 +131,7 @@ const Order = () => {
                     </div>
                     <div className="col-sm-6 col-md-8 col-8">
                       <span>
-                        <strong>Vệ sinh phòng khách</strong>
+                        <p>Vệ sinh phòng khách</p>
                       </span>
                       <span>4 lần</span>
                       <span>4 tuần (kể từ ngày bắt đầu)</span>
@@ -263,7 +263,12 @@ const Order = () => {
                   <div className="order-confirm">
                     <button type="submit">Hủy đơn</button>
                     <button type="submit">
-                      <Link to="/confirm">Xác nhận</Link>
+                      <Link
+                        to="/confirm"
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
+                        Xác nhận
+                      </Link>
                     </button>
                   </div>
                 </div>

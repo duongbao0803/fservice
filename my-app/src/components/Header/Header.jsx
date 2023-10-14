@@ -1,11 +1,27 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "../Header/styleHeader.css";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import { Navigate, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
-function Header() {
+function Header(props) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    navigate("/");
+    toast.success("Logout Success");
+  };
+
   return (
     <>
-      <nav className="navbar navbar-light navbar-expand-sm" id="move">
+      <nav className="navbar navbar-light navbar-expand-md" id="move">
         <button
           className="navbar-toggler"
           type="button"
@@ -28,13 +44,13 @@ function Header() {
           id="navbarToggleExternalContent"
         >
           <ul className="navbar-nav mr-auto" id="myNavbar">
-            <li className="nav-item active">
+            <li className="nav-item">
               <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>
             <li className="nav-item ">
-              <Link to="/service" className="nav-link">
+              <Link to="/package" className="nav-link">
                 Service
               </Link>
             </li>
@@ -48,17 +64,20 @@ function Header() {
                 Contact
               </Link>
             </li>
-            <li
-              className="nav-item"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <Link to="/admin">
-                <i className="fa-solid fa-circle-user" />
-              </Link>
+            <li className="nav-item" style={{ paddingRight: 0 }}>
+              <DropdownButton id="dropdown-basic-button" title="Account">
+                <Dropdown.Item as={Link} to="/authen">
+                  Login
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleLogout()}>
+                  Logout
+                </Dropdown.Item>
+              </DropdownButton>
             </li>
           </ul>
         </div>
       </nav>
+      <ToastContainer />
     </>
   );
 }

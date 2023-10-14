@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 export default function BannerPackage() {
   const [APIData, setAPIData] = useState();
   const [APIData1, setAPIData1] = useState();
 
   let { image } = useParams();
-  const baseURL = `https://fservices.azurewebsites.net/api/packages/1`;
+  const { id } = useParams();
+
+  const baseURL = `https://fservices.azurewebsites.net/api/packages/${id}`;
 
   useEffect(() => {
     async function fetchUserData() {

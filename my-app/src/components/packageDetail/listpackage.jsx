@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function ListPackage() {
+  const { id, packageDetails } = useParams();
   const [data, setData] = useState({ packageDetails: [], serviceDetails: [] }); // Initialize serviceDetails as an array
   const [loading, setLoading] = useState(true);
 
@@ -9,13 +11,15 @@ export default function ListPackage() {
     async function fetchData() {
       try {
         const initialResponse = await axios.get(
-          "https://fservices.azurewebsites.net/api/packages/1"
+          `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${1}`
         );
+        console.log("check initial", initialResponse.data.packageDetails);
 
         if (initialResponse.data && initialResponse.data.packageDetails) {
           const serviceIds = initialResponse.data.packageDetails.map(
             (pd) => pd.serviceId
           );
+
           const serviceResponses = await Promise.all(
             serviceIds.map((id) =>
               axios.get(
@@ -23,6 +27,7 @@ export default function ListPackage() {
               )
             )
           );
+          console.log("check serviceRes", serviceResponses);
 
           const services = serviceResponses.map((response) => response.data);
 
@@ -54,16 +59,16 @@ export default function ListPackage() {
             key={idx}
             className="col-12 col-sm-12 col-md-6 col-lg-4 package-detail"
           >
-            <div className="package-img">
+            <div className="package-img mb-3">
               <img
                 src={service.image}
                 alt={service.name}
                 className="w-100"
-                style={{ height: "220px" }}
+                style={{ width: "50%", height: "250px", objectFit: "cover" }}
               />
             </div>
             <div className="package-detail">
-              <p>{service.name}</p>
+              <h4>{service.name}</h4>
               <span>{service.description}</span>
             </div>
           </div>

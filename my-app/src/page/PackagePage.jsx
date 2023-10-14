@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 
 import Package from "../components/OrderPackage/Package";
 import { Helmet } from "react-helmet";
+import Filter from "../components/OrderPackage/Filter";
 
 // import "../css/style.css";
 
@@ -16,6 +17,7 @@ const PackagePage = () => {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <Package></Package>
+      {/* <Filter></Filter> */}
     </>
   );
 };

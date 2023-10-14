@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default function Payment() {
   return (
-    <div className="container mt-5">
+    <div className="container mt-1">
       <div className="pay mb-3">
         <div className="title-detail">
           <h2
@@ -10,6 +10,7 @@ export default function Payment() {
           >
             THÔNG TIN THANH TOÁN
           </h2>
+          <div className="line-confirm" />
         </div>
         <div className="table-custom">
           <table>

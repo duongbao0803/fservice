@@ -1,11 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import BannerPackage from "../components/packageDetail/BannerPackage";
-import ListPackage from "../components/packageDetail/listpackage";
+import ListPackage from "../components/packageDetail/ListPackage";
+
 import Frame from "../components/packageDetail/Frame";
 import WhyPackage from "../components/packageDetail/WhyPackage";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import test from "../";
 import "../css/stylepackageDetail.css";
 
 const PackageDetail = () => {
@@ -16,11 +18,11 @@ const PackageDetail = () => {
         <title>FService | Detail</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <Header />
       <BannerPackage />
-      <ListPackage />
-      <Frame />
-      <Footer />
+      <div className="section mb-5 mt-5">
+        <ListPackage />
+        <Frame />
+      </div>
     </>
   );
 };

@@ -13,9 +13,7 @@ function Package() {
     axios
       .get("https://fservices.azurewebsites.net/api/packages")
       .then((response) => {
-        const typeID = response.data;
-        const filterTypeID = typeID.filter((data) => data.typeId === 1);
-        setData(filterTypeID);
+        setData(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -26,7 +24,6 @@ function Package() {
 
   return (
     <>
-      <Header></Header>
       <div className="banner" />
       <div className="container">
         <div className="search-filter">
@@ -40,7 +37,7 @@ function Package() {
               <div className="filter">
                 <span>Sắp xếp theo: </span>
                 <select name="" id="">
-                  <option value={1}>Sort nè</option>
+                  <option value={1}></option>
                   <option value={1}>Sort</option>
                   <option value={1}>Sort</option>
                 </select>
@@ -56,8 +53,11 @@ function Package() {
                       <img
                         src={packageList.image}
                         alt=""
-                        width="100%"
-                        height="230px"
+                        style={{
+                          width: "100%",
+                          height: "270px",
+                          objectFit: "cover",
+                        }}
                       />
                     </div>
                   </div>
@@ -65,11 +65,16 @@ function Package() {
                     <h4>{packageList.name}</h4>
                     <p>{packageList.description}</p>
                     <span>
-                      Chỉ từ: <span style={{ color: "FF8228" }} />
-                      {packageList.price}
+                      Chỉ từ:{" "}
+                      <span style={{ color: "#ff7f00", fontWeight: "700" }}>
+                        {" "}
+                        {packageList.price}đ{" "}
+                      </span>
                     </span>
                     <div>
-                      <Link to="/packageDetail">Tìm hiểu thêm</Link>
+                      <Link to={`/detail/${packageList.id}`}>
+                        Tìm hiểu thêm
+                      </Link>
                     </div>
                   </div>
                 </>
@@ -78,7 +83,6 @@ function Package() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }

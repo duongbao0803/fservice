@@ -10,12 +10,13 @@ const Frame = () => {
   const [serviceData, setServiceData] = useState([]);
   const [packageDetails, setPackageDetails] = useState([]);
   let { id } = useParams();
-  const baseURL = `https://fservices.azurewebsites.net/api/packages/${1}`;
+  const baseURL = `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${2}`;
 
   useEffect(() => {
     async function fetchUserData() {
       try {
         const response = await axios.get(baseURL);
+        console.log("api", response);
         setAPIData(response.data);
 
         const details = response.data.packageDetails;
@@ -40,11 +41,11 @@ const Frame = () => {
   return (
     <>
       {/* package-detail */}
-      <div className="container mt-4">
+      <div className="container mt-5 pt-5">
         <div className="row">
           <div className="col-md-6">
             <div className="left-content-package-detail">
-              <p className="package-name">{APIData?.name}</p>
+              <h5 className="package-name">{APIData?.name}</h5>
               <p>
                 <span className="fa fa-star checked" />
                 <span className="fa fa-star checked" />
@@ -60,14 +61,23 @@ const Frame = () => {
               <div className="button-container">
                 <button type="button" id="order-now-button">
                   {" "}
-                  <Link to="/orderPage">Đặt mua</Link>
+                  <Link
+                    to="/orderPage"
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      fontWeight: "800",
+                    }}
+                  >
+                    Đặt mua
+                  </Link>
                 </button>
               </div>
             </div>
           </div>
           <div className="col-md-6">
             <div className="right-content-package-detail">
-              <p>Chi tiết gói: </p>
+              <h5>Chi tiết gói: </h5>
               <p>{APIData?.description}</p>
               <div className="Include">
                 <p>Gói dịch vụ bao gồm: </p>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default function Contact() {
   return (
-    <div className="container mt-5">
+    <div className="container mt-1">
       <div className="contact mb-3">
         <div className="title-detail">
           <h2
@@ -10,6 +10,7 @@ export default function Contact() {
           >
             THÔNG TIN LIÊN HỆ
           </h2>
+          <div className="line-confirm" />
         </div>
         <div className="table-custom">
           <table>

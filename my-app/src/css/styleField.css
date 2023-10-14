@@ -4,14 +4,14 @@
 }
 
 .register .register-field {
-  padding-left: 30px;
+  /* padding-left: 30px; */
   color: white;
 }
 
 .register .register-field a {
   background-color: #ffffff;
   padding: 7px 15px;
-  width: 157px;
+  width: 180px;
   color: #ff822f;
   border-radius: 10px;
   margin-top: 10px;

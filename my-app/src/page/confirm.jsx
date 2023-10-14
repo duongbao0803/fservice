@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import "../css/styleconfirm.css";
 import TitleConfirm from "../components/confirm/TitleConfirm";
 import Info from "../components/confirm/Info";
@@ -10,14 +9,9 @@ import ConfirmButton from "../components/confirm/ConfirmButton";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
-const Confirm = () => {
+function Confirm() {
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>FService | Confirm</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
       <Header />
       <TitleConfirm />
       <div
@@ -38,6 +32,6 @@ const Confirm = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default Confirm;

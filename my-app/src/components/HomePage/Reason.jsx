@@ -3,11 +3,11 @@ import { reasonList } from "../../data";
 function Reason() {
   return (
     <>
-      <div className="container mb-5 mt-5">
+      <div className="container mb-5 mt-5 pt-5 pb-5">
         <div className="content choose-service">
           <div className="row row-content mb-3">
             <div className="col-12 col-sm-12 col-md-12">
-              <h3>Tại sao nên chọn FService</h3>
+              <h2>Tại sao nên chọn FService</h2>
             </div>
           </div>
           <div className="row row-content">
@@ -32,7 +32,7 @@ function Reason() {
                 </div>
 
                 <div className="service-details">
-                  <h5>{reason.title}</h5>
+                  <h5 style={{ fontWeight: "900" }}>{reason.title}</h5>
                   <p>{reason.description}</p>
                 </div>
               </div>

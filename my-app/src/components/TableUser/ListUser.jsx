@@ -51,7 +51,7 @@ const ListUser = () => {
     setListUser(cloneListUser);
   };
 
-  const getUser = async (page, pageSize) => {
+  const getUser = async (page) => {
     try {
       let res = await fetchUser(page);
 
