@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function ListPackage() {
   const { id, packageDetails } = useParams();
-  const [data, setData] = useState({ packageDetails: [], serviceDetails: [] }); // Initialize serviceDetails as an array
+  const [data, setData] = useState({ packageDetails: [], serviceDetails: [] });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

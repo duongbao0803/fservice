@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import PackageDetail from "../../page/packageDetail";
 import { useParams } from "react-router-dom";
 import { Routes, Route, Link, redirect } from "react-router-dom";
 

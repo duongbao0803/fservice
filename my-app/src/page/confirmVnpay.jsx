@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "../css/styleconfirmvnpay.css";
 import TitleConfirm from "../components/confirmVnpay/TitleConfirm";
 import Info from "../components/confirmVnpay/Info";
@@ -6,9 +7,6 @@ import InfoPackage from "../components/confirmVnpay/InfoPackage";
 import Contact from "../components/confirmVnpay/Contact";
 import Payment from "../components/confirmVnpay/Payment";
 import ConfirmButton from "../components/confirmVnpay/ConfirmButton";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import { Helmet } from "react-helmet";
 
 function ConfirmVnpay() {
   return (
