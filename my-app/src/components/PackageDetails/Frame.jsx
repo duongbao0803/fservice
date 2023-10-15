@@ -3,43 +3,47 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Routes, Route, Link, redirect } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
   const [serviceData, setServiceData] = useState([]);
   const [packageDetails, setPackageDetails] = useState([]);
   let { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
   const baseURL = `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${2}`;
 
   useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const response = await axios.get(baseURL);
-        console.log("api", response);
-        setAPIData(response.data);
+    fetchFrame();
+  }, []);
 
-        const details = response.data.packageDetails;
-        setPackageDetails(details);
+  const fetchFrame = async () => {
+    try {
+      const response = await axios.get(baseURL);
+      console.log("api", response);
+      setAPIData(response.data);
 
-        const serviceIds = details.map((detail) => detail.serviceId);
-        const serviceResponses = await Promise.all(
-          serviceIds.map((id) =>
-            axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
-          )
-        );
-        const services = serviceResponses.map((resp) => resp.data);
+      const details = response.data.packageDetails;
+      setPackageDetails(details);
 
-        setServiceData(services);
-      } catch (error) {
-        console.error("There was an error fetching the data:", error);
-      }
+      const serviceIds = details.map((detail) => detail.serviceId);
+      const serviceResponses = await Promise.all(
+        serviceIds.map((id) =>
+          axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
+        )
+      );
+      const services = serviceResponses.map((resp) => resp.data);
+
+      setServiceData(services);
+    } catch (error) {
+      console.error("There was an error fetching the data:", error);
+      setLoading(false);
     }
+  };
 
-    fetchUserData();
-  }, [id]);
   return (
     <>
-      {/* package-detail */}
       <div className="container mt-5 pt-5">
         <div className="row">
           <div className="col-md-6">

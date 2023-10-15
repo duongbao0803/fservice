@@ -21,7 +21,7 @@ function Header(props) {
 
   return (
     <>
-      <nav className="navbar navbar-light navbar-expand-md" id="move">
+      <nav className="navbar b navbar-light navbar-expand-md" id="move">
         <button
           className="navbar-toggler"
           type="button"

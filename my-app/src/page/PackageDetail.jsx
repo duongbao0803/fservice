@@ -9,7 +9,6 @@ const PackageDetail = () => {
   return (
     <>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>FService | Detail</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
