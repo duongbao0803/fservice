@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../utils/cus-axios";
 
 const fetchUser = (page) => {
+  // return config.get(`/api/accounts?PageNumber=${page}&PageSize=2`);
   return config.get(`/api/accounts?PageNumber=${page}&PageSize=2`);
 };
 
@@ -23,11 +24,34 @@ const loginAPI = (email, password) => {
   return config.post("/api/authentication/SignIn", { email, password });
 };
 
-const editUser = (name, phoneNumber) => {
-  return config.put("https://reqres.in/api/users/2", {
-    name,
-    phoneNumber,
-  });
+// const signUp = (
+//   name,
+//   phoneNumber,
+//   address,
+//   dateOfBirth,
+//   email,
+//   userName,
+//   password,
+//   confirmPassword
+// ) => {
+//   return config.post("/api/authentication/SignUp", {
+//     name,
+//     phoneNumber,
+//     address,
+//     dateOfBirth,
+//     email,
+//     userName,
+//     password,
+//     confirmPassword,
+//   });
+// };
+
+const signup = (email, password) => {
+  return config.post("https://reqres.in/api/register", { email, password });
+};
+
+const editUser = (id) => {
+  return config.put(`/api/accounts/${id}`);
 };
 
 // const deleteUser = (id) => {
@@ -38,4 +62,4 @@ const deleteUser = (id) => {
   return config.delete(`/api/accounts/${id}`);
 };
 
-export { fetchUser, loginAPI, editUser, deleteUser };
+export { fetchUser, loginAPI, signup, editUser, deleteUser };

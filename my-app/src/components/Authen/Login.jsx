@@ -12,6 +12,9 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { loginAPI } from "../../services/UserService";
+import { signUp } from "../../services/UserService";
+import { signup } from "../../services/UserService";
+
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,12 +25,16 @@ import { Helmet } from "react-helmet";
 import "../../css/styleLogin.css";
 
 function Loginv2() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
   const [name, setName] = useState("");
-  const [userName, setuserName] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [dateOfBirth, setdateOfBirth] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailRegis, setemailRegis] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUsername] = useState("");
+  const [passwordRegis, setpasswordRegis] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
@@ -77,7 +84,38 @@ function Loginv2() {
     }
   };
 
-  const HandleSignup = () => {};
+  const HandleSignUp = async () => {
+    alert("Bao ne");
+    try {
+      // if (
+      //   !name ||
+      //   !phoneNumber ||
+      //   !address ||
+      //   !dateOfBirth ||
+      //   !emailRegis ||
+      //   !passwordRegis ||
+      //   !confirmPassword
+      // ) {
+      //   toast.error("Error! You must fill all information");
+      //   return;
+      // }
+      let res = await signup(
+        // name,
+        // phoneNumber,
+        // address,
+        // dateOfBirth,
+        // email,
+        // userName,
+        // password,
+        // confirmPassword
+        email,
+        password
+      );
+      console.log("check singup", res);
+    } catch (exception) {
+      console.log(" cook roi", exception);
+    }
+  };
 
   const [justifyActive, setJustifyActive] = useState("tab1");
 
@@ -185,15 +223,6 @@ function Loginv2() {
               />
               <MDBInput
                 wrapperClass="mb-4"
-                label="Username"
-                id="form1"
-                type="text"
-                required
-                value={userName}
-                onChange={(e) => setuserName(e.target.value)}
-              />
-              <MDBInput
-                wrapperClass="mb-4"
                 label="Email"
                 id="form1"
                 type="email"
@@ -201,16 +230,44 @@ function Loginv2() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-
+              <MDBInput
+                wrapperClass="mb-4"
+                label="User"
+                id="form1"
+                type="email"
+                required
+                value={userName}
+                onChange={(e) => setUsername(e.target.value)}
+              />
               <MDBInput
                 wrapperClass="mb-4"
                 label="Phone"
                 id="form1"
-                type="password"
+                type="text"
                 required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={phoneNumber}
+                onChange={(e) => setphoneNumber(e.target.value)}
               />
+
+              <MDBInput
+                wrapperClass="mb-4"
+                label="Address"
+                id="form1"
+                type="text"
+                required
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <MDBInput
+                wrapperClass="mb-4"
+                label="Date Of Birth"
+                id="form1"
+                type="date"
+                required
+                value={dateOfBirth}
+                onChange={(e) => setdateOfBirth(e.target.value)}
+              />
+
               <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
@@ -235,7 +292,7 @@ function Loginv2() {
                 <ReCaptcha />
               </div>
 
-              <MDBBtn className="mb-4 w-100" onClick={HandleSignup}>
+              <MDBBtn className="mb-4 w-100" onClick={HandleSignUp}>
                 Sign up
               </MDBBtn>
             </MDBTabsPane>

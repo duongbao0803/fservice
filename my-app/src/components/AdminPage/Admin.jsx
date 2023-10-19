@@ -6,9 +6,9 @@ import Footer from "../Footer/Footer";
 function Admin() {
   return (
     <>
-      <Header></Header>
+      {/* <Header></Header>
       <ListUser></ListUser>
-      <Footer></Footer>
+      <Footer></Footer> */}
     </>
   );
 }

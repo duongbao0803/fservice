@@ -7,27 +7,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { deleteUser } from "../../services/UserService";
 
-const DeleteModal = ({
-  show,
-  handleClose,
-  dataUserDelete,
-  handleDeleteInfoUser,
-}) => {
+const DeleteModal = ({ show, handleClose, dataUserDelete, getUser }) => {
   const confirmDelete = async () => {
     try {
       let res = await deleteUser(dataUserDelete);
-
-      // if (res && +res.status === 204) {
-      //   toast.success("Xóa thành công");
-      //   handleDeleteInfoUser(dataUserDelete);
-      //   handleClose();
-      // } else {
-      //   toast.error("Xóa thất bại");
-      // }
+      console.log("check delete", res.data.status);
+      if (res.data.status === "Success") {
+        toast.success("Xóa thành công");
+        handleClose();
+        getUser(1);
+      } else {
+        toast.error("Xóa thất bại");
+      }
     } catch (error) {
       console.log("Fetching deleteUser error", error);
     }
   };
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>

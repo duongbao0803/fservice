@@ -11,6 +11,7 @@ import NotFound from "./components/NotFound/NotFound";
 import PackageDetail from "./page/PackageDetail";
 import ListUser from "./components/TableUser/ListUser";
 import ConfirmVnpay from "./page/confirmVnpay";
+import { ManagePackage } from "./components/AdminPage/ManagePackage";
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
         <Route path="/confirm" element={<ConfirmVnpay />} />
         <Route path="/authen" element={<Login />} />
         <Route path="/board" element={<ListUser />} />
+
         <Route path="/detail/:id" element={<PackageDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {/* <ManagePackage></ManagePackage> */}
       <Footer />
     </>
   );

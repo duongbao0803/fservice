@@ -15,7 +15,7 @@ function Header(props) {
 
   const handleLogout = () => {
     Cookies.remove("token");
-    navigate("/");
+    navigate("/authen");
     toast.success("Logout Success");
   };
 
@@ -62,6 +62,11 @@ function Header(props) {
             <li className="nav-item">
               <Link to="/contact" className="nav-link">
                 Contact
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/board" className="nav-link">
+                Board
               </Link>
             </li>
             <li className="nav-item" style={{ paddingRight: 0 }}>

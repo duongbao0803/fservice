@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { fetchUser } from "../../services/UserService";
 import Table from "react-bootstrap/Table";
+import AddModal from "../TableUser/AddUserModal";
+
 import EditModal from "../TableUser/EditModal";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
@@ -15,6 +17,9 @@ const ListUser = () => {
   const [listUser, setListUser] = useState([]);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [dataUserAdd, setDataUserAdd] = useState({});
+
   const [dataUserEdit, setDataUserEdit] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
   const [total, setTotal] = useState(0);
@@ -30,34 +35,40 @@ const ListUser = () => {
     getUser(1);
   }, []);
 
+  const handleAdd = () => {
+    setDataUserAdd();
+    setShowModalAdd(true);
+  };
+
   const handleEditUser = (user) => {
-    setDataUserEdit(user);
+    setDataUserEdit(user.id);
     setShowModalEdit(true);
   };
 
   const handleDeleteUser = (user) => {
-    setDataUserDelete(user);
+    console.log("check delte", user);
+    setDataUserDelete(user.id);
     setShowModalDelete(true);
   };
 
-  const handleEditInfoUser = (user) => {
-    console.log(user);
-  };
+  // const handleEditInfoUser = (user) => {
+  //   console.log("test delete nè", user);
+  // };
 
-  const handleDeleteInfoUser = (user) => {
-    let cloneListUser = _.cloneDeep(listUser).filter(
-      (item) => item.id !== user.id
-    );
-    setListUser(cloneListUser);
-  };
+  // const handleDeleteInfoUser = (user) => {
+  //   let cloneListUser = _.cloneDeep(listUser).filter(
+  //     (item) => item.id !== user.id
+  //   );
+  //   setListUser(cloneListUser);
+  // };
 
   const getUser = async (page) => {
     try {
       let res = await fetchUser(page);
+      console.log("check list", res);
 
       if (res && res.data) {
         const xPaginationHeader = res.headers?.["x-pagination"];
-        // console.log("check user", xPaginationHeader);
         if (xPaginationHeader) {
           const paginationData = JSON.parse(xPaginationHeader);
           const sumPage = paginationData.TotalPages;
@@ -65,8 +76,6 @@ const ListUser = () => {
         }
         setListUser(res.data);
       }
-
-      // console.log("check username", res.data[1].name);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
@@ -79,7 +88,7 @@ const ListUser = () => {
   return (
     <div className="container">
       <div className="button">
-        <button>Add user</button>
+        <button onClick={() => handleAdd()}>Add user</button>
       </div>
       <Table striped bordered hover size="sm">
         <thead>
@@ -130,17 +139,28 @@ const ListUser = () => {
         activeClassName="active"
         renderOnZeroPageCount={null}
       />
+
+      <AddModal
+        show={showModalAdd}
+        handleClose={handleClose}
+        dataUserAdd={dataUserAdd}
+        // getUser={getUser}
+
+        // handleDeleteInfoUser={handleDeleteInfoUser}
+      />
       <EditModal
         show={showModalEdit}
         handleClose={handleClose}
         dataUserEdit={dataUserEdit}
-        handleEditInfoUser={handleEditInfoUser}
+        // handleEditInfoUser={handleEditInfoUser}
       />
       <DeleteModal
         show={showModalDelete}
         handleClose={handleClose}
         dataUserDelete={dataUserDelete}
-        handleDeleteInfoUser={handleDeleteInfoUser}
+        getUser={getUser}
+
+        // handleDeleteInfoUser={handleDeleteInfoUser}
       />
     </div>
   );
