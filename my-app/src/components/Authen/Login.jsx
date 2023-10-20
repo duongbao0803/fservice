@@ -8,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const handleLogin = async () => {
     if (!email || !password) {
-      alert("heello");
+      alert("hello");
       toast.error("Error! Incorrect Username or Password");
       return;
     }

@@ -13,19 +13,22 @@ import Admin from "./components/AdminPage/Admin";
 import InfoUser from "./components/TableUser/ListUser";
 import PackageDetail from "./page/packageDetail";
 import ConfirmVnpay from "./page/confirmVnpay";
-
+import Staff from "./page/staff";
+import StaffInfo from "./page/StaffInfo";
 
 function App() {
   return (
     <>
-      <ConfirmVnpay/>
+     < Staff/>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
         <Route path="/about" element={<PD />} />
         <Route path="/contact" element={<InfoUser />} />
         <Route path="/package" element={<PackagePage />} />
+        
       </Routes> */}
+
     </>
   );
 }
