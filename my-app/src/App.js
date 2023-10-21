@@ -19,7 +19,7 @@ import StaffInfo from "./page/StaffInfo";
 function App() {
   return (
     <>
-     < Staff/>
+     < ConfirmVnpay/>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
