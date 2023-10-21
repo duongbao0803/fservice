@@ -4,7 +4,7 @@
 ### Welcome to FService (Frontend);
 
 
-#### Instructor: PhuongLHK
+#### Instructor: Thầy Lâm Hữu Khánh Phương
 
 #### 4 Members:
 
