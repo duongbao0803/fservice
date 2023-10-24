@@ -1,32 +1,68 @@
-button:focus {
-    outline: none;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.sidebar {
-    position: absolute;
+
+
+/* Logo Styles */
+img {
+    display: block;
     top: 0;
-    left: 0;
-    z-index: 1;
-    min-height: 108vh;
-}
-.menu-section ul li > a {
-    text-decoration: none;
-    color: #333;
-}
-.menu-section ul li:not(:last-child) {
-    margin-bottom: 20px;
-}
-.menu-section h3 {
-    font-size: 20px;
-}
-.Job, .Information {
-    margin-bottom: 35px;
+    width: 120px;
+    margin-bottom: 60px;
 }
 
-.Tilte-table {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-     
+h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+li {
+    margin-bottom: 30px; 
+    text-decoration: none;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+
+.Job ul li a, .Information ul li a {
+    transition: all 0.1s ease;
+}
+
+.Job ul li a:hover, .Information ul li a:hover {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ff8228;
+    color: #fff !important;
+}
+.Job .active, .Information ul li a .active {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ff8228;
+    color: white !important;
+}
+.data-table {
+    background-color: #fff;
+    padding: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+
 
