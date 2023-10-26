@@ -56,46 +56,46 @@ function Loginv2() {
   }, []);
 
   const handleLogin = async () => {
-    if (!isRecaptchaVerified) {
-      toast.error("Please complete the ReCaptcha");
-      return;
-    }
-    let res = await loginAPI(email, password);
-    if (res.status !== 401 && res.status !== 400) {
-      if (res && res.data && res.data.status === true) {
-        session.setUser(res.data);
-        const jwtToken = res.data.jwtToken;
-        if (jwtToken) {
-          const decoded = jwt_decode(jwtToken);
-          const role =
-            decoded[
-              "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-            ];
-          const userName =
-            decoded[
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-            ];
+    try {
+      let res = await loginAPI(email, password);
+      if (res.status !== 401 && res.status !== 400) {
+        if (res && res.data && res.data.status === true) {
+          session.setUser(res.data);
+          const jwtToken = res.data.jwtToken;
+          if (jwtToken) {
+            const decoded = jwt_decode(jwtToken);
+            const role =
+              decoded[
+                "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+              ];
+            const userName =
+              decoded[
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+              ];
 
-          localStorage.setItem("username", userName);
-          localStorage.setItem("role", role);
-          localStorage.setItem("accesstoken", jwtToken);
+            localStorage.setItem("username", userName);
+            localStorage.setItem("role", role);
+            localStorage.setItem("accesstoken", jwtToken);
 
-          if (rememberMe) {
-            localStorage.setItem("rememberEmail", email);
-            localStorage.setItem("rememberPassword", password);
+            if (rememberMe) {
+              localStorage.setItem("rememberEmail", email);
+              localStorage.setItem("rememberPassword", password);
+            } else {
+              localStorage.removeItem("rememberEmail");
+              localStorage.removeItem("rememberPassword");
+            }
+            navigate("/");
           } else {
-            localStorage.removeItem("rememberEmail");
-            localStorage.removeItem("rememberPassword");
+            toast.error("Failed to decode the token.");
           }
-          navigate("/");
         } else {
-          toast.error("Failed to decode the token.");
+          toast.error(res.data);
         }
       } else {
-        toast.error(res.data);
+        toast.error(res.message || res.data.errors.Email[0]);
       }
-    } else {
-      toast.error(res.message || res.data.errors.Email[0]);
+    } catch (error) {
+      console.log("Error fetching Signin", error);
     }
   };
 
@@ -128,7 +128,7 @@ function Loginv2() {
       password: Yup.string()
         .matches(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]+$/,
-          "Password must contain at uppercase, lowercase letter, digit, special character (@#$%^&*!)"
+          "Password is invalid"
         )
         .min(7, "Password must be at least 7 characters")
         .max(12, "Password can't exceed 12 characters"),
@@ -165,6 +165,7 @@ function Loginv2() {
       }
     },
   });
+
   return (
     <>
       <Helmet>
@@ -378,9 +379,9 @@ function Loginv2() {
                     )}
                   </div>{" "}
                 </div>
-                <div className="d-flex  mb-4">
-                  <ReCaptcha />
-                </div>
+                {/* <div className="d-flex  mb-4">
+                  <ReCaptcha onChange={handleReCaptchaChange} />
+                </div> */}
                 <MDBBtn className="mb-4 w-100" type="submit">
                   Sign up
                 </MDBBtn>
