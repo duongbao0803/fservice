@@ -1,5 +1,4 @@
 import React from "react";
-// import "../css/style.css";
 
 function UserProcess() {
   return (
@@ -15,7 +14,7 @@ function UserProcess() {
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
               <div className="processing-img text-center mb-3">
                 <img
-                  src={require("../../img/chooseService.png")}
+                  src={require("../../assets/img/chooseService.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
@@ -28,7 +27,7 @@ function UserProcess() {
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
               <div className="processing-img text-center mb-3">
                 <img
-                  src={require("../../img/chooseHouse.png")}
+                  src={require("../../assets/img/chooseHouse.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
@@ -41,7 +40,7 @@ function UserProcess() {
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
               <div className="processing-img text-center mb-3">
                 <img
-                  src={require("../../img/process.png")}
+                  src={require("../../assets/img/process.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"
@@ -54,7 +53,7 @@ function UserProcess() {
             <div className="col-12 col-sm-12 col-md-6 col-lg-3">
               <div className="processing-img text-center mb-3">
                 <img
-                  src={require("../../img/feedback.png")}
+                  src={require("../../assets/img/feedback.png")}
                   alt="Dọn phòng"
                   width="150px"
                   height="150px"

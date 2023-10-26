@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Col, Row } from "react-bootstrap";
 import { Form, InputGroup } from "react-bootstrap";
 import { useFormik } from "formik";
-import { storage } from "../../firebase";
+import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export function ManagePackage() {

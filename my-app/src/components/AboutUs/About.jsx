@@ -7,25 +7,6 @@ import { Helmet } from "react-helmet";
 import Cookies from "js-cookie";
 
 function About() {
-  const [userData, setUserData] = useState(null);
-  // useEffect(() => {
-  //   // Lấy token từ nơi lưu trữ (ví dụ: cookies, local storage)
-  //   const token = Cookies.get("token");
-
-  //   // Giải mã phần payload của token
-  //   const decodedToken = JSON.parse(atob(token.split(".")[1]));
-  //   console.log("cehckkk", decodedToken);
-  //   // Trích xuất thông tin từ đối tượng đã giải mã
-  //   // const { email, role } = decodedToken;
-
-  //   // Cập nhật trạng thái userData
-  //   setUserData(decodedToken);
-  // }, []);
-
-  // if (!userData) {
-  //   return <p>Loading...</p>;
-  // }
-
   return (
     <>
       <Helmet>

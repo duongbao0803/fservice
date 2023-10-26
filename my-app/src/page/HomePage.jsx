@@ -6,7 +6,7 @@ import UseProcess from "../components/HomePage/UseProcess";
 import Field from "../components/HomePage/Field";
 import "react-loading-skeleton/dist/skeleton.css";
 import Slider from "../components/HomePage/Slider";
-import slides from "../data.json";
+import slides from "../shared/data.json";
 
 const HomePage = () => {
   return (

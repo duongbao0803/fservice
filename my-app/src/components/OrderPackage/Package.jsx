@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import { Routes, Route, Link, redirect } from "react-router-dom";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
-import "../../css/styleorderPackage.css";
+import "../../assets/css/styleorderPackage.css";
 
 function Package() {
   const [data, setData] = useState([]);

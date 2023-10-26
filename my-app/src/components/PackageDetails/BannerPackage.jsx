@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import Order from "../OrderCart/Order";
+
 export default function BannerPackage() {
-  const [APIData, setAPIData] = useState();
+  const [APIData, setAPIData] = useState("");
   const [APIData1, setAPIData1] = useState();
   const [loading, setLoading] = useState(true);
 
-  let { image } = useParams();
   const { id } = useParams();
-
-  const baseURL = `https://fservices.azurewebsites.net/api/packages/${id}`;
 
   useEffect(() => {
     // async function fetchUserData() {
@@ -35,11 +34,14 @@ export default function BannerPackage() {
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch(baseURL);
+      const res = await fetch(
+        `https://fservices.azurewebsites.net/api/packages/${id}`
+      );
+
       if (res.ok) {
         const data = await res.json();
+        console.log("check ser=vice", data);
         setAPIData(data);
-        console.log(data.packageDetails[0].serviceId);
         const response = await fetch(
           `https://fservices.azurewebsites.net/api/services/${data.packageDetails[0].serviceId}`
         );

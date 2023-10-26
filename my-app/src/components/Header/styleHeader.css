@@ -28,7 +28,7 @@
 
 .navbar-nav .nav-item .nav-link:hover::before {
   content: "";
-  width: 80%;
+  width: 85%;
 }
 
 .dropdown-toggle:focus {

@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
 import ReactPaginate from "react-paginate";
-import _ from "lodash";
+import { format } from "date-fns";
 
 const ListUser = () => {
   const [listUser, setListUser] = useState([]);
@@ -22,7 +22,6 @@ const ListUser = () => {
 
   const [dataUserEdit, setDataUserEdit] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
-  const [total, setTotal] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
 
   const handleClose = () => {
@@ -53,13 +52,6 @@ const ListUser = () => {
 
   // const handleEditInfoUser = (user) => {
   //   console.log("test delete nè", user);
-  // };
-
-  // const handleDeleteInfoUser = (user) => {
-  //   let cloneListUser = _.cloneDeep(listUser).filter(
-  //     (item) => item.id !== user.id
-  //   );
-  //   setListUser(cloneListUser);
   // };
 
   const getUser = async (page) => {
@@ -108,7 +100,7 @@ const ListUser = () => {
               <td>{item.phoneNumber}</td>
               <td>{item.email}</td>
               <td>{item.address}</td>
-              <td>{item.dateOfBirth}</td>
+              <td>{format(new Date(item.dateOfBirth), "dd-MM-yyyy")}</td>
               <td>
                 <button onClick={() => handleEditUser(item)}>Update</button>
               </td>
@@ -145,7 +137,6 @@ const ListUser = () => {
         handleClose={handleClose}
         dataUserAdd={dataUserAdd}
         // getUser={getUser}
-
         // handleDeleteInfoUser={handleDeleteInfoUser}
       />
       <EditModal

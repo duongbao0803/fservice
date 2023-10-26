@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import "../css/styleconfirmvnpay.css";
+import "../assets/css/styleconfirmvnpay.css";
 import TitleConfirm from "../components/confirmVnpay/TitleConfirm";
 import Info from "../components/confirmVnpay/Info";
 import InfoPackage from "../components/confirmVnpay/InfoPackage";

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "../../css/styleconfirm.css";
+import React from "react";
+import "../../assets/css/styleconfirm.css";
 
 export default function Contact() {
   return (

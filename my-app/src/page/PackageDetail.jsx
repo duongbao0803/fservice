@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import BannerPackage from "../components/PackageDetails/BannerPackage";
 import Frame from "../components/PackageDetails/Frame";
 import ListPackage from "../components/PackageDetails/ListPackage";
-import "../css/stylepackageDetail.css";
+import "../assets/css/stylepackageDetail.css";
 
 const PackageDetail = () => {
   return (

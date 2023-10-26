@@ -1,5 +1,5 @@
 import React from "react";
-import { reasonList } from "../../data";
+import { reasonList } from "../../shared/data";
 function Reason() {
   return (
     <>
@@ -14,7 +14,7 @@ function Reason() {
             <div className="col-12 col-sm-12 col-md-12">
               <div className="chooseService-img mb-4">
                 <img
-                  src={require("../../img/banner_2.png")}
+                  src={require("../../assets/img/banner_2.png")}
                   alt="chọn service"
                   width="100%"
                 />

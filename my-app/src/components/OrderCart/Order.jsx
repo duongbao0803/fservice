@@ -1,9 +1,104 @@
-import React from "react";
-import { Routes, Route, Link, redirect } from "react-router-dom";
-
-import "../../css/styleOrder.css";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import PriceFormat from "../PackageDetails/PriceFormat";
+import "../../assets/css/styleOrder.css";
+import { launch } from "../../services/UserService";
 
 const Order = () => {
+  const [yourRoom, setYourRoom] = useState([]);
+  const [yourTower, setYourTower] = useState([]);
+  const [typeRoom, setTypeRoom] = useState([]);
+  const [typeId, setTypeId] = useState([]);
+  const [price, setPrice] = useState(0);
+
+  const [loading, setLoading] = useState(true);
+  const { packageName, id } = useParams();
+  const [TypeRoomForSelectedHouse, setTypeRoomForSelectedHouse] = useState("");
+  const [BuildingForSelectedHouse, setBuildingForSelectedHouse] = useState("");
+
+  const [TypeIDForSelectedHouse, setTypeIDForSelectedHouse] = useState("");
+  const instead = "0";
+  const username = localStorage.getItem("username");
+
+  useEffect(() => {
+    fetchHouse();
+  }, []);
+
+  const fetchHouse = async () => {
+    try {
+      const res = await axios.get(
+        `https://fservices.azurewebsites.net/api/apartments?username=${username}`
+      );
+      console.log("check typeID", res.data);
+      const typeIdArray = res.data.map((apartment) => apartment.typeId);
+      console.log("check array type id", typeIdArray);
+      setTypeId(typeIdArray);
+
+      const yourRoomArray = res.data.map((apartment) => apartment.roomNo);
+      console.log("check setYourRoom", yourRoomArray);
+
+      const yourTowerArray = res.data.map(
+        (apartment) => apartment.type.building.name
+      );
+      console.log("check yourTowerArray", yourTowerArray);
+
+      const typeRoomArray = res.data.map((apartment) => apartment.type.type);
+      console.log("check typeRoomArray", typeRoomArray);
+
+      setYourRoom(yourRoomArray);
+      setYourTower(yourTowerArray);
+      setTypeRoom(typeRoomArray);
+    } catch (error) {
+      console.error("Error fetching package:", error);
+      setLoading(false);
+    }
+  };
+
+  const [selectedHouseChange, setSelectedHouseChange] = useState([]);
+
+  const handleHouseChange = (event) => {
+    try {
+      const selectedHouse = event.target.value;
+      setSelectedHouseChange(selectedHouse);
+
+      if (selectedHouse) {
+        const roomType = typeRoom[yourRoom.indexOf(selectedHouse)];
+        setTypeRoomForSelectedHouse(roomType);
+
+        // const buildingType = yourTower[yourRoom.indexOf(selectedHouse)];
+        // console.log("check building", buildingType);
+        // setBuildingForSelectedHouse()
+        // setTypeRoomForSelectedHouse(buildingType);
+
+        const selectedTypeId = typeId[yourRoom.indexOf(selectedHouse)];
+        console.log("chec selectedTypeId", selectedTypeId);
+        setTypeIDForSelectedHouse(selectedTypeId);
+
+        fetchPrice(selectedTypeId);
+      } else {
+        setPrice(0);
+        setTypeRoomForSelectedHouse("");
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  const fetchPrice = async (selectedTypeId) => {
+    try {
+      const getPrice = await axios.get(
+        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
+      );
+      console.log("check Priceeee", getPrice.data);
+      setPrice(getPrice.data.packagePrices[0].price);
+    } catch (error) {
+      console.error("Error fetching package:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="container mb-5 mt-4">
@@ -24,7 +119,7 @@ const Order = () => {
       </div>
       <div className="container mb-5">
         <div className="form-content text-center">
-          <span>VỆ SINH PHÒNG KHÁCH</span>
+          <span>ĐƠN HÀNG</span>
         </div>
         <div className="main-form">
           <div className="row">
@@ -48,6 +143,8 @@ const Order = () => {
                       className="form-control"
                       id="exampleFormControlInput1"
                       placeholder="Nơi làm việc"
+                      value="Vinhomes Grand Park"
+                      readOnly
                     />
                   </div>
                   <div className="mb-3">
@@ -59,58 +156,18 @@ const Order = () => {
                       Số nhà / Căn hộ
                     </label>
                     <select
-                      className="form-select form-select-lg mb-3 col-lg-12 col-md-12"
+                      className="form-select form-select-lg mb-3 col-lg-12 cols-md-12"
                       aria-label=".form-select-lg example"
+                      value={selectedHouseChange}
+                      onChange={handleHouseChange}
                     >
-                      <option selected>Open this select menu</option>
-                      <option value={1}>One</option>
-                      <option value={2}>Two</option>
-                      <option value={3}>Three</option>
+                      <option value="">Chọn nhà / căn hộ</option>
+                      {yourRoom.map((room, index) => (
+                        <option key={index} value={room}>
+                          {`${room} - ${yourTower[index]}`}
+                        </option>
+                      ))}
                     </select>
-                  </div>
-                  <div className="work-date">
-                    <div className="row">
-                      <div className="col-6 col-md-6 col-lg-6 col-sm-6">
-                        <div className="mb-3">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label col-md-12"
-                            style={{ padding: 0 }}
-                          >
-                            Chọn ngày làm
-                          </label>
-                          <select
-                            className="form-select form-select-md mb-3 col-md-12"
-                            aria-label=".form-select-md example"
-                          >
-                            <option selected>Open this select menu</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-6 col-lg-6 col-sm-6">
-                        <div className="mb-3">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label col-md-12"
-                            style={{ padding: 0 }}
-                          >
-                            Chọn giờ làm
-                          </label>
-                          <select
-                            className="form-select form-select-md mb-3 col-md-12"
-                            aria-label=".form-select-md example"
-                          >
-                            <option selected>Open this select menu</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -123,21 +180,18 @@ const Order = () => {
                 <div className="service_info-test">
                   <div className="row">
                     <div className="col-sm-6 col-md-4 col-4">
-                      <span>Loại dịch vụ:</span>
-                      <span>Số lần:</span>
+                      <span>Gói dịch vụ:</span>
                       <span>Thời hạn:</span>
                       <span>Loại phòng:</span>
-                      <span>Giá tiền</span>
+                      <span>Giá tiền:</span>
                     </div>
+
                     <div className="col-sm-6 col-md-8 col-8">
+                      <span>{packageName}</span>
+                      <span>4 tuần (kể từ ngày đặt)</span>
+                      <span>{TypeRoomForSelectedHouse || instead}</span>
                       <span>
-                        <p>Vệ sinh phòng khách</p>
-                      </span>
-                      <span>4 lần</span>
-                      <span>4 tuần (kể từ ngày bắt đầu)</span>
-                      <span>1 phòng ngủ</span>
-                      <span>
-                        <strong>250.000đ</strong>
+                        <PriceFormat price={price} />
                       </span>
                     </div>
                   </div>
@@ -202,20 +256,6 @@ const Order = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="exampleFormControlTextarea1"
-                      className="form-label"
-                    >
-                      Ghi chú
-                    </label>
-                    <textarea
-                      className="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows={2}
-                      defaultValue={""}
-                    />
-                  </div>
                 </div>
               </div>
               <div className="payment-info">
@@ -225,11 +265,11 @@ const Order = () => {
                   </span>
                 </div>
                 <div className="payment_info-test ">
-                  <span>
-                    <strong>Tổng tiền</strong>
-                  </span>
+                  <strong>Tổng tiền: </strong>
                   <span style={{ color: "#ff8228" }}>
-                    <strong>250.000đ</strong>
+                    <strong>
+                      <PriceFormat price={price} />{" "}
+                    </strong>
                   </span>
                   <p>
                     <strong>Chọn phương thức thanh toán</strong>
@@ -237,16 +277,7 @@ const Order = () => {
                   <div className="pay-by-cash">
                     <input type="radio" />
                     <img
-                      src={require("../../img/logo_tienmat.png")}
-                      alt=""
-                      width="40px"
-                    />
-                    <span>Thanh toán bằng tiền mặt</span>
-                  </div>
-                  <div className="pay-by-cash">
-                    <input type="radio" />
-                    <img
-                      src={require("../../img/logoVNPAY_thanhtoan.png")}
+                      src={require("../../assets/img/logoVNPAY_thanhtoan.png")}
                       alt=""
                       width="40px"
                     />

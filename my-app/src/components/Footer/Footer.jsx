@@ -10,7 +10,7 @@ function Footer() {
             <div className="row align-items-center">
               <div className="col-12 col-sm-6 col-md-5 col-lg-5">
                 <img
-                  src={require("../../img/logo_web_2.png")}
+                  src={require("../../assets/img/logo_web_2.png")}
                   alt="logo"
                   width="150px"
                 />
@@ -38,11 +38,11 @@ function Footer() {
                     &nbsp; support.fservice@gmail.com
                   </li>
                   <li>
-                    <img src={require("../../img/fb_logo.png")} alt="" />
+                    <img src={require("../../assets/img/fb_logo.png")} alt="" />
                     &nbsp; &nbsp;
-                    <img src={require("../../img/tw_logo.png")} alt="" />
+                    <img src={require("../../assets/img/tw_logo.png")} alt="" />
                     &nbsp; &nbsp;
-                    <img src={require("../../img/ig_logo.png")} alt="" />
+                    <img src={require("../../assets/img/ig_logo.png")} alt="" />
                   </li>
                 </ul>
               </div>
@@ -54,19 +54,19 @@ function Footer() {
                   <li>Hình thức thanh toán</li>
                   <li>
                     <img
-                      src={require("../../img/Visa_Inc._logo.svg.webp")}
+                      src={require("../../assets/img/Visa_Inc._logo.svg.webp")}
                       alt="logo_visa"
                       width="45px"
                     />
                     &nbsp;
                     <img
-                      src={require("../../img/MasterCard_early_1990s_logo.png")}
+                      src={require("../../assets/img/MasterCard_early_1990s_logo.png")}
                       alt="logo_visa"
                       width="45px"
                     />
                     &nbsp;
                     <img
-                      src={require("../../img/Logo-VNPAY-QR-1.webp")}
+                      src={require("../../assets/img/Logo-VNPAY-QR-1.webp")}
                       alt="logo_visa"
                       width="45px"
                     />

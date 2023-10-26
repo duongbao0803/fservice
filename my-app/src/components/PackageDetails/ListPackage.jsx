@@ -15,8 +15,9 @@ const ListPackage = () => {
   const fetchPackage = async () => {
     try {
       const initialResponse = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${1}`
+        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${2}`
       );
+      console.log("check packageDetail", initialResponse);
 
       if (initialResponse.data && initialResponse.data.packageDetails) {
         const serviceIds = initialResponse.data.packageDetails.map(
@@ -29,6 +30,7 @@ const ListPackage = () => {
           )
         );
         const services = serviceResponses.map((response) => response.data);
+        console.log("check service", services);
         setData({
           packageDetails: initialResponse.data.packageDetails,
           serviceDetails: services,
@@ -83,7 +85,9 @@ const ListPackage = () => {
                 </div>
                 <div className="package-detail">
                   <h4>{service.name}</h4>
-                  <span>{service.description}</span>
+                  <span style={{ textAlign: "justify" }}>
+                    {service.description}
+                  </span>
                 </div>
               </div>
             ))}
