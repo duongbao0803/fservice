@@ -80,7 +80,7 @@ function Header() {
               </li>
             )}
             <li className="nav-item" style={{ paddingRight: 0 }}>
-              {user == null || user == "undefined" ? (
+              {user == null ? (
                 <DropdownButton id="dropdown-basic-button" title="Tài khoản">
                   <Dropdown.Item as={Link} to="/authen">
                     Đăng nhập

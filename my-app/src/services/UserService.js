@@ -5,8 +5,16 @@ const fetchUser = (page) => {
   return config.get(`/api/accounts?PageNumber=${page}&PageSize=10`);
 };
 
+const Launch = () => {
+  return config.get("/api/authentication/Launch");
+};
+
 const loginAPI = (email, password) => {
   return config.post("/api/authentication/SignIn", { email, password });
+};
+
+const sendRefreshToken = () => {
+  return config.post("/api/authentication/Refresh-token");
 };
 
 const signUp = (userData) => {
@@ -25,4 +33,13 @@ const launch = () => {
   return config.get("/api/authentication/Launch");
 };
 
-export { fetchUser, loginAPI, signUp, editUser, deleteUser, launch };
+export {
+  fetchUser,
+  loginAPI,
+  signUp,
+  editUser,
+  deleteUser,
+  launch,
+  sendRefreshToken,
+  Launch,
+};

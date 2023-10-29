@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import PriceFormat from "../PackageDetails/PriceFormat";
 import "../../assets/css/styleOrder.css";
 import { launch } from "../../services/UserService";
+import { toast } from "react-toastify";
 
 const Order = () => {
   const [yourRoom, setYourRoom] = useState([]);
@@ -16,9 +17,9 @@ const Order = () => {
   const [loading, setLoading] = useState(true);
   const { packageName, id } = useParams();
   const [TypeRoomForSelectedHouse, setTypeRoomForSelectedHouse] = useState("");
-  const [BuildingForSelectedHouse, setBuildingForSelectedHouse] = useState("");
 
-  const [TypeIDForSelectedHouse, setTypeIDForSelectedHouse] = useState("");
+  const [TypeIDForSelectedHouse] = useState("");
+
   const instead = "0";
   const username = localStorage.getItem("username");
 
@@ -31,22 +32,19 @@ const Order = () => {
       const res = await axios.get(
         `https://fservices.azurewebsites.net/api/apartments?username=${username}`
       );
-      console.log("check typeID", res.data);
+
       const typeIdArray = res.data.map((apartment) => apartment.typeId);
-      console.log("check array type id", typeIdArray);
+      console.log("check typeID", typeIdArray);
       setTypeId(typeIdArray);
 
       const yourRoomArray = res.data.map((apartment) => apartment.roomNo);
-      console.log("check setYourRoom", yourRoomArray);
-
+      console.log("check yourRoomArray", yourRoomArray);
       const yourTowerArray = res.data.map(
         (apartment) => apartment.type.building.name
       );
-      console.log("check yourTowerArray", yourTowerArray);
 
       const typeRoomArray = res.data.map((apartment) => apartment.type.type);
       console.log("check typeRoomArray", typeRoomArray);
-
       setYourRoom(yourRoomArray);
       setYourTower(yourTowerArray);
       setTypeRoom(typeRoomArray);
@@ -56,30 +54,43 @@ const Order = () => {
     }
   };
 
-  const [selectedHouseChange, setSelectedHouseChange] = useState([]);
+  const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
 
-  const handleHouseChange = (event) => {
+  const handleHouseChange = (e) => {
     try {
-      const selectedHouse = event.target.value;
-      setSelectedHouseChange(selectedHouse);
+      const selectedHouse = e.target.value;
+      console.log("check selectedHouse", selectedHouse);
 
       if (selectedHouse) {
-        const roomType = typeRoom[yourRoom.indexOf(selectedHouse)];
-        setTypeRoomForSelectedHouse(roomType);
+        const room = selectedHouse.split(" - ")[0];
+        const tower = selectedHouse.split(" - ")[1];
+        console.log("check room", room);
+        console.log("check tower", tower);
+        setSelectedHouseChange([room, tower]);
 
-        // const buildingType = yourTower[yourRoom.indexOf(selectedHouse)];
-        // console.log("check building", buildingType);
-        // setBuildingForSelectedHouse()
-        // setTypeRoomForSelectedHouse(buildingType);
+        const selectedTypeId = typeId.find(
+          (id, index) => yourRoom[index] === room && yourTower[index] === tower
+        );
+        console.log("selectedTypeId", selectedTypeId);
 
-        const selectedTypeId = typeId[yourRoom.indexOf(selectedHouse)];
-        console.log("chec selectedTypeId", selectedTypeId);
-        setTypeIDForSelectedHouse(selectedTypeId);
+        const roomIndex = yourRoom.findIndex(
+          (roomNo, index) => roomNo === room && yourTower[index] === tower
+        );
+        if (roomIndex !== -1) {
+          console.log("chec typeroom", roomIndex);
+        }
 
-        fetchPrice(selectedTypeId);
+        if (selectedTypeId) {
+          setTypeRoomForSelectedHouse(typeRoom[roomIndex]);
+
+          fetchPrice(selectedTypeId);
+        } else {
+          toast("Không tìm thấy loại phòng được chọn");
+        }
       } else {
         setPrice(0);
         setTypeRoomForSelectedHouse("");
+        setSelectedHouseChange(["", ""]);
       }
     } catch (error) {
       console.log("Error", error);
@@ -91,7 +102,6 @@ const Order = () => {
       const getPrice = await axios.get(
         `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
       );
-      console.log("check Priceeee", getPrice.data);
       setPrice(getPrice.data.packagePrices[0].price);
     } catch (error) {
       console.error("Error fetching package:", error);
@@ -158,12 +168,15 @@ const Order = () => {
                     <select
                       className="form-select form-select-lg mb-3 col-lg-12 cols-md-12"
                       aria-label=".form-select-lg example"
-                      value={selectedHouseChange}
+                      value={`${selectedHouseChange[0]} - ${selectedHouseChange[1]}`}
                       onChange={handleHouseChange}
                     >
                       <option value="">Chọn nhà / căn hộ</option>
                       {yourRoom.map((room, index) => (
-                        <option key={index} value={room}>
+                        <option
+                          key={index}
+                          value={`${room} - ${yourTower[index]}`}
+                        >
                           {`${room} - ${yourTower[index]}`}
                         </option>
                       ))}
@@ -218,6 +231,7 @@ const Order = () => {
                       className="form-control"
                       id="exampleFormControlInput1"
                       placeholder="Họ và tên"
+                      value={localStorage.getItem("name")}
                     />
                   </div>
                   <div className="work-date">
@@ -231,10 +245,11 @@ const Order = () => {
                             Số điện thoại
                           </label>
                           <input
-                            type="email"
+                            type="text"
                             className="form-control"
                             id="exampleFormControlInput1"
                             placeholder="0909 113 114"
+                            value={localStorage.getItem("phoneNumber")}
                           />
                         </div>
                       </div>
@@ -251,6 +266,7 @@ const Order = () => {
                             className="form-control"
                             id="exampleFormControlInput1"
                             placeholder="example@email.com"
+                            value={localStorage.getItem("username")}
                           />
                         </div>
                       </div>
@@ -284,7 +300,7 @@ const Order = () => {
                     <span>Thanh toán bằng VNPAY</span>
                   </div>
                   <div className="confirm">
-                    <input type="checkbox" />
+                    <input type="checkbox" required />
                     <span>
                       Nhấn "Xác nhận" đồng nghĩa với việc bạn đã đồng ý với điều
                       khoản dịch vụ của{" "}
@@ -292,7 +308,14 @@ const Order = () => {
                     </span>
                   </div>
                   <div className="order-confirm">
-                    <button type="submit">Hủy đơn</button>
+                    <button type="submit">
+                      <Link
+                        to="/"
+                        style={{ color: "orange", textDecoration: "none" }}
+                      >
+                        Hủy đơn
+                      </Link>
+                    </button>
                     <button type="submit">
                       <Link
                         to="/confirm"

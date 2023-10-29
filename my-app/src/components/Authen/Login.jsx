@@ -12,7 +12,12 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import axios from "axios";
-import { launch, loginAPI, signUp } from "../../services/UserService";
+import {
+  launch,
+  loginAPI,
+  sendRefreshToken,
+  signUp,
+} from "../../services/UserService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -55,6 +60,25 @@ function Loginv2() {
     }
   }, []);
 
+  // const updateAccessToken = async () => {
+  //   const refreshToken = localStorage.getItem("refreshtoken");
+
+  //   try {
+  //     const response = await sendRefreshToken(refreshToken);
+  //     console.log("check ", response);
+  //     if (response.status === 200) {
+  //       const newAccessToken = response.data.accesstoken;
+  //       localStorage.setItem("accesstoken", newAccessToken);
+  //     } else {
+  //       console.log("Error");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error");
+  //   }
+  // };
+
+  // updateAccessToken();
+
   const handleLogin = async () => {
     try {
       let res = await loginAPI(email, password);
@@ -62,6 +86,7 @@ function Loginv2() {
         if (res && res.data && res.data.status === true) {
           session.setUser(res.data);
           const jwtToken = res.data.jwtToken;
+          const jwtRefreshToken = res.data.jwtRefreshToken;
           if (jwtToken) {
             const decoded = jwt_decode(jwtToken);
             const role =
@@ -76,6 +101,7 @@ function Loginv2() {
             localStorage.setItem("username", userName);
             localStorage.setItem("role", role);
             localStorage.setItem("accesstoken", jwtToken);
+            localStorage.setItem("refreshtoken", jwtRefreshToken);
 
             if (rememberMe) {
               localStorage.setItem("rememberEmail", email);
