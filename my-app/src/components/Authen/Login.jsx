@@ -13,6 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import {
+  Launch,
   launch,
   loginAPI,
   sendRefreshToken,
@@ -33,9 +34,7 @@ import { Session } from "../../App";
 function Loginv2() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
 
   const session = useContext(Session);
   const navigate = useNavigate();
@@ -53,31 +52,28 @@ function Loginv2() {
       setEmail(rememberEmail);
       setRememberMe(true);
     }
-
     if (rememberPassword) {
       setPassword(rememberPassword);
       setRememberMe(true);
     }
   }, []);
 
-  // const updateAccessToken = async () => {
-  //   const refreshToken = localStorage.getItem("refreshtoken");
-
-  //   try {
-  //     const response = await sendRefreshToken(refreshToken);
-  //     console.log("check ", response);
-  //     if (response.status === 200) {
-  //       const newAccessToken = response.data.accesstoken;
-  //       localStorage.setItem("accesstoken", newAccessToken);
-  //     } else {
-  //       console.log("Error");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error");
-  //   }
-  // };
-
-  // updateAccessToken();
+  const updateAccessToken = async () => {
+    const refreshToken = localStorage.getItem("refreshtoken");
+    try {
+      const response = await sendRefreshToken(refreshToken);
+      console.log("check ", response);
+      if (response.status === 200) {
+        const newAccessToken = response.data.accesstoken;
+        localStorage.setItem("accesstoken", newAccessToken);
+      } else {
+        console.log("Error");
+      }
+    } catch (error) {
+      console.log("Error");
+    }
+  };
+  updateAccessToken();
 
   const handleLogin = async () => {
     try {

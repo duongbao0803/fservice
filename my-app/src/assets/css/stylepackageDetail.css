@@ -153,13 +153,6 @@
   color: #fff;
 }
 
-/* .listPrice th,
-td {
-  border: 1px solid #333;
-  padding: 8px;
-  text-align: center;
-} */
-
 .listPrice tr:nth-child(even) {
   background-color: #f2f2f2;
 }

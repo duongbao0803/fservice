@@ -1,4 +1,3 @@
-import axios from "axios";
 import config from "../utils/cus-axios";
 
 const fetchUser = (page) => {
@@ -32,6 +31,10 @@ const deleteUser = (id) => {
 const launch = () => {
   return config.get("/api/authentication/Launch");
 };
+
+// const confirm = () => {
+//   return config.post("https://fservices.azurewebsites.net/api/orders");
+// };
 
 export {
   fetchUser,

@@ -1,0 +1,32 @@
+button:focus {
+    outline: none;
+
+}
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    min-height: 108vh;
+}
+.menu-section ul li > a {
+    text-decoration: none;
+    color: #333;
+}
+.menu-section ul li:not(:last-child) {
+    margin-bottom: 20px;
+}
+.menu-section h3 {
+    font-size: 20px;
+}
+.Job, .Information {
+    margin-bottom: 35px;
+}
+
+.Tilte-table {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+     
+}
+

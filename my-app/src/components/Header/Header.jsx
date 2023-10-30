@@ -14,7 +14,6 @@ import { Session } from "../../App";
 function Header() {
   const session = useContext(Session);
   const role = localStorage.getItem("role");
-  console.log("check role", role);
   const user = session.user;
   const navigate = useNavigate();
 
@@ -84,9 +83,6 @@ function Header() {
                 <DropdownButton id="dropdown-basic-button" title="Tài khoản">
                   <Dropdown.Item as={Link} to="/authen">
                     Đăng nhập
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleLogout()}>
-                    Đăng xuất
                   </Dropdown.Item>
                 </DropdownButton>
               ) : (

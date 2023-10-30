@@ -25,7 +25,7 @@ export default function Payment() {
               </tr>
               <tr>
                 <td>Phương thức thanh toán</td>
-                <td>Tiền mặt</td>
+                <td>VNPAY</td>
               </tr>
               <tr>
                 <td>Trạng thái thanh toán</td>

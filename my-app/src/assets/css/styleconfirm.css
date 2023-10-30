@@ -47,7 +47,7 @@
   margin: 0;
 }
 .table-custom td:first-child {
-  min-width: 350px;
+  min-width: 300px;
   padding-left: 20px;
   font-size: 16px;
 }

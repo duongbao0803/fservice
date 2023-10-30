@@ -10,7 +10,7 @@ export default function Info() {
       <div className="title" style={{ display: "flex", alignItems: "center" }}>
         <div className="tilte-img">
           <img
-            src="./img/title-confirm.png"
+            src={require("../../assets/img/title-confirm.png")}
             className="img-fluid"
             alt="Image"
           />

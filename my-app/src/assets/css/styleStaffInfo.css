@@ -1,0 +1,99 @@
+.InfoSideBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    min-height: 108vh;
+}
+
+.Info-menu-section ul li>a {
+    text-decoration: none;
+    color: #333;
+}
+
+.Info-menu-section ul li:not(:last-child) {
+    margin-bottom: 20px;
+   
+}
+
+.Info-menu-section h3 {
+    font-size: 20px;
+}
+
+.Job,
+.Information {
+    margin-bottom: 35px;
+}
+
+.Info-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px; 
+    margin-left: 350px;
+    margin-right: 90px;  
+    margin-top: 20px;
+    border: 1px solid #ddd;        
+    border-radius:5px;         
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);   
+    padding: 20px;                
+    background-color: #ffffff;
+    max-width: 100%;
+    height: 600px;
+}
+.Info-container table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+.Info-container th {
+   
+    padding: 10px;
+    font-size: 18px;
+}
+
+.Info-container td {
+    padding: 10px 5px;
+    vertical-align: middle;
+}
+
+.Info-container td:first-child {
+    text-align: right;
+    width: 25%;
+}
+
+.Info-container td > label {
+    margin-right: 10px;
+}
+
+
+.Info-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.Info-container button {
+    padding: 5px 10px;
+    background-color: #ff8228;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+}
+
+.avatar-section img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.avatar-section p {
+    font-size: 14px;
+    color: #777;
+}

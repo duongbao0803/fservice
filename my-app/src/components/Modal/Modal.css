@@ -1,0 +1,63 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    width: 70%;  
+    max-width: 700px; 
+    height: auto;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .modal-header {
+    border: none;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-body {
+    padding: 10px;
+  }
+  .modal-body h6 {
+   color: rgb(183, 176, 176);
+   padding-bottom: 5px;
+   border-bottom: 1px solid #ff8228; /* Or any color you prefer */
+   padding-bottom: 10px;
+  }
+  .job-details, .contact-details, .Info-details {
+    margin-bottom: 20px;
+  }
+  
+  .table table {
+    width: 100%;
+  }
+  
+  .table td {
+    padding: 5px 0;
+    border: none;
+    min-width: 100px;
+  }
+  .td-title {
+    width: 250px;
+  }
+  .status-button, .action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+ 
+  

@@ -65,6 +65,12 @@ const Frame = () => {
     }
   };
 
+  const style = {
+    border: "1px solid #333",
+    padding: "8px",
+    textAlign: "center",
+  };
+
   return (
     <>
       <div className="container mt-5 pt-5">
@@ -82,17 +88,17 @@ const Frame = () => {
               <table border={1} className="listPrice">
                 <thead>
                   <tr>
-                    <th>Tòa</th>
-                    <th>Phòng</th>
-                    <th>Giá</th>
+                    <th style={style}>Tòa</th>
+                    <th style={style}>Phòng</th>
+                    <th style={style}>Giá</th>
                   </tr>
                 </thead>
                 <tbody>
                   {room.map((room, index) => (
                     <tr>
-                      <td>{room.building.name}</td>
-                      <td>{room.type}</td>
-                      <td>
+                      <td style={style}>{room.building.name}</td>
+                      <td style={style}>{room.type}</td>
+                      <td style={style}>
                         <PriceFormat price={price[index].price} />
                       </td>
                     </tr>

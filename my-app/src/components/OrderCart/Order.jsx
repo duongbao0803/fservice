@@ -4,8 +4,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import PriceFormat from "../PackageDetails/PriceFormat";
 import "../../assets/css/styleOrder.css";
-import { launch } from "../../services/UserService";
+import { confirm, launch } from "../../services/UserService";
 import { toast } from "react-toastify";
+import config from "../../utils/cus-axios";
 
 const Order = () => {
   const [yourRoom, setYourRoom] = useState([]);
@@ -13,19 +14,60 @@ const Order = () => {
   const [typeRoom, setTypeRoom] = useState([]);
   const [typeId, setTypeId] = useState([]);
   const [price, setPrice] = useState(0);
-
   const [loading, setLoading] = useState(true);
   const { packageName, id } = useParams();
   const [TypeRoomForSelectedHouse, setTypeRoomForSelectedHouse] = useState("");
-
-  const [TypeIDForSelectedHouse] = useState("");
+  const [apartmentIdArray, setApartmentIdArray] = useState([]);
+  const [apartmentId, setApartmentId] = useState("");
+  const [packageId, setPackageId] = useState(id);
+  const [localHostDomain, setLocalHostDomain] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   const instead = "0";
   const username = localStorage.getItem("username");
 
   useEffect(() => {
     fetchHouse();
+    const currentDate = new Date();
+    const formattedStartDate = currentDate.toISOString();
+    setStartDate(formattedStartDate);
+
+    const localhostDomain = getLocalhostDomain();
+    setLocalHostDomain(localhostDomain);
   }, []);
+
+  const formData = {
+    apartmentId: apartmentId,
+    packageId: packageId,
+    packageName: packageName,
+    type: "normal",
+    paymentMethod: "vnpay",
+    startDate: "2023-10-30T17:09:50.531Z",
+    CallBackUrl: localHostDomain,
+    customerName: localStorage.getItem("name"),
+    phone: localStorage.getItem("phoneNumber"),
+    userName: localStorage.getItem("username"),
+  };
+
+  const handleConfirm = async () => {
+    try {
+      let res = await config.post("/api/orders", formData);
+      console.log("check confirm order", res);
+    } catch (error) {
+      console.log("Error Confirming", error);
+    }
+  };
+
+  // Get LocalHostDomain
+  const getLocalhostDomain = () => {
+    const { protocol, hostname, port } = window.location;
+    const domain = `${protocol.replace(
+      "http",
+      "https"
+    )}//${hostname}:${port}/payment/`;
+
+    return domain;
+  };
 
   const fetchHouse = async () => {
     try {
@@ -34,20 +76,19 @@ const Order = () => {
       );
 
       const typeIdArray = res.data.map((apartment) => apartment.typeId);
-      console.log("check typeID", typeIdArray);
       setTypeId(typeIdArray);
 
       const yourRoomArray = res.data.map((apartment) => apartment.roomNo);
-      console.log("check yourRoomArray", yourRoomArray);
       const yourTowerArray = res.data.map(
         (apartment) => apartment.type.building.name
       );
+      const apartmentIdArray = res.data.map((apartment) => apartment.id);
 
       const typeRoomArray = res.data.map((apartment) => apartment.type.type);
-      console.log("check typeRoomArray", typeRoomArray);
       setYourRoom(yourRoomArray);
       setYourTower(yourTowerArray);
       setTypeRoom(typeRoomArray);
+      setApartmentIdArray(apartmentIdArray);
     } catch (error) {
       console.error("Error fetching package:", error);
       setLoading(false);
@@ -55,30 +96,25 @@ const Order = () => {
   };
 
   const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
-
   const handleHouseChange = (e) => {
     try {
       const selectedHouse = e.target.value;
-      console.log("check selectedHouse", selectedHouse);
 
       if (selectedHouse) {
         const room = selectedHouse.split(" - ")[0];
         const tower = selectedHouse.split(" - ")[1];
-        console.log("check room", room);
-        console.log("check tower", tower);
         setSelectedHouseChange([room, tower]);
 
         const selectedTypeId = typeId.find(
           (id, index) => yourRoom[index] === room && yourTower[index] === tower
         );
-        console.log("selectedTypeId", selectedTypeId);
 
         const roomIndex = yourRoom.findIndex(
           (roomNo, index) => roomNo === room && yourTower[index] === tower
         );
-        if (roomIndex !== -1) {
-          console.log("chec typeroom", roomIndex);
-        }
+
+        const selectedApartmentId = apartmentIdArray[roomIndex];
+        setApartmentId(selectedApartmentId);
 
         if (selectedTypeId) {
           setTypeRoomForSelectedHouse(typeRoom[roomIndex]);
@@ -102,6 +138,7 @@ const Order = () => {
       const getPrice = await axios.get(
         `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
       );
+      console.log("check apartmentID", getPrice);
       setPrice(getPrice.data.packagePrices[0].price);
     } catch (error) {
       console.error("Error fetching package:", error);
@@ -320,6 +357,7 @@ const Order = () => {
                       <Link
                         to="/confirm"
                         style={{ color: "white", textDecoration: "none" }}
+                        onClick={handleConfirm}
                       >
                         Xác nhận
                       </Link>

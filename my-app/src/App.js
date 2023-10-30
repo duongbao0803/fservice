@@ -10,13 +10,12 @@ import Login from "./components/Authen/Login";
 import NotFound from "./components/NotFound/NotFound";
 import PackageDetail from "./page/PackageDetail";
 import ListUser from "./components/TableUser/ListUser";
-import ConfirmVnpay from "./page/confirmVnpay";
+import ConfirmVnpay from "./page/ConfirmVnpay";
 import { createContext, useEffect, useState } from "react";
-import ListPackage from "./components/PackageDetails/ListPackage";
-import axios from "axios";
-import config from "./utils/cus-axios";
 import { Launch } from "./services/UserService";
+import Confirm from "./page/Confirm";
 export const Session = createContext(null);
+export const getUserInfo = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,13 +28,12 @@ function App() {
     try {
       const res = await Launch();
       if (res && res.status === 200) {
-        console.log("check name", res.data);
         setUser(res.data);
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("phoneNumber", res.data.phoneNumber);
         localStorage.setItem("address", res.data.address);
       } else {
-        console.log("errro");
+        console.log("error");
       }
     } catch (error) {
       console.log("Error Getting info", error);
@@ -51,9 +49,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/package" element={<PackagePage />} />
           <Route path="/detail/:id/:packageName" element={<OrderPage />} />
-          <Route path="/confirm" element={<confirm />} />
+          <Route path="/confirm" element={<Confirm />} />
           <Route path="/authen" element={<Login />} />
           <Route path="/board" element={<ListUser />} />
+          <Route path="/confirmvnpay" element={<ConfirmVnpay />} />
           <Route path="/detail/:id" element={<PackageDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
