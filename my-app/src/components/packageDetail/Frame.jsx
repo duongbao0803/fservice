@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
-import PackageDetail from "../../page/packageDetail";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 const Frame = () => {

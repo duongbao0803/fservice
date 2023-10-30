@@ -15,11 +15,16 @@ import PackageDetail from "./page/packageDetail";
 import ConfirmVnpay from "./page/confirmVnpay";
 import Staff from "./page/staff";
 import StaffInfo from "./page/StaffInfo";
+import ManagePackage from "./page/ManagePackage";
+import ManagePackage_Use from "./page/ManagePackage_Use";
+import ManagePackage_Details from "./page/ManagePackage_Details";
+
+
 
 function App() {
   return (
     <>
-     <Staff/>
+      <ManagePackage/>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
