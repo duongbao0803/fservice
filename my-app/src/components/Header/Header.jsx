@@ -84,6 +84,9 @@ function Header() {
                   <Dropdown.Item as={Link} to="/authen">
                     Đăng nhập
                   </Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleLogout()}>
+                    Đăng xuất
+                  </Dropdown.Item>
                 </DropdownButton>
               ) : (
                 <DropdownButton
