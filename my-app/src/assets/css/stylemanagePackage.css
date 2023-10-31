@@ -1,0 +1,162 @@
+body {
+    background-color: #f2f6fa;
+}
+
+.location {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;  
+}
+
+.left-bar .user i {
+    color: #ff8228;
+  }
+  
+  .left-bar .info-buiding:hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  }
+  
+  .left-bar .info-package:hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  }
+  
+  .left-bar .info-order:hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  }
+  
+  .left-bar .info-account:hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  }
+  
+  .left-bar .logout:hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  }
+
+  .main_info-list .user {
+    line-height: 45px;
+    padding: 0 20px 0 15px;
+    border: 1px solid #f2f6fa;
+    cursor: pointer;
+  }
+
+  .right_bar-main {
+    background-color: #fff;
+    border-radius: 10px;
+   
+  }
+  
+  .info_ordered-table tr td:nth-child(2),
+  td:nth-child(4) {
+  
+    font-weight: 700;
+  }
+  
+ 
+  .info_ordered-table tr td {
+    padding: 10px;
+  }
+  
+  .orderedPackage {
+    border: 2px solid #ff8228;
+    border-radius: 15px;  /* increased border radius */
+    padding: 15px 20px;  /* adjusted padding */
+    margin-bottom: 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .orderedPackage_main {
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 5px;
+  }
+  
+  .orderedPackage_main .orderedPackage-name span {
+    color: #ff8228;
+    font-weight: 650;
+  }
+  
+  .orderedPackage_main .orderedPackage-status span:nth-child(1) {
+    color: #757575;
+   
+    padding: 0 15px;
+    border-radius: 8px;
+    font-weight: none;
+  }
+  
+  .orderedPackage_main .orderedPackage-status span:nth-child(2) {
+    color: white;
+    font-size: 15px;
+    background-color: #03AC00;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 500px;
+  }
+  
+  .info-ordered .button button {
+    background-color: #ffcaa3;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .chooseHouse a {
+    text-decoration: none;
+    color: #ff8228;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.chooseHouse a:hover {
+    color: #e76a1f;
+}
+
+.choose_table tr td {
+  padding: 10px;
+  cursor: pointer;
+}
+.choose_table tr td :hover{
+  text-decoration: underline;
+  
+}
+.chooseHouse-details a {
+  cursor: pointer;
+}
+.choose {
+  margin-bottom: 10px;
+}
+
+.choose  :hover {
+  border-bottom: 3px solid #ff8228;
+}
+
+  .orderedPackage .button button {
+ 
+    right: 12px;
+    bottom: 10px;
+    outline: none;
+  }
+
+  .action {
+    cursor: pointer;
+    text-decoration: underline;
+    color:  #ff8228! important;
+  }
+
+
+
+
+
+
+
+
+
+

@@ -6,31 +6,30 @@
     min-height: 108vh;
 }
 
-.Info-menu-section ul li>a {
-    text-decoration: none;
-    color: #333;
+.Info-Job ul li a, .Info-Information ul li a {
+    transition: all 0.1s ease;
 }
 
-.Info-menu-section ul li:not(:last-child) {
-    margin-bottom: 20px;
-   
+.Info-Job ul li a:hover, .Info-Information ul li a:hover {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ff8228;
+    color: #fff !important;
 }
-
-.Info-menu-section h3 {
-    font-size: 20px;
+.Info-Information .Info-active, .Info-Information ul li a .Info-active {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ff8228;
+    color: white !important;
 }
-
-.Job,
-.Information {
-    margin-bottom: 35px;
-}
-
 .Info-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px; 
-    margin-left: 350px;
-    margin-right: 90px;  
     margin-top: 20px;
     border: 1px solid #ddd;        
     border-radius:5px;         
@@ -40,15 +39,18 @@
     max-width: 100%;
     height: 600px;
 }
+
 .Info-container table {
     width: 100%;
     border-collapse: collapse;
 
 }
 .Info-container th {
-   
     padding: 10px;
     font-size: 18px;
+}
+.group {
+    display: flex;
 }
 
 .Info-container td {
@@ -63,27 +65,28 @@
 
 .Info-container td > label {
     margin-right: 10px;
-}
-
-
-.Info-container input[type="radio"] {
-    margin-right: 5px;
+    display: inline-block;
+    width: 150px;
+    text-align: right; 
 }
 
 .Info-container button {
-    padding: 5px 10px;
+    padding: 10px 15px;
     background-color: #ff8228;
     color: white;
     border: none;
     border-radius: 5px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
 
 .avatar-section {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
     align-items: center;
-    gap: 20px; 
 }
 
 .avatar-section img {
@@ -96,4 +99,7 @@
 .avatar-section p {
     font-size: 14px;
     color: #777;
+}
+.avatar-section button {
+    padding: 5px 10px;
 }
