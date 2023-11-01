@@ -18,13 +18,13 @@ import StaffInfo from "./page/StaffInfo";
 import ManagePackage from "./page/ManagePackage";
 import ManagePackage_Use from "./page/ManagePackage_Use";
 import ManagePackage_Details from "./page/ManagePackage_Details";
-
+import ManageHouse from "./page/ManageHouse";
 
 
 function App() {
   return (
     <>
-      <ManagePackage/>
+      <ManageHouse/>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />
