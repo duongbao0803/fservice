@@ -47,6 +47,21 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/staff"
+          element={
+            <PrivateRoute allowedRole={["STAFF"]}>
+              {/* <Outlet> */}
+              {/* Route con dành cho vai trò "USER" */}
+              <Staff></Staff>
+              {/* <ManagePackage /> */}
+              {/* <Route index element={<ManagePackage />} />
+                <Route path="settings" element={<ManagePackage_Details />} />
+                <Route path="settings" element={<ManagePackage_Use />} />
+              </Outlet> */}
+            </PrivateRoute>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/package" element={<PackagePage />} />
         <Route path="/detail/:id/:packageName" element={<OrderPage />} />

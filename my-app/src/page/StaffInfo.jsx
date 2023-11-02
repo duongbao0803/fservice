@@ -24,6 +24,6 @@ function StaffInfo() {
         </div>
       </div>
     </>
-  );
+  )
 }
 export default StaffInfo;

@@ -13,13 +13,13 @@ import Logout from "@mui/icons-material/Logout";
 function Sidebar() {
   const theme = useContext(ThemeContext);
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div style={{margin: "8px"}}>
       <div style={{ marginRight: "0" }}>
         {/* Sidebar */}
         <div>
           {/* Logo */}
           <div className="mb-4">
-            <img src={Logo} alt="Logo" />
+            <img className="logo-side-bar" src={Logo} alt="Logo" />
           </div>
 
           <div className="menu-section">
@@ -61,7 +61,7 @@ function Sidebar() {
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
-                    <KeyIcon style={{ color: theme.palette.secondary.main }} />{" "}
+                    <KeyIcon style={{ color: theme.palette.secondary.main }} />
                     Thay đổi mật khẩu
                   </Link>
                 </li>
@@ -73,7 +73,7 @@ function Sidebar() {
                   >
                     <LogoutIcon
                       style={{ color: theme.palette.secondary.main }}
-                    />{" "}
+                    />
                     Đăng xuất
                   </Link>
                 </li>

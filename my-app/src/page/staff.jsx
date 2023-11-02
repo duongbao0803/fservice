@@ -11,7 +11,7 @@ function Staff() {
       <div className="container-fluid">
         {/* <Navbar/> */}
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-2" style={{ backgroundColor: "white", padding: 0}}>
             <Sidebar />
           </div>
           <div
@@ -24,6 +24,6 @@ function Staff() {
         </div>
       </div>
     </>
-  );
+  )
 }
 export default Staff;

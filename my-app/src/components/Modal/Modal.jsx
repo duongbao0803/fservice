@@ -134,7 +134,7 @@ function Modal({ isOpen, service, onClose }) {
                                                         outline: 'none',
                                                     }}
                                                 >Hoàn thành</button>
-                                            </div>.
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
