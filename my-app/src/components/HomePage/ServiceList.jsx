@@ -64,24 +64,29 @@ function ServiceList() {
                   style={{ position: "relative" }}
                   key={packages.id}
                 >
-                  <div className="service-img mb-3">
-                    <img
-                      src={packages.image}
-                      alt="Dọn phòng"
-                      style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-                  <div className="service-details pb-4">
-                    <h5>{packages.name}</h5>
-                    <p className="text-justify">{packages.description}</p>
-                    <div style={{ position: "absolute", bottom: "0" }}>
-                      <Link to={`/detail/${packages.id}`}>Tìm hiểu thêm</Link>
+                  <Link
+                    to={`/detail/${packages.id}`}
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    <div className="service-img mb-3">
+                      <img
+                        src={packages.image}
+                        alt="Dọn phòng"
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          objectFit: "cover",
+                        }}
+                      />
                     </div>
-                  </div>
+                    <div className="service-details pb-4">
+                      <h5>{packages.name}</h5>
+                      <p className="text-justify">{packages.description}</p>
+                      <div style={{ position: "absolute", bottom: "0" }}>
+                        Tìm hiểu thêm
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               ))}
         </div>

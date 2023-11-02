@@ -11,8 +11,6 @@ import Confirm from "../page/Confirm";
 import ConfirmVnpay from "../page/ConfirmVnpay";
 import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
-import Staff from "../page/Staff";
-import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
@@ -23,6 +21,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/authen" element={<Loginv2 />} />
+
         <Route
           path="/board"
           element={
@@ -36,19 +35,11 @@ const AppRoutes = () => {
           path="/user"
           element={
             <PrivateRoute allowedRole={["USER"]}>
-              {/* <Outlet> */}
-              {/* Route con dành cho vai trò "USER" */}
               <ManagePackage_Details></ManagePackage_Details>
-              {/* <ManagePackage /> */}
-              {/* <Route index element={<ManagePackage />} />
-                <Route path="settings" element={<ManagePackage_Details />} />
-                <Route path="settings" element={<ManagePackage_Use />} />
-              </Outlet> */}
             </PrivateRoute>
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/package" element={<PackagePage />} />
         <Route path="/detail/:id/:packageName" element={<OrderPage />} />
         <Route path="/confirm" element={<Confirm />} />
         <Route path="/confirmvnpay" element={<ConfirmVnpay />} />
