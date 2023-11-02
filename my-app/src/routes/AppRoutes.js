@@ -11,7 +11,7 @@ import Confirm from "../page/Confirm";
 import ConfirmVnpay from "../page/ConfirmVnpay";
 import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
-import Staff from "../page/Staff";
+import Staff from "../page/StaffPage";
 import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
 import ManagePackage_Details from "../page/ManagePackage_Details";
