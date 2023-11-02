@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../css/styleStaffInfo.css";
+import "../assets/css/styleStaffInfo.css";
 
 import InfoNav from "../components/StaffInfo/InfoNav";
 import InfoSideBar from "../components/StaffInfo/InfoSideBar";

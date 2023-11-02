@@ -158,7 +158,6 @@ const AddUserModal = ({ show, handleClose, dataUserAdd }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 };

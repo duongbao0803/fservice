@@ -13,18 +13,22 @@ import { Session } from "../../App";
 
 function Header() {
   const session = useContext(Session);
+  // const user = session.user;
+  const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
-  const user = session.user;
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("accesstoken");
+    localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("isLogged");
     localStorage.removeItem("role");
     localStorage.removeItem("username");
-
+    localStorage.removeItem("phoneNumber");
+    localStorage.removeItem("name");
     session.setUser(null);
-    navigate("/authen");
     toast.success("Logout Success");
+    navigate("/authen");
   };
 
   return (
@@ -46,6 +50,7 @@ function Header() {
             src={require("../../assets/img/logo_web_2.png")}
             alt=""
             width="90px"
+            style={{ margin: "0" }}
           />
         </div>
         <div className="container-fluid">
@@ -79,13 +84,10 @@ function Header() {
               </li>
             )}
             <li className="nav-item" style={{ paddingRight: 0 }}>
-              {user == null ? (
+              {logged !== "true" ? (
                 <DropdownButton id="dropdown-basic-button" title="Tài khoản">
                   <Dropdown.Item as={Link} to="/authen">
                     Đăng nhập
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleLogout()}>
-                    Đăng xuất
                   </Dropdown.Item>
                 </DropdownButton>
               ) : (
@@ -96,9 +98,20 @@ function Header() {
                       src={require("../../assets/img/ig_logo.png")}
                       width="30"
                       height="30"
+                      style={{ margin: "0" }}
                     />
                   }
                 >
+                  {role === "USER" && (
+                    <Dropdown.Item>
+                      <Link
+                        to="/user"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >
+                        Thông tin người dùng
+                      </Link>
+                    </Dropdown.Item>
+                  )}
                   <Dropdown.Item onClick={handleLogout}>
                     Đăng xuất
                   </Dropdown.Item>
@@ -108,7 +121,14 @@ function Header() {
           </ul>
         </div>
       </nav>
-      <ToastContainer />
+      <ToastContainer
+        autoClose={2000}
+        pauseOnHover={false}
+        style={{
+          top: "3em",
+          zIndex: 1,
+        }}
+      />
     </>
   );
 }

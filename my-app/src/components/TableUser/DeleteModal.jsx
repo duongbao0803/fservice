@@ -40,7 +40,6 @@ const DeleteModal = ({ show, handleClose, dataUserDelete, getUser }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 };

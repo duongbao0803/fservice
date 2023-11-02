@@ -12,13 +12,7 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import axios from "axios";
-import {
-  Launch,
-  launch,
-  loginAPI,
-  sendRefreshToken,
-  signUp,
-} from "../../services/UserService";
+import { loginAPI, sendRefreshToken, signUp } from "../../services/UserService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -30,10 +24,12 @@ import "../../assets/css/styleLogin.css";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
 import { Session } from "../../App";
+import { updateAccessToken } from "../../utils/cus-axios";
 
 function Loginv2() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogged, setIsLogged] = useState(true);
   const [rememberMe, setRememberMe] = useState(false);
 
   const session = useContext(Session);
@@ -58,24 +54,26 @@ function Loginv2() {
     }
   }, []);
 
-  const updateAccessToken = async () => {
-    const refreshToken = localStorage.getItem("refreshtoken");
-    try {
-      const response = await sendRefreshToken(refreshToken);
-      console.log("check ", response);
-      if (response.status === 200) {
-        const newAccessToken = response.data.accesstoken;
-        localStorage.setItem("accesstoken", newAccessToken);
-      } else {
-        console.log("Error");
-      }
-    } catch (error) {
-      console.log("Error");
-    }
-  };
-  updateAccessToken();
+  // const updateAccessToken = async () => {
+  //   const refreshToken = localStorage.getItem("refreshtoken");
+  //   try {
+  //     const response = await sendRefreshToken(refreshToken);
+  //     if (response.status === 200) {
+  //       const newAccessToken = response.data.accesstoken;
+  //       localStorage.setItem("accesstoken", newAccessToken);
+  //     } else {
+  //       console.log("Error");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error Sending RefreshToken", error);
+  //   }
+  // };
+  // updateAccessToken();
 
   const handleLogin = async () => {
+    if (!password) {
+      toast.error("Password is required");
+    }
     try {
       let res = await loginAPI(email, password);
       if (res.status !== 401 && res.status !== 400) {
@@ -93,7 +91,8 @@ function Loginv2() {
               decoded[
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
               ];
-
+            setIsLogged(true);
+            localStorage.setItem("isLogged", isLogged);
             localStorage.setItem("username", userName);
             localStorage.setItem("role", role);
             localStorage.setItem("accesstoken", jwtToken);
@@ -150,10 +149,10 @@ function Loginv2() {
       password: Yup.string()
         .matches(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]+$/,
-          "Password is invalid"
+          "Password is invalid (Ex: Abc@12345)"
         )
-        .min(7, "Password must be at least 7 characters")
-        .max(12, "Password can't exceed 12 characters"),
+        .min(7, "Password must be at least 7 characters (Ex: Abc@12345) ")
+        .max(12, "Password can't exceed 20 characters (Ex: Abc@12345)"),
 
       confirmPassword: Yup.string().oneOf(
         [Yup.ref("password"), null],
@@ -162,7 +161,6 @@ function Loginv2() {
     }),
 
     onSubmit: async (values) => {
-      console.log("Form submitted", values);
       try {
         let res = await signUp({
           name: values.name,
@@ -173,7 +171,6 @@ function Loginv2() {
           password: values.password,
           confirmPassword: values.confirmPassword,
         });
-        console.log("Check ressssss", res.data.status);
         if (res.data.status === "Error") {
           toast.error(res.data.message);
         } else {
@@ -240,7 +237,7 @@ function Loginv2() {
             <MDBTabsPane show={justifyActive === "tab1"}>
               <MDBInput
                 wrapperClass="mb-4"
-                label="Email address"
+                label="Username"
                 id="form1"
                 type="email"
                 required

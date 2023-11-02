@@ -40,7 +40,6 @@ export default function BannerPackage() {
 
       if (res.ok) {
         const data = await res.json();
-        console.log("check ser=vice", data);
         setAPIData(data);
         const response = await fetch(
           `https://fservices.azurewebsites.net/api/services/${data.packageDetails[0].serviceId}`

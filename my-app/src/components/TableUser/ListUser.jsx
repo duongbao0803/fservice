@@ -7,7 +7,6 @@ import AddModal from "../TableUser/AddUserModal";
 
 import EditModal from "../TableUser/EditModal";
 import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
 import ReactPaginate from "react-paginate";
@@ -19,7 +18,6 @@ const ListUser = () => {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [dataUserAdd, setDataUserAdd] = useState({});
-
   const [dataUserEdit, setDataUserEdit] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
   const [totalPage, setTotalPage] = useState(0);
@@ -50,15 +48,9 @@ const ListUser = () => {
     setShowModalDelete(true);
   };
 
-  // const handleEditInfoUser = (user) => {
-  //   console.log("test delete nè", user);
-  // };
-
   const getUser = async (page) => {
     try {
       let res = await fetchUser(page);
-      console.log("check list", res);
-
       if (res && res.data) {
         const xPaginationHeader = res.headers?.["x-pagination"];
         if (xPaginationHeader) {
@@ -72,7 +64,6 @@ const ListUser = () => {
       console.error("Error fetching user:", error);
     }
   };
-
   const handlePageClick = (e) => {
     getUser(+e.selected + 1);
   };

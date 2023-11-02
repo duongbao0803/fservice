@@ -82,7 +82,6 @@ const EditModal = ({ show, handleClose, dataUserEdit, handleEditInfoUser }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 };

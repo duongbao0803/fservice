@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Routes, Route, Link, redirect } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import BasicRating from "./Star";
 import PriceFormat from "./PriceFormat";
 import Order from "../OrderCart/Order";
+import { toast } from "react-toastify";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
@@ -19,6 +20,7 @@ const Frame = () => {
 
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFrame();
@@ -65,6 +67,15 @@ const Frame = () => {
     }
   };
 
+  const handleSubmit = () => {
+    if (localStorage.getItem("isLogged") === "true") {
+      navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
+    } else {
+      navigate("/authen");
+      toast.warning("You must login before ordering package");
+    }
+  };
+
   const style = {
     border: "1px solid #333",
     padding: "8px",
@@ -107,18 +118,12 @@ const Frame = () => {
               </table>
 
               <div className="button-container">
-                <button type="button" id="order-now-button">
-                  {" "}
-                  <Link
-                    to={`/detail/${id}/${encodeURIComponent(packageName)}`}
-                    style={{
-                      color: "white",
-                      textDecoration: "none",
-                      fontWeight: "800",
-                    }}
-                  >
-                    Đặt mua
-                  </Link>
+                <button
+                  type="button"
+                  id="order-now-button"
+                  onClick={handleSubmit}
+                >
+                  Đặt mua
                 </button>
               </div>
             </div>

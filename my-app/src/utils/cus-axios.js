@@ -1,12 +1,10 @@
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
-const accesstoken = localStorage.getItem("accesstoken");
-
 const config = axios.create({
   baseURL: "https://fservices.azurewebsites.net",
   headers: {
-    Authorization: `Bearer ${accesstoken}`,
+    Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
   },
 });
 

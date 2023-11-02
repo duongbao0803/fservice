@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext, createContext } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import PriceFormat from "../PackageDetails/PriceFormat";
@@ -22,16 +22,32 @@ const Order = () => {
   const [packageId, setPackageId] = useState(id);
   const [localHostDomain, setLocalHostDomain] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  const instead = "0";
+  const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
+  const instead = 0;
   const username = localStorage.getItem("username");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchHouse();
     const currentDate = new Date();
-    const formattedStartDate = currentDate.toISOString();
-    setStartDate(formattedStartDate);
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const formattedStartDate = `${year}-${month}-${day}`;
+    console.log("check start", formattedStartDate);
+    console.log("check start string", "2023-11-2");
 
+    setStartDate(+formattedStartDate);
+
+    const nextMonthDate = new Date(currentDate);
+    nextMonthDate.setMonth(currentDate.getMonth() + 1);
+    const nextMonthDay = nextMonthDate.getDate();
+    const nextMonth = nextMonthDate.getMonth() + 1;
+    const nextMonthYear = nextMonthDate.getFullYear();
+    const formattedEndDate = `${nextMonthYear}-${nextMonth}-${nextMonthDay}`;
+    setEndDate(formattedEndDate);
     const localhostDomain = getLocalhostDomain();
     setLocalHostDomain(localhostDomain);
   }, []);
@@ -41,18 +57,33 @@ const Order = () => {
     packageId: packageId,
     packageName: packageName,
     type: "normal",
-    paymentMethod: "vnpay",
-    startDate: "2023-10-30T17:09:50.531Z",
+    paymentMethod: "VNPAY",
+    startDate: startDate,
     CallBackUrl: localHostDomain,
     customerName: localStorage.getItem("name"),
     phone: localStorage.getItem("phoneNumber"),
     userName: localStorage.getItem("username"),
   };
 
+  // Confirm Order
   const handleConfirm = async () => {
+    if (price === 0) {
+      toast.error("Vui lòng chọn số nhà / căn hộ");
+      return;
+    }
     try {
       let res = await config.post("/api/orders", formData);
       console.log("check confirm order", res);
+      navigate("/confirm", {
+        state: {
+          room: selectedHouseChange[0],
+          tower: selectedHouseChange[1],
+          startDate,
+          endDate,
+          TypeRoomForSelectedHouse,
+          price,
+        },
+      });
     } catch (error) {
       console.log("Error Confirming", error);
     }
@@ -69,6 +100,7 @@ const Order = () => {
     return domain;
   };
 
+  // Get Info Student's House
   const fetchHouse = async () => {
     try {
       const res = await axios.get(
@@ -95,7 +127,8 @@ const Order = () => {
     }
   };
 
-  const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
+  // Get Information When Selected
+
   const handleHouseChange = (e) => {
     try {
       const selectedHouse = e.target.value;
@@ -133,12 +166,12 @@ const Order = () => {
     }
   };
 
+  //Get Price When Selected
   const fetchPrice = async (selectedTypeId) => {
     try {
       const getPrice = await axios.get(
         `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
       );
-      console.log("check apartmentID", getPrice);
       setPrice(getPrice.data.packagePrices[0].price);
     } catch (error) {
       console.error("Error fetching package:", error);
@@ -207,6 +240,7 @@ const Order = () => {
                       aria-label=".form-select-lg example"
                       value={`${selectedHouseChange[0]} - ${selectedHouseChange[1]}`}
                       onChange={handleHouseChange}
+                      required
                     >
                       <option value="">Chọn nhà / căn hộ</option>
                       {yourRoom.map((room, index) => (
@@ -353,14 +387,13 @@ const Order = () => {
                         Hủy đơn
                       </Link>
                     </button>
-                    <button type="submit">
-                      <Link
-                        to="/confirm"
-                        style={{ color: "white", textDecoration: "none" }}
-                        onClick={handleConfirm}
-                      >
-                        Xác nhận
-                      </Link>
+                    <button
+                      type="submit"
+                      style={{ color: "white", textDecoration: "none" }}
+                      onClick={handleConfirm}
+                    >
+                      {" "}
+                      Xác nhận
                     </button>
                   </div>
                 </div>
