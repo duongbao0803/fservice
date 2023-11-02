@@ -1,6 +1,8 @@
 import axios from "axios";
+import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
+// console.log("check ls", localStorage.getItem("accesstoken"));
 const config = axios.create({
   baseURL: "https://fservices.azurewebsites.net",
   headers: {

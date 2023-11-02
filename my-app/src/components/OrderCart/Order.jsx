@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import PriceFormat from "../PackageDetails/PriceFormat";
+// import PriceFormat from "../PackageDetails/PriceFormat";
 import "../../assets/css/styleOrder.css";
 import { confirm, launch } from "../../services/UserService";
 import { toast } from "react-toastify";
 import config from "../../utils/cus-axios";
-
+import { format } from "date-fns";
+import PriceFormat from "../PackageDetails/PriceFormat";
 const Order = () => {
   const [yourRoom, setYourRoom] = useState([]);
   const [yourTower, setYourTower] = useState([]);
@@ -21,9 +22,10 @@ const Order = () => {
   const [apartmentId, setApartmentId] = useState("");
   const [packageId, setPackageId] = useState(id);
   const [localHostDomain, setLocalHostDomain] = useState("");
+  const [orderDate, setOrderDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
+  const [paymentUrl, setPaymentUrl] = useState("");
   const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
   const instead = 0;
   const username = localStorage.getItem("username");
@@ -32,22 +34,15 @@ const Order = () => {
   useEffect(() => {
     fetchHouse();
     const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1;
+    const formatOrderDate = format(currentDate, "yyyy-MM-dd HH:mm:ss");
+    setOrderDate(formatOrderDate);
+    const formattedStartDate = format(currentDate, "yyyy-MM-dd");
+    setStartDate(formattedStartDate);
     const year = currentDate.getFullYear();
-    const formattedStartDate = `${year}-${month}-${day}`;
-    console.log("check start", formattedStartDate);
-    console.log("check start string", "2023-11-2");
-
-    setStartDate(+formattedStartDate);
-
-    const nextMonthDate = new Date(currentDate);
-    nextMonthDate.setMonth(currentDate.getMonth() + 1);
-    const nextMonthDay = nextMonthDate.getDate();
-    const nextMonth = nextMonthDate.getMonth() + 1;
-    const nextMonthYear = nextMonthDate.getFullYear();
-    const formattedEndDate = `${nextMonthYear}-${nextMonth}-${nextMonthDay}`;
-    setEndDate(formattedEndDate);
+    const month = String(currentDate.getMonth() + 2).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const updateFormattedEndDate = `${year}-${month}-${day}`;
+    setEndDate(updateFormattedEndDate);
     const localhostDomain = getLocalhostDomain();
     setLocalHostDomain(localhostDomain);
   }, []);
@@ -71,22 +66,18 @@ const Order = () => {
       toast.error("Vui lòng chọn số nhà / căn hộ");
       return;
     }
-    try {
-      let res = await config.post("/api/orders", formData);
-      console.log("check confirm order", res);
-      navigate("/confirm", {
-        state: {
-          room: selectedHouseChange[0],
-          tower: selectedHouseChange[1],
-          startDate,
-          endDate,
-          TypeRoomForSelectedHouse,
-          price,
-        },
-      });
-    } catch (error) {
-      console.log("Error Confirming", error);
-    }
+    navigate("/confirm", {
+      state: {
+        formData,
+        room: selectedHouseChange[0],
+        tower: selectedHouseChange[1],
+        startDate,
+        endDate,
+        TypeRoomForSelectedHouse,
+        price,
+        orderDate,
+      },
+    });
   };
 
   // Get LocalHostDomain
@@ -128,7 +119,6 @@ const Order = () => {
   };
 
   // Get Information When Selected
-
   const handleHouseChange = (e) => {
     try {
       const selectedHouse = e.target.value;
@@ -355,7 +345,7 @@ const Order = () => {
                   <strong>Tổng tiền: </strong>
                   <span style={{ color: "#ff8228" }}>
                     <strong>
-                      <PriceFormat price={price} />{" "}
+                      <PriceFormat price={price} />
                     </strong>
                   </span>
                   <p>

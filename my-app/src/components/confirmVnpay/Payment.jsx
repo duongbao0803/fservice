@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default function Payment() {
+function Payment() {
   return (
     <div className="container mt-1">
       <div className="pay mb-3">
@@ -46,3 +46,4 @@ export default function Payment() {
     </div>
   );
 }
+export default Payment;

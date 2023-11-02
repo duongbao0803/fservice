@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PriceFormat from "../PackageDetails/PriceFormat";
+// import PriceFormat from "../PackageDetails/PriceFormat";
 
 export default function Payment(props) {
   return (
@@ -18,12 +19,13 @@ export default function Payment(props) {
             <tbody>
               <tr>
                 <td>Ngày đặt dịch vụ</td>
-                <td>{props.startDate} </td>
+                <td> {props.state.orderDate} </td>
               </tr>
               <tr>
                 <td>Số tiền</td>
                 <td>
-                  <PriceFormat price={props.price} />
+                  <PriceFormat price={props.state.price} />
+                  {/* {props.state.price} */}
                 </td>
               </tr>
               <tr>

@@ -15,15 +15,16 @@ const refreshdata = () => {
 };
 
 const Launch = () => {
-  let dmm = {};
-  dmm = refreshdata();
-  return config.get("/api/authentication/Launch", dmm);
+  const refreshedConfig = refreshdata();
+  return config.get("/api/authentication/Launch", refreshedConfig);
 };
 
 const fetchUser = (page) => {
-  let dmm = {};
-  dmm = refreshdata();
-  return config.get(`/api/accounts?PageNumber=${page}&PageSize=10`, dmm);
+  const refreshedConfig = refreshdata();
+  return config.get(
+    `/api/accounts?PageNumber=${page}&PageSize=10`,
+    refreshedConfig
+  );
 };
 
 const loginAPI = (email, password) => {
@@ -56,6 +57,11 @@ const deleteUser = (id) => {
   return config.delete(`/api/accounts/${id}`);
 };
 
+const Order = (data) => {
+  const refreshedConfig = refreshdata();
+  return config.post("/api/orders", data, refreshedConfig);
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -64,4 +70,5 @@ export {
   deleteUser,
   sendRefreshToken,
   Launch,
+  Order,
 };

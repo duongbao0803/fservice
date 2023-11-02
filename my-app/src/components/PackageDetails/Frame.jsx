@@ -111,6 +111,8 @@ const Frame = () => {
                       <td style={style}>{room.type}</td>
                       <td style={style}>
                         <PriceFormat price={price[index].price} />
+
+                        {/* {price[index].price} */}
                       </td>
                     </tr>
                   ))}

@@ -20,7 +20,6 @@ function App() {
       const res = await Launch();
       console.log("check res launch", res);
       if (res && res.status === 200) {
-        console.log("check list", res);
         setUser(res.data);
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("phoneNumber", res.data.phoneNumber);
