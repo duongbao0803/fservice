@@ -11,7 +11,7 @@ function Modal({ isOpen, service, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className="modal" style={{ backgroundColor: theme.background }}>
+        <div onClick={onClose} className="modal" style={{ backgroundColor: theme.background }}>
             <div className="modal-content">
                 <div className="modal-header">
                     <h5>CHI TIẾT CÔNG VIỆC</h5>
@@ -47,7 +47,7 @@ function Modal({ isOpen, service, onClose }) {
                                     <tr>
                                         <td className="modal-title">Ghi chú:</td>
                                         <td>
-                                            <p>{service?.notes || 'Làm nhanh giúp chị nhé em.'}</p>
+                                            <p>{service?.notes || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -78,7 +78,7 @@ function Modal({ isOpen, service, onClose }) {
                     <section className="Info-details">
                         <h6>THÔNG TIN</h6>
                         <div className="modal-table">
-                            <table>
+                            <table style={{width: "100%"}}>
                                 <tbody>
                                     <tr>
                                         <td className="modal-title">Trạng thái:</td>
@@ -86,7 +86,7 @@ function Modal({ isOpen, service, onClose }) {
                                             <div style={{
                                                 backgroundColor: '#0A6EBD',
                                                 borderRadius: '10px',
-                                                width: '120px',
+                                                minWidth: '110px',
                                                 padding: '5px',
                                                 textAlign: 'center'
                                             }}>
@@ -107,7 +107,7 @@ function Modal({ isOpen, service, onClose }) {
                                                         color: 'white',
                                                         backgroundColor: '#ff8228',
                                                         borderRadius: '10px',
-                                                        width: '100px',
+                                                        minWidth: '120px',
                                                         padding: '5px',
                                                         border: 'none',
                                                         outline: 'none',
@@ -117,7 +117,9 @@ function Modal({ isOpen, service, onClose }) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="modal-title">Ngày hoàn thành:</td>
+                                        <td className="modal-title">
+                                            <p>Ngày hoàn thành:</p>
+                                        </td>
                                         <td>
                                             <p>10/10/2023</p>
                                         </td>
@@ -128,7 +130,7 @@ function Modal({ isOpen, service, onClose }) {
                                                         color: 'white',
                                                         backgroundColor: '#03AC00',
                                                         borderRadius: '10px',
-                                                        width: '100px',
+                                                        minWidth: '120px',
                                                         padding: '5px',
                                                         border: 'none',
                                                         outline: 'none',

@@ -34,9 +34,9 @@ function DataTable() {
         <div>
           <h4>DANH SÁCH CÔNG VIỆC</h4>
           <div className="dropdown-container d-flex align-items-center" style={{ justifyContent: 'flex-end' }}>
-            <label style={{paddingRight: "10px"}}>Hiển thị:</label>
+            <label style={{paddingRight: "10px", margin:"0"}}>Hiển thị:</label>
             <select className="form-control w-auto" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
-              <option>Theo ngày / tuần / tháng</option>
+              <option>Mặc định</option>
               <option>Theo ngày</option>
               <option>Theo tuần</option>
               <option>Theo tháng</option>
