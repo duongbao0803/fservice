@@ -9,6 +9,7 @@ function ConfirmButton(props) {
   const navigate = useNavigate();
   const handleSubmit = async () => {
     const data = props.state.formData;
+
     try {
       let res = await Order(data);
       if (res && res.status === 200) {
@@ -20,6 +21,12 @@ function ConfirmButton(props) {
         });
         setTimeout(() => {
           window.open(res.data.paymentUrl, "_blank");
+          window.open(
+            `${res.data.paymentUrl}?callback=${encodeURIComponent(
+              data.CallBackUrl
+            )}`,
+            "_blank"
+          );
         }, 3000);
       } else {
         toast.error("Đơn hàng tạo thất bại");
@@ -29,7 +36,6 @@ function ConfirmButton(props) {
       console.log("check submit", error);
     }
   };
-
   return (
     <div className="container-cf-btn">
       <form>

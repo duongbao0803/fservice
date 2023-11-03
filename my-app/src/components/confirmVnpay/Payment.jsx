@@ -1,6 +1,21 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Payment() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const paymentStatus = params.get("vnp_ResponseCode"); // Trạng thái thanh toán từ VNPAY
+    // Xử lý kết quả thanh toán và chuyển hướng người dùng về trang UI tương ứng
+    if (paymentStatus === "00") {
+      navigate("/home");
+    } else {
+      navigate("/error");
+    }
+  }, [location, navigate]);
+
   return (
     <div className="container mt-1">
       <div className="pay mb-3">

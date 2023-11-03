@@ -76,10 +76,10 @@ const Order = () => {
         TypeRoomForSelectedHouse,
         price,
         orderDate,
+        localHostDomain,
       },
     });
   };
-
   // Get LocalHostDomain
   const getLocalhostDomain = () => {
     const { protocol, hostname, port } = window.location;
