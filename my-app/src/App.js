@@ -24,7 +24,12 @@ import ManageHouse from "./page/ManageHouse";
 function App() {
   return (
     <>
-      <ManageHouse/>
+    
+      <Routes>
+      <Route path="/" element={<ManageHouse/>}/>
+        <Route path="/managepackage" element={<ManagePackage/>}/>
+        <Route path="/managepackage_details" element={<ManagePackage_Details/>}/>
+      </Routes>
       {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<PackagePage />} />

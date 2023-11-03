@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from "react-router-dom";
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
@@ -109,9 +110,11 @@ function Rightbar() {
               </TableContainer>
 
             </div>
-            <div className="button-details d-flex justify-content-end" style={{marginTop: '10px'}}>
+            <Link to="/managepackage">
+            <div className="button-details d-flex justify-content-end" style={{marginTop: '10px', textDecoration: "none"}}>
               <button>Quay về</button>
             </div>
+            </Link>
           </div>
 
         </div>

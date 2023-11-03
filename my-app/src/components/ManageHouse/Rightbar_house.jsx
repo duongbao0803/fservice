@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -27,12 +28,12 @@ function Rightbar_house() {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                                <Link to="/managepackage" style={{ color: 'inherit', textDecoration: 'underline' }}>
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <ArrowForwardIcon style={{ marginRight: '8px', color: '#ff8228' }} />
                                         <span>Gói dịch vụ đang sử dụng</span>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
