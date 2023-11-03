@@ -1,8 +1,8 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 /* Logo Styles */
 .logo-side-bar {
@@ -12,23 +12,23 @@
   margin-bottom: 60px;
 }
 
-h3 {
+.menu-section h3 {
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-ul {
+.menu-section ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-li {
+.menu-section li {
   margin-bottom: 30px;
   text-decoration: none;
 }
 
-li:last-child {
+.menu-section li:last-child {
   margin-bottom: 0;
 }
 

@@ -38,7 +38,7 @@ const AppRoutes = () => {
             <PrivateRoute allowedRole={["USER"]}>
               {/* <Outlet> */}
               {/* Route con dành cho vai trò "USER" */}
-              <ManagePackage_Details></ManagePackage_Details>
+              <ManagePackage></ManagePackage>
               {/* <ManagePackage /> */}
               {/* <Route index element={<ManagePackage />} />
                 <Route path="settings" element={<ManagePackage_Details />} />

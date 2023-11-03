@@ -2,10 +2,7 @@ import React from "react";
 
 function Location() {
     return (
-      <div className="container first-line"
-      style={{paddingLeft: "80px",
-    }}
-      >
+      <div className="container">
         {/* title */}
         <div className="location d-flex mb-1">
           <p style={{marginRight: '20px'}}>

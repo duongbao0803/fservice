@@ -2,7 +2,7 @@ import React from "react";
 import Location from "../components/ManagePackage_Use/Location";
 
 import "../assets/css/styleMP_Use.css";
-import Leftbar from "../components/ManagePackage_Use/Leftbar";
+import Leftbar from "../components/ManagePackage/Leftbar";
 import Rightbar_Use from "../components/ManagePackage_Use/Rightbar_Use";
 function ManagePackage_Use() {
   return (
