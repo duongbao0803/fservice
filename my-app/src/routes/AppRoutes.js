@@ -16,6 +16,8 @@ import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
+import PaymentSuccess from "../page/PaymentSuccess";
+import PaymentError from "../page/PaymentError";
 
 const AppRoutes = () => {
   return (
@@ -68,6 +70,10 @@ const AppRoutes = () => {
         <Route path="/confirm" element={<Confirm />} />
         <Route path="/confirmvnpay" element={<ConfirmVnpay />} />
         <Route path="/detail/:id" element={<PackageDetail />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/error" element={<PaymentError />} />
+
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
