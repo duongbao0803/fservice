@@ -1,68 +1,416 @@
-import React from "react";
-import "../../css/styleLogin.css";
-import { useState, useEffect } from "react";
-import { LoginAPI } from "../../services/UserService";
+import React, { useState, useEffect, useContext } from "react";
+import {
+  MDBContainer,
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane,
+  MDBBtn,
+  MDBIcon,
+  MDBInput,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
+import axios from "axios";
+import { loginAPI, sendRefreshToken, signUp } from "../../services/UserService";
 import { toast } from "react-toastify";
-function Login() {
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import jwt_decode from "jwt-decode";
+import { useFormik } from "formik";
+import { Button, Typography } from "@mui/material";
+import ReCaptcha from "../ReCaptcha/GG_ReCaptcha";
+import "../../assets/css/styleLogin.css";
+import * as Yup from "yup";
+import "react-toastify/dist/ReactToastify.css";
+import { Session } from "../../App";
+import { updateAccessToken } from "../../utils/cus-axios";
+
+function Loginv2() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = async () => {
-    if (!email || !password) {
-      alert("hello");
-      toast.error("Error! Incorrect Username or Password");
-      return;
+  const [isLogged, setIsLogged] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const session = useContext(Session);
+  const navigate = useNavigate();
+  const accesstoken = localStorage.getItem("accesstoken");
+
+  useEffect(() => {
+    if (accesstoken) {
+      navigate("/");
     }
-    let res = await LoginAPI(email, password);
-    console.log("check login: ", res);
+
+    const rememberEmail = localStorage.getItem("rememberEmail");
+    const rememberPassword = localStorage.getItem("rememberPassword");
+
+    if (rememberEmail) {
+      setEmail(rememberEmail);
+      setRememberMe(true);
+    }
+    if (rememberPassword) {
+      setPassword(rememberPassword);
+      setRememberMe(true);
+    }
+  }, []);
+
+  // const updateAccessToken = async () => {
+  //   const refreshToken = localStorage.getItem("refreshtoken");
+  //   try {
+  //     const response = await sendRefreshToken(refreshToken);
+  //     if (response.status === 200) {
+  //       const newAccessToken = response.data.accesstoken;
+  //       localStorage.setItem("accesstoken", newAccessToken);
+  //     } else {
+  //       console.log("Error");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error Sending RefreshToken", error);
+  //   }
+  // };
+  // updateAccessToken();
+
+  const handleLogin = async () => {
+    if (!password) {
+      toast.error("Password is required");
+    }
+    try {
+      let res = await loginAPI(email, password);
+      if (res.status !== 401 && res.status !== 400) {
+        if (res && res.data && res.data.status === true) {
+          session.setUser(res.data);
+          const jwtToken = res.data.jwtToken;
+          const jwtRefreshToken = res.data.jwtRefreshToken;
+          if (jwtToken) {
+            const decoded = jwt_decode(jwtToken);
+            const role =
+              decoded[
+                "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+              ];
+            const userName =
+              decoded[
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+              ];
+            setIsLogged(true);
+            localStorage.setItem("isLogged", isLogged);
+            localStorage.setItem("username", userName);
+            localStorage.setItem("role", role);
+            localStorage.setItem("accesstoken", jwtToken);
+            localStorage.setItem("refreshtoken", jwtRefreshToken);
+
+            if (rememberMe) {
+              localStorage.setItem("rememberEmail", email);
+              localStorage.setItem("rememberPassword", password);
+            } else {
+              localStorage.removeItem("rememberEmail");
+              localStorage.removeItem("rememberPassword");
+            }
+            navigate("/");
+          } else {
+            toast.error("Failed to decode the token.");
+          }
+        } else {
+          toast.error(res.data);
+        }
+      } else {
+        toast.error(res.message || res.data.errors.Email[0]);
+      }
+    } catch (error) {
+      console.log("Error fetching Signin", error);
+    }
   };
 
+  const [justifyActive, setJustifyActive] = useState("tab1");
+  const handleJustifyClick = (value) => {
+    if (value === justifyActive) {
+      return;
+    }
+    setJustifyActive(value);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      phoneNumber: "",
+      dateOfBirth: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string(),
+      phoneNumber: Yup.string().matches(
+        /^[0-9]{10}$/,
+        "Phone number must be 10 digits"
+      ),
+      address: Yup.string(),
+      dateOfBirth: Yup.date(),
+      email: Yup.string().email("Invalid email address"),
+      password: Yup.string()
+        .matches(
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]+$/,
+          "Password is invalid (Ex: Abc@12345)"
+        )
+        .min(7, "Password must be at least 7 characters (Ex: Abc@12345) ")
+        .max(12, "Password can't exceed 20 characters (Ex: Abc@12345)"),
+
+      confirmPassword: Yup.string().oneOf(
+        [Yup.ref("password"), null],
+        "ConfirmPassword must match with Password"
+      ),
+    }),
+
+    onSubmit: async (values) => {
+      try {
+        let res = await signUp({
+          name: values.name,
+          phoneNumber: values.phoneNumber,
+          address: values.address,
+          dateOfBirth: values.dateOfBirth,
+          email: values.email,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+        });
+        if (res.data.status === "Error") {
+          toast.error(res.data.message);
+        } else {
+          toast.success(
+            "Đăng kí thành công, vui lòng check mail để xác nhận tài khoản"
+          );
+          navigate("/");
+        }
+      } catch (error) {
+        console.log("Error Adding User", error);
+      }
+    },
+  });
+
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-5">
-          <div className="card">
-            <div className="card-header">Login</div>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="text"
-                    className="form-control"
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>FService | Authen</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+
+      <div
+        className="authen d-flex"
+        style={{
+          minHeight: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "orange",
+        }}
+      >
+        <MDBContainer
+          className="p-3 my-5 d-flex flex-column"
+          style={{
+            width: "500px",
+            border: "1px solid black",
+            backgroundColor: "white",
+          }}
+        >
+          <MDBTabs
+            pills
+            justify
+            className="mb-3 d-flex flex-row justify-content-between"
+          >
+            <MDBTabsItem>
+              <MDBTabsLink
+                onClick={() => handleJustifyClick("tab1")}
+                active={justifyActive === "tab1"}
+              >
+                Login
+              </MDBTabsLink>
+            </MDBTabsItem>
+            <MDBTabsItem>
+              <MDBTabsLink
+                onClick={() => handleJustifyClick("tab2")}
+                active={justifyActive === "tab2"}
+              >
+                Register
+              </MDBTabsLink>
+            </MDBTabsItem>
+          </MDBTabs>
+
+          <MDBTabsContent>
+            <MDBTabsPane show={justifyActive === "tab1"}>
+              <MDBInput
+                wrapperClass="mb-4"
+                label="Username"
+                id="form1"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <MDBInput
+                wrapperClass="mb-4"
+                label="Password"
+                id="form2"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div className="d-flex mx-2 mb-4 justify-content-between">
+                <MDBCheckbox
+                  name="flexCheck"
+                  value=""
+                  id="flexCheckDefault"
+                  required
+                  label="Remember me"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <a href="!#">Forgot password?</a>
+              </div>
+
+              <MDBBtn className="mb-4 w-100" onClick={handleLogin}>
+                Sign in
+              </MDBBtn>
+            </MDBTabsPane>
+
+            {/* Register */}
+            <MDBTabsPane show={justifyActive === "tab2"}>
+              <form onSubmit={formik.handleSubmit}>
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Name"
+                  id="name"
+                  type="text"
+                  required
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                />
+
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Email"
                     id="email"
-                    placeholder="Enter email"
+                    type="email"
+                    required
                     name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                   />
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.email && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.email}
+                      </Typography>
+                    )}
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="pwd">Password:</label>
-                  <input
+
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Phone"
+                    id="phoneNumber"
+                    type="text"
+                    required
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                  />
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.phoneNumber && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.phoneNumber}
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Address"
+                    id="address"
+                    type="text"
+                    required
+                    value={formik.values.address}
+                    onChange={formik.handleChange}
+                  />
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.address && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.address}
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Date Of Birth"
+                    id="dateOfBirth"
+                    type="date"
+                    required
+                    value={formik.values.dateOfBirth}
+                    onChange={formik.handleChange}
+                  />{" "}
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.dateOfBirth && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.dateOfBirth}
+                      </Typography>
+                    )}{" "}
+                  </div>{" "}
+                </div>
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Password"
+                    id="password"
                     type="password"
-                    className="form-control"
-                    id="pwd"
-                    placeholder="Enter password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                    required
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                  />{" "}
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.password && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.password}
+                      </Typography>
+                    )}{" "}
+                  </div>{" "}
                 </div>
-                <button
-                  type="submit"
-                  className={email && password ? "active" : ""}
-                  // disabled={email && password ? false : true}
-                  onClick={() => handleLogin()}
-                >
-                  Submit
-                </button>
+
+                <div style={{ position: "relative" }}>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Confirm Password"
+                    id="confirmPassword"
+                    type="password"
+                    required
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                  />{" "}
+                  <div style={{ position: "absolute", top: "34px" }}>
+                    {formik.errors.confirmPassword && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.confirmPassword}
+                      </Typography>
+                    )}
+                  </div>{" "}
+                </div>
+                {/* <div className="d-flex  mb-4">
+                  <ReCaptcha onChange={handleReCaptchaChange} />
+                </div> */}
+                <MDBBtn className="mb-4 w-100" type="submit">
+                  Sign up
+                </MDBBtn>
               </form>
-            </div>
-          </div>
-        </div>
+            </MDBTabsPane>
+          </MDBTabsContent>
+        </MDBContainer>
       </div>
-    </div>
+    </>
   );
 }
 
-export default Login;
+export default Loginv2;

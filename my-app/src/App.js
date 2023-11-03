@@ -1,40 +1,43 @@
 import { Routes, Route, Link, redirect } from "react-router-dom";
-
 import "./App.css";
-import HomePage from "./page/HomePage";
-import PackagePage from "./page/PackagePage";
 import Footer from "./components/Footer/Footer";
-import About from "./components/AboutUs/About";
-import OrderPage from "./page/OrderPage";
-import Confirm from "./page/confirm";
-import PD from "./page/packageDetail";
-import Login from "./components/Authen/Login";
-import Admin from "./components/AdminPage/Admin";
-import InfoUser from "./components/TableUser/ListUser";
-import PackageDetail from "./page/packageDetail";
-import ConfirmVnpay from "./page/confirmVnpay";
-import Staff from "./page/staff";
-import StaffInfo from "./page/StaffInfo";
-import ManagePackage from "./page/ManagePackage";
-import ManagePackage_Use from "./page/ManagePackage_Use";
-import ManagePackage_Details from "./page/ManagePackage_Details";
-import ManageHouse from "./page/ManageHouse";
-
+import Header from "./components/Header/Header";
+import { createContext, useEffect, useState } from "react";
+import { Launch } from "./services/UserService";
+import AppRoutes from "./routes/AppRoutes";
+export const Session = createContext(null);
 
 function App() {
-  return (
-    <>
-      <ManageHouse/>
-      {/* <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/service" element={<PackagePage />} />
-        <Route path="/about" element={<PD />} />
-        <Route path="/contact" element={<InfoUser />} />
-        <Route path="/package" element={<PackagePage />} />
-        
-      </Routes> */}
+  const [user, setUser] = useState(null);
+  const accesstoken = localStorage.getItem("accesstoken");
 
-    </>
+  useEffect(() => {
+    getUserInfo();
+  }, [accesstoken]);
+
+  const getUserInfo = async () => {
+    try {
+      const res = await Launch();
+      console.log("check res launch", res);
+      if (res && res.status === 200) {
+        console.log("check list", res);
+        setUser(res.data);
+        localStorage.setItem("name", res.data.name);
+        localStorage.setItem("phoneNumber", res.data.phoneNumber);
+      } else {
+        console.log("error");
+      }
+    } catch (error) {
+      console.log("Error Getting info", error);
+    }
+  };
+
+  return (
+    <Session.Provider value={{ user, setUser }}>
+      <Header />
+      <AppRoutes />
+      <Footer />
+    </Session.Provider>
   );
 }
 

@@ -1,0 +1,23 @@
+.banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
+    url("../img/dọn\ phòng.jpg");
+  min-height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.search-filter {
+  margin-top: 30px;
+}
+
+.search-filter .filter {
+  text-align: end;
+}
+
+.list_package {
+  margin: 50px;
+}
+
+.list_package-row {
+  margin-bottom: 80px;
+}

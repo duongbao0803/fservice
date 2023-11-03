@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState } from 'react'
+import { DataGrid } from '@mui/x-data-grid'
 import Modal from '../Modal/Modal'
 
 function DataTable() {
@@ -34,15 +34,15 @@ function DataTable() {
         <div>
           <h4>DANH SÁCH CÔNG VIỆC</h4>
           <div className="dropdown-container d-flex align-items-center" style={{ justifyContent: 'flex-end' }}>
-            <label className="mr-2">Hiển thị:</label>
+            <label style={{paddingRight: "10px", margin:"0"}}>Hiển thị:</label>
             <select className="form-control w-auto" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
-              <option>Theo ngày / tuần / tháng</option>
+              <option>Mặc định</option>
               <option>Theo ngày</option>
               <option>Theo tuần</option>
               <option>Theo tháng</option>
             </select>
           </div>
-          <div className="content-table mt-4" style={{ height: 400, width: '100%' }}>
+          <div className="content-table mt-4" style={{ height: 500, width: '100%' }}>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -61,7 +61,7 @@ function DataTable() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default DataTable;

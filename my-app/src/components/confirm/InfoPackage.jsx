@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { useAppData } from "../OrderCart/Order";
+import { useLocation } from "react-router-dom";
 
-export default function InfoPackage() {
+export default function InfoPackage(props) {
   return (
     <div className="container mt-3">
       <div className="detail mb-3">
@@ -19,16 +21,20 @@ export default function InfoPackage() {
                 <td>Địa chỉ</td>
                 <td>
                   <p>Vinhomes Grand Park</p>
-                  <p>S101-Tầng 3-Số phòng 0309</p>
+                  <p>
+                    {props.tower} - {props.room}
+                  </p>
                 </td>
               </tr>
               <tr>
                 <td>Thời hạn gói</td>
-                <td>23/09/2023-23/10/2023</td>
+                <td>
+                  {props.startDate} - {props.endDate}
+                </td>
               </tr>
               <tr>
                 <td>Loại phòng</td>
-                <td>1 Phòng ngủ</td>
+                <td>{props.TypeRoomForSelectedHouse}</td>
               </tr>
             </tbody>
           </table>

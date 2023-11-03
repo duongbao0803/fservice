@@ -1,0 +1,73 @@
+.form-title-cf-vn {
+  background-color: #ff8228;
+  padding: 8px 12px;
+}
+.title {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.icon-title {
+  float: left;
+}
+.line-cf-vn {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.img-fluid {
+  max-height: 50px;
+  width: auto;
+}
+.confirm-vnpay {
+  padding: 50px;
+}
+.card {
+  width: 600px;
+}
+.form-check {
+  padding-left: 20px;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.table-custom-vn {
+  table-layout: fixed;
+  width: 100%;
+}
+.table-custom-vn td {
+  padding: 10px 0;
+}
+.table-custom-vn td p {
+  margin: 0;
+}
+.table-custom-vn td:first-child {
+  min-width: 350px;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.table-custom-vn td:last-child {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.done-btn {
+  background-color: #ff8228;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  width: 20%;
+}
+
+.done-btn:hover {
+  background-color: rgb(152, 152, 152);
+}

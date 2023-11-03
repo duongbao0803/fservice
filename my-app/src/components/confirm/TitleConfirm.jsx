@@ -2,24 +2,20 @@ import React, { Component } from "react";
 
 export default function TitleConfirm() {
   return (
-    <div className="container-cf"
-    style={{paddingLeft: "80px",
-    fontSize: "20px",
-  }}
-    >
-      {/* title */}
-      <div className="title d-flex mb-1">
-        <p>
-          <i className="fa-solid fa-house mr-2" style={{ color: "#ff8228" }} />
-          Trang chủ
-        </p>
-        <p>
-          <i
-            className="fa-solid fa-caret-right mr-2"
-            style={{ color: "#ff8228" }}
-          />{" "}
-          Xác nhận dịch vụ
-        </p>
+    <div className="container mb-5 mt-4">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="location">
+            <i className="fa-solid fa-house" style={{ color: "#ff8228" }} />
+            &nbsp;<h5 className="d-inline">Trang chủ</h5>&nbsp;&nbsp;&nbsp;
+            <i
+              className="fa-solid fa-caret-right"
+              style={{ color: "#ff8228" }}
+            ></i>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <h5 className="d-inline">Xác nhận dịch vụ</h5>
+          </div>
+        </div>
       </div>
     </div>
   );

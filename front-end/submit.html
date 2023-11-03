@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<!-- link font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Josefin+Sans:wght@100;200;300;400&family=Montserrat:wght@500;700&family=Rokkitt:wght@300&display=swap"
+  rel="stylesheet" />
+<!-- font-awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif
+  }
+
+  body {
+    /* min-height: 100vh; */
+    display: flex;
+    justify-content: center;
+    background-color: black;
+  }
+
+  .field {
+    display: flex;
+    justify-content: center;
+    height: 600px;
+  }
+
+  .main {
+    width: 600px;
+  }
+
+  .nav {
+    background-color: #F8F8F8;
+    height: 55px;
+    position: relative;
+  }
+
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+
+  .confirm {
+
+    background-color: #FFFFFF;
+  }
+
+  .info,
+  .note {
+    padding: 30px;
+  }
+
+  .info p {
+    font-size: 14px;
+  }
+
+  .note {
+    font-style: italic;
+  }
+
+  .props {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+  }
+
+  button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #ff7800;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  button strong {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  button strong:after {
+    content: "»";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.3s;
+  }
+
+  button:hover strong {
+    padding-right: 15px;
+  }
+
+  button:hover strong:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .footer {
+    background-color: #F8F8F8;
+
+  }
+</style>
+
+<body>
+  <div class="field">
+    <div class="main">
+      <div class="nav">
+
+        <div class="image" style="padding-left: 15px;">
+          <img src="https://cdn.discordapp.com/attachments/1036663699458490408/1166764222080888893/logo_web_2.png"
+            alt="" width="100px" />
+        </div>
+        <div class="middle">
+          <h3 style="text-align: center"><span style="color: #ff7800; font-weight: 900; font-size: 20px;">|&nbsp&nbsp &nbsp </span> Xác nhận Email</h3>
+        </div>
+
+
+      </div>
+      <div class="confirm">
+        <div class="info">
+          <h4 style="margin-bottom: 15px;">Xác thực FService Account của bạn</h4>
+          <p>Bạn đã đăng ký &lt;your-email&gt; tại FService.</p>
+          <p> Để xác thực địa chỉ email của bạn hãy nhấn vào nút bên dưới.</p>
+        </div>
+        <div class="props">
+          <button>
+            <strong>XÁC NHẬN</strong>
+          </button>
+        </div>
+        <div class="note">
+          <p>* Lưu ý: Tài khoản chỉ có thể đăng nhập được khi đã xác thực.</p>
+        </div>
+      </div>
+      <div class="footer" style="padding: 5px 15px">
+        <div class="container">
+
+          <img src="./img/logo_web_2.png" alt="logo" width="120px" />
+          <ul class="list-unstyled" style="list-style-type: none;">
+            <li>
+              <i class="fa-solid fa-phone" style="line-height: 40px"></i>&nbsp&nbsp
+              +84 988 889 898
+            </li>
+            <li>
+              <i class="fa-solid fa-paper-plane" style="line-height: 40px"></i>&nbsp&nbsp
+              support.fservice@gmail.com
+            </li>
+            <li style="width: 300px;">
+              <i class="fa-solid fa-location-dot" style="line-height: 40px"></i>&nbsp&nbsp S101, Vinhomes
+              Grand Park, Nguyễn Xiển, P. Long Thạnh Mỹ, TP. Thủ Đức,
+              TP.HCM
+            </li>
+
+          </ul>
+        </div>
+
+
+      </div>
+</body>
+
+</html>

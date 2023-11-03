@@ -1,12 +1,12 @@
 .nav-item {
   padding: 0 15px;
 }
+
+.navbar {
+  --mdb-navbar-box-shadow: none !important;
+}
 .nav-link {
   width: max-content;
-}
-
-.navbar-nav .nav-link {
-  color: red;
 }
 
 .nav-item {
@@ -28,5 +28,24 @@
 
 .navbar-nav .nav-item .nav-link:hover::before {
   content: "";
-  width: 80%;
+  width: 85%;
+}
+
+.dropdown-toggle:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#dropdown-basic-button {
+  background-color: white;
+  color: #ff8228;
+  border: 2px solid #ff8228;
+  font-weight: 900;
+  box-shadow: none !important;
+  transition: 0.5s ease;
+}
+#dropdown-basic-button:hover {
+  transition: 0.5s ease;
+  color: black;
+  border: 2px solid black;
 }

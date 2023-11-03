@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function ConfirmButton() {
   return (
@@ -14,12 +15,21 @@ export default function ConfirmButton() {
             id="defaultCheck"
           />
           <label className="form-check-label" htmlFor="defaultCheck">
-            Xác nhận 
+            Xác nhận
           </label>
         </div>
         <div className="btn-container">
           <button className="done-btn" type="button" style={{ color: "white" }}>
-            HOÀN TẤT
+            <Link
+              to="/confirmvnpay"
+              style={{
+                textDecoration: "none",
+                color: "#fff",
+                fontWeight: "700",
+              }}
+            >
+              HOÀN TẤT
+            </Link>
           </button>
         </div>
       </form>

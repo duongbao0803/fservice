@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
+import { Session } from "../../App";
 
 export default function Contact() {
   return (
@@ -17,15 +18,15 @@ export default function Contact() {
             <tbody>
               <tr>
                 <td>Tên liên hệ</td>
-                <td>Dương Tôn Bảo</td>
+                <td>{localStorage.getItem("name")}</td>
               </tr>
               <tr>
                 <td>Số điện thoại</td>
-                <td>0909 099 089</td>
+                <td>{localStorage.getItem("phoneNumber")}</td>
               </tr>
               <tr>
                 <td>Email</td>
-                <td>duongbao2k3@gmail.com</td>
+                <td>{localStorage.getItem("username")}</td>
               </tr>
             </tbody>
           </table>
