@@ -8,32 +8,43 @@ function Test1() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch building data
-    axios
-      .get("https://fservices.azurewebsites.net/api/buildings")
-      .then((response) => {
-        setBuildings(response.data);
-        setLoading(false); // Set loading to false after building data is fetched
-      })
-      .catch((error) => {
-        console.error("Error fetching building data:", error);
-        setLoading(false); // Set loading to false in case of an error
-      });
+    test();
+    fetchFloorsForBuilding();
   }, []);
+  // Fetch building data
+  //   axios
+  //     .get("https://fservices.azurewebsites.net/api/buildings")
+  //     .then((response) => {
+  //       setBuildings(response.data);
+  //       setLoading(false); // Set loading to false after building data is fetched
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching building data:", error);
+  //       setLoading(false); // Set loading to false in case of an error
+  //     });
+  // }, []);
+  const test = async () => {
+    let res = await axios.get(
+      "https://fservices.azurewebsites.net/api/buildings"
+    );
+    console.log("check res", res);
+  };
+  // if (res && res.data)
 
   // Function to fetch floors based on the selected building
-  const fetchFloorsForBuilding = (buildingId) => {
-    axios
-      .get(
-        `https://fservices.azurewebsites.net/api/floors?buildingId=${buildingId}`
-      )
-      .then((response) => {
-        setFloors(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching floor data:", error);
-      });
+  const fetchFloorsForBuilding = async () => {
+    let res = await axios.get(
+      "https://fservices.azurewebsites.net/api/floors?buidingId=1"
+    );
+    console.log("checkBuild", res);
   };
+
+  // .then((response) => {
+  //   setFloors(response.data);
+  // })
+  // .catch((error) => {
+  //   console.error("Error fetching floor data:", error);
+  // });
 
   // Event handler when a building is selected
   const handleBuildingChange = (event) => {
@@ -42,9 +53,9 @@ function Test1() {
     fetchFloorsForBuilding(selectedBuildingId);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <>

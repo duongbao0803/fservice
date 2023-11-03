@@ -1,0 +1,73 @@
+.form-title-cf {
+  background-color: #ff8228;
+  padding: 8px 12px;
+}
+.title {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.icon-title {
+  float: left;
+}
+.line-confirm {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.img-fluid {
+  max-height: 50px;
+  width: auto;
+}
+/* .confirmm {
+  padding: 50px;
+} */
+.card {
+  width: 600px;
+}
+.form-check {
+  padding-left: 20px;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.table-custom {
+  table-layout: fixed;
+  width: 100%;
+}
+.table-custom td {
+  padding: 10px 0;
+}
+.table-custom td p {
+  margin: 0;
+}
+.table-custom td:first-child {
+  min-width: 300px;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.table-custom td:last-child {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.done-btn {
+  background-color: #ff8228;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  width: 20%;
+}
+
+.done-btn:hover {
+  background-color: rgb(152, 152, 152);
+}

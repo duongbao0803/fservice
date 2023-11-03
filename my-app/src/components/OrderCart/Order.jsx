@@ -1,9 +1,184 @@
-import React from "react";
-import "../../css/styleOrder.css";
+import React, { useState, useEffect, useContext, createContext } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import PriceFormat from "../PackageDetails/PriceFormat";
+import "../../assets/css/styleOrder.css";
+import { confirm, launch } from "../../services/UserService";
+import { toast } from "react-toastify";
+import config from "../../utils/cus-axios";
 
-// import { IntroService } from "../data";
+const Order = () => {
+  const [yourRoom, setYourRoom] = useState([]);
+  const [yourTower, setYourTower] = useState([]);
+  const [typeRoom, setTypeRoom] = useState([]);
+  const [typeId, setTypeId] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const { packageName, id } = useParams();
+  const [TypeRoomForSelectedHouse, setTypeRoomForSelectedHouse] = useState("");
+  const [apartmentIdArray, setApartmentIdArray] = useState([]);
+  const [apartmentId, setApartmentId] = useState("");
+  const [packageId, setPackageId] = useState(id);
+  const [localHostDomain, setLocalHostDomain] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-function Order() {
+  const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
+  const instead = 0;
+  const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchHouse();
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const formattedStartDate = `${year}-${month}-${day}`;
+    console.log("check start", formattedStartDate);
+    console.log("check start string", "2023-11-2");
+
+    setStartDate(+formattedStartDate);
+
+    const nextMonthDate = new Date(currentDate);
+    nextMonthDate.setMonth(currentDate.getMonth() + 1);
+    const nextMonthDay = nextMonthDate.getDate();
+    const nextMonth = nextMonthDate.getMonth() + 1;
+    const nextMonthYear = nextMonthDate.getFullYear();
+    const formattedEndDate = `${nextMonthYear}-${nextMonth}-${nextMonthDay}`;
+    setEndDate(formattedEndDate);
+    const localhostDomain = getLocalhostDomain();
+    setLocalHostDomain(localhostDomain);
+  }, []);
+
+  const formData = {
+    apartmentId: apartmentId,
+    packageId: packageId,
+    packageName: packageName,
+    type: "normal",
+    paymentMethod: "VNPAY",
+    startDate: startDate,
+    CallBackUrl: localHostDomain,
+    customerName: localStorage.getItem("name"),
+    phone: localStorage.getItem("phoneNumber"),
+    userName: localStorage.getItem("username"),
+  };
+
+  // Confirm Order
+  const handleConfirm = async () => {
+    if (price === 0) {
+      toast.error("Vui lòng chọn số nhà / căn hộ");
+      return;
+    }
+    try {
+      let res = await config.post("/api/orders", formData);
+      console.log("check confirm order", res);
+      navigate("/confirm", {
+        state: {
+          room: selectedHouseChange[0],
+          tower: selectedHouseChange[1],
+          startDate,
+          endDate,
+          TypeRoomForSelectedHouse,
+          price,
+        },
+      });
+    } catch (error) {
+      console.log("Error Confirming", error);
+    }
+  };
+
+  // Get LocalHostDomain
+  const getLocalhostDomain = () => {
+    const { protocol, hostname, port } = window.location;
+    const domain = `${protocol.replace(
+      "http",
+      "https"
+    )}//${hostname}:${port}/payment/`;
+
+    return domain;
+  };
+
+  // Get Info Student's House
+  const fetchHouse = async () => {
+    try {
+      const res = await axios.get(
+        `https://fservices.azurewebsites.net/api/apartments?username=${username}`
+      );
+
+      const typeIdArray = res.data.map((apartment) => apartment.typeId);
+      setTypeId(typeIdArray);
+
+      const yourRoomArray = res.data.map((apartment) => apartment.roomNo);
+      const yourTowerArray = res.data.map(
+        (apartment) => apartment.type.building.name
+      );
+      const apartmentIdArray = res.data.map((apartment) => apartment.id);
+
+      const typeRoomArray = res.data.map((apartment) => apartment.type.type);
+      setYourRoom(yourRoomArray);
+      setYourTower(yourTowerArray);
+      setTypeRoom(typeRoomArray);
+      setApartmentIdArray(apartmentIdArray);
+    } catch (error) {
+      console.error("Error fetching package:", error);
+      setLoading(false);
+    }
+  };
+
+  // Get Information When Selected
+
+  const handleHouseChange = (e) => {
+    try {
+      const selectedHouse = e.target.value;
+
+      if (selectedHouse) {
+        const room = selectedHouse.split(" - ")[0];
+        const tower = selectedHouse.split(" - ")[1];
+        setSelectedHouseChange([room, tower]);
+
+        const selectedTypeId = typeId.find(
+          (id, index) => yourRoom[index] === room && yourTower[index] === tower
+        );
+
+        const roomIndex = yourRoom.findIndex(
+          (roomNo, index) => roomNo === room && yourTower[index] === tower
+        );
+
+        const selectedApartmentId = apartmentIdArray[roomIndex];
+        setApartmentId(selectedApartmentId);
+
+        if (selectedTypeId) {
+          setTypeRoomForSelectedHouse(typeRoom[roomIndex]);
+
+          fetchPrice(selectedTypeId);
+        } else {
+          toast("Không tìm thấy loại phòng được chọn");
+        }
+      } else {
+        setPrice(0);
+        setTypeRoomForSelectedHouse("");
+        setSelectedHouseChange(["", ""]);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  //Get Price When Selected
+  const fetchPrice = async (selectedTypeId) => {
+    try {
+      const getPrice = await axios.get(
+        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
+      );
+      setPrice(getPrice.data.packagePrices[0].price);
+    } catch (error) {
+      console.error("Error fetching package:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="container mb-5 mt-4">
@@ -23,14 +198,14 @@ function Order() {
         </div>
       </div>
       <div className="container mb-5">
-        <div className="form-title text-center">
-          <span>VỆ SINH PHÒNG KHÁCH</span>
+        <div className="form-content text-center">
+          <span>ĐƠN HÀNG</span>
         </div>
         <div className="main-form">
           <div className="row">
             <div className="col-md-6">
               <div className="work-info">
-                <div className="title work_info-title">
+                <div className="content work_info-title">
                   <span>
                     <strong>THÔNG TIN LÀM VIỆC</strong>
                   </span>
@@ -48,6 +223,8 @@ function Order() {
                       className="form-control"
                       id="exampleFormControlInput1"
                       placeholder="Nơi làm việc"
+                      value="Vinhomes Grand Park"
+                      readOnly
                     />
                   </div>
                   <div className="mb-3">
@@ -59,63 +236,27 @@ function Order() {
                       Số nhà / Căn hộ
                     </label>
                     <select
-                      className="form-select form-select-lg mb-3 col-lg-12 col-md-12"
+                      className="form-select form-select-lg mb-3 col-lg-12 cols-md-12"
                       aria-label=".form-select-lg example"
+                      value={`${selectedHouseChange[0]} - ${selectedHouseChange[1]}`}
+                      onChange={handleHouseChange}
+                      required
                     >
-                      <option selected>Open this select menu</option>
-                      <option value={1}>One</option>
-                      <option value={2}>Two</option>
-                      <option value={3}>Three</option>
+                      <option value="">Chọn nhà / căn hộ</option>
+                      {yourRoom.map((room, index) => (
+                        <option
+                          key={index}
+                          value={`${room} - ${yourTower[index]}`}
+                        >
+                          {`${room} - ${yourTower[index]}`}
+                        </option>
+                      ))}
                     </select>
-                  </div>
-                  <div className="work-date">
-                    <div className="row">
-                      <div className="col-6 col-md-6 col-lg-6 col-sm-6">
-                        <div className="mb-3">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label col-md-12"
-                            style={{ padding: 0 }}
-                          >
-                            Chọn ngày làm
-                          </label>
-                          <select
-                            className="form-select form-select-md mb-3 col-md-12"
-                            aria-label=".form-select-md example"
-                          >
-                            <option selected>Open this select menu</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-6 col-lg-6 col-sm-6">
-                        <div className="mb-3">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label col-md-12"
-                            style={{ padding: 0 }}
-                          >
-                            Chọn giờ làm
-                          </label>
-                          <select
-                            className="form-select form-select-md mb-3 col-md-12"
-                            aria-label=".form-select-md example"
-                          >
-                            <option selected>Open this select menu</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
               <div className="service-info mb-4">
-                <div className="title service_info-title">
+                <div className="content service_info-title">
                   <span>
                     <strong>THÔNG TIN DỊCH VỤ</strong>
                   </span>
@@ -123,21 +264,18 @@ function Order() {
                 <div className="service_info-test">
                   <div className="row">
                     <div className="col-sm-6 col-md-4 col-4">
-                      <span>Loại dịch vụ:</span>
-                      <span>Số lần:</span>
+                      <span>Gói dịch vụ:</span>
                       <span>Thời hạn:</span>
                       <span>Loại phòng:</span>
-                      <span>Giá tiền</span>
+                      <span>Giá tiền:</span>
                     </div>
+
                     <div className="col-sm-6 col-md-8 col-8">
+                      <span>{packageName}</span>
+                      <span>4 tuần (kể từ ngày đặt)</span>
+                      <span>{TypeRoomForSelectedHouse || instead}</span>
                       <span>
-                        <strong>Vệ sinh phòng khách</strong>
-                      </span>
-                      <span>4 lần</span>
-                      <span>4 tuần (kể từ ngày bắt đầu)</span>
-                      <span>1 phòng ngủ</span>
-                      <span>
-                        <strong>250.000đ</strong>
+                        <PriceFormat price={price} />
                       </span>
                     </div>
                   </div>
@@ -146,7 +284,7 @@ function Order() {
             </div>
             <div className="col-md-6">
               <div className="contact-info">
-                <div className="title contact_info-title">
+                <div className="content contact_info-title">
                   <span>
                     <strong>THÔNG TIN LIÊN HỆ</strong>
                   </span>
@@ -164,6 +302,7 @@ function Order() {
                       className="form-control"
                       id="exampleFormControlInput1"
                       placeholder="Họ và tên"
+                      value={localStorage.getItem("name")}
                     />
                   </div>
                   <div className="work-date">
@@ -177,10 +316,11 @@ function Order() {
                             Số điện thoại
                           </label>
                           <input
-                            type="email"
+                            type="text"
                             className="form-control"
                             id="exampleFormControlInput1"
                             placeholder="0909 113 114"
+                            value={localStorage.getItem("phoneNumber")}
                           />
                         </div>
                       </div>
@@ -197,39 +337,26 @@ function Order() {
                             className="form-control"
                             id="exampleFormControlInput1"
                             placeholder="example@email.com"
+                            value={localStorage.getItem("username")}
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="exampleFormControlTextarea1"
-                      className="form-label"
-                    >
-                      Ghi chú
-                    </label>
-                    <textarea
-                      className="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows={2}
-                      defaultValue={""}
-                    />
-                  </div>
                 </div>
               </div>
               <div className="payment-info">
-                <div className="title payment_info-title">
+                <div className="content payment_info-title">
                   <span>
                     <strong>THÔNG TIN THANH TOÁN</strong>
                   </span>
                 </div>
                 <div className="payment_info-test ">
-                  <span>
-                    <strong>Tổng tiền</strong>
-                  </span>
+                  <strong>Tổng tiền: </strong>
                   <span style={{ color: "#ff8228" }}>
-                    <strong>250.000đ</strong>
+                    <strong>
+                      <PriceFormat price={price} />{" "}
+                    </strong>
                   </span>
                   <p>
                     <strong>Chọn phương thức thanh toán</strong>
@@ -237,23 +364,14 @@ function Order() {
                   <div className="pay-by-cash">
                     <input type="radio" />
                     <img
-                      src={require("../../img/logo_tienmat.png")}
-                      alt=""
-                      width="40px"
-                    />
-                    <span>Thanh toán bằng tiền mặt</span>
-                  </div>
-                  <div className="pay-by-cash">
-                    <input type="radio" />
-                    <img
-                      src={require("../../img/logoVNPAY_thanhtoan.png")}
+                      src={require("../../assets/img/logoVNPAY_thanhtoan.png")}
                       alt=""
                       width="40px"
                     />
                     <span>Thanh toán bằng VNPAY</span>
                   </div>
                   <div className="confirm">
-                    <input type="checkbox" />
+                    <input type="checkbox" required />
                     <span>
                       Nhấn "Xác nhận" đồng nghĩa với việc bạn đã đồng ý với điều
                       khoản dịch vụ của{" "}
@@ -261,8 +379,22 @@ function Order() {
                     </span>
                   </div>
                   <div className="order-confirm">
-                    <button type="submit">Hủy đơn</button>
-                    <button type="submit">Xác nhận</button>
+                    <button type="submit">
+                      <Link
+                        to="/"
+                        style={{ color: "orange", textDecoration: "none" }}
+                      >
+                        Hủy đơn
+                      </Link>
+                    </button>
+                    <button
+                      type="submit"
+                      style={{ color: "white", textDecoration: "none" }}
+                      onClick={handleConfirm}
+                    >
+                      {" "}
+                      Xác nhận
+                    </button>
                   </div>
                 </div>
               </div>
@@ -273,6 +405,6 @@ function Order() {
       </div>
     </>
   );
-}
+};
 
 export default Order;
