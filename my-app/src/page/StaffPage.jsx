@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import "../assets/css/styleStaffWork.css";
 
 import Navbar from "../components/StaffPage/Navbar";
 import Sidebar from "../components/StaffPage/Sidebar";
 import WorkTable from "../components/StaffPage/WorkTable";
+
 function Staff() {
+  
   return (
     <>
       <div className="container-fluid">
         {/* <Navbar/> */}
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-2" style={{ backgroundColor: "white", padding: 0}}>
             <Sidebar />
           </div>
           <div
@@ -24,6 +26,6 @@ function Staff() {
         </div>
       </div>
     </>
-  );
+  )
 }
 export default Staff;

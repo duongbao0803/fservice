@@ -29,6 +29,17 @@ const PrivateRoute = (props) => {
     );
   }
 
+  if (
+    localStorage.getItem("role") === "STAFF" &&
+    props.allowedRole.includes("STAFF")
+  ) {
+    return (
+      <>
+        <div>{props.children}</div>
+      </>
+    );
+  }
+
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />

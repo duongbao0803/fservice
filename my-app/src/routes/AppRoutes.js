@@ -11,6 +11,8 @@ import Confirm from "../page/Confirm";
 import ConfirmVnpay from "../page/ConfirmVnpay";
 import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
+import Staff from "../page/StaffPage";
+import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
@@ -35,7 +37,29 @@ const AppRoutes = () => {
           path="/user"
           element={
             <PrivateRoute allowedRole={["USER"]}>
-              <ManagePackage_Details></ManagePackage_Details>
+              {/* <Outlet> */}
+              {/* Route con dành cho vai trò "USER" */}
+              <ManagePackage></ManagePackage>
+              {/* <ManagePackage /> */}
+              {/* <Route index element={<ManagePackage />} />
+                <Route path="settings" element={<ManagePackage_Details />} />
+                <Route path="settings" element={<ManagePackage_Use />} />
+              </Outlet> */}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/staff"
+          element={
+            <PrivateRoute allowedRole={["STAFF"]}>
+              {/* <Outlet> */}
+              {/* Route con dành cho vai trò "USER" */}
+              <Staff></Staff>
+              {/* <ManagePackage /> */}
+              {/* <Route index element={<ManagePackage />} />
+                <Route path="settings" element={<ManagePackage_Details />} />
+                <Route path="settings" element={<ManagePackage_Use />} />
+              </Outlet> */}
             </PrivateRoute>
           }
         />

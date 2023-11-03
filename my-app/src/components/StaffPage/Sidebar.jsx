@@ -10,16 +10,41 @@ import { Link } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logout from "@mui/icons-material/Logout";
 
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Session } from "../../App";
+
 function Sidebar() {
+
+  const session = useContext(Session);
+  // const user = session.user;
+  const logged = localStorage.getItem("isLogged");
+  const role = localStorage.getItem("role");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accesstoken");
+    localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("isLogged");
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    localStorage.removeItem("phoneNumber");
+    localStorage.removeItem("name");
+    session.setUser(null);
+    toast.success("Logout Success");
+    navigate("/authen");
+  };
+
   const theme = useContext(ThemeContext);
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div style={{margin: "8px"}}>
       <div style={{ marginRight: "0" }}>
         {/* Sidebar */}
         <div>
           {/* Logo */}
           <div className="mb-4">
-            <img src={Logo} alt="Logo" />
+            <img className="logo-side-bar" src={Logo} alt="Logo" />
           </div>
 
           <div className="menu-section">
@@ -61,19 +86,20 @@ function Sidebar() {
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
-                    <KeyIcon style={{ color: theme.palette.secondary.main }} />{" "}
+                    <KeyIcon style={{ color: theme.palette.secondary.main }} />
                     Thay đổi mật khẩu
                   </Link>
                 </li>
                 <li>
-                  <Link
+                  <Link 
+                    onClick={handleLogout}
                     href="#"
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
                     <LogoutIcon
                       style={{ color: theme.palette.secondary.main }}
-                    />{" "}
+                    />
                     Đăng xuất
                   </Link>
                 </li>

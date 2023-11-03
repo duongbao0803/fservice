@@ -3,22 +3,26 @@ body {
 }
 
 .location {
-    padding-left: 20px;
     display: flex;
     align-items: center;  
+}
+.active-menu {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228 !important;
 }
 
 .left-bar .user i {
     color: #ff8228;
   }
   
-  .left-bar .info-buiding:hover {
+  .left-bar .user:hover {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
   }
   
-  .left-bar .info-package:hover {
+  /* .left-bar .info-package:hover {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
@@ -40,7 +44,7 @@ body {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
-  }
+  } */
 
   .main_info_use-list .user {
     line-height: 45px;
