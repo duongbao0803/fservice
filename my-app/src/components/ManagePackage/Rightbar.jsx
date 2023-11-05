@@ -18,7 +18,6 @@ function Rightbar() {
     fetchApartmentPackage();
   }, []);
 
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -62,22 +61,26 @@ function Rightbar() {
 
   const fetchApartment = async () => {
     try {
-      let response = await config.get(`https://fservices.azurewebsites.net/api/apartments?username=${localStorage.getItem("username")}`);
+      let response = await config.get(
+        `https://fservices.azurewebsites.net/api/apartments?username=${localStorage.getItem(
+          "username"
+        )}`
+      );
       console.log("check apartment:", response.data);
       setApartmentData(response.data);
-    }
-    catch (Error) {
+    } catch (Error) {
       console.log("error fetching: ", Error);
     }
   };
 
   const fetchApartmentPackage = async () => {
     try {
-      let response = await config.get(`https://fservices.azurewebsites.net/api/apartment-packages/apartment2`);
-      console.log("check apartment package:", response.data);
+      let response = await config.get(
+        `https://fservices.azurewebsites.net/api/apartment-packages/apartment2`
+      );
+      console.log("check apartment package:", response);
       setApartmentPackageData(response.data);
-    }
-    catch (Error) {
+    } catch (Error) {
       console.log("error fetching package: ", Error);
     }
   };
@@ -89,7 +92,9 @@ function Rightbar() {
         <div className="chooseHouse pb-3">
           <div className="choose">
             {apartments.map((apartment, index) => (
-              <a style={{ padding: "0 10px" }}>{apartment.type.building.name} - {apartment.roomNo}</a>
+              <a style={{ padding: "0 10px" }}>
+                {apartment.type.building.name} - {apartment.roomNo}
+              </a>
             ))}
           </div>
           <div className="orderedPackage">
@@ -117,7 +122,9 @@ function Rightbar() {
 
                         <tr>
                           <td>Áp dụng từ:</td>
-                          <td>{packages.startDate} - {packages.endDate}</td>
+                          <td>
+                            {packages.startDate} - {packages.endDate}
+                          </td>
                         </tr>
                       </tbody>
                     </table>

@@ -7,12 +7,11 @@ function Payment() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const paymentStatus = params.get("vnp_ResponseCode"); // Trạng thái thanh toán từ VNPAY
-    // Xử lý kết quả thanh toán và chuyển hướng người dùng về trang UI tương ứng
+    const paymentStatus = params.get("vnp_ResponseCode");
     if (paymentStatus === "00") {
       navigate("/home");
     } else {
-      navigate("/error");
+      navigate("/payment/error");
     }
   }, [location, navigate]);
 

@@ -12,21 +12,13 @@ function ConfirmButton(props) {
 
     try {
       let res = await Order(data);
+      console.log("check order", res);
       if (res && res.status === 200) {
-        console.log("check order confirm", res.data.paymentUrl);
-
-        console.log("check order confirm", res.data.paymentUrl);
         toast.success("Đơn hàng tạo thành công, vui lòng chờ trong giây lát", {
           autoClose: 2000,
         });
         setTimeout(() => {
           window.open(res.data.paymentUrl, "_blank");
-          window.open(
-            `${res.data.paymentUrl}?callback=${encodeURIComponent(
-              data.CallBackUrl
-            )}`,
-            "_blank"
-          );
         }, 3000);
       } else {
         toast.error("Đơn hàng tạo thất bại");

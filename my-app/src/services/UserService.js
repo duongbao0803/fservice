@@ -62,6 +62,11 @@ const Order = (data) => {
   return config.post("/api/orders", data, refreshedConfig);
 };
 
+// const getApartment = (data) => {
+//   const refreshedConfig = refreshdata();
+//   return config.post("/api/orders", data, refreshedConfig);
+// };
+
 export {
   fetchUser,
   loginAPI,
