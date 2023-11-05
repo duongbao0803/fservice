@@ -21,7 +21,7 @@ const Order = () => {
   const [apartmentIdArray, setApartmentIdArray] = useState([]);
   const [apartmentId, setApartmentId] = useState("");
   const [packageId, setPackageId] = useState(id);
-  const [localHostDomain, setLocalHostDomain] = useState("");
+  // const [localHostDomain, setLocalHostDomain] = useState("");
   const [orderDate, setOrderDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -43,9 +43,10 @@ const Order = () => {
     const day = String(currentDate.getDate()).padStart(2, "0");
     const updateFormattedEndDate = `${year}-${month}-${day}`;
     setEndDate(updateFormattedEndDate);
-    const localhostDomain = getLocalhostDomain();
-    setLocalHostDomain(localhostDomain);
+    // const localhostDomain = getLocalhostDomain();
+    // setLocalHostDomain(localhostDomain);
   }, []);
+  const localHostDomain = "https://fservices.vercel.app";
 
   const formData = {
     apartmentId: apartmentId,
@@ -81,15 +82,15 @@ const Order = () => {
     });
   };
   // Get LocalHostDomain
-  const getLocalhostDomain = () => {
-    const { protocol, hostname, port } = window.location;
-    const domain = `${protocol.replace(
-      "http",
-      "https"
-    )}//${hostname}:${port}/payment/`;
+  // const getLocalhostDomain = () => {
+  //   const { protocol, hostname, port } = window.location;
+  //   const domain = `${protocol.replace(
+  //     "http",
+  //     "https"
+  //   )}//${hostname}:${port}/payment/`;
 
-    return domain;
-  };
+  //   return domain;
+  // };
 
   // Get Info Student's House
   const fetchHouse = async () => {
