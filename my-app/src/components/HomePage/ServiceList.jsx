@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import config from "../../utils/cus-axios";
 // import { service } from "../../data";
 
 function ServiceList() {
@@ -15,9 +16,7 @@ function ServiceList() {
 
   const fetchPackage = async () => {
     try {
-      const response = await axios.get(
-        "https://fservices.azurewebsites.net/api/packages"
-      );
+      const response = await config.get("/api/packages");
       setData(response.data);
       setLoading(false);
     } catch (error) {

@@ -5,17 +5,15 @@ import About from "../components/AboutUs/About";
 import ListUser from "../components/TableUser/ListUser";
 import Loginv2 from "../components/Authen/Login";
 import PrivateRoute from "./PrivateRoute";
-import PackagePage from "../page/PackagePage";
 import OrderPage from "../page/OrderPage";
 import Confirm from "../page/Confirm";
-import ConfirmVnpay from "../page/ConfirmVnpay";
+
 import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
 import Staff from "../page/StaffPage";
 import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
-import ManagePackage_Details from "../page/ManagePackage_Details";
-import ManagePackage_Use from "../page/ManagePackage_Use";
+
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
 
@@ -68,7 +66,6 @@ const AppRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id/:packageName" element={<OrderPage />} />
         <Route path="/confirm" element={<Confirm />} />
-        <Route path="/confirmvnpay" element={<ConfirmVnpay />} />
         <Route path="/detail/:id" element={<PackageDetail />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />

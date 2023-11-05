@@ -52,23 +52,23 @@ function Loginv2() {
       setPassword(rememberPassword);
       setRememberMe(true);
     }
+    updateAccessToken();
   }, []);
 
-  // const updateAccessToken = async () => {
-  //   const refreshToken = localStorage.getItem("refreshtoken");
-  //   try {
-  //     const response = await sendRefreshToken(refreshToken);
-  //     if (response.status === 200) {
-  //       const newAccessToken = response.data.accesstoken;
-  //       localStorage.setItem("accesstoken", newAccessToken);
-  //     } else {
-  //       console.log("Error");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error Sending RefreshToken", error);
-  //   }
-  // };
-  // updateAccessToken();
+  const updateAccessToken = async () => {
+    const refreshToken = localStorage.getItem("refreshtoken");
+    try {
+      const response = await sendRefreshToken(refreshToken);
+      if (response.status === 200) {
+        const newAccessToken = response.data.accesstoken;
+        localStorage.setItem("accesstoken", newAccessToken);
+      } else {
+        console.log("Erroreee");
+      }
+    } catch (error) {
+      console.log("Error Sending RefreshToken", error);
+    }
+  };
 
   const handleLogin = async () => {
     if (!password) {

@@ -3,6 +3,7 @@ import "../assets/css/stylePaymentResult.css";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import PriceFormat from "../components/PackageDetails/PriceFormat";
 
 const PaymentError = () => {
   const [paymentData, setPaymentData] = useState({});
@@ -54,7 +55,7 @@ const PaymentError = () => {
                   <tr>
                     <th>Số tiền:</th>
                     <td class="amout amout__error">
-                      {paymentData.vnp_Amount} VND
+                      <PriceFormat price={Number(paymentData.vnp_Amount)} /> VND
                     </td>
                   </tr>
                   <tr>

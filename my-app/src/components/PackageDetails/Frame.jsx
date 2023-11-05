@@ -8,6 +8,7 @@ import BasicRating from "./Star";
 import PriceFormat from "./PriceFormat";
 import Order from "../OrderCart/Order";
 import { toast } from "react-toastify";
+import config from "../../utils/cus-axios";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
@@ -29,16 +30,12 @@ const Frame = () => {
   const fetchFrame = async () => {
     try {
       // Choose price
-      const res = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}`
-      );
+      const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
       setPackageName(res.data.name);
 
       //Load description
-      const response = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${1}`
-      );
+      const response = await config.get(`/api/packages/${id}?typeId=${1}`);
       setAPIData(response.data);
 
       //Load Service
@@ -48,7 +45,7 @@ const Frame = () => {
       const serviceIds = details.map((detail) => detail.serviceId);
       const serviceResponses = await Promise.all(
         serviceIds.map((id) =>
-          axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
+          config.get(`https://fservices.azurewebsites.net/api/services/${id}`)
         )
       );
       const services = serviceResponses.map((resp) => resp.data);
@@ -56,7 +53,7 @@ const Frame = () => {
       setServiceData(services);
 
       //Load building
-      const building = await axios.get(
+      const building = await config.get(
         "https://fservices.azurewebsites.net/api/types"
       );
 
@@ -111,8 +108,6 @@ const Frame = () => {
                       <td style={style}>{room.type}</td>
                       <td style={style}>
                         <PriceFormat price={price[index].price} />
-
-                        {/* {price[index].price} */}
                       </td>
                     </tr>
                   ))}

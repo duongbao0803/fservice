@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../assets/css/stylePaymentResult.css";
+import PriceFormat from "../components/PackageDetails/PriceFormat";
 
 const PaymentSuccess = () => {
   const [paymentData, setPaymentData] = useState({});
@@ -51,7 +52,10 @@ const PaymentSuccess = () => {
                   </tr>
                   <tr>
                     <th>Số tiền:</th>
-                    <td class="amout">{paymentData.vnp_Amount} VND</td>
+                    <td class="amout">
+                      <PriceFormat price={Number(paymentData.vnp_Amount)} /> VND
+                      VND
+                    </td>
                   </tr>
                   <tr>
                     <th>Mã giao dịch:</th>

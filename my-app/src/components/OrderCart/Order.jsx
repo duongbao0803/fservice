@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import PriceFormat from "../PackageDetails/PriceFormat";
 import "../../assets/css/styleOrder.css";
 import { confirm, launch } from "../../services/UserService";
 import { toast } from "react-toastify";
@@ -47,7 +46,6 @@ const Order = () => {
     // setLocalHostDomain(localhostDomain);
   }, []);
   const localHostDomain = "https://fservices.vercel.app";
-
   const formData = {
     apartmentId: apartmentId,
     packageId: packageId,
@@ -95,9 +93,7 @@ const Order = () => {
   // Get Info Student's House
   const fetchHouse = async () => {
     try {
-      const res = await axios.get(
-        `https://fservices.azurewebsites.net/api/apartments?username=${username}`
-      );
+      const res = await config.get(`/api/apartments?username=${username}`);
 
       const typeIdArray = res.data.map((apartment) => apartment.typeId);
       setTypeId(typeIdArray);
@@ -160,8 +156,8 @@ const Order = () => {
   //Get Price When Selected
   const fetchPrice = async (selectedTypeId) => {
     try {
-      const getPrice = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${selectedTypeId}`
+      const getPrice = await config.get(
+        `/api/packages/${id}?typeId=${selectedTypeId}`
       );
       setPrice(getPrice.data.packagePrices[0].price);
     } catch (error) {
