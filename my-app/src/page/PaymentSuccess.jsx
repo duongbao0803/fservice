@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import "../assets/css/stylePaymentResult.css";
 
 const PaymentSuccess = () => {
+    const [paymentData, setPaymentData] = useState({});
+    const location = useLocation();
+
+    useEffect(() => {
+        
+        const queryParams = new URLSearchParams(location.search);
+
+        // Create an object to store the parsed parameters
+        const parsedData = {};
+
+        // Iterate over the parameters and add them to the parsedData object
+        queryParams.forEach((value, key) => {
+            parsedData[key] = value;
+        });
+
+        // Set the parsed data to the paymentData state
+        setPaymentData(parsedData);
+    }, []);
+    console.log(localStorage.getItem("name"));
+
     return (
         <>
         <div class="outline">
@@ -28,15 +49,15 @@ const PaymentSuccess = () => {
                             </tr>
                             <tr>
                                 <th>Mã đơn hàng:</th>
-                                <td>ORDERCODE</td>
+                                <td>{paymentData.vnp_TxnRef}</td>
                             </tr>
                             <tr>
                                 <th>Số tiền:</th>
-                                <td class="amout">2.130.000 VND</td>
+                                <td class="amout">{paymentData.vnp_Amount} VND</td>
                             </tr>
                             <tr>
                                 <th>Mã giao dịch:</th>
-                                <td>2112122121</td>
+                                <td>{paymentData.vnp_TransactionNo}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -51,23 +72,23 @@ const PaymentSuccess = () => {
                         <tbody>
                             <tr>
                                 <th>Nội dung:</th>
-                                <td>Thanh toan cho Dich vu tron goi Premium</td>
+                                <td>{paymentData.vnp_OrderInfo}</td>
                             </tr>
                             <tr>
                                 <th>Mã ngân hàng:</th>
-                                <td>TP BANK</td>
+                                <td>{paymentData.vnp_BankCode}</td>
                             </tr>
                             <tr>
                                 <th>Loại thanh toán:</th>
-                                <td>VISA</td>
+                                <td>{paymentData.vnp_CardType}</td>
                             </tr>
                             <tr>
                                 <th>Mã giao dịch ngân hàng:</th>
-                                <td>54325626226</td>
+                                <td>{paymentData.vnp_BankTranNo}</td>
                             </tr>
                             <tr>
                                 <th>Ngày thanh toán:</th>
-                                <td>03/11/2023 21:25</td>
+                                <td>{paymentData.vnp_PayDate}</td>
                             </tr>
                         </tbody>
                     </table>
