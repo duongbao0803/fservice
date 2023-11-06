@@ -33,6 +33,8 @@ const Frame = () => {
       // Choose price
       const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
+      setPackageName(res.data.name);
+
       const prices = price.map((typePrice) => typePrice.typeId);
 
       //Load description
@@ -69,6 +71,7 @@ const Frame = () => {
   );
 
   const handleSubmit = () => {
+    console.log("check name: ", packageName);
     if (localStorage.getItem("isLogged") === "true") {
       navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
     } else {
@@ -106,7 +109,7 @@ const Frame = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterPackagePrice.map((room, index) => (
+                  {room.map((room, index) => (
                     <tr>
                       <td style={style}>{room.building.name}</td>
                       <td style={style}>{room.type}</td>

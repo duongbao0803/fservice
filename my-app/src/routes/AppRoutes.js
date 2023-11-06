@@ -16,6 +16,8 @@ import ManagePackage from "../page/ManagePackage";
 
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
+import Payment from "../components/confirm/Payment";
+import PaymentResult from "../components/Payment/PaymentResult";
 
 const AppRoutes = () => {
   return (
@@ -67,6 +69,7 @@ const AppRoutes = () => {
         <Route path="/detail/:id/:packageName" element={<OrderPage />} />
         <Route path="/confirm" element={<Confirm />} />
         <Route path="/detail/:id" element={<PackageDetail />} />
+        <Route path="/payment" element={<PaymentResult />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
 

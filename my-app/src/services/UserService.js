@@ -53,6 +53,11 @@ const Order = (data) => {
   return config.post("/api/orders", data, refreshedConfig);
 };
 
+const Payment = (data) => {
+  const refreshedConfig = refreshData();
+  return config.post("/api/payment", data, refreshedConfig);
+};
+
 const getApartment = (apartment) => {
   const refreshedConfig = refreshData();
   return config.get(`/api/apartments?username=${apartment}`, refreshedConfig);
@@ -72,6 +77,4 @@ export {
   sendRefreshToken,
   Launch,
   Order,
-  getApartment,
-  getApartmentPackage,
 };
