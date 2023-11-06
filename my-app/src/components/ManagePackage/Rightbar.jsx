@@ -6,6 +6,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import formatDate from "../../utils/tools";
 import { getApartment } from "../../services/UserService";
+import { Link } from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
@@ -15,6 +16,8 @@ function Rightbar() {
   const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
+
+
   useEffect(() => {
     fetchApartment();
     // fetchApartmentPackage();
@@ -84,7 +87,7 @@ function Rightbar() {
     }
   };
 
-  const showModal = () => {};
+  const showModal = () => { };
 
   return (
     <div className="right-bar">
@@ -145,7 +148,9 @@ function Rightbar() {
                       </tbody>
                     </table>
                     <div className="button d-flex justify-content-end">
-                      <button onClick={() => showModal()}>Xem chi tiết</button>
+                      <button onClick={() => showModal()}>
+                        <Link to={`/managePackage-detail/${packages.id}`}>Xem chi tiết</Link>
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -28,8 +28,6 @@ function Rightbar() {
         <div className="chooseHouse-details pb-3">
           <div className="choose">
           <a href style={{borderBottom: '3px solid #ff8228'}}>Căn hộ 1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href>Căn hộ 2</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href>Căn hộ 3</a>
           </div>
           <div className="orderedPackage-details">
             <div className="orderedPackage-details_main d-flex justify-content-between">

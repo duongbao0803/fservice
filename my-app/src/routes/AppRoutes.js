@@ -12,12 +12,14 @@ import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
 import Staff from "../page/StaffPage";
 import StaffInfo from "../page/StaffInfo";
-import ManagePackage from "../page/ManagePackage";
 
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
 import Payment from "../components/confirm/Payment";
 import PaymentResult from "../components/Payment/PaymentResult";
+import ManagePackage_Details from "../page/ManagePackage_Details";
+import ManagePackage_Use from "../page/ManagePackage_Use";
+import ManagePackage from "../page/ManagePackage";
 
 const AppRoutes = () => {
   return (
@@ -39,14 +41,10 @@ const AppRoutes = () => {
           path="/user"
           element={
             <PrivateRoute allowedRole={["USER"]}>
-              {/* <Outlet> */}
               {/* Route con dành cho vai trò "USER" */}
-              <ManagePackage></ManagePackage>
-              {/* <ManagePackage /> */}
-              {/* <Route index element={<ManagePackage />} />
-                <Route path="settings" element={<ManagePackage_Details />} />
-                <Route path="settings" element={<ManagePackage_Use />} />
-              </Outlet> */}
+              <ManagePackage />
+              {/* <ManagePackage_Use />
+              <ManagePackage_Details/> */}
             </PrivateRoute>
           }
         />
@@ -54,14 +52,8 @@ const AppRoutes = () => {
           path="/staff"
           element={
             <PrivateRoute allowedRole={["STAFF"]}>
-              {/* <Outlet> */}
-              {/* Route con dành cho vai trò "USER" */}
+              {/* Route con dành cho vai trò "STAFF" */}
               <Staff></Staff>
-              {/* <ManagePackage /> */}
-              {/* <Route index element={<ManagePackage />} />
-                <Route path="settings" element={<ManagePackage_Details />} />
-                <Route path="settings" element={<ManagePackage_Use />} />
-              </Outlet> */}
             </PrivateRoute>
           }
         />
@@ -72,6 +64,13 @@ const AppRoutes = () => {
         <Route path="/payment" element={<PaymentResult />} />
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
+        <Route path="/payment/error" element={<PaymentError />} />
+        <Route
+          path="/managePackage-detail/:id"
+          element={<ManagePackage_Details />}
+        />
+
+        {/* ManagePackage_Details */}
 
         <Route path="*" element={<NotFound />} />
       </Routes>
