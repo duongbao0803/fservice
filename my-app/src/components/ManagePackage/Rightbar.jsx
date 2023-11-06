@@ -8,15 +8,15 @@ function Rightbar() {
   const [nameData, setNameData] = useState(null);
 
   const [apartments, setApartmentData] = useState([]);
+  const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
 
   useEffect(() => {
     fetchApartment();
+  // fetchApartmentPackage();
+
   }, []);
 
-  useEffect(() => {
-    fetchApartmentPackage();
-  }, []);
 
   // const fetchData = async () => {
   //   try {
@@ -68,22 +68,27 @@ function Rightbar() {
       );
       console.log("check apartment:", response.data);
       setApartmentData(response.data);
+      setcurrentApartmentData(response.data[0]);
     } catch (Error) {
       console.log("error fetching: ", Error);
     }
   };
 
-  const fetchApartmentPackage = async () => {
+  const fetchApartmentPackage = async (id) => {
     try {
       let response = await config.get(
-        `https://fservices.azurewebsites.net/api/apartment-packages/apartment2`
+        `/api/apartment-packages/apartment${id}`
       );
       console.log("check apartment package:", response);
-      setApartmentPackageData(response.data);
+      if (response.status == 200 && response.data){
+        setApartmentPackageData(response.data);
+      }
+      
     } catch (Error) {
       console.log("error fetching package: ", Error);
     }
   };
+
 
   return (
     <div className="right-bar">
@@ -92,7 +97,9 @@ function Rightbar() {
         <div className="chooseHouse pb-3">
           <div className="choose">
             {apartments.map((apartment, index) => (
-              <a style={{ padding: "0 10px" }}>
+              <a 
+                onClick={fetchApartmentPackage(apartment.id)}
+                style={{ padding: "0 10px" }}>
                 {apartment.type.building.name} - {apartment.roomNo}
               </a>
             ))}
@@ -117,7 +124,7 @@ function Rightbar() {
                         <tr />
                         <tr>
                           <td>Căn hộ:</td>
-                          <td>S101-0310-Vinhomes Grand Park</td>
+                          <td>{currentApartment.type.building.name} - {currentApartment.roomNo} - Vinhomes Grand Park</td>
                         </tr>
 
                         <tr>

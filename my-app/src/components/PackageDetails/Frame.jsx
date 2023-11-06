@@ -9,6 +9,7 @@ import PriceFormat from "./PriceFormat";
 import Order from "../OrderCart/Order";
 import { toast } from "react-toastify";
 import config from "../../utils/cus-axios";
+import { ro } from "date-fns/locale";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
@@ -32,7 +33,11 @@ const Frame = () => {
       // Choose price
       const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
-      setPackageName(res.data.name);
+
+      const prices = price.map((typePrice) => (
+
+        typePrice.typeId
+      ))
 
       //Load description
       const response = await config.get(`/api/packages/${id}?typeId=${1}`);
@@ -45,7 +50,7 @@ const Frame = () => {
       const serviceIds = details.map((detail) => detail.serviceId);
       const serviceResponses = await Promise.all(
         serviceIds.map((id) =>
-          config.get(`https://fservices.azurewebsites.net/api/services/${id}`)
+          config.get(`/api/services/${id}`)
         )
       );
       const services = serviceResponses.map((resp) => resp.data);
@@ -54,15 +59,20 @@ const Frame = () => {
 
       //Load building
       const building = await config.get(
-        "https://fservices.azurewebsites.net/api/types"
+        "/api/types"
       );
 
       setRoom(building.data);
+      console.log("check room:", room);
     } catch (error) {
       console.error("There was an error fetching the data:", error);
       setLoading(false);
     }
   };
+
+  // filter package
+  const packageTypeIds = price.map((price) => price.typeId);
+  const filterPackagePrice = room.filter((room) => packageTypeIds.includes(room.id));
 
   const handleSubmit = () => {
     if (localStorage.getItem("isLogged") === "true") {
@@ -102,7 +112,7 @@ const Frame = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {room.map((room, index) => (
+                  {filterPackagePrice.map((room, index) => (
                     <tr>
                       <td style={style}>{room.building.name}</td>
                       <td style={style}>{room.type}</td>
