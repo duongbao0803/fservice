@@ -33,7 +33,7 @@ const loginAPI = (email, password) => {
 };
 
 const sendRefreshToken = () => {
-  return config.post("/api/authentication/Refresh-token");
+  return config.post("/api/authentication/Refresh-token", refreshData);
 };
 
 const signUp = (userData) => {
@@ -65,7 +65,7 @@ const getApartment = (apartment) => {
 
 const getApartmentPackage = (id) => {
   const refreshedConfig = refreshData();
-  return config.get(`/api/apartment-packages/apartment?${id}`, refreshedConfig);
+  return config.get(`/api/apartment-packages/apartment${id}`, refreshedConfig);
 };
 
 export {

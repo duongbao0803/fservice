@@ -59,6 +59,7 @@ function Loginv2() {
     const refreshToken = localStorage.getItem("refreshtoken");
     try {
       const response = await sendRefreshToken(refreshToken);
+      console.log("check accesstoken", response);
       if (response.status === 200) {
         const newAccessToken = response.data.accesstoken;
         localStorage.setItem("accesstoken", newAccessToken);

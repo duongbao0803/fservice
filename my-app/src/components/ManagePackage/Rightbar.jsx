@@ -5,23 +5,22 @@ import config from "../../utils/cus-axios";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import formatDate from "../../utils/tools";
-import { getApartment } from "../../services/UserService";
+import { getApartment, getApartmentPackage } from "../../services/UserService";
 import { Link } from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
   const [nameData, setNameData] = useState(null);
-
+  const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setApartmentData] = useState([]);
-  const [currentApartment, setcurrentApartmentData] = useState({});
+  // const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
 
-
-  useEffect(() => {
-    fetchApartment();
-    // fetchApartmentPackage();
-  }, []);
+  // useEffect(() => {
+  //   fetchApartment();
+  //   // fetchApartmentPackage();
+  // }, []);
 
   // const fetchData = async () => {
   //   try {
@@ -63,13 +62,22 @@ function Rightbar() {
   //     console.error("Error response:", error.response);
   //   }
   // };
+  useEffect(() => {
+    fetchApartment();
+    if (selectedApartment) {
+      fetchApartmentPackage(selectedApartment.id);
+    }
+  }, [selectedApartment]);
+
+  const handleApartmentClick = (apartment) => {
+    setSelectedApartment(apartment);
+  };
 
   const fetchApartment = async () => {
     try {
       let response = await getApartment(username);
       console.log("check apartment:", response.data);
       setApartmentData(response.data);
-      setcurrentApartmentData(response.data[0]);
     } catch (Error) {
       console.log("error fetching: ", Error);
     }
@@ -77,7 +85,7 @@ function Rightbar() {
 
   const fetchApartmentPackage = async (id) => {
     try {
-      let response = await config.get(`/api/apartment-packages/apartment${id}`);
+      let response = await getApartmentPackage(id);
       console.log("check apartment package:", response);
       if (response.status === 200 && response.data) {
         setApartmentPackageData(response.data);
@@ -87,7 +95,7 @@ function Rightbar() {
     }
   };
 
-  const showModal = () => { };
+  const showModal = () => {};
 
   return (
     <div className="right-bar">
@@ -97,7 +105,7 @@ function Rightbar() {
           <div className="choose">
             {apartments.map((apartment, index) => (
               <a
-                onClick={() => fetchApartmentPackage(apartment.id)}
+                onClick={() => handleApartmentClick(apartment)}
                 style={{ padding: "0 10px" }}
               >
                 {apartment.type.building.name} - {apartment.roomNo}
@@ -113,7 +121,6 @@ function Rightbar() {
                       <span>{packages.package.name} (Cho căn 1PN)</span>
                     </div>
                     <div className="orderedPackage-status">
-                      {/* <span>Trạng thái: </span> */}
                       {packages.packageStatus === "Active" ? (
                         <span className="box-status box-status__active">
                           ĐANG HOẠT ĐỘNG
@@ -133,8 +140,8 @@ function Rightbar() {
                         <tr>
                           <td>Căn hộ:</td>
                           <td>
-                            {currentApartment.type.building.name} -{" "}
-                            {currentApartment.roomNo} - Vinhomes Grand Park
+                            {selectedApartment.type.building.name} -{" "}
+                            {selectedApartment.roomNo} - Vinhomes Grand Park
                           </td>
                         </tr>
 
@@ -149,7 +156,9 @@ function Rightbar() {
                     </table>
                     <div className="button d-flex justify-content-end">
                       <button onClick={() => showModal()}>
-                        <Link to={`/managePackage-detail/${packages.id}`}>Xem chi tiết</Link>
+                        <Link to={`/managePackage-detail/${packages.id}`}>
+                          Xem chi tiết
+                        </Link>
                       </button>
                     </div>
                   </div>
