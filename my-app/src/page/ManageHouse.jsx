@@ -1,7 +1,7 @@
 import React from "react";
 import Location_house from "../components/ManageHouse/Location_house";
 
-import '../css/stylemanageHouse.css'
+import '../assets/css/stylemanageHouse.css'
 import Leftbar_house from "../components/ManageHouse/Leftbar_house";
 import Rightbar_house from "../components/ManageHouse/Rightbar_house"
 function ManageHouse() {

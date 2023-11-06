@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,6 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
+import config from "../../utils/cus-axios";
+
+
+
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
@@ -20,7 +25,56 @@ const rows = [
 ];
 
 function Rightbar() {
+  const [apiData, setApiData] = useState(null);
+  const [nameData, setNameData] = useState(null);
+  const [selectedApartment, setSelectedApartment] = useState(null);
+  const [apartments, setApartmentData] = useState([]);
+  const [apartmentsPackage, setApartmentPackageData] = useState([]);
 
+  useEffect(() => {
+    fetchApartment();
+  }, []);
+
+  
+
+  const fetchApartment = async () => {
+    try {
+      let response = await config.get(
+        `https://fservices.azurewebsites.net/api/apartments?username=${localStorage.getItem(
+          "username"
+        )}`
+      );
+      console.log("check apartment:", response.data);
+      setApartmentData(response.data);
+    } catch (Error) {
+      console.log("error fetching: ", Error);
+    }
+  };
+
+  
+  const fetchApartmentPackage = async () => {
+    try {
+      let response = await config.get(
+        `https://fservices.azurewebsites.net/api/apartment-packages/id`
+      );
+      console.log("check apartment package:", response);
+      setApartmentPackageData(response.data);
+    } catch (Error) {
+      console.log("error fetching package: ", Error);
+    }
+  };
+
+  
+  const handleApartmentClick = async (apartmentId) => {
+    try {
+      const response = await config.get(
+        `https://fservices.azurewebsites.net/api/apartment- packages/${apartmentId}`
+      );
+      setSelectedApartment(response.data);
+    } catch (error) {
+      console.log("error fetching apartment package: ", error);
+    }
+  };
   return (
 
     <div className="right-bar-details">
@@ -28,9 +82,15 @@ function Rightbar() {
       <div className="right_bar-details-main" style={{ padding: '20px' }}>
         <div className="chooseHouse-details pb-3">
           <div className="choose">
-          <a href style={{borderBottom: '3px solid #ff8228'}}>Căn hộ 1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href>Căn hộ 2</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href>Căn hộ 3</a>
+            {apartments.map((apartment) => (
+              <a
+              key={apartment.id}
+              style={{ padding: "0 10px" }}
+              onClick={() => handleApartmentClick(apartment.id)}
+            >
+              {apartment.type.building.name} - {apartment.roomNo}
+            </a>
+            ))}
           </div>
           <div className="orderedPackage-details">
             <div className="orderedPackage-details_main d-flex justify-content-between">
@@ -61,7 +121,7 @@ function Rightbar() {
               <div className="choose-details_table">
                 <tr>
                   <td>
-                    <span style={{borderBottom: '3px solid #ff8228'}}>Dịch vụ</span>
+                    <span style={{ borderBottom: '3px solid #ff8228' }}>Dịch vụ</span>
                   </td>
                   <td>
                     <span> Sử dụng</span>
@@ -96,13 +156,13 @@ function Rightbar() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.serviceName}>
-                        <TableCell component="th" scope="row">{row.serviceName}</TableCell>
-                        <TableCell align="right">{row.quantity}</TableCell>
-                        <TableCell align="right">{row.used}</TableCell>
-                        <TableCell align="right">{row.remaining}</TableCell>
-                        <TableCell align="right" className="action">{row.action}</TableCell>
+                  {apartmentsPackage.map((packageItem) => (
+                      <TableRow key={packageItem.serviceName}>
+                        <TableCell component="th" scope="row">{packageItem.serviceName}</TableCell>
+                        <TableCell align="right">{packageItem.quantity}</TableCell>
+                        <TableCell align="right">{packageItem.used}</TableCell>
+                        <TableCell align="right">{packageItem.remaining}</TableCell>
+                        <TableCell align="right" className="action">{packageItem.action}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -111,9 +171,9 @@ function Rightbar() {
 
             </div>
             <Link to="/managepackage">
-            <div className="button-details d-flex justify-content-end" style={{marginTop: '10px', textDecoration: "none"}}>
-              <button>Quay về</button>
-            </div>
+              <div className="button-details d-flex justify-content-end" style={{ marginTop: '10px', textDecoration: "none" }}>
+                <button>Quay về</button>
+              </div>
             </Link>
           </div>
 

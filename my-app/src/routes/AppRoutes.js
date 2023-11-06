@@ -16,6 +16,8 @@ import StaffInfo from "../page/StaffInfo";
 import ManagePackage from "../page/ManagePackage";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
+import ManageHouse from "../page/ManageHouse";
+
 
 const AppRoutes = () => {
   return (
@@ -38,7 +40,8 @@ const AppRoutes = () => {
             <PrivateRoute allowedRole={["USER"]}>
               {/* <Outlet> */}
               {/* Route con dành cho vai trò "USER" */}
-              <ManagePackage></ManagePackage>
+              <ManagePackage_Details></ManagePackage_Details>
+            
               {/* <ManagePackage /> */}
               {/* <Route index element={<ManagePackage />} />
                 <Route path="settings" element={<ManagePackage_Details />} />
