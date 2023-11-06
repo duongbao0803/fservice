@@ -109,6 +109,7 @@ function Rightbar({ id, buildingName, roomNo }) {
                   </tr>
                 </tbody>
               </table>
+
               <div className="choose-details_table">
                 <tr>
                   <td>
@@ -121,97 +122,67 @@ function Rightbar({ id, buildingName, roomNo }) {
                   </td>
                 </tr>
               </div>
-              <div className="info-ordered-details">
-                <table className="info_ordered-details-table">
-                  <tbody>
-                    <tr />
-                    <tr />
-                    <tr>
-                      <td>Căn hộ:</td>
-                      <td>
-                        {buildingName}-{roomNo}-Vinhomes Grand Park
-                      </td>
-                    </tr>
+              <TableContainer component={Paper} style={{ boxShadow: "none" }}>
+                <Table
+                  sx={{
+                    minWidth: 650,
 
-                    <tr>
-                      <td>Áp dụng từ:</td>
-                      <td>01/10/2023 - 31/10/2023</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="choose-details_table">
-                  <tr>
-                    <td>
-                      <span style={{ borderBottom: "3px solid #ff8228" }}>
-                        Dịch vụ
-                      </span>
-                    </td>
-                    <td>
-                      <span> Sử dụng</span>
-                    </td>
-                  </tr>
-                </div>
-                <TableContainer component={Paper} style={{ boxShadow: "none" }}>
-                  <Table
-                    sx={{
-                      minWidth: 650,
-
-                      "& .MuiTableCell-root": {
-                        borderBottom: "none",
-                        backgroundColor: "transparent",
-                      },
-                      "& .MuiTableHead-root .MuiTableCell-root": {
-                        borderBottom: "none",
-                        backgroundColor: "transparent",
-                      },
-                      borderCollapse: "separate",
-                      borderSpacing: "0",
-                    }}
-                    size="small"
-                    aria-label="a dense table"
-                  >
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Tên dịch vụ</TableCell>
-                        <TableCell align="right">Số lượng</TableCell>
-                        <TableCell align="right">Đã dùng</TableCell>
-                        <TableCell align="right">Còn lại</TableCell>
-                        <TableCell align="right">Thao tác</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow key={row.serviceName}>
-                          <TableCell component="th" scope="row">
-                            {row.serviceName}
+                    "& .MuiTableCell-root": {
+                      borderBottom: "none",
+                      backgroundColor: "transparent",
+                    },
+                    "& .MuiTableHead-root .MuiTableCell-root": {
+                      borderBottom: "none",
+                      backgroundColor: "transparent",
+                    },
+                    borderCollapse: "separate",
+                    borderSpacing: "0",
+                  }}
+                  size="small"
+                  aria-label="a dense table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Tên dịch vụ</TableCell>
+                      <TableCell align="right">Số lượng</TableCell>
+                      <TableCell align="right">Đã dùng</TableCell>
+                      <TableCell align="right">Còn lại</TableCell>
+                      <TableCell align="right">Thao tác</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.serviceName}>
+                        <TableCell component="th" scope="row">
+                          {row.serviceName}
+                        </TableCell>
+                        <TableCell align="right">{row.quantity}</TableCell>
+                        <TableCell align="right">{row.used}</TableCell>
+                        <TableCell align="right">{row.remaining}</TableCell>
+                        {apmPackage.packageStatus === "Active" ? (
+                          <TableCell align="right" className="action">
+                            {row.action}
                           </TableCell>
-                          <TableCell align="right">{row.quantity}</TableCell>
-                          <TableCell align="right">{row.used}</TableCell>
-                          <TableCell align="right">{row.remaining}</TableCell>
-                          {apmPackage.packageStatus === "Active" ? (
-                            <TableCell align="right" className="action">
-                              {row.action}
-                            </TableCell>
-                          ) : (
-                            <span></span>
-                          )}
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
-              <div
-                className="button-details d-flex justify-content-end"
-                style={{ marginTop: "10px" }}
-              >
-                <button>
-                  <Link to="/user">Quay về</Link>
-                </button>
-              </div>
+                        ) : (
+                          <span></span>
+                        )}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+            <div
+              className="button-details d-flex justify-content-end"
+              style={{ marginTop: "10px" }}
+            >
+              <button>
+                <Link to="/user">Quay về</Link>
+              </button>
             </div>
           </div>
         </div>
+
         {/* <UsingModal handleClose={handleClose} show={show}></UsingModal> */}
       </div>
     </div>
