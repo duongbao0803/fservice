@@ -114,6 +114,10 @@ td:nth-child(4) {
   background-color: #757575;
 }
 
+.box-status__expired {
+  background-color: #952323;
+}
+
 .info-ordered .button button {
   background-color: #ffcaa3;
   border: none;

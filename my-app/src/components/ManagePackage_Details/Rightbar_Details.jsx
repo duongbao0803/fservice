@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,19 +6,60 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import config from "../../utils/cus-axios";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import formatDate from "../../utils/tools";
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
 }
 
-const rows = [
-  createData('Tổng vệ sinh nhà cửa', 9, 0, 9, 'Sử dụng'),
-  createData('Giặt ủi quần áo', 6, 0, 6, 'Sử dụng'),
-  createData('Giao nước', 4, 3, 1, 'Sử dụng'),
-  createData('Vệ sinh máy lạnh', 1, 1, 0, 'Mua thêm'),
-];
+// const rows = [
+//   createData('Tổng vệ sinh nhà cửa', 9, 0, 9, 'Sử dụng'),
+//   createData('Giặt ủi quần áo', 6, 0, 6, 'Sử dụng'),
+//   createData('Giao nước', 4, 3, 1, 'Sử dụng'),
+//   createData('Vệ sinh máy lạnh', 1, 1, 0, 'Mua thêm'),
+// ];
 
-function Rightbar() {
+
+function Rightbar({ id, buildingName, roomNo }) {
+
+  useEffect(() => {
+    apartmentPackage()
+  }, [])
+
+  const [apmPackage, setApmPackage] = useState({});
+  const [apmPackageService, setApmPackageService] = useState([]);
+  const [currentPackage, setcurrentPackage] = useState({});
+
+  const apartmentPackage = async () => {
+    try {
+      const res = await config.get(`api/apartment-packages/${id}`);
+      console.log("check pacckage:", res.data);
+      setApmPackage(res.data);
+      setApmPackageService(res.data.apartmentPackageServices);
+      setcurrentPackage(res.data.package);
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  const rows = apmPackageService.map((apmPackage) => {
+
+    const status = (apmPackage.remainQuantity !== 0) ? 'Sử dụng' : 'Mua thêm';
+
+    return createData(
+      apmPackage.service.name,
+      apmPackage.quantity,
+      apmPackage.usedQuantity,
+      apmPackage.remainQuantity,
+      status
+    );
+  });
+
 
   return (
 
@@ -27,16 +68,23 @@ function Rightbar() {
       <div className="right_bar-details-main" style={{ padding: '20px' }}>
         <div className="chooseHouse-details pb-3">
           <div className="choose">
-          <a href style={{borderBottom: '3px solid #ff8228'}}>Căn hộ 1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href style={{ borderBottom: '3px solid #ff8228' }}>{buildingName} - {roomNo}</a>
           </div>
           <div className="orderedPackage-details">
             <div className="orderedPackage-details_main d-flex justify-content-between">
               <div className="orderedPackage-details-name ">
-                <span>COMBO VỆ SINH NHÀ Ở (Cho căn 1PN)</span>
+                <span>{currentPackage.name}</span>
               </div>
               <div className="orderedPackage-details-status">
-                <span>Trạng thái: </span>
-                <span>ĐANG HOẠT ĐỘNG</span>
+                {apmPackage.packageStatus === "Active" ? (
+                  <span className="box-status box-status__active">
+                    ĐANG HOẠT ĐỘNG
+                  </span>
+                ) : (
+                  <span className="box-status box-status__expired">
+                    ĐÃ HẾT HẠN
+                  </span>
+                )}
               </div>
             </div>
             <div className="info-ordered-details">
@@ -45,12 +93,12 @@ function Rightbar() {
                   <tr />
                   <tr>
                     <td>Căn hộ:</td>
-                    <td>S101-0310-Vinhomes Grand Park</td>
+                    <td>{buildingName} - {roomNo} - Vinhomes Grand Park</td>
                   </tr>
 
                   <tr>
                     <td>Áp dụng từ:</td>
-                    <td>01/10/2023 - 31/10/2023</td>
+                    <td>{formatDate(apmPackage.startDate)} - {formatDate(apmPackage.endDate)}</td>
 
                   </tr>
 
@@ -58,7 +106,7 @@ function Rightbar() {
               <div className="choose-details_table">
                 <tr>
                   <td>
-                    <span style={{borderBottom: '3px solid #ff8228'}}>Dịch vụ</span>
+                    <span style={{ borderBottom: '3px solid #ff8228' }}>Dịch vụ</span>
                   </td>
                   <td>
                     <span> Sử dụng</span>
@@ -99,7 +147,11 @@ function Rightbar() {
                         <TableCell align="right">{row.quantity}</TableCell>
                         <TableCell align="right">{row.used}</TableCell>
                         <TableCell align="right">{row.remaining}</TableCell>
-                        <TableCell align="right" className="action">{row.action}</TableCell>
+                        {apmPackage.packageStatus === "Active" ? (
+                          <TableCell align="right" className="action">{row.action}</TableCell>
+                        ) : (
+                          <span></span>
+                        )}
                       </TableRow>
                     ))}
                   </TableBody>
@@ -107,8 +159,10 @@ function Rightbar() {
               </TableContainer>
 
             </div>
-            <div className="button-details d-flex justify-content-end" style={{marginTop: '10px'}}>
-              <button>Quay về</button>
+            <div className="button-details d-flex justify-content-end" style={{ marginTop: '10px' }}>
+              <button>
+                <Link to="/user">Quay về</Link>
+              </button>
             </div>
           </div>
 

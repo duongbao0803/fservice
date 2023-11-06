@@ -118,11 +118,15 @@ function Rightbar() {
                         <span className="box-status box-status__active">
                           ĐANG HOẠT ĐỘNG
                         </span>
-                      ) : (
+                      ) : packages.packageStatus === "Disable" ? (
                         <span className="box-status box-status__disable">
                           KHÔNG KHẢ DỤNG
                         </span>
-                      )}
+                      ) : packages.packageStatus === "Expired" ? (
+                        <span className="box-status box-status__expired">
+                          ĐÃ HẾT HẠN
+                        </span>
+                      ) : ""}
                     </div>
                   </div>
                   <div className="info-ordered">
@@ -147,11 +151,17 @@ function Rightbar() {
                         </tr>
                       </tbody>
                     </table>
-                    <div className="button d-flex justify-content-end">
-                      <button onClick={() => showModal()}>
-                        <Link to={`/managePackage-detail/${packages.id}`}>Xem chi tiết</Link>
-                      </button>
-                    </div>
+                    {packages.packageStatus !== "Disable" ? (
+                      <div className="button d-flex justify-content-end">
+                        <button onClick={() => showModal()}>
+                          <Link to={`/user/managePackage-detail/${packages.id}?buildingName=${currentApartment.type.building.name}&roomNo=${currentApartment.roomNo}`}>
+                            Xem chi tiết</Link>
+                        </button>
+                      </div>
+                    ) : (
+                      <span></span>
+                    )}
+
                   </div>
                 </div>
               </>
