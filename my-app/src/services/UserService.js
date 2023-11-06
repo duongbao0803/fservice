@@ -1,29 +1,29 @@
 import axios from "axios";
 import config from "../utils/cus-axios";
 
-const refreshdata = () => {
+const refreshData = () => {
   let accesstoken = localStorage.getItem("accesstoken");
-  let confi = {};
+  let config = {};
   if (accesstoken !== null)
-    confi = {
+    config = {
       headers: {
         Authorization: `Bearer ${accesstoken}`,
       },
     };
-  console.log("iam here", confi);
-  return confi;
+  return config;
 };
 
 const Launch = () => {
-  let dmm = {};
-  dmm = refreshdata();
-  return config.get("/api/authentication/Launch", dmm);
+  const refreshedConfig = refreshData();
+  return config.get("/api/authentication/Launch", refreshedConfig);
 };
 
 const fetchUser = (page) => {
-  let dmm = {};
-  dmm = refreshdata();
-  return config.get(`/api/accounts?PageNumber=${page}&PageSize=10`, dmm);
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/accounts?PageNumber=${page}&PageSize=10`,
+    refreshedConfig
+  );
 };
 
 const loginAPI = (email, password) => {
@@ -33,27 +33,39 @@ const loginAPI = (email, password) => {
 };
 
 const sendRefreshToken = () => {
-  // let dmm = {};
-  // dmm = refreshdata();
   return config.post("/api/authentication/Refresh-token");
 };
 
 const signUp = (userData) => {
-  // let dmm = {};
-  // dmm = refreshdata();
   return config.post("/api/authentication/SignUp", userData);
 };
 
 const editUser = (id) => {
-  // let dmm = {};
-  // dmm = refreshdata();
   return config.put(`/api/accounts/${id}`);
 };
 
 const deleteUser = (id) => {
-  // let dmm = {};
-  // dmm = refreshdata();
   return config.delete(`/api/accounts/${id}`);
+};
+
+const Order = (data) => {
+  const refreshedConfig = refreshData();
+  return config.post("/api/orders", data, refreshedConfig);
+};
+
+const Payment = (data) => {
+  const refreshedConfig = refreshData();
+  return config.post("/api/payment", data, refreshedConfig);
+};
+
+const getApartment = (apartment) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments?username=${apartment}`, refreshedConfig);
+};
+
+const getApartmentPackage = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartment-packages/apartment?${id}`, refreshedConfig);
 };
 
 export {
@@ -64,4 +76,8 @@ export {
   deleteUser,
   sendRefreshToken,
   Launch,
+  Order,
+  getApartmentPackage,
+  getApartment,
+  Payment,
 };

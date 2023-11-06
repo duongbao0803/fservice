@@ -13,7 +13,6 @@ import { Session } from "../../App";
 
 function Header() {
   const session = useContext(Session);
-  // const user = session.user;
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();

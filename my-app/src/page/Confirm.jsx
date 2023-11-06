@@ -12,44 +12,27 @@ import { useLocation } from "react-router-dom";
 function Confirm() {
   const { state } = useLocation();
 
-  const { startDate, endDate, TypeRoomForSelectedHouse, price, room, tower } =
-    state;
-
-  console.log(
-    "check all",
-    startDate,
-    endDate,
-    TypeRoomForSelectedHouse,
-    price,
-    room,
-    tower
-  );
-  return (
-    <>
-      <TitleConfirm />
-      <div
-        className="confirm mb-5"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
+  if (state !== null) {
+    return (
+      <>
+        <TitleConfirm />
         <div
-          className="form-card"
-          style={{ backgroundColor: "#F8F8F8", width: "600px" }}
+          className="confirm mb-5"
+          style={{ display: "flex", justifyContent: "center" }}
         >
-          <Info />
-          <InfoPackage
-            startDate={startDate}
-            endDate={endDate}
-            TypeRoomForSelectedHouse={TypeRoomForSelectedHouse}
-            room={room}
-            tower={tower}
-          />
-          <Contact />
-          <Payment price={price} startDate={startDate} />
-          <ConfirmButton />
+          <div
+            className="form-card"
+            style={{ backgroundColor: "#F8F8F8", width: "600px" }}
+          >
+            <Info />
+            <InfoPackage state={state} />
+            <Contact />
+            <Payment state={state} />
+            <ConfirmButton state={state} />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
-
 export default Confirm;

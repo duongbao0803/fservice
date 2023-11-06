@@ -4,7 +4,17 @@ import Location from "../components/ManagePackage/Location";
 import "../assets/css/styleMP_Details.css";
 import Leftbar from "../components/ManagePackage/Leftbar";
 import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
+import { useLocation, useParams } from "react-router-dom";
+
 function ManagePackage_Details() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const buildingName = searchParams.get("buildingName");
+  const roomNo = searchParams.get("roomNo");
+  const {id} = useParams();
+
+  console.log("check id", id);
   return (
     <>
       <Location />
@@ -14,7 +24,7 @@ function ManagePackage_Details() {
             <Leftbar />
           </div>
           <div class="col-md-12 col-sm-12 col-lg-9">
-            <Rightbar_Details />
+            <Rightbar_Details id = {id} buildingName = {buildingName} roomNo = {roomNo}/>
           </div>
         </div>
       </div>

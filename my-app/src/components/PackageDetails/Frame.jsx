@@ -8,6 +8,8 @@ import BasicRating from "./Star";
 import PriceFormat from "./PriceFormat";
 import Order from "../OrderCart/Order";
 import { toast } from "react-toastify";
+import config from "../../utils/cus-axios";
+import { ro } from "date-fns/locale";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});
@@ -29,16 +31,14 @@ const Frame = () => {
   const fetchFrame = async () => {
     try {
       // Choose price
-      const res = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}`
-      );
+      const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
       setPackageName(res.data.name);
 
+      const prices = price.map((typePrice) => typePrice.typeId);
+
       //Load description
-      const response = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${1}`
-      );
+      const response = await config.get(`/api/packages/${id}?typeId=${1}`);
       setAPIData(response.data);
 
       //Load Service
@@ -47,27 +47,31 @@ const Frame = () => {
 
       const serviceIds = details.map((detail) => detail.serviceId);
       const serviceResponses = await Promise.all(
-        serviceIds.map((id) =>
-          axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
-        )
+        serviceIds.map((id) => config.get(`/api/services/${id}`))
       );
       const services = serviceResponses.map((resp) => resp.data);
 
       setServiceData(services);
 
       //Load building
-      const building = await axios.get(
-        "https://fservices.azurewebsites.net/api/types"
-      );
+      const building = await config.get("/api/types");
 
       setRoom(building.data);
+      console.log("check room:", room);
     } catch (error) {
       console.error("There was an error fetching the data:", error);
       setLoading(false);
     }
   };
 
+  // filter package
+  const packageTypeIds = price.map((price) => price.typeId);
+  const filterPackagePrice = room.filter((room) =>
+    packageTypeIds.includes(room.id)
+  );
+
   const handleSubmit = () => {
+    console.log("check name: ", packageName);
     if (localStorage.getItem("isLogged") === "true") {
       navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
     } else {
@@ -105,7 +109,7 @@ const Frame = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {room.map((room, index) => (
+                  {filterPackagePrice.map((room, index) => (
                     <tr>
                       <td style={style}>{room.building.name}</td>
                       <td style={style}>{room.type}</td>

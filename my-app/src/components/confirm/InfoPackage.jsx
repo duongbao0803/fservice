@@ -22,19 +22,19 @@ export default function InfoPackage(props) {
                 <td>
                   <p>Vinhomes Grand Park</p>
                   <p>
-                    {props.tower} - {props.room}
+                    {props.state.tower} - {props.state.room}
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>Thời hạn gói</td>
                 <td>
-                  {props.startDate} - {props.endDate}
+                  {props.state.startDate} - {props.state.endDate}
                 </td>
               </tr>
               <tr>
                 <td>Loại phòng</td>
-                <td>{props.TypeRoomForSelectedHouse}</td>
+                <td>{props.state.TypeRoomForSelectedHouse}</td>
               </tr>
             </tbody>
           </table>

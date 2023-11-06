@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import config from "../../utils/cus-axios";
 // import { service } from "../../data";
 
 function ServiceList() {
@@ -15,9 +16,7 @@ function ServiceList() {
 
   const fetchPackage = async () => {
     try {
-      const response = await axios.get(
-        "https://fservices.azurewebsites.net/api/packages"
-      );
+      const response = await config.get("/api/packages");
       setData(response.data);
       setLoading(false);
     } catch (error) {
@@ -64,24 +63,29 @@ function ServiceList() {
                   style={{ position: "relative" }}
                   key={packages.id}
                 >
-                  <div className="service-img mb-3">
-                    <img
-                      src={packages.image}
-                      alt="Dọn phòng"
-                      style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-                  <div className="service-details pb-4">
-                    <h5>{packages.name}</h5>
-                    <p className="text-justify">{packages.description}</p>
-                    <div style={{ position: "absolute", bottom: "0" }}>
-                      <Link to={`/detail/${packages.id}`}>Tìm hiểu thêm</Link>
+                  <Link
+                    to={`/detail/${packages.id}`}
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    <div className="service-img mb-3">
+                      <img
+                        src={packages.image}
+                        alt="Dọn phòng"
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          objectFit: "cover",
+                        }}
+                      />
                     </div>
-                  </div>
+                    <div className="service-details pb-4">
+                      <h5>{packages.name}</h5>
+                      <p className="text-justify">{packages.description}</p>
+                      <div style={{ position: "absolute", bottom: "0" }}>
+                        Tìm hiểu thêm
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               ))}
         </div>

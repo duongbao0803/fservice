@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
+import config from "../../utils/cus-axios";
 
 const ListPackage = () => {
   const { id } = useParams();
@@ -14,8 +15,8 @@ const ListPackage = () => {
 
   const fetchPackage = async () => {
     try {
-      const initialResponse = await axios.get(
-        `https://fservices.azurewebsites.net/api/packages/${id}?typeId=${2}`
+      const initialResponse = await config.get(
+        `/api/packages/${id}?typeId=${2}`
       );
 
       if (initialResponse.data && initialResponse.data.packageDetails) {
@@ -24,9 +25,7 @@ const ListPackage = () => {
         );
 
         const serviceResponses = await Promise.all(
-          serviceIds.map((id) =>
-            axios.get(`https://fservices.azurewebsites.net/api/services/${id}`)
-          )
+          serviceIds.map((id) => config.get(`/api/services/${id}`))
         );
         const services = serviceResponses.map((response) => response.data);
         setData({

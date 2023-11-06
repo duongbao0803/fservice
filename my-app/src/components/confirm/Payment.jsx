@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import PriceFormat from "../PackageDetails/PriceFormat";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+// import PriceFormat from "../PackageDetails/PriceFormat";
 
 export default function Payment(props) {
+
+
+  const payment = async () => {
+    try {
+    } catch (error) {
+      console.log("Error Fetching Paymenting");
+    }
+  };
+
   return (
     <div className="container mt-1">
       <div className="pay mb-3">
@@ -18,12 +31,13 @@ export default function Payment(props) {
             <tbody>
               <tr>
                 <td>Ngày đặt dịch vụ</td>
-                <td>{props.startDate} </td>
+                <td> {props.state.orderDate} </td>
               </tr>
               <tr>
                 <td>Số tiền</td>
                 <td>
-                  <PriceFormat price={props.price} />
+                  <PriceFormat price={props.state.price} />
+                  {/* {props.state.price} */}
                 </td>
               </tr>
               <tr>
