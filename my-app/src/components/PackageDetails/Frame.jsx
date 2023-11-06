@@ -109,7 +109,7 @@ const Frame = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {room.map((room, index) => (
+                  {filterPackagePrice.map((room, index) => (
                     <tr>
                       <td style={style}>{room.building.name}</td>
                       <td style={style}>{room.type}</td>

@@ -77,4 +77,7 @@ export {
   sendRefreshToken,
   Launch,
   Order,
+  getApartmentPackage,
+  getApartment,
+  Payment,
 };
