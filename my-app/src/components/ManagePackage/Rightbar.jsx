@@ -2,6 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import config from "../../utils/cus-axios";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import formatDate from "../../utils/tools";
+import { getApartment } from "../../services/UserService";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
@@ -10,13 +14,11 @@ function Rightbar() {
   const [apartments, setApartmentData] = useState([]);
   const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
-
+  const username = localStorage.getItem("username");
   useEffect(() => {
     fetchApartment();
-  // fetchApartmentPackage();
-
+    // fetchApartmentPackage();
   }, []);
-
 
   // const fetchData = async () => {
   //   try {
@@ -61,11 +63,7 @@ function Rightbar() {
 
   const fetchApartment = async () => {
     try {
-      let response = await config.get(
-        `https://fservices.azurewebsites.net/api/apartments?username=${localStorage.getItem(
-          "username"
-        )}`
-      );
+      let response = await getApartment(username);
       console.log("check apartment:", response.data);
       setApartmentData(response.data);
       setcurrentApartmentData(response.data[0]);
@@ -76,19 +74,17 @@ function Rightbar() {
 
   const fetchApartmentPackage = async (id) => {
     try {
-      let response = await config.get(
-        `/api/apartment-packages/apartment${id}`
-      );
+      let response = await config.get(`/api/apartment-packages/apartment${id}`);
       console.log("check apartment package:", response);
-      if (response.status == 200 && response.data){
+      if (response.status === 200 && response.data) {
         setApartmentPackageData(response.data);
       }
-      
     } catch (Error) {
       console.log("error fetching package: ", Error);
     }
   };
 
+  const showModal = () => {};
 
   return (
     <div className="right-bar">
@@ -97,14 +93,15 @@ function Rightbar() {
         <div className="chooseHouse pb-3">
           <div className="choose">
             {apartments.map((apartment, index) => (
-              <a 
-                onClick={fetchApartmentPackage(apartment.id)}
-                style={{ padding: "0 10px" }}>
+              <a
+                onClick={() => fetchApartmentPackage(apartment.id)}
+                style={{ padding: "0 10px" }}
+              >
                 {apartment.type.building.name} - {apartment.roomNo}
               </a>
             ))}
           </div>
-          <div className="orderedPackage">
+          <div className="apartment-package">
             {apartmentsPackage.map((packages, index) => (
               <>
                 <div className="orderedPackage">
@@ -113,8 +110,16 @@ function Rightbar() {
                       <span>{packages.package.name} (Cho căn 1PN)</span>
                     </div>
                     <div className="orderedPackage-status">
-                      <span>Trạng thái: </span>
-                      <span>{packages.packageStatus}</span>
+                      {/* <span>Trạng thái: </span> */}
+                      {packages.packageStatus === "Active" ? (
+                        <span className="box-status box-status__active">
+                          ĐANG HOẠT ĐỘNG
+                        </span>
+                      ) : (
+                        <span className="box-status box-status__disable">
+                          KHÔNG KHẢ DỤNG
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="info-ordered">
@@ -124,25 +129,32 @@ function Rightbar() {
                         <tr />
                         <tr>
                           <td>Căn hộ:</td>
-                          <td>{currentApartment.type.building.name} - {currentApartment.roomNo} - Vinhomes Grand Park</td>
+                          <td>
+                            {currentApartment.type.building.name} -{" "}
+                            {currentApartment.roomNo} - Vinhomes Grand Park
+                          </td>
                         </tr>
 
                         <tr>
                           <td>Áp dụng từ:</td>
                           <td>
-                            {packages.startDate} - {packages.endDate}
+                            {formatDate(packages.startDate)} -{" "}
+                            {formatDate(packages.endDate)}
                           </td>
                         </tr>
                       </tbody>
                     </table>
                     <div className="button d-flex justify-content-end">
-                      <button>Xem chi tiết</button>
+                      <button onClick={() => showModal()}>Xem chi tiết</button>
                     </div>
                   </div>
                 </div>
               </>
             ))}
           </div>
+          <Stack spacing={2}>
+            <Pagination count={10} variant="outlined" shape="rounded" />
+          </Stack>
         </div>
       </div>
     </div>

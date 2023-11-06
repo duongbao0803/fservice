@@ -72,7 +72,7 @@ function Loginv2() {
 
   const handleLogin = async () => {
     if (!password) {
-      toast.error("Password is required");
+      toast.error("Mật khẩu không được để trống");
     }
     try {
       let res = await loginAPI(email, password);
@@ -141,22 +141,22 @@ function Loginv2() {
       name: Yup.string(),
       phoneNumber: Yup.string().matches(
         /^[0-9]{10}$/,
-        "Phone number must be 10 digits"
+        "Số điện thoại phải có 10 số"
       ),
       address: Yup.string(),
       dateOfBirth: Yup.date(),
-      email: Yup.string().email("Invalid email address"),
+      email: Yup.string().email("Email không hợp lệ"),
       password: Yup.string()
         .matches(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]+$/,
-          "Password is invalid (Ex: Abc@12345)"
+          "Mật khẩu không hợp lệ (Ví dụ: Abc@12345)"
         )
-        .min(7, "Password must be at least 7 characters (Ex: Abc@12345) ")
-        .max(12, "Password can't exceed 20 characters (Ex: Abc@12345)"),
+        .min(7, "Mật khẩu cần có ít nhất 7 kí tự (Gợi ý: Abc@12345) ")
+        .max(12, "Mật khẩu tối đa là 12 kí tự"),
 
       confirmPassword: Yup.string().oneOf(
         [Yup.ref("password"), null],
-        "ConfirmPassword must match with Password"
+        "Mật khẩu xác nhận phải trùng với mật khẩu"
       ),
     }),
 
@@ -175,7 +175,7 @@ function Loginv2() {
           toast.error(res.data.message);
         } else {
           toast.success(
-            "Đăng kí thành công, vui lòng check mail để xác nhận tài khoản"
+            "Đăng kí thành công, vui lòng kiểm tra email để xác nhận tài khoản"
           );
           navigate("/");
         }
@@ -220,7 +220,7 @@ function Loginv2() {
                 onClick={() => handleJustifyClick("tab1")}
                 active={justifyActive === "tab1"}
               >
-                Login
+                Đăng nhập
               </MDBTabsLink>
             </MDBTabsItem>
             <MDBTabsItem>
@@ -228,7 +228,7 @@ function Loginv2() {
                 onClick={() => handleJustifyClick("tab2")}
                 active={justifyActive === "tab2"}
               >
-                Register
+                Đăng ký
               </MDBTabsLink>
             </MDBTabsItem>
           </MDBTabs>
@@ -237,7 +237,7 @@ function Loginv2() {
             <MDBTabsPane show={justifyActive === "tab1"}>
               <MDBInput
                 wrapperClass="mb-4"
-                label="Username"
+                label="Email"
                 id="form1"
                 type="email"
                 required
@@ -247,7 +247,7 @@ function Loginv2() {
 
               <MDBInput
                 wrapperClass="mb-4"
-                label="Password"
+                label="Mật khẩu"
                 id="form2"
                 type="password"
                 required
@@ -260,15 +260,15 @@ function Loginv2() {
                   value=""
                   id="flexCheckDefault"
                   required
-                  label="Remember me"
+                  label="Ghi nhớ"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <a href="!#">Forgot password?</a>
+                <a href="!#">Quên mật khẩu?</a>
               </div>
 
               <MDBBtn className="mb-4 w-100" onClick={handleLogin}>
-                Sign in
+                Đăng nhập
               </MDBBtn>
             </MDBTabsPane>
 
@@ -277,7 +277,7 @@ function Loginv2() {
               <form onSubmit={formik.handleSubmit}>
                 <MDBInput
                   wrapperClass="mb-4"
-                  label="Name"
+                  label="Họ và tên"
                   id="name"
                   type="text"
                   required
@@ -309,7 +309,7 @@ function Loginv2() {
                 <div style={{ position: "relative" }}>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Phone"
+                    label="Số điện thoại"
                     id="phoneNumber"
                     type="text"
                     required
@@ -328,7 +328,7 @@ function Loginv2() {
                 <div style={{ position: "relative" }}>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Address"
+                    label="Địa chỉ"
                     id="address"
                     type="text"
                     required
@@ -346,7 +346,7 @@ function Loginv2() {
                 <div style={{ position: "relative" }}>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Date Of Birth"
+                    label="Ngày sinh"
                     id="dateOfBirth"
                     type="date"
                     required
@@ -364,7 +364,7 @@ function Loginv2() {
                 <div style={{ position: "relative" }}>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Password"
+                    label="Mật khẩu"
                     id="password"
                     type="password"
                     required
@@ -383,7 +383,7 @@ function Loginv2() {
                 <div style={{ position: "relative" }}>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Confirm Password"
+                    label="Xác nhận mật khẩu"
                     id="confirmPassword"
                     type="password"
                     required
@@ -402,7 +402,7 @@ function Loginv2() {
                   <ReCaptcha onChange={handleReCaptchaChange} />
                 </div> */}
                 <MDBBtn className="mb-4 w-100" type="submit">
-                  Sign up
+                  Đăng ký
                 </MDBBtn>
               </form>
             </MDBTabsPane>

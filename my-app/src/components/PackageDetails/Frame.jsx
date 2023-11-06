@@ -33,11 +33,7 @@ const Frame = () => {
       // Choose price
       const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
-
-      const prices = price.map((typePrice) => (
-
-        typePrice.typeId
-      ))
+      const prices = price.map((typePrice) => typePrice.typeId);
 
       //Load description
       const response = await config.get(`/api/packages/${id}?typeId=${1}`);
@@ -49,18 +45,14 @@ const Frame = () => {
 
       const serviceIds = details.map((detail) => detail.serviceId);
       const serviceResponses = await Promise.all(
-        serviceIds.map((id) =>
-          config.get(`/api/services/${id}`)
-        )
+        serviceIds.map((id) => config.get(`/api/services/${id}`))
       );
       const services = serviceResponses.map((resp) => resp.data);
 
       setServiceData(services);
 
       //Load building
-      const building = await config.get(
-        "/api/types"
-      );
+      const building = await config.get("/api/types");
 
       setRoom(building.data);
       console.log("check room:", room);
@@ -72,7 +64,9 @@ const Frame = () => {
 
   // filter package
   const packageTypeIds = price.map((price) => price.typeId);
-  const filterPackagePrice = room.filter((room) => packageTypeIds.includes(room.id));
+  const filterPackagePrice = room.filter((room) =>
+    packageTypeIds.includes(room.id)
+  );
 
   const handleSubmit = () => {
     if (localStorage.getItem("isLogged") === "true") {
