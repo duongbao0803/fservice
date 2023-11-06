@@ -35,6 +35,7 @@ function Loginv2() {
   const session = useContext(Session);
   const navigate = useNavigate();
   const accesstoken = localStorage.getItem("accesstoken");
+  const refreshToken = localStorage.getItem("refreshtoken");
 
   useEffect(() => {
     if (accesstoken) {
@@ -56,9 +57,8 @@ function Loginv2() {
   }, []);
 
   const updateAccessToken = async () => {
-    const refreshToken = localStorage.getItem("refreshtoken");
     try {
-      const response = await sendRefreshToken(refreshToken);
+      const response = await sendRefreshToken(refreshToken, accesstoken);
       console.log("check accesstoken", response);
       if (response.status === 200) {
         const newAccessToken = response.data.accesstoken;

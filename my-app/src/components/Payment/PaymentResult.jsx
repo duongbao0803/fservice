@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import config from "../../utils/cus-axios";
 import { Payment } from "../../services/UserService";
 import axios from "axios";
+import { Spinner } from "react-bootstrap";
 
 export default function PaymentResult(props) {
   const [paymentData, setPaymentData] = useState({});
@@ -60,8 +61,10 @@ export default function PaymentResult(props) {
   postPaymentData();
 
   return (
-    <div>
-      <h1>Payment processing...</h1>
+    <div style={{ minHeight: "100vh" }}>
+      <div className="text-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
     </div>
   );
 }

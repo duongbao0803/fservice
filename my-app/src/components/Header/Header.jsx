@@ -125,7 +125,7 @@ function Header() {
         pauseOnHover={false}
         style={{
           top: "3em",
-          zIndex: 1,
+          zIndex: 2,
         }}
       />
     </>

@@ -62,7 +62,7 @@ function Rightbar({ id, buildingName, roomNo }) {
   console.log("check building", buildingName);
 
   return (
-    <div className="right-bar-details">
+    <div className="right-bar-details mb-5">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
       <div className="right_bar-details-main" style={{ padding: "20px" }}>
         <div className="chooseHouse-details pb-3">

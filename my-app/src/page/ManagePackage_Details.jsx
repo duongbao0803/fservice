@@ -7,12 +7,11 @@ import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Detai
 import { useLocation, useParams } from "react-router-dom";
 
 function ManagePackage_Details() {
-
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const buildingName = searchParams.get("buildingName");
   const roomNo = searchParams.get("roomNo");
-  const {id} = useParams();
+  const { id } = useParams();
 
   console.log("check id", id);
   return (
@@ -24,7 +23,11 @@ function ManagePackage_Details() {
             <Leftbar />
           </div>
           <div class="col-md-12 col-sm-12 col-lg-9">
-            <Rightbar_Details id = {id} buildingName = {buildingName} roomNo = {roomNo}/>
+            <Rightbar_Details
+              id={id}
+              buildingName={buildingName}
+              roomNo={roomNo}
+            />
           </div>
         </div>
       </div>
