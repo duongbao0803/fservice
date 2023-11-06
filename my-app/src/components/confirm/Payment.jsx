@@ -6,21 +6,7 @@ import { useEffect } from "react";
 // import PriceFormat from "../PackageDetails/PriceFormat";
 
 export default function Payment(props) {
-  const [paymentData, setPaymentData] = useState({});
-  const location = useLocation();
-  console.log("check location:", location);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams();
-    console.log("check queryParams success", queryParams);
-
-    const parsedData = {};
-    queryParams.forEach((value, key) => {
-      parsedData[key] = value;
-    });
-    setPaymentData(parsedData);
-  }, []);
-  console.log("check data: ", paymentData);
 
   const payment = async () => {
     try {
@@ -45,12 +31,12 @@ export default function Payment(props) {
             <tbody>
               <tr>
                 <td>Ngày đặt dịch vụ</td>
-                {/* <td> {props.state.orderDate} </td> */}
+                <td> {props.state.orderDate} </td>
               </tr>
               <tr>
                 <td>Số tiền</td>
                 <td>
-                  {/* <PriceFormat price={props.state.price} /> */}
+                  <PriceFormat price={props.state.price} />
                   {/* {props.state.price} */}
                 </td>
               </tr>

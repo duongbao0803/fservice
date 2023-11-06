@@ -33,6 +33,7 @@ const Frame = () => {
       // Choose price
       const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
+      setPackageName(res.data.name);
 
       const prices = price.map((typePrice) => (
 
@@ -71,12 +72,14 @@ const Frame = () => {
   };
 
   // filter package
-  const packageTypeIds = price.map((price) => price.typeId);
-  const filterPackagePrice = room.filter((room) => packageTypeIds.includes(room.id));
+  // const packageTypeIds = price.map((price) => price.typeId);
+  // const filterPackagePrice = room.filter((room) => packageTypeIds.includes(room.id));
 
   const handleSubmit = () => {
+    console.log("check name: ", packageName);
     if (localStorage.getItem("isLogged") === "true") {
       navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
+
     } else {
       navigate("/authen");
       toast.warning("You must login before ordering package");
@@ -112,7 +115,7 @@ const Frame = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterPackagePrice.map((room, index) => (
+                  {room.map((room, index) => (
                     <tr>
                       <td style={style}>{room.building.name}</td>
                       <td style={style}>{room.type}</td>

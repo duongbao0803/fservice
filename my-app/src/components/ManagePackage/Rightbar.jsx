@@ -77,7 +77,7 @@ function Rightbar() {
   const fetchApartmentPackage = async (id) => {
     try {
       let response = await config.get(
-        `/api/apartment-packages/apartment${id}`
+        `https://fservices.azurewebsites.net/api/apartment-packages/apartment${id}`
       );
       console.log("check apartment package:", response);
       if (response.status == 200 && response.data){
@@ -98,7 +98,7 @@ function Rightbar() {
           <div className="choose">
             {apartments.map((apartment, index) => (
               <a 
-                onClick={fetchApartmentPackage(apartment.id)}
+                onClick={() => fetchApartmentPackage(apartment.id)}
                 style={{ padding: "0 10px" }}>
                 {apartment.type.building.name} - {apartment.roomNo}
               </a>
