@@ -186,6 +186,7 @@ function Rightbar() {
                   color: "#ff7800",
                   fontWeight: "700",
                   paddingLeft: "10px",
+                  pointerEvents: "none",
                 }}
               >
                 VUI LÒNG CHỌN CĂN HỘ

@@ -35,7 +35,9 @@ function Loginv2() {
   const session = useContext(Session);
   const navigate = useNavigate();
   const accesstoken = localStorage.getItem("accesstoken");
+  console.log("chec acc", accesstoken);
   const refreshToken = localStorage.getItem("refreshtoken");
+  console.log("chec re", refreshToken);
 
   useEffect(() => {
     if (accesstoken) {
