@@ -79,6 +79,8 @@ const Order = () => {
       },
     });
   };
+
+  console.log("Check domain", localHostDomain);
   // Get LocalHostDomain
   const getLocalhostDomain = () => {
     const { protocol, hostname, port } = window.location;
