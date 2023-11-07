@@ -76,7 +76,7 @@ const AppRoutes = () => {
           element={<ManagePackage />}
         />
         <Route
-          path="/user/managePackage-detail/:id"
+          path="/user/managepackage/:id"
           element={<ManagePackage_Details />}
         />
         <Route

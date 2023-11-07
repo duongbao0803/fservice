@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: #f2f6fa;
 }
 
@@ -10,7 +10,7 @@ body {
     color: #ff8228;
 }
 
-/* .left-bar .info-buiding:hover {
+.left-bar .info-buiding:hover {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
@@ -38,14 +38,14 @@ body {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
-} */
+}
 
 .main_info-list .user {
     line-height: 45px;
     padding: 0 20px 0 15px;
     border: 1px solid #f2f6fa;
     cursor: pointer;
-}
+} */
 
 .right_bar-main {
     background-color: #fff;
@@ -100,8 +100,8 @@ body {
 .user_info-table tr:last-child button:last-child {
     background-color: #ffc9a3;
     color: black;
-    font-weight: 600;
-    padding: 0 20px;
+    font-weight: 400;
+    padding: 3px 20px;
     margin-bottom: 20px;
 }
 

@@ -177,7 +177,7 @@ function Rightbar({ id, buildingName, roomNo }) {
               style={{ marginTop: "10px" }}
             >
               <button>
-                <Link to="/user">Quay về</Link>
+                <Link to="/user/manage-package">Quay về</Link>
               </button>
             </div>
           </div>

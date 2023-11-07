@@ -122,7 +122,7 @@ function Rightbar() {
                         <div className="button d-flex justify-content-end">
                           <button onClick={() => showModal()}>
                             <Link
-                              to={`/user/managePackage-detail/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
+                              to={`/user/managepackage/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
                             >
                               Xem chi tiết
                             </Link>

@@ -1,4 +1,4 @@
-body {
+/* body {
   background-color: #f2f6fa;
 }
 
@@ -23,7 +23,7 @@ body {
   border: 1px solid #ff8228;
 }
 
-/* .left-bar .info-package:hover {
+.left-bar .info-package:hover {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
@@ -39,7 +39,7 @@ body {
     background-color: #f8e2db;
     border-radius: 10px;
     border: 1px solid #ff8228;
-  } */
+  }
 
 .left-bar .logout:hover {
   background-color: #f8e2db;
@@ -52,7 +52,9 @@ body {
   padding: 0 20px 0 15px;
   border: 1px solid #f2f6fa;
   cursor: pointer;
-}
+} */
+
+/* ----------- */
 
 .right_bar-main {
   background-color: #fff;

@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -51,7 +51,7 @@ body {
   background-color: #f8e2db;
   border-radius: 10px;
   border: 1px solid #ff8228;
-}
+} */
 .right-bar_house {
   font-family: Arial, sans-serif;
   padding: 20px;

@@ -5,7 +5,7 @@ function Location() {
       <div className="container">
         {/* title */}
         <div className="location d-flex mb-1">
-          <p style={{marginRight: '20px'}}>
+          <p style={{marginRight: '20px', fontWeight:'600'}}>
             <i className="fa-solid fa-house mr-2" style={{ color: "#ff8228" }} />
             Trang chủ
           </p>

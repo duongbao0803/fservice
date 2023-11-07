@@ -1,13 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Session } from "../../App";
-import config from "../../utils/cus-axios";
 
 function Leftbar() {
   const session = useContext(Session);
