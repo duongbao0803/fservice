@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f2f6fa;
+}
+
+.first-line_house {
+  margin-bottom: 50px;
+}
+
+.main_info-list_house .user {
+  line-height: 45px;
+  padding: 0 20px 0 15px;
+  border: 1px solid #f2f6fa;
+  cursor: pointer;
+}
+
+.left-bar_house.user i {
+  color: #ff8228;
+}
+
+.left-bar_house .info-buiding:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar_house .info-package:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar_house .info-order:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar_house .info-account:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+
+.left-bar_house .logout:hover {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228;
+}
+.right-bar_house {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.row_house {
+  /* display: flex; */
+  /* align-items: center; */
+  padding: 20px 0;
+  background: white;
+
+}
+
+.house-info {
+  padding: 10px;
+  /* margin: 20px; */
+  /* border: 1px solid #FFA15D; */
+  
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.house-info .house-box {
+  border: 1px solid #FFA15D;
+  border-radius: 8px;
+}
+
+.fa-solid.fa-house {
+  margin-right: 10px;
+}
+
+.house_info-address table {
+  width: 100%;
+}
+
+.house_info-address td {
+  padding: 5px 0;
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #FFEBE1;
+  height: 100%;
+  padding: 10px;
+}
+

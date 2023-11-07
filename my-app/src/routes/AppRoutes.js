@@ -20,6 +20,7 @@ import PaymentResult from "../components/Payment/PaymentResult";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
 import ManagePackage from "../page/ManagePackage";
+import ManageHouse from "../page/ManageHouse";
 import UserPage from "../page/UserPage";
 
 const AppRoutes = () => {
@@ -43,7 +44,7 @@ const AppRoutes = () => {
           element={
             <PrivateRoute allowedRole={["USER"]}>
               {/* Route con dành cho vai trò "USER" */}
-              <ManagePackage />
+              <ManageHouse />
               {/* <ManagePackage_Use />
               <ManagePackage_Details/> */}
             </PrivateRoute>
@@ -69,6 +70,10 @@ const AppRoutes = () => {
         <Route
           path="/user/managePackage-detail/:id"
           element={<ManagePackage_Details />}
+        />
+        <Route
+          path="/user/manage-package"
+          element={<ManagePackage />}
         />
         <Route
           path="/user/managePackage-detail/:id"
