@@ -50,10 +50,12 @@ function Leftbar() {
       </div>
       <div className="main_info-list">
         <div className="user info-buiding">
-          <span>
-            <i className="fa-solid fa-building" />
-            &nbsp;&nbsp;Căn hộ của bạn
-          </span>
+          <Link to={`/user/manage-house`}>
+            <span>
+              <i className="fa-solid fa-building" />
+              &nbsp;&nbsp;Căn hộ của bạn
+            </span>
+          </Link>
         </div>
         <div className="user info-package active-menu">
           <span>
