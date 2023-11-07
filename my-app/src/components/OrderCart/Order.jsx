@@ -83,7 +83,6 @@ const Order = () => {
   const getLocalhostDomain = () => {
     const { protocol, hostname, port } = window.location;
     const domain = `${protocol}//${hostname}:${port}/payment`;
-
     return domain;
   };
 
@@ -346,21 +345,54 @@ const Order = () => {
                     <strong>Chọn phương thức thanh toán</strong>
                   </p>
                   <div className="pay-by-cash">
-                    <input type="radio" />
-                    <img
-                      src={require("../../assets/img/logoVNPAY_thanhtoan.png")}
-                      alt=""
-                      width="40px"
-                    />
-                    <span>Thanh toán bằng VNPAY</span>
+                    <div className="form-check" style={{ padding: "0" }}>
+                      <input
+                        required
+                        className="check-box"
+                        type="radio"
+                        defaultValue
+                        id="defaultCheck"
+                      />
+                      <img
+                        src={require("../../assets/img/logoVNPAY_thanhtoan.png")}
+                        alt=""
+                        width="40px"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="defaultCheck"
+                      >
+                        <span>Thanh toán bằng VNPAY</span>
+                      </label>
+                    </div>
                   </div>
-                  <div className="confirm">
-                    <input type="checkbox" required />
-                    <span>
-                      Nhấn "Xác nhận" đồng nghĩa với việc bạn đã đồng ý với điều
-                      khoản dịch vụ của{" "}
-                      <span style={{ fontWeight: "900" }}>FService</span>
-                    </span>
+                  <div className="pay-by-cash">
+                    <div
+                      className="form-check"
+                      style={{
+                        padding: "0",
+                        display: "flex",
+                        gap: "10px",
+                      }}
+                    >
+                      <input
+                        required
+                        className="check-box"
+                        type="checkbox"
+                        defaultValue
+                        id="defaultCheck"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="defaultCheck"
+                      >
+                        <span>
+                          Nhấn "Xác nhận" đồng nghĩa với việc bạn đã đồng ý với
+                          điều khoản dịch vụ của{" "}
+                          <span style={{ fontWeight: "900" }}>FService</span>
+                        </span>
+                      </label>
+                    </div>
                   </div>
                   <div className="order-confirm">
                     <button type="submit">

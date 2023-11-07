@@ -68,9 +68,9 @@ td:nth-child(4) {
   padding: 10px;
 }
 
-.apartment-package {
+/* .apartment-package {
   min-height: 300px;
-}
+} */
 
 .orderedPackage {
   border: 2px solid #ff8228;

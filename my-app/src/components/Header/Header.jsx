@@ -26,7 +26,7 @@ function Header() {
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("name");
     session.setUser(null);
-    toast.success("Logout Success");
+    toast.success("Đăng xuất thành công");
     navigate("/authen");
   };
 
@@ -125,7 +125,7 @@ function Header() {
         pauseOnHover={false}
         style={{
           top: "3em",
-          zIndex: 1,
+          zIndex: 2,
         }}
       />
     </>

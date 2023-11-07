@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import config from "../../utils/cus-axios";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -22,12 +22,10 @@ function createData(serviceName, quantity, used, remaining, action) {
 //   createData('Vệ sinh máy lạnh', 1, 1, 0, 'Mua thêm'),
 // ];
 
-
 function Rightbar({ id, buildingName, roomNo }) {
-
   useEffect(() => {
-    apartmentPackage()
-  }, [])
+    apartmentPackage();
+  }, []);
 
   const [apmPackage, setApmPackage] = useState({});
   const [apmPackageService, setApmPackageService] = useState([]);
@@ -40,16 +38,13 @@ function Rightbar({ id, buildingName, roomNo }) {
       setApmPackage(res.data);
       setApmPackageService(res.data.apartmentPackageServices);
       setcurrentPackage(res.data.package);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-
-  }
+  };
 
   const rows = apmPackageService.map((apmPackage) => {
-
-    const status = (apmPackage.remainQuantity !== 0) ? 'Sử dụng' : 'Mua thêm';
+    const status = apmPackage.remainQuantity !== 0 ? "Sử dụng" : "Mua thêm";
 
     return createData(
       apmPackage.service.name,
@@ -60,15 +55,21 @@ function Rightbar({ id, buildingName, roomNo }) {
     );
   });
 
+  // const handleClose = () => {
+  //   setShowModal(false);
+  // };
+
+  console.log("check building", buildingName);
 
   return (
-
-    <div className="right-bar-details">
+    <div className="right-bar-details mb-5">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
-      <div className="right_bar-details-main" style={{ padding: '20px' }}>
+      <div className="right_bar-details-main" style={{ padding: "20px" }}>
         <div className="chooseHouse-details pb-3">
           <div className="choose">
-            <a href style={{ borderBottom: '3px solid #ff8228' }}>{buildingName} - {roomNo}</a>
+            <a href style={{ borderBottom: "3px solid #ff8228" }}>
+              {buildingName} - {roomNo}
+            </a>
           </div>
           <div className="orderedPackage-details">
             <div className="orderedPackage-details_main d-flex justify-content-between">
@@ -89,48 +90,57 @@ function Rightbar({ id, buildingName, roomNo }) {
             </div>
             <div className="info-ordered-details">
               <table className="info_ordered-details-table">
-                <tbody><tr />
+                <tbody>
+                  <tr />
                   <tr />
                   <tr>
                     <td>Căn hộ:</td>
-                    <td>{buildingName} - {roomNo} - Vinhomes Grand Park</td>
+                    <td>
+                      {buildingName} - {roomNo} - Vinhomes Grand Park
+                    </td>
                   </tr>
 
                   <tr>
                     <td>Áp dụng từ:</td>
-                    <td>{formatDate(apmPackage.startDate)} - {formatDate(apmPackage.endDate)}</td>
-
+                    <td>
+                      {formatDate(apmPackage.startDate)} -{" "}
+                      {formatDate(apmPackage.endDate)}
+                    </td>
                   </tr>
+                </tbody>
+              </table>
 
-                </tbody></table>
               <div className="choose-details_table">
                 <tr>
                   <td>
-                    <span style={{ borderBottom: '3px solid #ff8228' }}>Dịch vụ</span>
+                    <span style={{ borderBottom: "3px solid #ff8228" }}>
+                      Dịch vụ
+                    </span>
                   </td>
                   <td>
                     <span> Sử dụng</span>
                   </td>
                 </tr>
-
               </div>
-              <TableContainer component={Paper} style={{ boxShadow: 'none' }}>
-                <Table sx={{
+              <TableContainer component={Paper} style={{ boxShadow: "none" }}>
+                <Table
+                  sx={{
+                    minWidth: 650,
 
-                  minWidth: 650,
-
-                  '& .MuiTableCell-root': {
-                    borderBottom: 'none',
-                    backgroundColor: 'transparent',
-                  },
-                  '& .MuiTableHead-root .MuiTableCell-root': {
-                    borderBottom: 'none',
-                    backgroundColor: 'transparent',
-
-                  },
-                  borderCollapse: 'separate',
-                  borderSpacing: '0',
-                }} size="small" aria-label="a dense table">
+                    "& .MuiTableCell-root": {
+                      borderBottom: "none",
+                      backgroundColor: "transparent",
+                    },
+                    "& .MuiTableHead-root .MuiTableCell-root": {
+                      borderBottom: "none",
+                      backgroundColor: "transparent",
+                    },
+                    borderCollapse: "separate",
+                    borderSpacing: "0",
+                  }}
+                  size="small"
+                  aria-label="a dense table"
+                >
                   <TableHead>
                     <TableRow>
                       <TableCell>Tên dịch vụ</TableCell>
@@ -143,12 +153,16 @@ function Rightbar({ id, buildingName, roomNo }) {
                   <TableBody>
                     {rows.map((row) => (
                       <TableRow key={row.serviceName}>
-                        <TableCell component="th" scope="row">{row.serviceName}</TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.serviceName}
+                        </TableCell>
                         <TableCell align="right">{row.quantity}</TableCell>
                         <TableCell align="right">{row.used}</TableCell>
                         <TableCell align="right">{row.remaining}</TableCell>
                         {apmPackage.packageStatus === "Active" ? (
-                          <TableCell align="right" className="action">{row.action}</TableCell>
+                          <TableCell align="right" className="action">
+                            {row.action}
+                          </TableCell>
                         ) : (
                           <span></span>
                         )}
@@ -157,23 +171,21 @@ function Rightbar({ id, buildingName, roomNo }) {
                   </TableBody>
                 </Table>
               </TableContainer>
-
             </div>
-            <div className="button-details d-flex justify-content-end" style={{ marginTop: '10px' }}>
+            <div
+              className="button-details d-flex justify-content-end"
+              style={{ marginTop: "10px" }}
+            >
               <button>
                 <Link to="/user">Quay về</Link>
               </button>
             </div>
           </div>
-
         </div>
+
+        {/* <UsingModal handleClose={handleClose} show={show}></UsingModal> */}
       </div>
-
-
     </div>
-
-
-
   );
 }
 

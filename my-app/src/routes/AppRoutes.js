@@ -70,8 +70,6 @@ const AppRoutes = () => {
           element={<ManagePackage_Details />}
         />
 
-        {/* ManagePackage_Details */}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -27,13 +27,17 @@ const fetchUser = (page) => {
 };
 
 const loginAPI = (email, password) => {
-  // let dmm = {};
-  // dmm = refreshdata();
   return config.post("/api/authentication/SignIn", { email, password });
 };
 
-const sendRefreshToken = () => {
-  return config.post("/api/authentication/Refresh-token");
+const sendRefreshToken = (aToken, rToken) => {
+  const refreshedConfig = refreshData();
+  return config.post(
+    "/api/authentication/Refresh-token",
+    aToken,
+    rToken,
+    refreshedConfig
+  );
 };
 
 const signUp = (userData) => {
@@ -65,7 +69,7 @@ const getApartment = (apartment) => {
 
 const getApartmentPackage = (id) => {
   const refreshedConfig = refreshData();
-  return config.get(`/api/apartment-packages/apartment?${id}`, refreshedConfig);
+  return config.get(`/api/apartment-packages/apartment${id}`, refreshedConfig);
 };
 
 export {
