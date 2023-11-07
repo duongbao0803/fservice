@@ -42,10 +42,21 @@ const Order = () => {
     const day = String(currentDate.getDate()).padStart(2, "0");
     const updateFormattedEndDate = `${year}-${month}-${day}`;
     setEndDate(updateFormattedEndDate);
-    const localhostDomain = getLocalhostDomain();
-    setLocalHostDomain(localhostDomain);
+    // const localhostDomain = getLocalhostDomain();
+    // setLocalHostDomain(localhostDomain);
   }, []);
-  //const localHostDomain = "https://fservices.vercel.app";
+
+  const [currentHostWithPayment, setCurrentHostWithPayment] = useState('');
+
+  useEffect(() => {
+    const currentHost = window.location.origin;
+    const hostWithPayment = `${currentHost}/payment`;
+    setCurrentHostWithPayment(hostWithPayment);
+  }, []);
+ 
+console.log("check current hót", currentHostWithPayment);
+
+
   const formData = {
     apartmentId: apartmentId,
     packageId: packageId,
@@ -53,7 +64,7 @@ const Order = () => {
     type: "normal",
     paymentMethod: "VNPAY",
     startDate: startDate,
-    CallBackUrl: localHostDomain,
+    CallBackUrl: currentHostWithPayment,
     customerName: localStorage.getItem("name"),
     phone: localStorage.getItem("phoneNumber"),
     userName: localStorage.getItem("username"),
@@ -75,21 +86,15 @@ const Order = () => {
         TypeRoomForSelectedHouse,
         price,
         orderDate,
-        localHostDomain,
+        currentHostWithPayment,
       },
     });
   };
 
 
   // Get LocalHostDomain
-  const getLocalhostDomain = () => {
-    const { protocol, hostname, port } = window.location;
-    const domain = `${protocol}//${hostname}:${port}/payment`;
-    return domain;
-  };
 
-console.log("check domain", localHostDomain);
-
+// console.log("check domain", localhostDomain);
   // Get Info Student's House
   const fetchHouse = async () => {
     try {
