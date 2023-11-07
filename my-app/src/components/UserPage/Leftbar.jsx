@@ -45,21 +45,26 @@ function Leftbar() {
   return (
     <div className="left-bar">
       <div className="main-info mb-4">
-        <img src="./img/fb_logo.png" alt="" width="50px" />
+        <img src={require("../../assets/img/siunhando.jpg")} alt="" width="50px" height="50px" style={{ marginRight: "8px", borderRadius: "50%" }} />
         <span>{localStorage.getItem("username")}</span>
       </div>
       <div className="main_info-list">
-        <div className="user info-buiding">
-          <span>
-            <i className="fa-solid fa-building" />
-            &nbsp;&nbsp;Căn hộ của bạn
-          </span>
+        <div className="user info-buiding active-menu">
+          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user`}>
+            <span>
+              <i className="fa-solid fa-building" />
+              &nbsp;&nbsp;Căn hộ của bạn
+            </span>
+          </Link>
         </div>
-        <div className="user info-package active-menu">
-          <span>
-            <i className="fa-solid fa-box-archive" />
-            &nbsp;&nbsp;Gói dịch vụ
-          </span>
+        <div className="user info-package">
+          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user/manage-package`}>
+            <span>
+              <i className="fa-solid fa-box-archive" />
+              &nbsp;&nbsp;Gói dịch vụ
+            </span>
+          </Link>
+
         </div>
         <div className="user info-order">
           <span>

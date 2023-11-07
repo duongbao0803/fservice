@@ -2,7 +2,7 @@ import React from "react";
 import Location from "../components/ManagePackage/Location";
 
 import "../assets/css/styleMP_Details.css";
-import Leftbar from "../components/ManagePackage/Leftbar";
+import Leftbar from "../components/UserPage/Leftbar";
 import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
 import { useLocation, useParams } from "react-router-dom";
 

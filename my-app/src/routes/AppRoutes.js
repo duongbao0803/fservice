@@ -20,6 +20,7 @@ import PaymentResult from "../components/Payment/PaymentResult";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
 import ManagePackage from "../page/ManagePackage";
+import UserPage from "../page/UserPage";
 
 const AppRoutes = () => {
   return (
@@ -68,6 +69,14 @@ const AppRoutes = () => {
         <Route
           path="/user/managePackage-detail/:id"
           element={<ManagePackage_Details />}
+        />
+        <Route
+          path="/user/managePackage-detail/:id"
+          element={<ManagePackage_Details />}
+        />
+        <Route
+          path="/user/info"
+          element={<UserPage />}
         />
 
         <Route path="*" element={<NotFound />} />

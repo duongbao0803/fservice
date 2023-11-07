@@ -1,20 +1,19 @@
 import React from "react";
-import Location from "../components/ManagePackage/Location";
-
 import "../assets/css/stylemanagePackage.css";
 import Leftbar from "../components/UserPage/Leftbar";
-import Rightbar from "../components/ManagePackage/Rightbar";
-function ManagePackage() {
+import UserInfo from "../components/UserPage/UserInfo";
+import "../assets/css/styleUserInfo.css";
+
+function UserPage() {
   return (
     <>
-      <Location />
       <div className="container" style={{ minHeight: "100vh" }}>
         <div className="row">
           <div class="col-md-12 col-sm-12 col-lg-3">
             <Leftbar />
           </div>
           <div class="col-md-12 col-sm-12 col-lg-9">
-            <Rightbar />
+            <UserInfo/>
           </div>
         </div>
       </div>
@@ -22,4 +21,4 @@ function ManagePackage() {
   );
 }
 
-export default ManagePackage;
+export default UserPage;
