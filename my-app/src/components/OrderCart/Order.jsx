@@ -79,12 +79,16 @@ const Order = () => {
       },
     });
   };
+
+
   // Get LocalHostDomain
   const getLocalhostDomain = () => {
     const { protocol, hostname, port } = window.location;
     const domain = `${protocol}//${hostname}:${port}/payment`;
     return domain;
   };
+
+console.log("check domain", localHostDomain);
 
   // Get Info Student's House
   const fetchHouse = async () => {
