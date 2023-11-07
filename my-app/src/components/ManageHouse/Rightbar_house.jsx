@@ -33,10 +33,12 @@ function Rightbar_house() {
         <div className="container">
             <div className="right-bar_house">
                 <h5 className="mb-4">Căn hộ của bạn</h5>
-                <div className="row right_bar-main_house">
-                    <div className="col-md-4 row_house">
-                            {apartments.map((apartment) => (
-                                <div className="house-info">
+                <div className="row">
+                    {/* <div className=""> */}
+                    {apartments.map((apartment) => (
+                        <div className="col-md-6 house-info">
+                            <div className="house-box">
+                                <div style={{padding:"10px"}}>
                                     <p className="fw-bold">
                                         <i className="fa-solid fa-house" style={{ color: '#ff8228' }} />
                                         {apartment.type.building.name} - {apartment.roomNo}
@@ -45,16 +47,16 @@ function Rightbar_house() {
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    <td>Địa chỉ:</td>
+                                                    <th>Địa chỉ:</th>
                                                     <td>{apartment.type.building.name} - Vinhomes Grand Park</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Loại:</td>
+                                                    <th>Loại:</th>
                                                     <td>{apartment.type.type}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <Link to="/managepackage" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                                        <Link to="/managepackage" style={{ color: 'inherit'}}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <ArrowForwardIcon style={{ marginRight: '8px', color: '#ff8228' }} />
                                                 <span>Gói dịch vụ đang sử dụng</span>
@@ -62,15 +64,18 @@ function Rightbar_house() {
                                         </Link>
                                     </div>
                                 </div>
-                            ))}
-                            <div className='col-md-4'>
-                                <div className="icon-box">
-                                    {/* You can place your '+' icon SVG or Font Awesome icon here */}
-                                    <AddCircleOutlineIcon style={{ color: '#FFA15D' }}></AddCircleOutlineIcon>
-                                </div>
+
                             </div>
 
+                        </div>
+                    ))}
+                    <div className='col-md-6'>
+                        <div className="icon-box">
+                            <AddCircleOutlineIcon style={{ color: '#FFA15D' }}></AddCircleOutlineIcon>
+                        </div>
                     </div>
+
+                    {/* </div> */}
                 </div>
             </div>
         </div>

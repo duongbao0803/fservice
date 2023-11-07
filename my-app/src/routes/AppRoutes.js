@@ -43,7 +43,7 @@ const AppRoutes = () => {
           element={
             <PrivateRoute allowedRole={["USER"]}>
               {/* Route con dành cho vai trò "USER" */}
-              <ManagePackage />
+              <ManageHouse />
               {/* <ManagePackage_Use />
               <ManagePackage_Details/> */}
             </PrivateRoute>
@@ -71,8 +71,8 @@ const AppRoutes = () => {
           element={<ManagePackage_Details />}
         />
         <Route
-          path="/user/manage-house"
-          element={<ManageHouse />}
+          path="/user/manage-package"
+          element={<ManagePackage />}
         />
 
         <Route path="*" element={<NotFound />} />

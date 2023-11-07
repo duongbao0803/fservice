@@ -1,5 +1,5 @@
 import React from "react";
-import Location_house from "../components/ManageHouse/Location_house";
+import Location from "../components/ManagePackage/Location";
 
 import '../assets/css/stylemanageHouse.css'
 import Leftbar from "../components/ManagePackage/Leftbar";
@@ -7,7 +7,7 @@ import Rightbar_house from "../components/ManageHouse/Rightbar_house"
 function ManageHouse() {
     return (
         <>
-         <Location_house />
+         <Location />
             <div className="container">
                 <div className="row">
                 <div class="col-md-12 col-sm-12 col-lg-3">
