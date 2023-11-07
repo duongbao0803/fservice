@@ -26,8 +26,10 @@ const Order = () => {
   const [endDate, setEndDate] = useState("");
   const [paymentUrl, setPaymentUrl] = useState("");
   const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
-  const instead = 0;
   const username = localStorage.getItem("username");
+  const [currentHostWithPayment, setCurrentHostWithPayment] = useState('');
+  const instead = 0;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,19 +44,15 @@ const Order = () => {
     const day = String(currentDate.getDate()).padStart(2, "0");
     const updateFormattedEndDate = `${year}-${month}-${day}`;
     setEndDate(updateFormattedEndDate);
-    // const localhostDomain = getLocalhostDomain();
-    // setLocalHostDomain(localhostDomain);
-  }, []);
-
-  const [currentHostWithPayment, setCurrentHostWithPayment] = useState('');
-
-  useEffect(() => {
+    //Get current host
     const currentHost = window.location.origin;
     const hostWithPayment = `${currentHost}/payment`;
     setCurrentHostWithPayment(hostWithPayment);
   }, []);
- 
-console.log("check current hót", currentHostWithPayment);
+
+
+
+  console.log("check current hót", currentHostWithPayment);
 
 
   const formData = {
@@ -92,9 +90,6 @@ console.log("check current hót", currentHostWithPayment);
   };
 
 
-  // Get LocalHostDomain
-
-// console.log("check domain", localhostDomain);
   // Get Info Student's House
   const fetchHouse = async () => {
     try {
