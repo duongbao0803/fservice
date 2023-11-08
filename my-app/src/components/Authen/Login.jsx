@@ -63,7 +63,7 @@ function Loginv2() {
       let res = await loginAPI(email, password);
       if (res.status !== 401 && res.status !== 400) {
         if (res && res.data && res.data.status === true) {
-          session.setUser(res.data);
+          // session.setUser(res.data);
           const jwtToken = res.data.jwtToken;
           const jwtRefreshToken = res.data.jwtRefreshToken;
           if (jwtToken) {
@@ -80,7 +80,6 @@ function Loginv2() {
             localStorage.setItem("isLogged", isLogged);
             localStorage.setItem("username", userName);
             localStorage.setItem("role", role);
-
             localStorage.setItem("accesstoken", jwtToken);
             localStorage.setItem("refreshtoken", jwtRefreshToken);
 

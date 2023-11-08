@@ -1,14 +1,12 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
-
+import { useContext } from "react";
 import { toast } from "react-toastify";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Session } from "../../App";
 
 function Leftbar() {
-  const session = useContext(Session);
-  // const user = session.user;
+  // const session = useContext(Session);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -19,7 +17,9 @@ function Leftbar() {
     localStorage.removeItem("username");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("name");
-    session.setUser(null);
+    localStorage.removeItem("date");
+
+    // session.setUser(null);
     toast.success("Đăng xuất thành công");
     navigate("/authen");
   };

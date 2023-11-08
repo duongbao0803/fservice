@@ -15,13 +15,6 @@ function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
 }
 
-// const rows = [
-//   createData('Tổng vệ sinh nhà cửa', 9, 0, 9, 'Sử dụng'),
-//   createData('Giặt ủi quần áo', 6, 0, 6, 'Sử dụng'),
-//   createData('Giao nước', 4, 3, 1, 'Sử dụng'),
-//   createData('Vệ sinh máy lạnh', 1, 1, 0, 'Mua thêm'),
-// ];
-
 function Rightbar({ id, buildingName, roomNo }) {
   useEffect(() => {
     apartmentPackage();

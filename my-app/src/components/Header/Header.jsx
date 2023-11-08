@@ -12,7 +12,6 @@ import "../Header/styleHeader.css";
 import { Session } from "../../App";
 
 function Header() {
-  const session = useContext(Session);
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ function Header() {
     localStorage.removeItem("username");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("name");
-    session.setUser(null);
     toast.success("Đăng xuất thành công");
     navigate("/authen");
   };

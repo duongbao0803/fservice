@@ -22,6 +22,7 @@ import ManagePackage_Use from "../page/ManagePackage_Use";
 import ManagePackage from "../page/ManagePackage";
 import ManageHouse from "../page/ManageHouse";
 import UserPage from "../page/UserPage";
+import Rightbar from "../components/ManagePackage/Rightbar";
 
 const AppRoutes = () => {
   return (
@@ -67,18 +68,18 @@ const AppRoutes = () => {
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
         <Route path="/payment/error" element={<PaymentError />} />
-        <Route
-          path="/user/manage-package"
-          element={<ManagePackage />}
-        />
+        <Route path="/user/manage-package" element={<ManagePackage />}>
+          <Route
+            path="/user/manage-package/apartment/:id"
+            element={<Rightbar />}
+          />
+        </Route>
+
         <Route
           path="/user/manage-package/:id"
           element={<ManagePackage_Details />}
         />
-        <Route
-          path="/user/info"
-          element={<UserPage />}
-        />
+        <Route path="/user/info" element={<UserPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

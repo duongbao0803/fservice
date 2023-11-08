@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
   const [nameData, setNameData] = useState(null);
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setApartmentData] = useState([]);
-  // const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
@@ -60,12 +59,13 @@ function Rightbar() {
         <div className="chooseHouse ">
           <div className="choose">
             {apartments.map((apartment, index) => (
-              <a
+              <NavLink
+                to={`/user/manage-package/apartment/${apartment.id}`}
                 onClick={() => handleApartmentClick(apartment)}
                 style={{ padding: "0 10px" }}
               >
                 {apartment.type.building.name} - {apartment.roomNo}
-              </a>
+              </NavLink>
             ))}
           </div>
           <div className="apartment-package">

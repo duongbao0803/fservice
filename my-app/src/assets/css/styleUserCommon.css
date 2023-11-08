@@ -35,40 +35,11 @@ body {
   padding: 3px 10px;
   text-decoration: none;
   color: #000000;
-  /* border: 1px solid #000000; */
   width: 100%;
 }
 
 .main_info-list .user :hover {
-  display: block;
   text-decoration: none;
   background-color: #f8e2db;
   border-radius: 10px;
-  /* border: 1px solid #ff8228; */
-  width: 100%;
 }
-
-
-/* .left-bar .info-package:hover {
-      background-color: #f8e2db;
-      border-radius: 10px;
-      border: 1px solid #ff8228;
-    }
-    
-    .left-bar .info-order:hover {
-      background-color: #f8e2db;
-      border-radius: 10px;
-      border: 1px solid #ff8228;
-    }
-    
-    .left-bar .info-account:hover {
-      background-color: #f8e2db;
-      border-radius: 10px;
-      border: 1px solid #ff8228;
-    } */
-
-/* .left-bar .logout:hover {
-    background-color: #f8e2db;
-    border-radius: 10px;
-    border: 1px solid #ff8228;
-  } */

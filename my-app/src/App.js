@@ -43,7 +43,6 @@ function App() {
         // Xử lý lỗi ở đây nếu cần
       }
     } catch (error) {
-      // Xử lý lỗi khi có lỗi trong quá trình gửi request
       console.log("Error rf", error);
     }
   };
@@ -57,6 +56,8 @@ function App() {
         setUser(res.data);
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("phoneNumber", res.data.phoneNumber);
+        localStorage.setItem("dateOfBirth", res.data.dateOfBirth);
+        localStorage.setItem("address", res.data.address);
       } else {
         console.log("error");
       }
@@ -65,11 +66,11 @@ function App() {
     }
   };
   return (
-    <Session.Provider value={{ user, setUser }}>
+    <>
       <Header />
       <AppRoutes />
       <Footer />
-    </Session.Provider>
+    </>
   );
 }
 
