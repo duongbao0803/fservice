@@ -68,15 +68,11 @@ const AppRoutes = () => {
         <Route path="/payment/error" element={<PaymentError />} />
         <Route path="/payment/error" element={<PaymentError />} />
         <Route
-          path="/user/managePackage-detail/:id"
-          element={<ManagePackage_Details />}
-        />
-        <Route
           path="/user/manage-package"
           element={<ManagePackage />}
         />
         <Route
-          path="/user/managepackage/:id"
+          path="/user/manage-package/:id"
           element={<ManagePackage_Details />}
         />
         <Route

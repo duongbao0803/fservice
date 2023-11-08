@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import config from "../../utils/cus-axios";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
 import { Link } from "react-router-dom";
@@ -122,7 +118,7 @@ function Rightbar() {
                         <div className="button d-flex justify-content-end">
                           <button onClick={() => showModal()}>
                             <Link
-                              to={`/user/managepackage/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
+                              to={`/user/manage-package/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
                             >
                               Xem chi tiết
                             </Link>

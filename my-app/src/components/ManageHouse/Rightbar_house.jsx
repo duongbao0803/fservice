@@ -48,15 +48,23 @@ function Rightbar_house() {
                                             <tbody>
                                                 <tr>
                                                     <th>Địa chỉ:</th>
-                                                    <td>{apartment.type.building.name} - Vinhomes Grand Park</td>
+                                                    <td>Toà {apartment.type.building.name} - Vinhomes Grand Park</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Loại:</th>
-                                                    <td>{apartment.type.type}</td>
+                                                    {apartment.type.type == "1 PN" ?
+                                                    (
+                                                        <td>1 Phòng ngủ</td>
+                                                    )
+                                                    :
+                                                    (
+                                                        <td>2 Phòng ngủ</td>
+                                                    )
+                                                    }
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <Link to="/managepackage" style={{ color: 'inherit'}}>
+                                        <Link to="/manage-package" style={{ color: 'inherit'}}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <ArrowForwardIcon style={{ marginRight: '8px', color: '#ff8228' }} />
                                                 <span>Gói dịch vụ đang sử dụng</span>

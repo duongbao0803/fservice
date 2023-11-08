@@ -48,9 +48,9 @@ function UserInfo() {
                                         <td>
                                             <input className="form-control" type="text" value={user.phoneNumber} />
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             <button>Cập nhật</button>
-                                        </td>
+                                        </td> */}
                                     </tr>
 
                                     <tr>
@@ -60,7 +60,7 @@ function UserInfo() {
                                 </table>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center">
+                        <div class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center mb-3 mt-3" style={{borderLeft:"3px solid #efefef"}}>
                             <div>
                                 <div className="text-center mb-3">
                                     <img
