@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { Launch } from "../../services/UserService";
 import { Session } from "../../App";
+import formatDate from "../../utils/tools";
 
 function UserInfo() {
 
@@ -9,8 +10,8 @@ function UserInfo() {
     const session = useContext(Session);
     console.log(session);
     const user = session.user;
-    const dateOfBirth = new Date(user.dateOfBirth).toLocaleDateString();
-    console.log(dateOfBirth);
+    // const dateOfBirth = new Date(user.dateOfBirth).toLocaleDateString();
+    // console.log(dateOfBirth);
 
     const fileInputRef = useRef(null);
 
@@ -39,28 +40,17 @@ function UserInfo() {
                                     <tr>
                                         <th>Ngày sinh:</th>
                                         <td>
-                                            <input className="form-control" type="text" name="" value={dateOfBirth}/>
+                                            <input className="form-control" type="text" name="" value={formatDate(user.dateOfBirth)}/>
                                         </td>
                                     </tr>
-                                    {/* <tr class="sex">
-                                        <th>Giới tính:</th>
-                                        <td>
-                                            <input type="radio" required=""
-                                                id="password-text" /><span> Nam</span>&nbsp;&nbsp;
-                                            <input type="radio" /><span> Nữ</span>&nbsp;&nbsp;
-                                            <input type="radio" /><span> Khác</span>
-
-                                        </td>
-                                    </tr> */}
-
                                     <tr>
                                         <th>Số điện thoại:</th>
                                         <td>
                                             <input className="form-control" type="text" value={user.phoneNumber} />
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             <button>Cập nhật</button>
-                                        </td>
+                                        </td> */}
                                     </tr>
 
                                     <tr>
@@ -70,7 +60,7 @@ function UserInfo() {
                                 </table>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center">
+                        <div class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center mb-3 mt-3" style={{borderLeft:"3px solid #efefef"}}>
                             <div>
                                 <div className="text-center mb-3">
                                     <img

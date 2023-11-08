@@ -1,13 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Session } from "../../App";
-import config from "../../utils/cus-axios";
 
 function Leftbar() {
   const session = useContext(Session);
@@ -29,19 +26,6 @@ function Leftbar() {
     navigate("/authen");
   };
 
-  const [apiData, setApiData] = useState(null);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await config.
-  //     setApiData(response.data);
-  //     alert(`Fetched data with ID: ${response.data.id}`);
-  // } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //     console.error("Error response:", error.response);
-  // }
-  // }
-
   return (
     <div className="left-bar">
       <div className="main-info mb-4">
@@ -49,40 +33,67 @@ function Leftbar() {
         <span>{localStorage.getItem("username")}</span>
       </div>
       <div className="main_info-list">
-        <div className="user info-buiding active-menu">
-          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user`}>
+        <div className="user">
+          <NavLink
+            to={"/user"} end
+            className={({ isActive }) =>
+              isActive ? "info active-menu" : "info"
+            }
+          >
             <span>
               <i className="fa-solid fa-building" />
               &nbsp;&nbsp;Căn hộ của bạn
             </span>
-          </Link>
-        </div>
-        <div className="user info-package">
-          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user/manage-package`}>
+          </NavLink>
+
+          <NavLink
+            to={"/user/manage-package"}
+            className={({ isActive }) =>
+              isActive ? "info active-menu" : "info"
+            }
+          >
             <span>
               <i className="fa-solid fa-box-archive" />
               &nbsp;&nbsp;Gói dịch vụ
             </span>
-          </Link>
+          </NavLink>
 
-        </div>
-        <div className="user info-order">
-          <span>
-            <i className="fa-regular fa-file" />
-            &nbsp;&nbsp;Quản lí đơn hàng
-          </span>
-        </div>
-        <div className="user info-account">
-          <span className="">
-            <i className="fa-regular fa-user" />
-            &nbsp;&nbsp;Thông tin tài khoản
-          </span>
-        </div>
-        <div className="user logout">
-          <span onClick={() => handleLogout()}>
-            <i className="fa-solid fa-arrow-right-from-bracket" />
-            &nbsp;&nbsp;Thoát
-          </span>
+          <NavLink
+            to={"/user/order"}
+            className={({ isActive }) =>
+              isActive ? "info active-menu" : "info"
+            }
+          >
+            <span>
+              <i className="fa-regular fa-file" />
+              &nbsp;&nbsp;Quản lí đơn hàng
+            </span>
+          </NavLink>
+
+          <NavLink
+            to={"/user/info"}
+            className={({ isActive }) =>
+              isActive ? "info active-menu" : "info"
+            }
+          >
+            <span className="">
+              <i className="fa-regular fa-user" />
+              &nbsp;&nbsp;Thông tin tài khoản
+            </span>
+          </NavLink>
+
+          <NavLink
+            to={"/authen"}
+            className={({ isActive }) =>
+              isActive ? "info active-menu" : "info"
+            }
+          >
+            <span onClick={() => handleLogout()}>
+              <i className="fa-solid fa-arrow-right-from-bracket" />
+              &nbsp;&nbsp;Thoát
+            </span>
+          </NavLink>
+
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Location from "../components/ManagePackage/Location";
+import Location from "../components/UserPage/Location";
 
 import "../assets/css/styleMP_Details.css";
 import Leftbar from "../components/UserPage/Leftbar";

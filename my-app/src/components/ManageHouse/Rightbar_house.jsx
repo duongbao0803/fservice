@@ -18,57 +18,81 @@ function Rightbar_house() {
     fetchApartment();
   }, [selectedApartment]);
 
-  const fetchApartment = async () => {
-    try {
-      let response = await getApartment(username);
-      console.log("check apartment:", response.data);
-      setApartmentData(response.data);
-    } catch (Error) {
-      console.log("error fetching: ", Error);
-    }
-  };
+  // const fetchApartment = async () => {
+  //   try {
+  //     let response = await getApartment(username);
+  //     console.log("check apartment:", response.data);
+  //     setApartmentData(response.data);
+  //   } catch (Error) {
+  //     console.log("error fetching: ", Error);
+  //   }
+  // };
 
-  return (
-    <div className="container">
-      <div className="right-bar_house">
-        <h5 className="mb-4">Căn hộ của bạn</h5>
-        <div className="row">
-          {/* <div className=""> */}
-          {apartments.map((apartment) => (
-            <div className="col-md-6 house-info">
-              <div className="house-box">
-                <div style={{ padding: "10px" }}>
-                  <p className="fw-bold">
-                    <i
-                      className="fa-solid fa-house"
-                      style={{ color: "#ff8228" }}
-                    />
-                    {apartment.type.building.name} - {apartment.roomNo}
-                  </p>
-                  <div className="house_info-address">
-                    <table>
-                      <tbody>
-                        <tr>
-                          <th>Địa chỉ:</th>
-                          <td>
-                            {apartment.type.building.name} - Vinhomes Grand Park
-                          </td>
-                        </tr>
-                        <tr>
-                          <th>Loại:</th>
-                          <td>{apartment.type.type}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <Link to="/managepackage" style={{ color: "inherit" }}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <ArrowForwardIcon
-                          style={{ marginRight: "8px", color: "#ff8228" }}
-                        />
-                        <span>Gói dịch vụ đang sử dụng</span>
-                      </div>
-                    </Link>
-                  </div>
+    const fetchApartment = async () => {
+        try {
+            let response = await getApartment(username);
+            console.log("check apartment:", response.data);
+            setApartmentData(response.data);
+        } catch (Error) {
+            console.log("error fetching: ", Error);
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="right-bar_house">
+                <h5 className="mb-4">Căn hộ của bạn</h5>
+                <div className="row">
+                    {/* <div className=""> */}
+                    {apartments.map((apartment) => (
+                        <div className="col-md-6 house-info">
+                            <div className="house-box">
+                                <div style={{padding:"10px"}}>
+                                    <p className="fw-bold">
+                                        <i className="fa-solid fa-house" style={{ color: '#ff8228' }} />
+                                        {apartment.type.building.name} - {apartment.roomNo}
+                                    </p>
+                                    <div className="house_info-address">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Địa chỉ:</th>
+                                                    <td>Toà {apartment.type.building.name} - Vinhomes Grand Park</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Loại:</th>
+                                                    {apartment.type.type == "1 PN" ?
+                                                    (
+                                                        <td>1 Phòng ngủ</td>
+                                                    )
+                                                    :
+                                                    (
+                                                        <td>2 Phòng ngủ</td>
+                                                    )
+                                                    }
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <Link to="/manage-package" style={{ color: 'inherit'}}>
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <ArrowForwardIcon style={{ marginRight: '8px', color: '#ff8228' }} />
+                                                <span>Gói dịch vụ đang sử dụng</span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    ))}
+                    <div className='col-md-6'>
+                        <div className="icon-box">
+                            <AddCircleOutlineIcon style={{ color: '#FFA15D' }}></AddCircleOutlineIcon>
+                        </div>
+                    </div>
+
+                    {/* </div> */}
                 </div>
               </div>
             </div>
