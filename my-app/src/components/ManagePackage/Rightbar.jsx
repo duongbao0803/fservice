@@ -7,7 +7,6 @@ import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
 import { Link } from "react-router-dom";
 
-
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
   const [nameData, setNameData] = useState(null);
@@ -17,10 +16,12 @@ function Rightbar() {
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
+  const [noPackage, setNoPackage] = useState(false);
 
   useEffect(() => {
     fetchApartment();
     if (selectedApartment) {
+      console.log("checlk selected", selectedApartment.id);
       fetchApartmentPackage(selectedApartment.id);
     }
   }, [selectedApartment]);
@@ -33,7 +34,6 @@ function Rightbar() {
   const fetchApartment = async () => {
     try {
       let response = await getApartment(username);
-      console.log("check apartment:", response.data);
       setApartmentData(response.data);
     } catch (Error) {
       console.log("error fetching: ", Error);
@@ -46,6 +46,9 @@ function Rightbar() {
       console.log("check apartment package:", response);
       if (response.status === 200 && response.data) {
         setApartmentPackageData(response.data);
+      } else {
+        setApartmentPackageData([]);
+        noPackage(true);
       }
     } catch (Error) {
       console.log("error fetching package: ", Error);
@@ -71,11 +74,11 @@ function Rightbar() {
           </div>
           <div className="apartment-package">
             {show === true ? (
-              apartmentsPackage.map((packages, index) => (
-                <>
-                  <div className="orderedPackage">
+              apartmentsPackage.length > 0 ? (
+                apartmentsPackage.map((packages, index) => (
+                  <div className="orderedPackage" key={index}>
                     <div className="orderedPackage_main d-flex justify-content-between">
-                      <div className="orderedPackage-name ">
+                      <div className="orderedPackage-name">
                         <span>{packages.package.name} (Cho căn 1PN)</span>
                       </div>
                       <div className="orderedPackage-status">
@@ -99,8 +102,6 @@ function Rightbar() {
                     <div className="info-ordered">
                       <table className="info_ordered-table">
                         <tbody>
-                          <tr />
-                          <tr />
                           <tr>
                             <td>Căn hộ:</td>
                             <td>
@@ -108,7 +109,6 @@ function Rightbar() {
                               {selectedApartment.roomNo} - Vinhomes Grand Park
                             </td>
                           </tr>
-
                           <tr>
                             <td>Áp dụng từ:</td>
                             <td>
@@ -133,8 +133,19 @@ function Rightbar() {
                       )}
                     </div>
                   </div>
-                </>
-              ))
+                ))
+              ) : (
+                <span
+                  style={{
+                    color: "#ff7800",
+                    fontWeight: "700",
+                    paddingLeft: "10px",
+                    pointerEvents: "none",
+                  }}
+                >
+                  KHÔNG CÓ GÓI DỊCH VỤ
+                </span>
+              )
             ) : (
               <span
                 style={{

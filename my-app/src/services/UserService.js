@@ -27,17 +27,17 @@ const fetchUser = (page) => {
 };
 
 const loginAPI = (email, password) => {
-  return config.post("/api/authentication/SignIn", { email, password });
-};
-
-const sendRefreshToken = (aToken, rToken) => {
   const refreshedConfig = refreshData();
   return config.post(
-    "/api/authentication/Refresh-token",
-    aToken,
-    rToken,
+    "/api/authentication/SignIn",
+    { email, password },
     refreshedConfig
   );
+};
+
+const sendRefreshToken = (data) => {
+  const refreshedConfig = refreshData();
+  return config.post("/api/authentication/Refresh-token", data);
 };
 
 const signUp = (userData) => {

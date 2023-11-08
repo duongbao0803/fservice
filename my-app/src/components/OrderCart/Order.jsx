@@ -27,7 +27,7 @@ const Order = () => {
   const [paymentUrl, setPaymentUrl] = useState("");
   const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
   const username = localStorage.getItem("username");
-  const [currentHostWithPayment, setCurrentHostWithPayment] = useState('');
+  const [currentHostWithPayment, setCurrentHostWithPayment] = useState("");
   const instead = 0;
 
   const navigate = useNavigate();
@@ -50,10 +50,7 @@ const Order = () => {
     setCurrentHostWithPayment(hostWithPayment);
   }, []);
 
-
-
   console.log("check current hót", currentHostWithPayment);
-
 
   const formData = {
     apartmentId: apartmentId,
@@ -88,7 +85,6 @@ const Order = () => {
       },
     });
   };
-
 
   // Get Info Student's House
   const fetchHouse = async () => {

@@ -35,9 +35,6 @@ function Loginv2() {
   const session = useContext(Session);
   const navigate = useNavigate();
   const accesstoken = localStorage.getItem("accesstoken");
-  console.log("chec acc", accesstoken);
-  const refreshToken = localStorage.getItem("refreshtoken");
-  console.log("chec re", refreshToken);
 
   useEffect(() => {
     if (accesstoken) {
@@ -55,23 +52,8 @@ function Loginv2() {
       setPassword(rememberPassword);
       setRememberMe(true);
     }
-    updateAccessToken();
+    // updateAccessToken();
   }, []);
-
-  const updateAccessToken = async () => {
-    try {
-      const response = await sendRefreshToken(refreshToken, accesstoken);
-      console.log("check accesstoken", response);
-      if (response.status === 200) {
-        const newAccessToken = response.data.accesstoken;
-        localStorage.setItem("accesstoken", newAccessToken);
-      } else {
-        console.log("Erroreee");
-      }
-    } catch (error) {
-      console.log("Error Sending RefreshToken", error);
-    }
-  };
 
   const handleLogin = async () => {
     if (!password) {
@@ -98,6 +80,7 @@ function Loginv2() {
             localStorage.setItem("isLogged", isLogged);
             localStorage.setItem("username", userName);
             localStorage.setItem("role", role);
+
             localStorage.setItem("accesstoken", jwtToken);
             localStorage.setItem("refreshtoken", jwtRefreshToken);
 

@@ -16,12 +16,12 @@ function ManagePackage_Details() {
   console.log("check id", id);
   return (
     <>
-      <Location />
+      {/* <Location /> */}
       <div className="container">
         <div className="row">
-          <div class="col-md-12 col-sm-12 col-lg-3">
+          {/* <div class="col-md-12 col-sm-12 col-lg-3">
             <Leftbar />
-          </div>
+          </div> */}
           <div class="col-md-12 col-sm-12 col-lg-9">
             <Rightbar_Details
               id={id}
