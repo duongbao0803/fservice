@@ -28,13 +28,13 @@ function Leftbar() {
     <div className="left-bar">
       <div className="main-info mb-4">
         <img
-          src={require("../../assets/img/siunhando.jpg")}
-          alt=""
+          src={localStorage.getItem("avatar")}
+          alt="Lỗi"
           width="50px"
           height="50px"
           style={{ marginRight: "8px", borderRadius: "50%" }}
         />
-        <span>{localStorage.getItem("username")}</span>
+        <span>{localStorage.getItem("name")}</span>
       </div>
       <div className="main_info-list">
         <div className="user">

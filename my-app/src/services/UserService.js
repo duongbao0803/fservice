@@ -37,15 +37,20 @@ const loginAPI = (email, password) => {
 
 const sendRefreshToken = (data) => {
   const refreshedConfig = refreshData();
-  return config.post("/api/authentication/Refresh-token", data);
+  return config.post(
+    "/api/authentication/Refresh-token",
+    data,
+    refreshedConfig
+  );
 };
 
 const signUp = (userData) => {
   return config.post("/api/authentication/SignUp", userData);
 };
 
-const editUser = (id) => {
-  return config.put(`/api/accounts/${id}`);
+const editUser = (id, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(`/api/accounts/${id}`, data, refreshedConfig);
 };
 
 const deleteUser = (id) => {

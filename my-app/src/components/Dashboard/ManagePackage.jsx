@@ -9,24 +9,31 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export function ManagePackage() {
   const formik = useFormik({
     initialValues: {
-      image: "",
+      file: null,
     },
-
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const handleUploadFirebase = async () => {
-        const data = await values.file.arrayBuffer();
-        const metadata = {
-          contentType: "image/png",
-        };
-        const storageRef = ref(storage, `/Fservice/${values.file.name}`);
-        await uploadBytes(storageRef, data, metadata);
-        values.image = await getDownloadURL(storageRef);
-        console.log(values.image);
+        const file = values.file;
+        const storageRef = ref(
+          storage,
+          `/Fservice/${generateUniqueFileName(file.name)}`
+        );
+        await uploadBytes(storageRef, file, { contentType: file.type });
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log("Uploaded image URL:", downloadURL);
       };
 
-      handleUploadFirebase();
+      await handleUploadFirebase();
     },
   });
+
+  // Hàm để tạo tên tệp tin duy nhất
+  const generateUniqueFileName = (originalFileName) => {
+    const timestamp = Date.now();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const extension = originalFileName.split(".").pop();
+    return `${timestamp}_${randomString}.${extension}`;
+  };
 
   const [show, setShow] = useState(false);
 

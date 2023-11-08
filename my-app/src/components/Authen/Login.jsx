@@ -24,7 +24,6 @@ import "../../assets/css/styleLogin.css";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
 import { Session } from "../../App";
-import { updateAccessToken } from "../../utils/cus-axios";
 
 function Loginv2() {
   const [email, setEmail] = useState("");
@@ -63,7 +62,7 @@ function Loginv2() {
       let res = await loginAPI(email, password);
       if (res.status !== 401 && res.status !== 400) {
         if (res && res.data && res.data.status === true) {
-          // session.setUser(res.data);
+          session.setUser(res.data);
           const jwtToken = res.data.jwtToken;
           const jwtRefreshToken = res.data.jwtRefreshToken;
           if (jwtToken) {

@@ -24,6 +24,10 @@ function Header() {
     localStorage.removeItem("username");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("name");
+    localStorage.removeItem("dateOfBirth");
+    localStorage.removeItem("address");
+    localStorage.removeItem("avatar");
+    localStorage.removeItem("name");
     toast.success("Đăng xuất thành công");
     navigate("/authen");
   };
@@ -92,7 +96,7 @@ function Header() {
                   id="dropdown-basic-button"
                   title={
                     <img
-                      src={require("../../assets/img/ig_logo.png")}
+                      src={localStorage.getItem("avatar")}
                       width="30"
                       height="30"
                       style={{ margin: "0" }}

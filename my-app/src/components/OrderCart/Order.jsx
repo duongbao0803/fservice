@@ -50,8 +50,6 @@ const Order = () => {
     setCurrentHostWithPayment(hostWithPayment);
   }, []);
 
-  console.log("check current hót", currentHostWithPayment);
-
   const formData = {
     apartmentId: apartmentId,
     packageId: packageId,
