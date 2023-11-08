@@ -9,8 +9,6 @@ import { Session } from "../../App";
 function Leftbar() {
   const session = useContext(Session);
   // const user = session.user;
-  const logged = localStorage.getItem("isLogged");
-  const role = localStorage.getItem("role");
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -29,13 +27,20 @@ function Leftbar() {
   return (
     <div className="left-bar">
       <div className="main-info mb-4">
-        <img src={require("../../assets/img/siunhando.jpg")} alt="" width="50px" height="50px" style={{ marginRight: "8px", borderRadius: "50%" }} />
+        <img
+          src={require("../../assets/img/siunhando.jpg")}
+          alt=""
+          width="50px"
+          height="50px"
+          style={{ marginRight: "8px", borderRadius: "50%" }}
+        />
         <span>{localStorage.getItem("username")}</span>
       </div>
       <div className="main_info-list">
         <div className="user">
           <NavLink
-            to={"/user"} end
+            to={"/user"}
+            end
             className={({ isActive }) =>
               isActive ? "info active-menu" : "info"
             }
@@ -87,13 +92,13 @@ function Leftbar() {
             className={({ isActive }) =>
               isActive ? "info active-menu" : "info"
             }
+            onClick={() => handleLogout()}
           >
-            <span onClick={() => handleLogout()}>
+            <span>
               <i className="fa-solid fa-arrow-right-from-bracket" />
               &nbsp;&nbsp;Thoát
             </span>
           </NavLink>
-
         </div>
       </div>
     </div>
