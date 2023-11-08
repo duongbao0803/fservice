@@ -55,6 +55,8 @@ body {
 .right-bar_house {
   font-family: Arial, sans-serif;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .row_house {
@@ -69,7 +71,7 @@ body {
   padding: 10px;
   /* margin: 20px; */
   /* border: 1px solid #FFA15D; */
-  
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -101,4 +103,3 @@ body {
   height: 100%;
   padding: 10px;
 }
-

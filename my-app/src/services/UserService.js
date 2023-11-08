@@ -67,10 +67,21 @@ const getApartment = (apartment) => {
   return config.get(`/api/apartments?username=${apartment}`, refreshedConfig);
 };
 
+const getApartmentId = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments/${id}`, refreshedConfig);
+};
+
 const getApartmentPackage = (id) => {
   const refreshedConfig = refreshData();
   return config.get(`/api/apartment-packages/apartment${id}`, refreshedConfig);
 };
+
+const getApartmentPackageDetail = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartment-packages/${id}`, refreshedConfig);
+};
+
 
 export {
   fetchUser,
@@ -82,6 +93,8 @@ export {
   Launch,
   Order,
   getApartmentPackage,
+  getApartmentPackageDetail,
   getApartment,
+  getApartmentId,
   Payment,
 };

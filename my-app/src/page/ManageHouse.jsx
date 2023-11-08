@@ -1,7 +1,6 @@
+import "../assets/css/stylemanageHouse.css";
 import React from "react";
 import Location from "../components/UserPage/Location";
-
-import "../assets/css/stylemanageHouse.css";
 import Leftbar from "../components/UserPage/Leftbar";
 import Rightbar_house from "../components/ManageHouse/Rightbar_house"
 function ManageHouse() {
