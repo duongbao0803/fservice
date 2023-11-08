@@ -48,8 +48,17 @@ function Rightbar_house() {
     <div className="container">
       <h5 className="mb-4">Căn hộ của bạn</h5>
       <div className="right-bar_house">
+
+        <div className="add-apartment">
+          <div className="add-apartment__text">
+            <Link
+              to={"/user/add-apartment"}
+            >
+              + Thêm căn hộ</Link>
+          </div>
+        </div>
+
         <div className="row">
-          {/* <div className=""> */}
           {apartments.map((apartment) => (
             <div className="col-md-6 house-info">
               <div className="house-box">
@@ -95,15 +104,6 @@ function Rightbar_house() {
               </div>
             </div>
           ))}
-          <div className="col-md-6">
-            <div className="icon-box">
-              <AddCircleOutlineIcon
-                style={{ color: "#FFA15D" }}
-              ></AddCircleOutlineIcon>
-            </div>
-          </div>
-
-          {/* </div> */}
         </div>
       </div>
     </div>
