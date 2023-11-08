@@ -97,9 +97,12 @@ function Header() {
                   title={
                     <img
                       src={localStorage.getItem("avatar")}
-                      width="30"
-                      height="30"
-                      style={{ margin: "0" }}
+                      style={{
+                        margin: "0",
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                      }}
                     />
                   }
                 >

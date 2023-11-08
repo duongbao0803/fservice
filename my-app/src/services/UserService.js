@@ -87,6 +87,20 @@ const getApartmentPackageDetail = (id) => {
   return config.get(`/api/apartment-packages/${id}`, refreshedConfig);
 };
 
+const getFloor = (buildingId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/floors?buidingId=${buildingId}`, refreshedConfig);
+};
+
+const getBuilding = () => {
+  const refreshedConfig = refreshData();
+  return config.get("/api/buildings", refreshedConfig);
+};
+
+const getApartmentByFloor = (floorId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
+};
 
 export {
   fetchUser,
@@ -102,4 +116,7 @@ export {
   getApartment,
   getApartmentId,
   Payment,
+  getFloor,
+  getApartmentByFloor,
+  getBuilding,
 };
