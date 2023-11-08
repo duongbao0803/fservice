@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { getApartment } from "../../services/UserService";
+
 
 function Rightbar_house() {
   const [apiData, setApiData] = useState(null);
@@ -12,7 +13,8 @@ function Rightbar_house() {
   // const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchApartment();
@@ -28,12 +30,35 @@ function Rightbar_house() {
     }
   };
 
+  const handleClick = (apartment) => {
+    // console.log("check aID", id);
+    navigate(`/user/manage-package/apartment/${apartment.id}`, {
+      state: {
+        apartment: apartment
+      }
+    })
+    localStorage.setItem("show", show);
+
+
+  }
+
+  console.log();
+
   return (
     <div className="container">
+      <h5 className="mb-4">Căn hộ của bạn</h5>
       <div className="right-bar_house">
-        <h5 className="mb-4">Căn hộ của bạn</h5>
+
+        <div className="add-apartment">
+          <div className="add-apartment__text">
+            <Link
+              to={"/user/add-apartment"}
+            >
+              + Thêm căn hộ</Link>
+          </div>
+        </div>
+
         <div className="row">
-          {/* <div className=""> */}
           {apartments.map((apartment) => (
             <div className="col-md-6 house-info">
               <div className="house-box">
@@ -65,28 +90,20 @@ function Rightbar_house() {
                         </tr>
                       </tbody>
                     </table>
-                    <Link to="/manage-package" style={{ color: "inherit" }}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <ArrowForwardIcon
-                          style={{ marginRight: "8px", color: "#ff8228" }}
-                        />
-                        <span>Gói dịch vụ đang sử dụng</span>
-                      </div>
-                    </Link>
+                    {/* <Link style={{ color: "inherit" }}> */}
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <ArrowForwardIcon
+                        style={{ marginRight: "8px", color: "#ff8228" }}
+                      />
+                      <span onClick={() => handleClick(apartment)} style={{ cursor: "pointer" }}>
+                        Gói dịch vụ đang sử dụng</span>
+                    </div>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          <div className="col-md-6">
-            <div className="icon-box">
-              <AddCircleOutlineIcon
-                style={{ color: "#FFA15D" }}
-              ></AddCircleOutlineIcon>
-            </div>
-          </div>
-
-          {/* </div> */}
         </div>
       </div>
     </div>

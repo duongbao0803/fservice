@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
@@ -12,6 +12,15 @@ function Rightbar() {
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
   const [noPackage, setNoPackage] = useState(false);
+  const navigate = useNavigate()
+  const {state} = useLocation()
+  
+ useEffect(() => {
+  if (state !== null) {
+    handleApartmentClick(state.apartment)
+  }
+}, []);
+
 
   useEffect(() => {
     fetchApartment();
@@ -21,7 +30,9 @@ function Rightbar() {
     }
   }, [selectedApartment]);
 
+ 
   const handleApartmentClick = (apartment) => {
+    console.log("check log", apartment);
     setShow(true);
     setSelectedApartment(apartment);
   };
@@ -29,6 +40,7 @@ function Rightbar() {
   const fetchApartment = async () => {
     try {
       let response = await getApartment(username);
+      console.log("check apartment", response.data);
       setApartmentData(response.data);
     } catch (Error) {
       console.log("error fetching: ", Error);
@@ -38,7 +50,6 @@ function Rightbar() {
   const fetchApartmentPackage = async (id) => {
     try {
       let response = await getApartmentPackage(id);
-      console.log("check apartment package:", response);
       if (response.status === 200 && response.data) {
         setApartmentPackageData(response.data);
       } else {
@@ -50,7 +61,16 @@ function Rightbar() {
     }
   };
 
-  const showModal = () => {};
+  const handleClick = (id) => {
+    console.log("check apartment", selectedApartment);
+    navigate(`/user/manage-package/${id}`,
+      {
+        state: {
+          selectedApartment : selectedApartment
+        },
+      })
+  }
+
 
   return (
     <div className="right-bar mb-4">
@@ -61,21 +81,24 @@ function Rightbar() {
             {apartments.map((apartment, index) => (
               <NavLink
                 to={`/user/manage-package/apartment/${apartment.id}`}
+                className={({ isActive }) =>
+                  isActive ? "active-link" : ""
+                }
                 onClick={() => handleApartmentClick(apartment)}
-                style={{ padding: "0 10px" }}
+                style={{ marginRight: "20px" }}
               >
-                {apartment.type.building.name} - {apartment.roomNo}
+                {apartment.roomNo} - {apartment.type.building.name}
               </NavLink>
             ))}
           </div>
           <div className="apartment-package">
-            {show === true ? (
+            {show ===  true ? (
               apartmentsPackage.length > 0 ? (
                 apartmentsPackage.map((packages, index) => (
                   <div className="orderedPackage" key={index}>
                     <div className="orderedPackage_main d-flex justify-content-between">
                       <div className="orderedPackage-name">
-                        <span>{packages.package.name} (Cho căn 1PN)</span>
+                        <span>{packages.package.name} (Cho căn {selectedApartment.type.type})</span>
                       </div>
                       <div className="orderedPackage-status">
                         {packages.packageStatus === "Active" ? (
@@ -116,12 +139,8 @@ function Rightbar() {
                       </table>
                       {packages.packageStatus !== "Disable" ? (
                         <div className="button d-flex justify-content-end">
-                          <button onClick={() => showModal()}>
-                            <Link
-                              to={`/user/manage-package/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
-                            >
+                          <button onClick={() => handleClick(packages.id)}>
                               Xem chi tiết
-                            </Link>
                           </button>
                         </div>
                       ) : (
