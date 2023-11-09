@@ -120,6 +120,11 @@ const getStaffWork = (username) => {
   return config.get(`/api/staffworks/${username}`, refreshedConfig);
 };
 
+const getOrder = (id, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(`/api/staffworks/${id}`, data, refreshedConfig);
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -138,4 +143,6 @@ export {
   getApartmentByFloor,
   getBuilding,
   getAddApartment,
+  getStaffWork,
+  getOrder,
 };

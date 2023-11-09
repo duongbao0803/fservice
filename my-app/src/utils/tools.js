@@ -22,6 +22,7 @@ export const PriceFormat = ({ price }) => {
 };
 
 export const handleLogout = (navigate) => {
+  navigate("/authen");
   localStorage.removeItem("accesstoken");
   localStorage.removeItem("refreshtoken");
   localStorage.removeItem("isLogged");
@@ -34,5 +35,4 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem("avatar");
   localStorage.removeItem("name");
   toast.success("Đăng xuất thành công");
-  navigate("/authen");
 };

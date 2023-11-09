@@ -68,7 +68,7 @@ const AppRoutes = () => {
           </>
         )}
 
-        {role === "ADMIN" && <Route path="/" element={<ListUser />} />}
+        {role === "ADMIN" && <Route path="/board" element={<ListUser />} />}
 
         {role === "STAFF" && (
           <>

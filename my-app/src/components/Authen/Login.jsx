@@ -72,9 +72,9 @@ function Loginv2() {
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
               ];
             if (role === "ADMIN") {
-              navigate("/");
+              navigate("/board");
             } else if (role === "STAFF") {
-              navigate("/");
+              navigate("/staff");
             } else {
               navigate("/");
             }

@@ -41,7 +41,7 @@ function Rightbar({ id }) {
       try {
         const response = await getApartmentId(apartmentId);
         setApartment(response.data);
-      } catch (err) {
+      } catch (erro) {
         setApartment(null);
       }
     };
