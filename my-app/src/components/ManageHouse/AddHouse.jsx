@@ -85,8 +85,6 @@ function AddHouse() {
     const handleFloorChange = (event) => {
         const selectedFloorId = event.target.value;
         setSelectedFloor(selectedFloorId);
-        // fetchApartmentType(selectedFloorId);
-        // fetchApartmentByFloor(selectedFloorId);
     };
 
     const handleTypeChange = (event) => {
@@ -103,9 +101,6 @@ function AddHouse() {
         const selectedApartmentId = even.target.value;
         setSelectedApartment(selectedApartmentId);
     };
-
-
-
 
     return (
         <div className="right-bar_house add-apartment">

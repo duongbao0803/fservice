@@ -66,3 +66,18 @@
         border: none;
     }
 }
+
+/* date picker */
+.ant-space {
+    width: 100%;
+}
+
+.ant-picker {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.ant-picker .ant-picker-input > input{
+    font-size: 1rem !important;
+}

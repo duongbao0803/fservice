@@ -1,17 +1,16 @@
 import React, { useContext, useRef } from "react";
 import { Launch, editUser } from "../../services/UserService";
-import { Session } from "../../App";
-import formatDate from "../../utils/tools";
 import { useState } from "react";
 import { useEffect } from "react";
 import { storage } from "../../firebase/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useFormik } from "formik";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { MDBInput } from "mdb-react-ui-kit";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
+import { DatePicker, Space } from 'antd';
+import dayjs from 'dayjs';
 
 function UserInfo() {
   const email = localStorage.getItem("username");
@@ -169,6 +168,14 @@ function UserInfo() {
     console.log("check new name", newAddress);
   };
 
+  // date picker
+  const onChange = (date, dateString) => {
+    console.log("check date", dateString);
+    setDateOfBirth(dateString);
+    formik.setFieldValue("dateOfBirth", dateString);
+  };
+  const dateFormat = 'YYYY-MM-DD';
+
   return (
     <>
       <div class="right-bar">
@@ -200,13 +207,16 @@ function UserInfo() {
                     <tr>
                       <th>Ngày sinh:</th>
                       <td>
-                        <input
+                        {/* <input
                           className="form-control"
                           type="text"
                           name="dateOfBirth"
                           value={dateOfBirth}
                           onChange={handleDateOfBirthChange}
-                        />
+                        /> */}
+                        <Space direction="vertical">
+                          <DatePicker onChange={onChange} defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}/>
+                        </Space>
                       </td>
                     </tr>
                     <tr>
