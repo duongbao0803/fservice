@@ -17,22 +17,48 @@
   
   .orderedPackage_use {
     border: 2px solid #ff8228;
-    border-radius: 15px;  /* increased border radius */
-    padding: 15px 20px;  /* adjusted padding */
+    border-radius: 15px;
+    padding: 15px 20px; 
     margin-bottom: 40px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }
   .orderedPackage_use_main {
     border-bottom: 1px solid #d9d9d9;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
   }
   
   .orderedPackage_use_main .orderedPackage_use-name span {
     color: #ff8228;
     font-weight: 650;
   }
+
+  .orderedPackage-details_main .orderedPackage-details-name span {
+    color: #ff8228;
+    font-weight: 650;
+  }
   
-  .orderedPackage_use_main .orderedPackage_use-status span:nth-child(1) {
+  .orderedPackage_use_main .orderedPackage_use-status .box-status {
+    color: white;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 500px;
+  }
+
+  .box-status__active {
+    background-color: #03ac00;
+  }
+  
+  .box-status__disable {
+    background-color: #757575;
+  }
+  
+  .box-status__expired {
+    background-color: #952323;
+  }
+  
+  /* .orderedPackage_use_main .orderedPackage_use-status span:nth-child(1) {
     color: #757575;
    
     padding: 0 15px;
@@ -47,7 +73,7 @@
     border-radius: 8px;
     font-weight: 600;
     width: 500px;
-  }
+  } */
   
   .info-ordered_use .button button {
     background-color: #ffcaa3;
@@ -95,7 +121,8 @@
 }
  
 .inside-details__table table tbody tr th {
-  min-width: 200px;
+  min-width: 150px;
+  padding: 8px;
 }
 
 .ant-steps-item-process .ant-steps-item-icon {

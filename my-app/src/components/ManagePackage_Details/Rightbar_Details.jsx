@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
@@ -22,6 +23,7 @@ function Rightbar({ id }) {
   const [data, setData] = useState(null);
   const [apartmentId, setApartmentId] = useState(null);
   const [apartment, setApartment] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -63,6 +65,11 @@ function Rightbar({ id }) {
     );
   });
 
+  const handleTabUsing = () => {
+    console.log("check ne");
+    navigate(`/user/manage-package/${id}/using`);
+  };
+
   return (
     <div className="right-bar-details mb-5">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
@@ -95,8 +102,6 @@ function Rightbar({ id }) {
               <div className="info-ordered-details">
                 <table className="info_ordered-details-table">
                   <tbody>
-                    <tr />
-                    <tr />
                     <tr>
                       <td>Căn hộ:</td>
                       <td>
@@ -124,7 +129,7 @@ function Rightbar({ id }) {
                       </span>
                     </td>
                     <td>
-                      <span> Sử dụng</span>
+                      <span onClick={handleTabUsing}>Sử dụng</span>
                     </td>
                   </tr>
                 </div>

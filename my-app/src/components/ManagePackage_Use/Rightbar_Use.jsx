@@ -10,13 +10,16 @@ function Rightbar() {
   const finishedTime = " 05:00 PM"; // dynamic in practice
 
   return (
-    <div className="right-bar_use">
+    <div className="right-bar_use mb-5">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
       <div className="right_bar_use-main" style={{ padding: '20px' }}>
         <div className="chooseHouse_use pb-3">
-          <a href="#">Căn hộ 1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="#">Căn hộ 2</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="#">Căn hộ 3</a>
+          <div className="choose">
+            <a href style={{ borderBottom: "3px solid #ff8228" }}>
+              {/* {apartment?.roomNo} - {apartment?.type?.building?.name} */}
+              Căn hộ 1
+            </a>
+          </div>
         </div>
 
         <div className="orderedPackage_use">
@@ -25,8 +28,7 @@ function Rightbar() {
               <span>COMBO VỆ SINH NHÀ Ở (Cho căn 1PN)</span>
             </div>
             <div className="orderedPackage_use-status">
-              <span>Trạng thái: </span>
-              <span className="status-active">ĐANG HOẠT ĐỘNG</span>
+              <span className="box-status box-status__active">ĐANG HOẠT ĐỘNG</span>
             </div>
           </div>
 
@@ -43,18 +45,68 @@ function Rightbar() {
                 </tr>
               </tbody>
             </table>
+
+            <div className="choose-details_table">
+              <tr>
+                <td>
+                  <span >
+                    Dịch vụ
+                  </span>
+                </td>
+                <td>
+                  <span style={{ borderBottom: "3px solid #ff8228" }}>Sử dụng</span>
+                </td>
+              </tr>
+            </div>
+
             <div className="inside-table">
+              <div className="d-flex justify-content-between">
+                <p style={{ fontWeight: "bold", fontSize: "18px" }}>
+                  Dịch vụ: <span style={{ color: '#ff8228' }}>Tổng vệ sinh nhà cửa</span>
+                </p>
+                <p style={{fontWeight:"bold", fontSize: "18px", color:"#757575"}}>24.10.2023</p>
+              </div>
               <div className="row_use row">
-                <div className="col-md-6">
-               
-                  <div className="inside-details-main d-flex align-items-center" >
-                    <h6 className="mb-3" style={{ marginRight: '20px' }}>Dịch vụ: </h6>
-                    <h5 className="mb-3"><span style={{ color: '#ff8228', fontWeight: 'bold', borderBottom:'2px solid #ff8228', paddingBottom: '1px' }}> Tổng vệ sinh nhà cửa</span></h5>
-          
-                 </div>
+                <div className="col-md-4">
+                  <Steps direction="vertical" current={0} style={{ minHeight: '30vh' }}>
+                    <Step title="Đang chờ" description={` ${waitingTime}`} />
+                    <Step title="Đang thực hiện" />
+                    <Step title="Đã hoàn thành" description={`${finishedTime}`} />
+                  </Steps>
+                </div>
+                <div className="col-md-8">
+                  <div className="inside-details">
+                    <div className="inside-details__table" style={{ fontSize: '16px' }}>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <th>Ngày thực hiện:</th>
+                            <td>24.10.2023</td>
+                          </tr>
+                          <tr>
+                            <th>Giờ hẹn:</th>
+                            <td>3:00 PM - 5:00 PM</td>
+                          </tr>
+                          <tr>
+                            <th>Nhân viên:</th>
+                            <td>Dương Tôn Bảo</td>
+                          </tr>
+                          <tr>
+                            <th>Số điện thoại:</th>
+                            <td>0909113114</td>
+                          </tr>
+                          <tr>
+                            <th>Ghi chú:</th>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
                 </div>
               </div>
-              <Row gutter={12}>
+              {/* <Row gutter={12}>
                 <Col md={10}>
                   <Steps direction="vertical" current={0} style={{ minHeight: '30vh' }}>
                     <Step title="Waiting" description={` ${waitingTime}`} />
@@ -65,7 +117,6 @@ function Rightbar() {
                 <Col md={12}>
 
                   <div className="inside-details">
-
                     <div className="inside-details__table" style={{ fontSize: '16px' }}>
                       <table>
                         <tbody>
@@ -113,7 +164,7 @@ function Rightbar() {
                   </div>
 
                 </Col>
-              </Row>
+              </Row> */}
             </div>
 
           </div>

@@ -62,10 +62,15 @@ const AppRoutes = () => {
             <Route path="/user/add-apartment" element={<AddHouse />} />
             <Route path="/user/manage-package" element={<ManagePackage />}>
               <Route path="apartment/:id" element={<ManagePackage />} />
+              {/* <Route path=":id" element={<ManagePackage_Details />} /> */}
             </Route>
             <Route
               path="/user/manage-package/:id"
               element={<ManagePackage_Details />}
+            />
+            <Route
+              path="/user/manage-package/:id/using"
+              element={<ManagePackage_Use />}
             />
           </>
         )}

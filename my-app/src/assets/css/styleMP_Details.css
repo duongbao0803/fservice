@@ -17,9 +17,7 @@ td:nth-child(4) {
 .orderedPackage-details {
   border: 2px solid #ff8228;
   border-radius: 15px;
-  /* increased border radius */
   padding: 15px 20px;
-  /* adjusted padding */
   margin-bottom: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
