@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../../assets/css/styleOrder.css";
-import { confirm, launch } from "../../services/UserService";
 import { toast } from "react-toastify";
 import config from "../../utils/cus-axios";
 import { format } from "date-fns";
-import PriceFormat from "../PackageDetails/PriceFormat";
+import { PriceFormat } from "../../utils/tools";
+
 const Order = () => {
   const [yourRoom, setYourRoom] = useState([]);
   const [yourTower, setYourTower] = useState([]);
@@ -20,11 +19,9 @@ const Order = () => {
   const [apartmentIdArray, setApartmentIdArray] = useState([]);
   const [apartmentId, setApartmentId] = useState("");
   const [packageId, setPackageId] = useState(id);
-  const [localHostDomain, setLocalHostDomain] = useState("");
   const [orderDate, setOrderDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [paymentUrl, setPaymentUrl] = useState("");
   const [selectedHouseChange, setSelectedHouseChange] = useState(["", ""]);
   const username = localStorage.getItem("username");
   const [currentHostWithPayment, setCurrentHostWithPayment] = useState("");

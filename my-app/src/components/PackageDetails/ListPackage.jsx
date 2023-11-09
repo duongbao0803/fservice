@@ -63,7 +63,7 @@ const ListPackage = () => {
                 </div>
               </div>
             ))
-          : data.serviceDetails.map((service, idx) => (
+          : data.serviceDetails?.map((service, idx) => (
               <div
                 key={idx}
                 className="col-12 col-sm-12 col-md-6 col-lg-4 package-detail"
