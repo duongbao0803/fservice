@@ -4,7 +4,6 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { getApartment } from "../../services/UserService";
 
-
 function Rightbar_house() {
   const [apiData, setApiData] = useState(null);
   const [nameData, setNameData] = useState(null);
@@ -14,7 +13,7 @@ function Rightbar_house() {
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchApartment();
@@ -34,27 +33,19 @@ function Rightbar_house() {
     // console.log("check aID", id);
     navigate(`/user/manage-package/apartment/${apartment.id}`, {
       state: {
-        apartment: apartment
-      }
-    })
+        apartment: apartment,
+      },
+    });
     localStorage.setItem("show", show);
-
-
-  }
-
-  console.log();
+  };
 
   return (
     <div className="container">
       <h5 className="mb-4">Căn hộ của bạn</h5>
       <div className="right-bar_house">
-
         <div className="add-apartment">
           <div className="add-apartment__text">
-            <Link
-              to={"/user/add-apartment"}
-            >
-              + Thêm căn hộ</Link>
+            <button>+ Thêm căn hộ</button>
           </div>
         </div>
 
@@ -95,8 +86,12 @@ function Rightbar_house() {
                       <ArrowForwardIcon
                         style={{ marginRight: "8px", color: "#ff8228" }}
                       />
-                      <span onClick={() => handleClick(apartment)} style={{ cursor: "pointer" }}>
-                        Gói dịch vụ đang sử dụng</span>
+                      <span
+                        onClick={() => handleClick(apartment)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        Gói dịch vụ đang sử dụng
+                      </span>
                     </div>
                     {/* </Link> */}
                   </div>

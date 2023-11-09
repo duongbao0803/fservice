@@ -102,6 +102,11 @@ const getApartmentByFloor = (floorId) => {
   return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
 };
 
+const getTypeID = (floorId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
+};
+
 export {
   fetchUser,
   loginAPI,

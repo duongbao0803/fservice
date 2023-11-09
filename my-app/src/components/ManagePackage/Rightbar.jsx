@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
-import { Link, NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
@@ -12,15 +18,14 @@ function Rightbar() {
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
   const [noPackage, setNoPackage] = useState(false);
-  const navigate = useNavigate()
-  const {state} = useLocation()
-  
- useEffect(() => {
-  if (state !== null) {
-    handleApartmentClick(state.apartment)
-  }
-}, []);
+  const navigate = useNavigate();
+  const { state } = useLocation();
 
+  useEffect(() => {
+    if (state !== null) {
+      handleApartmentClick(state.apartment);
+    }
+  }, []);
 
   useEffect(() => {
     fetchApartment();
@@ -30,7 +35,6 @@ function Rightbar() {
     }
   }, [selectedApartment]);
 
- 
   const handleApartmentClick = (apartment) => {
     console.log("check log", apartment);
     setShow(true);
@@ -63,14 +67,12 @@ function Rightbar() {
 
   const handleClick = (id) => {
     console.log("check apartment", selectedApartment);
-    navigate(`/user/manage-package/${id}`,
-      {
-        state: {
-          selectedApartment : selectedApartment
-        },
-      })
-  }
-
+    navigate(`/user/manage-package/${id}`, {
+      state: {
+        selectedApartment: selectedApartment,
+      },
+    });
+  };
 
   return (
     <div className="right-bar mb-4">
@@ -81,9 +83,7 @@ function Rightbar() {
             {apartments.map((apartment, index) => (
               <NavLink
                 to={`/user/manage-package/apartment/${apartment.id}`}
-                className={({ isActive }) =>
-                  isActive ? "active-link" : ""
-                }
+                className={({ isActive }) => (isActive ? "active-link" : "")}
                 onClick={() => handleApartmentClick(apartment)}
                 style={{ marginRight: "20px" }}
               >
@@ -92,13 +92,16 @@ function Rightbar() {
             ))}
           </div>
           <div className="apartment-package">
-            {show ===  true ? (
+            {show === true ? (
               apartmentsPackage.length > 0 ? (
                 apartmentsPackage.map((packages, index) => (
                   <div className="orderedPackage" key={index}>
                     <div className="orderedPackage_main d-flex justify-content-between">
                       <div className="orderedPackage-name">
-                        <span>{packages.package.name} (Cho căn {selectedApartment.type.type})</span>
+                        <span>
+                          {packages.package.name} (Cho căn{" "}
+                          {selectedApartment.type.type})
+                        </span>
                       </div>
                       <div className="orderedPackage-status">
                         {packages.packageStatus === "Active" ? (
@@ -140,7 +143,7 @@ function Rightbar() {
                       {packages.packageStatus !== "Disable" ? (
                         <div className="button d-flex justify-content-end">
                           <button onClick={() => handleClick(packages.id)}>
-                              Xem chi tiết
+                            Xem chi tiết
                           </button>
                         </div>
                       ) : (
