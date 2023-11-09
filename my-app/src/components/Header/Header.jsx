@@ -80,13 +80,7 @@ function Header() {
                 Liên hệ
               </Link>
             </li>
-            {role === "ADMIN" && (
-              <li className="nav-item">
-                <Link to="/board" className="nav-link">
-                  Board
-                </Link>
-              </li>
-            )}
+
             <li className="nav-item" style={{ paddingRight: 0 }}>
               {logged !== "true" ? (
                 <DropdownButton id="dropdown-basic-button" title="Tài khoản">
@@ -98,32 +92,29 @@ function Header() {
                 <DropdownButton
                   id="dropdown-basic-button"
                   title={
-                    linkAvt?.length ?
-                      (
-                        <img
-                          src={localStorage.getItem("avatar")}
-                          style={{
-                            margin: "0",
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "50%",
-                            objectFit: "cover"
-                          }}
-                        />
-
-                      ) :
-                      (
-                        <img
-                          src={require("../../assets/img/img-user.png")}
-                          style={{
-                            margin: "0",
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "50%",
-                            objectFit: "cover"
-                          }}
-                        />
-                      )
+                    linkAvt?.length ? (
+                      <img
+                        src={localStorage.getItem("avatar")}
+                        style={{
+                          margin: "0",
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={require("../../assets/img/img-user.png")}
+                        style={{
+                          margin: "0",
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    )
                   }
                 >
                   {role === "USER" && (
@@ -144,7 +135,7 @@ function Header() {
             </li>
           </ul>
         </div>
-      </nav >
+      </nav>
       <ToastContainer
         autoClose={2000}
         pauseOnHover={false}

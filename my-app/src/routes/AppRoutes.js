@@ -45,13 +45,17 @@ const AppRoutes = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/detail/:id" element={<PackageDetail />} />
-            {role === "USER"} && (
+          </>
+        )}
+
+        {role === "USER" && (
+          <>
             <Route path="/detail/:id/:packageName" element={<OrderPage />} />
             <Route path="/confirm" element={<Confirm />} />
             <Route path="/payment" element={<PaymentResult />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/error" element={<PaymentError />} />
-            <Route path="/user" element={<ManageHouse></ManageHouse>} />
+            <Route path="/user" element={<ManageHouse />} />
             <Route path="/user/info" element={<UserPage />} />
             <Route path="/user/add-apartment" element={<AddHouse />} />
             <Route path="/user/manage-package" element={<ManagePackage />}>
@@ -61,15 +65,13 @@ const AppRoutes = () => {
               path="/user/manage-package/:id"
               element={<ManagePackage_Details />}
             />
-            )
           </>
         )}
 
-        {role === "ADMIN" && <Route path="/board" element={<ListUser />} />}
+        {role === "ADMIN" && <Route path="/" element={<ListUser />} />}
 
-        {role === "STAFF" && <Route path="/staff" element={<StaffPage />} />}
+        {role === "STAFF" && <Route path="/" element={<StaffPage />} />}
 
-        <Route path="/staff/info" element={<StaffInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {role !== "STAFF" && role !== "ADMIN" && <Footer />}
