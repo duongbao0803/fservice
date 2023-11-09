@@ -25,7 +25,6 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem("accesstoken");
   localStorage.removeItem("refreshtoken");
   localStorage.removeItem("isLogged");
-  localStorage.removeItem("role");
   localStorage.removeItem("username");
   localStorage.removeItem("phoneNumber");
   localStorage.removeItem("name");
@@ -33,6 +32,7 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem("address");
   localStorage.removeItem("avatar");
   localStorage.removeItem("name");
+  localStorage.removeItem("role");
   toast.success("Đăng xuất thành công");
   navigate("/authen");
 };
