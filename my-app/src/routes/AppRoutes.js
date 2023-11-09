@@ -24,6 +24,7 @@ import ManageHouse from "../page/ManageHouse";
 import UserPage from "../page/UserPage";
 import Rightbar from "../components/ManagePackage/Rightbar";
 import AddHouse from "../components/ManageHouse/AddHouse";
+import Rightbar_Use from "../page/ManagePackage_Use";
 
 const AppRoutes = () => {
   return (
@@ -81,8 +82,15 @@ const AppRoutes = () => {
         <Route
           path="/user/manage-package/:id"
           element={<ManagePackage_Details />}
+          
+        />
+         <Route
+          path="/user/manage-package/using"
+          element={<ManagePackage_Use/>}
         />
         <Route path="/user/info" element={<UserPage />} />
+
+        
 
         <Route path="*" element={<NotFound />} />
       </Routes>
