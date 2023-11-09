@@ -71,6 +71,13 @@ function Loginv2() {
               decoded[
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
               ];
+            if (role === "ADMIN") {
+              navigate("/board");
+            } else if (role === "STAFF") {
+              navigate("/staff");
+            } else {
+              navigate("/");
+            }
             const userName =
               decoded[
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
@@ -89,7 +96,7 @@ function Loginv2() {
               localStorage.removeItem("rememberEmail");
               localStorage.removeItem("rememberPassword");
             }
-            navigate("/");
+            // navigate("/");
           } else {
             toast.error("Failed to decode the token.");
           }
