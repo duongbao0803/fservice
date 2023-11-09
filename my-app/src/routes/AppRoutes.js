@@ -70,7 +70,12 @@ const AppRoutes = () => {
 
         {role === "ADMIN" && <Route path="/" element={<ListUser />} />}
 
-        {role === "STAFF" && <Route path="/" element={<StaffPage />} />}
+        {role === "STAFF" && (
+          <>
+            <Route path="/staff" element={<StaffPage />} />
+            <Route path="/staff/info" element={<StaffInfo />} />
+          </>
+        )}
 
         <Route path="*" element={<NotFound />} />
       </Routes>

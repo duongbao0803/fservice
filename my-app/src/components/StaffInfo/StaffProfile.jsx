@@ -169,9 +169,9 @@ function StaffProfile() {
     const dateFormat = 'YYYY-MM-DD';
 
     return (
-        <div className="Info-container">
-            <h5>THÔNG TIN</h5>
+        <div className="Info-container mt-5">
             <div className="staff-info">
+                <h4>THÔNG TIN</h4>
                 <div className="row">
 
 
