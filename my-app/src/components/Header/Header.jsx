@@ -17,7 +17,6 @@ function Header() {
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
-
   const linkAvt = localStorage.getItem("avatar");
 
   const handleLogoutClick = () => {
@@ -81,9 +80,9 @@ function Header() {
                 <DropdownButton
                   id="dropdown-basic-button"
                   title={
-                    linkAvt?.length ? (
+                    linkAvt !== null && linkAvt?.length > 0 && linkAvt !== "null" ? (
                       <img
-                        src={localStorage.getItem("avatar")}
+                        src={linkAvt}
                         style={{
                           margin: "0",
                           width: "30px",

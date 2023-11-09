@@ -77,7 +77,9 @@ function DataTable() {
     try {
       let response = await config.get(`/api/staffworks/${username}`);
       console.log("check staff:", response.data);
-      setStaffData(response.data);
+      if (response && response.data && response.status === 200) {
+        setStaffData(response.data);
+      }
     } catch (Error) {
       console.log("error fetching: ", Error);
     }
@@ -85,7 +87,9 @@ function DataTable() {
   const fetchApartment = async (id) => {
     try {
       const response = await config.get(`/api/apartments/${id}`);
-      return response.data;
+      if (response && response.data && response.status === 200) {
+        return response.data;
+      }
     } catch (error) {
       console.error("Error fetching apartment:", error);
       return null; // Handle the error as needed

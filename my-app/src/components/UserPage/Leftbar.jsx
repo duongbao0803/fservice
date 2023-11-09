@@ -8,6 +8,7 @@ import { Session } from "../../App";
 function Leftbar() {
   // const session = useContext(Session);
   const navigate = useNavigate();
+  const linkAvt = localStorage.getItem("avatar");
 
   const handleLogout = () => {
     localStorage.removeItem("accesstoken");
@@ -27,17 +28,35 @@ function Leftbar() {
   return (
     <div className="left-bar">
       <div className="main-info mb-4">
-        <img
-          src={localStorage.getItem("avatar")}
-          alt="Error..."
-          width="50px"
-          height="50px"
-          style={{
-            marginRight: "8px",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
+        {linkAvt !== null && linkAvt?.length > 0 && linkAvt !== "null" ?
+          (
+            <img
+              src={linkAvt}
+              alt="Link avatar"
+              width="50px"
+              height="50px"
+              style={{
+                marginRight: "8px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          ) :
+          (
+            <img
+              src={require("../../assets/img/img-user.png")}
+              alt="Link avatar"
+              width="50px"
+              height="50px"
+              style={{
+                marginRight: "8px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          )
+        }
+
         <span>{localStorage.getItem("name")}</span>
       </div>
       <div className="main_info-list">
