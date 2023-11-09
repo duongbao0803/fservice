@@ -10,7 +10,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 function Navbar() {
     // Use theme from the context
     const theme = useContext(ThemeContext);
-
+    const username = localStorage.getItem("username");
     return (
         <div className="Navbar">
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '60px', paddingRight: '20px' }}>
@@ -26,7 +26,7 @@ function Navbar() {
                     <Box className="account" sx={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}>
                         <Avatar className="account-icon" sx={{ backgroundColor: 'grey', marginRight: '20px' }} />
                         <Typography className="account-name" variant="body1" component="span" sx={{ fontSize: '18px' }}>
-                            phwtram0803@fpt.com
+                           {username}
                         </Typography>
 
                     </Box>
