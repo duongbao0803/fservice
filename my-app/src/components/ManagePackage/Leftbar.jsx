@@ -49,19 +49,22 @@ function Leftbar() {
         <span>{localStorage.getItem("username")}</span>
       </div>
       <div className="main_info-list">
-        <div className="user info-buiding">
-          <Link to={`/user/manage-house`}>
+        <div className="user info-buiding active-menu">
+          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user`}>
             <span>
               <i className="fa-solid fa-building" />
               &nbsp;&nbsp;Căn hộ của bạn
             </span>
           </Link>
         </div>
-        <div className="user info-package active-menu">
-          <span>
-            <i className="fa-solid fa-box-archive" />
-            &nbsp;&nbsp;Gói dịch vụ
-          </span>
+        <div className="user info-package">
+          <Link style={{ color: "#000", textDecoration: "none" }} to={`/user/manage-package`}>
+            <span>
+              <i className="fa-solid fa-box-archive" />
+              &nbsp;&nbsp;Gói dịch vụ
+            </span>
+          </Link>
+
         </div>
         <div className="user info-order">
           <span>
