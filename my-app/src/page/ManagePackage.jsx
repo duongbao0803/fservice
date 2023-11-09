@@ -19,7 +19,6 @@ function ManagePackage() {
           </div>
         </div>
       </div>
-      <UsingModal/>
     </>
   );
 }

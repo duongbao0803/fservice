@@ -33,19 +33,19 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
 
 
     if (!trimmedName) {
-      setNameError('Name is required.');
+      setNameError('Tên khách hàng không được để trống');
       return false;
     }
 
 
     if (trimmedName.length < 2) {
-      setNameError('Name must be at least 2 characters long.');
+      setNameError('Tên phải dài hơn 2 kí tự');
       return false;
     }
 
 
     if (/[0-9]/.test(trimmedName)) {
-      setNameError('Name must not contain numbers.');
+      setNameError('Tên không được chứa số');
       return false;
     }
 
@@ -57,7 +57,7 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
   const validatePhoneNumber = () => {
     const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
     if (!phoneRegex.test(phoneNumber.trim())) {
-      setPhoneNumberError('Invalid phone number.');
+      setPhoneNumberError('Số điện thoại không hợp lệ (Vd: 0989xxxxxx)');
       return false;
     } else {
       setPhoneNumberError('');
@@ -67,7 +67,7 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
 
   const validateNote = () => {
     if (note.trim().length > 200) {
-      setNoteError('Note must be less than 200 characters.');
+      setNoteError('Ghi chú phải ít hơn 200 kí tự');
       return false;
     } else {
       setNoteError('');
@@ -111,10 +111,10 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
 
       <Modal show={true} onHide={handleClose} dialogClassName="UsingModal">
         <Modal.Header closeButton style={{ backgroundColor: '#ff8228' }}>
-          <Modal.Title style={{ color: 'white' }}>Sử Dụng Dịch Vụ</Modal.Title>
+          <Modal.Title className="h6" style={{ color: 'white', marginLeft:"10px" }}>Sử Dụng Dịch Vụ</Modal.Title>
         </Modal.Header>
-        <div>
-          <table className="apartment-table">
+        <div className="mt-3" style={{marginLeft:"15px"}}>
+          <table className="apartment-table" >
             <tbody>
               <tr>
                 <th className="apartment-info">
@@ -137,16 +137,18 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
         </div>
         <div style={{ padding: '15px' }}>
           <div className="form_table">
-            <h5 style={{
+            <p style={{
               color: '#ff8228',
-              borderBottom: '2px solid #d9d9d9'
+              fontSize:"18px",
+              fontWeight:"bold"
+              // borderBottom: '2px solid #d9d9d9'
             }}>
               Tổng vệ sinh nhà cửa
-            </h5>
+            </p>
             <Modal.Body>
               <Form>
-                <Form.Group className="mb-3" controlId="formName">
-                  <Form.Label>Name</Form.Label>
+                <Form.Group className="mb-5" controlId="formName">
+                  <Form.Label>Tên khách hàng</Form.Label>
                   <Form.Control
                     type="text"
                     autoFocus
@@ -161,8 +163,8 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
                     {nameError}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formPhone">
-                  <Form.Label>Phone</Form.Label>
+                <Form.Group className="mb-5" controlId="formPhone">
+                  <Form.Label>Số điện thoại</Form.Label>
                   <Form.Control
                     type="text"
                     value={phoneNumber}
@@ -176,8 +178,8 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
                     {phoneNumberError}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formNote">
-                  <Form.Label>Note</Form.Label>
+                <Form.Group className="mb-5" controlId="formNote">
+                  <Form.Label>Ghi chú cho nhân viên</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
@@ -216,10 +218,10 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
         </div>
         <Modal.Footer style={{border: 'none'}}>
           <Button variant="secondary" className="modal-btn-close" onClick={handleClose}>
-            Close
+            HUỶ
           </Button>
           <Button variant="primary" className="modal-btn-save" onClick={() => handleUsingPackage()}>
-            Save
+            SỬ DỤNG
           </Button>
         </Modal.Footer>
       </Modal>
