@@ -4,9 +4,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
 import "./Modal.css";
 
-function Modal({ isOpen, service, onClose }) {
+function Modal({ isOpen, service, onClose , staffData}) {
   const theme = useContext(ThemeContext);
-
+    console.log("check modal:", staffData);
+    
+    
   if (!isOpen) return null;
 
   return (
