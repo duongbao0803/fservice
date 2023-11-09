@@ -109,9 +109,15 @@ const getTypeID = (floorId) => {
 
 const getAddApartment = (floorId, typeId) => {
   const refreshedConfig = refreshData();
-  return config.get(`/api/apartments?floorId=${floorId}&typeId=${typeId}`,
+  return config.get(
+    `/api/apartments?floorId=${floorId}&typeId=${typeId}`,
     refreshedConfig
   );
+};
+
+const getStaffWork = (username) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/staffworks/${username}`, refreshedConfig);
 };
 
 export {

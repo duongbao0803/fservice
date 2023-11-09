@@ -16,7 +16,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Session } from "../../App";
 
 function Sidebar() {
-
   const session = useContext(Session);
   // const user = session.user;
   const logged = localStorage.getItem("isLogged");
@@ -53,7 +52,8 @@ function Sidebar() {
               <ul style={{ listStyleType: "none" }}>
                 <li>
                   <NavLink
-                    to={"/staff"} end
+                    to={"/staff"}
+                    end
                     className={({ isActive }) =>
                       isActive ? "active-staff" : ""
                     }
@@ -81,7 +81,7 @@ function Sidebar() {
                   >
                     <ManageAccountsIcon
                       style={{ color: theme.palette.secondary.main }}
-                    />{" "}
+                    />
                     Tài khoản của tôi
                   </NavLink>
                 </li>

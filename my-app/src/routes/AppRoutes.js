@@ -24,71 +24,55 @@ import ManagePackage from "../page/ManagePackage";
 import ManageHouse from "../page/ManageHouse";
 import UserPage from "../page/UserPage";
 import Rightbar from "../components/ManagePackage/Rightbar";
+import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
+
 import AddHouse from "../components/ManageHouse/AddHouse";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const AppRoutes = () => {
+  const role = localStorage.getItem("role");
+  console.log("check role", role);
+  console.log("check role", typeof role);
+
   return (
     <>
+      {role !== "STAFF" && role !== "ADMIN" && <Header />}
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute allowedRole={["USER"]}>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-
         <Route path="/authen" element={<Loginv2 />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/detail/:id/:packageName" element={<OrderPage />} />
-        <Route path="/confirm" element={<Confirm />} />
-        <Route path="/detail/:id" element={<PackageDetail />} />
-        <Route path="/payment" element={<PaymentResult />} />
-        <Route path="/payment/success" element={<PaymentSuccess />} />
-        <Route path="/payment/error" element={<PaymentError />} />
+        {role !== "STAFF" && role !== "ADMIN" && (
+          <>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/detail/:id" element={<PackageDetail />} />
+            {role === "USER"} && (
+            <Route path="/detail/:id/:packageName" element={<OrderPage />} />
+            <Route path="/confirm" element={<Confirm />} />
+            <Route path="/payment" element={<PaymentResult />} />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/payment/error" element={<PaymentError />} />
+            <Route path="/user" element={<ManageHouse></ManageHouse>} />
+            <Route path="/user/info" element={<UserPage />} />
+            <Route path="/user/add-apartment" element={<AddHouse />} />
+            <Route path="/user/manage-package" element={<ManagePackage />}>
+              <Route path="apartment/:id" element={<ManagePackage />} />
+            </Route>
+            <Route
+              path="/user/manage-package/:id"
+              element={<ManagePackage_Details />}
+            />
+            )
+          </>
+        )}
 
-        <Route
-          path="/user"
-          element={
-            <PrivateRoute allowedRole={["USER"]}>
-              <HomePage />
-              <About />
-            </PrivateRoute>
-          }
-        >
-          <Route path="add-apartment" element={<AddHouse />} />
-          <Route path="manage-package" element={<ManagePackage />}>
-            <Route path="apartment/:id" element={<Rightbar />} />
-          </Route>
-            <Route path="info" element={<UserPage />} />
-        </Route>
+        {role === "ADMIN" && <Route path="/board" element={<ListUser />} />}
 
-        <Route
-          exact
-          path="/board"
-          element={
-            <PrivateRoute allowedRole={["ADMIN"]}>
-              <ListUser />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          exact
-          path="/staff"
-          element={
-            <PrivateRoute allowedRole={["STAFF"]}>
-              <StaffPage />
-            </PrivateRoute>
-          }
-        >
-          {/* <Route path="/staff/info" element={<StaffInfo />} /> */}
-        </Route>
+        {role === "STAFF" && <Route path="/staff" element={<StaffPage />} />}
 
         <Route path="/staff/info" element={<StaffInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {role !== "STAFF" && role !== "ADMIN" && <Footer />}
     </>
   );
 };

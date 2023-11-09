@@ -1,17 +1,50 @@
-import React, { useContext } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { Session } from "../App";
-import NotFound from "../components/NotFound/NotFound";
-import HomePage from "../page/HomePage";
+// import React, { useContext } from "react";
+// import { Route, Routes } from "react-router-dom";
+// import { Session } from "../App";
+// import NotFound from "../components/NotFound/NotFound";
 
-const PrivateRoute = (props) => {
-  const userRole = localStorage.getItem("role");
+// const PrivateRoute = (props) => {
+//   // const { user } = useContext(Session);
+//   // console.log("check user", user);
 
-  if (userRole && props.allowedRole.includes(userRole)) {
-    return <>{props.children}</>;
-  }
+//   if (
+//     localStorage.getItem("role") === "ADMIN" &&
+//     props.allowedRole.includes("ADMIN")
+//   ) {
+//     return (
+//       <>
+//         <div>{props.children}</div>;
+//       </>
+//     );
+//   }
 
-  return <Navigate to="*" />;
-};
+//   if (
+//     localStorage.getItem("role") === "USER" &&
+//     props.allowedRole.includes("USER")
+//   ) {
+//     return (
+//       <>
+//         <div>{props.children}</div>;
+//       </>
+//     );
+//   }
 
-export default PrivateRoute;
+//   if (
+//     localStorage.getItem("role") === "STAFF" &&
+//     props.allowedRole.includes("STAFF")
+//   ) {
+//     return (
+//       <>
+//         <div>{props.children}</div>
+//       </>
+//     );
+//   }
+
+//   return (
+//     <Routes>
+//       <Route path="*" element={<NotFound />} />
+//     </Routes>
+//   );
+// };
+
+// export default PrivateRoute;
