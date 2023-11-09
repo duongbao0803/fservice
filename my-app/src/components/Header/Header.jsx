@@ -51,7 +51,7 @@ function Header() {
             src={require("../../assets/img/logo_web_2.png")}
             alt=""
             width="90px"
-            style={{ margin: "0" }}
+            style={{ margin: "0"}}
           />
         </div>
         <div className="container-fluid">
@@ -102,6 +102,7 @@ function Header() {
                         width: "30px",
                         height: "30px",
                         borderRadius: "50%",
+                        objectFit:"cover" 
                       }}
                     />
                   }

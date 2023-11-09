@@ -29,10 +29,10 @@ function Leftbar() {
       <div className="main-info mb-4">
         <img
           src={localStorage.getItem("avatar")}
-          alt="Lỗi"
+          alt="Error..."
           width="50px"
           height="50px"
-          style={{ marginRight: "8px", borderRadius: "50%" }}
+          style={{ marginRight: "8px", borderRadius: "50%", objectFit:"cover" }}
         />
         <span>{localStorage.getItem("name")}</span>
       </div>

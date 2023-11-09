@@ -82,6 +82,31 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:id/:packageName" element={<OrderPage />} />
+        <Route path="/confirm" element={<Confirm />} />
+        <Route path="/detail/:id" element={<PackageDetail />} />
+        <Route path="/payment" element={<PaymentResult />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/error" element={<PaymentError />} />
+        <Route path="/payment/error" element={<PaymentError />} />
+
+        <Route path="/user" element={<ManageHouse />}>
+          <Route path="/user/add-apartment" element={<AddHouse />} />
+        </Route>
+
+        <Route path="/user/manage-package" element={<ManagePackage />}>
+          <Route
+            path="/user/manage-package/apartment/:id"
+            element={<Rightbar />}
+          />
+        </Route>
+
+        <Route
+          path="/user/manage-package/:id"
+          element={<ManagePackage_Details />}
+        />
+        <Route path="/user/info" element={<UserPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
