@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const formatDate = (inputDate) => {
   const date = new Date(inputDate);
@@ -17,4 +19,20 @@ export const PriceFormat = ({ price }) => {
     currency: "VND",
   });
   return <span>{formattedPrice}</span>;
+};
+
+export const handleLogout = (navigate) => {
+  localStorage.removeItem("accesstoken");
+  localStorage.removeItem("refreshtoken");
+  localStorage.removeItem("isLogged");
+  localStorage.removeItem("role");
+  localStorage.removeItem("username");
+  localStorage.removeItem("phoneNumber");
+  localStorage.removeItem("name");
+  localStorage.removeItem("dateOfBirth");
+  localStorage.removeItem("address");
+  localStorage.removeItem("avatar");
+  localStorage.removeItem("name");
+  toast.success("Đăng xuất thành công");
+  navigate("/authen");
 };

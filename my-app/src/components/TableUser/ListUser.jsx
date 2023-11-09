@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
 import ReactPaginate from "react-paginate";
 import { format } from "date-fns";
+import { handleLogout } from "../../utils/tools";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ListUser = () => {
   const [listUser, setListUser] = useState([]);
@@ -21,6 +23,7 @@ const ListUser = () => {
   const [dataUserEdit, setDataUserEdit] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
   const [totalPage, setTotalPage] = useState(0);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setShowModalEdit(false);
@@ -66,6 +69,9 @@ const ListUser = () => {
   };
   const handlePageClick = (e) => {
     getUser(+e.selected + 1);
+  };
+  const handleLogoutClick = () => {
+    handleLogout(navigate);
   };
 
   return (
@@ -141,9 +147,9 @@ const ListUser = () => {
         handleClose={handleClose}
         dataUserDelete={dataUserDelete}
         getUser={getUser}
-
-        // handleDeleteInfoUser={handleDeleteInfoUser}
       />
+
+      <button onClick={handleLogoutClick}>Đăng xuất</button>
     </div>
   );
 };
