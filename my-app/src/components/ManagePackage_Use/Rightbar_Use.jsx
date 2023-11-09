@@ -1,8 +1,13 @@
 import React from "react";
 import { Steps, Row, Col } from 'antd';
 
+
 function Rightbar() {
-  const description = '';
+  const { Step } = Steps;
+
+  // You could format your dates here using a library like moment.js or date-fns
+  const waitingTime = " 03:00 PM"; // dynamic in practice
+  const finishedTime = " 05:00 PM"; // dynamic in practice
 
   return (
     <div className="right-bar_use">
@@ -41,26 +46,21 @@ function Rightbar() {
             <div className="inside-table">
               <div className="row_use row">
                 <div className="col-md-6">
-                  <div className="inside-details-main d-flex align-items-center">
-                    <h6 className="mb-3" style={{marginRight: '50px'}}>Dịch vụ: </h6>
-                    <h5 className="mb-3"><span style={{ color: '#ff8228', fontWeight: 'bold' }}> Tổng vệ sinh nhà cửa</span></h5>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex justify-content-end align-items-center">
-                  <span>24.10.2023 3:00 PM</span>
+               
+                  <div className="inside-details-main d-flex align-items-center" >
+                    <h6 className="mb-3" style={{ marginRight: '20px' }}>Dịch vụ: </h6>
+                    <h5 className="mb-3"><span style={{ color: '#ff8228', fontWeight: 'bold', borderBottom:'2px solid #ff8228', paddingBottom: '1px' }}> Tổng vệ sinh nhà cửa</span></h5>
+          
+                 </div>
                 </div>
               </div>
               <Row gutter={12}>
                 <Col md={10}>
-                  <Steps style={{ minHeight: '30vh' }}
-                    direction="vertical"
-                    current={0}
-                    items={[
-                      { title: 'Waiting' },
-                      { title: 'In Progress' },
-                      { title: 'Finished' },
-                    ]}
-                  />
+                  <Steps direction="vertical" current={0} style={{ minHeight: '30vh' }}>
+                    <Step title="Waiting" description={` ${waitingTime}`} />
+                    <Step title="In Progress" />
+                    <Step title="Finished" description={`${finishedTime}`} />
+                  </Steps>
                 </Col>
                 <Col md={12}>
 
@@ -71,15 +71,15 @@ function Rightbar() {
                         <tbody>
                           <tr>
                             <th>
-                             <p> Ngày thực hiện:</p>
+                              <p> Ngày thực hiện:</p>
                             </th>
                             <td>
-                            <p> 24.10.2023</p>
+                              <p> 24.10.2023</p>
                             </td>
                           </tr>
                           <tr>
                             <th>
-                             <p>Giờ hẹn:</p> 
+                              <p>Giờ hẹn:</p>
                             </th>
                             <td>
                               <p>3:00 PM - 5:00 PM</p>
@@ -98,7 +98,7 @@ function Rightbar() {
                               <p>Số điện thoại:</p>
                             </th>
                             <td>
-                             <p> 0909113114</p>
+                              <p> 0909113114</p>
                             </td>
                           </tr>
                           <tr>
@@ -116,11 +116,11 @@ function Rightbar() {
               </Row>
             </div>
 
-            </div>
           </div>
         </div>
       </div>
-  
+    </div>
+
 
   );
 }
