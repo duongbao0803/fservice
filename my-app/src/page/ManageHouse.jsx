@@ -15,6 +15,7 @@ function ManageHouse() {
           </div>
           <div class="col-md-12 col-sm-12 col-lg-9">
             <Rightbar_house />
+            {/* <AddHouse/> */}
           </div>
         </div>
       </div>

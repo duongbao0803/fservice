@@ -67,9 +67,7 @@ const AppRoutes = () => {
         <Route path="/payment/error" element={<PaymentError />} />
         <Route path="/payment/error" element={<PaymentError />} />
 
-        <Route path="/user" element={<ManageHouse />}>
-          <Route path="/user/add-apartment" element={<AddHouse />} />
-        </Route>
+        <Route path="/user" element={<ManageHouse />}/>
 
         <Route path="/user/manage-package" element={<ManagePackage />}>
           <Route

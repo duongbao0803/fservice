@@ -74,21 +74,35 @@
 }
 
 /* add page */
-.add-apartment .add-btn {
+.add-apartment .button-container {
   display: flex;
   justify-content: end;
 }
 
-.add-apartment .add-btn button {
+.add-apartment .button-container button {
   border: none;
   padding: 5px 15px;
-  background-color: #FFA15D;
   border-radius: 8px;
+  width: 140px;
 }
 
-.add-apartment .add-btn button:hover {
+.add-apartment .button-container .btn-add {
+  background-color: #FFA15D;
+  color: #fff;
+}
+
+.add-apartment .button-container .btn-add:hover {
   background-color: #ff8228;
   /* color: #fff; */
+}
+
+.add-apartment .button-container .btn-cancel {
+  background-color: transparent;
+  border: 2px solid #ff8228;
+}
+
+.add-apartment .button-container .btn-cancel:hover {
+  background-color: #FFEBE1 !important;
 }
 
 .add-apartment .apartment-info table th {
