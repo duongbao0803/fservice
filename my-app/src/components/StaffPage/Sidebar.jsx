@@ -12,7 +12,7 @@ import Logout from "@mui/icons-material/Logout";
 
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Session } from "../../App";
 
 function Sidebar() {
@@ -38,7 +38,7 @@ function Sidebar() {
 
   const theme = useContext(ThemeContext);
   return (
-    <div style={{margin: "8px"}}>
+    <div style={{ margin: "8px" }}>
       <div style={{ marginRight: "0" }}>
         {/* Sidebar */}
         <div>
@@ -52,15 +52,17 @@ function Sidebar() {
               <h3 style={{ color: theme.palette.secondary.main }}>CÔNG VIỆC</h3>
               <ul style={{ listStyleType: "none" }}>
                 <li>
-                  <Link
-                    className="active"
-                    href="#"
+                  <NavLink
+                    to={"/staff"} end
+                    className={({ isActive }) =>
+                      isActive ? "active-staff" : ""
+                    }
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
                     <FormatListBulletedIcon className="mr-2" /> Quản lí công
                     việc
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -69,8 +71,11 @@ function Sidebar() {
               <h3 style={{ color: theme.palette.secondary.main }}>THÔNG TIN</h3>
               <ul style={{ listStyleType: "none", padding: "0", margin: "0" }}>
                 <li>
-                  <Link
-                    href="#"
+                  <NavLink
+                    to={"/staff/info"}
+                    className={({ isActive }) =>
+                      isActive ? "active-staff" : ""
+                    }
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
@@ -78,22 +83,22 @@ function Sidebar() {
                       style={{ color: theme.palette.secondary.main }}
                     />{" "}
                     Tài khoản của tôi
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
-                    href="#"
+                  <NavLink
+                    to={"/staff/change-password"}
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
                     <KeyIcon style={{ color: theme.palette.secondary.main }} />
                     Thay đổi mật khẩu
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link 
+                  <NavLink
+                    to={"/authen"}
                     onClick={handleLogout}
-                    href="#"
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
@@ -101,7 +106,7 @@ function Sidebar() {
                       style={{ color: theme.palette.secondary.main }}
                     />
                     Đăng xuất
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>

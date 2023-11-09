@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 import "../Header/styleHeader.css";
 
 import { Session } from "../../App";
+import { Avatar } from "@mui/material";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
+
+  const linkAvt = localStorage.getItem("avatar");
 
   const handleLogout = () => {
     localStorage.removeItem("accesstoken");
@@ -51,7 +54,7 @@ function Header() {
             src={require("../../assets/img/logo_web_2.png")}
             alt=""
             width="90px"
-            style={{ margin: "0"}}
+            style={{ margin: "0" }}
           />
         </div>
         <div className="container-fluid">
@@ -95,16 +98,32 @@ function Header() {
                 <DropdownButton
                   id="dropdown-basic-button"
                   title={
-                    <img
-                      src={localStorage.getItem("avatar")}
-                      style={{
-                        margin: "0",
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "50%",
-                        objectFit:"cover" 
-                      }}
-                    />
+                    linkAvt?.length ?
+                      (
+                        <img
+                          src={localStorage.getItem("avatar")}
+                          style={{
+                            margin: "0",
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "50%",
+                            objectFit: "cover"
+                          }}
+                        />
+
+                      ) :
+                      (
+                        <img
+                          src={require("../../assets/img/img-user.png")}
+                          style={{
+                            margin: "0",
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "50%",
+                            objectFit: "cover"
+                          }}
+                        />
+                      )
                   }
                 >
                   {role === "USER" && (
@@ -125,7 +144,7 @@ function Header() {
             </li>
           </ul>
         </div>
-      </nav>
+      </nav >
       <ToastContainer
         autoClose={2000}
         pauseOnHover={false}

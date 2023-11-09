@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 
+import "../assets/css/styleStaffCommon.css";
 import "../assets/css/styleStaffWork.css";
+
 
 import Navbar from "../components/StaffPage/Navbar";
 import Sidebar from "../components/StaffPage/Sidebar";

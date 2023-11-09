@@ -11,6 +11,7 @@ function Navbar() {
     // Use theme from the context
     const theme = useContext(ThemeContext);
     const username = localStorage.getItem("username");
+    const avt = localStorage.getItem("avatar");
     return (
         <div className="Navbar">
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '60px', paddingRight: '20px' }}>
@@ -24,11 +25,25 @@ function Navbar() {
                     </ButtonBase>
 
                     <Box className="account" sx={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}>
-                        <Avatar className="account-icon" sx={{ backgroundColor: 'grey', marginRight: '20px' }} />
+                        {avt?.length === 0 ?
+                            (
+                                <Avatar className="account-icon" sx={{ backgroundColor: 'grey', marginRight: '20px' }} />
+                            ) :
+                            (
+                                <img
+                                    src={localStorage.getItem("avatar")}
+                                    style={{
+                                        margin: "20px",
+                                        width: "30px",
+                                        height: "30px",
+                                        borderRadius: "50%",
+                                        objectFit: "cover"
+                                    }}
+                                />
+                            )}
                         <Typography className="account-name" variant="body1" component="span" sx={{ fontSize: '18px' }}>
-                           {username}
+                            {username}
                         </Typography>
-
                     </Box>
                 </Box>
             </Box>

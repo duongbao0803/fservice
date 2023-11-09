@@ -38,7 +38,7 @@ function DataTable() {
 
     const fetchAllApartmentsAndCreateRows = async () => {
       setLoading(true);
-      const rowsWithData = await Promise.all(staffData.map(async (staff, index) => {
+      const rowsWithData = await Promise.all(staffData?.map(async (staff, index) => {
         const apartmentInfo = await fetchApartment(staff.apartmentPackage.apartmentId);
         // Construct the row
         return {

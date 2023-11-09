@@ -1,25 +1,24 @@
 import React from "react";
-
+import "../assets/css/styleStaffCommon.css";
 import "../assets/css/styleStaffInfo.css";
-
-import InfoNav from "../components/StaffInfo/InfoNav";
-import InfoSideBar from "../components/StaffInfo/InfoSideBar";
-import UserProfile from "../components/StaffInfo/UserProfile";
+import StaffProfile from "../components/StaffInfo/StaffProfile";
+import Sidebar from "../components/StaffPage/Sidebar";
+import Navbar from "../components/StaffPage/Navbar";
 function StaffInfo() {
   return (
     <>
       <div className="container-fluid">
         {/* <Navbar/> */}
         <div className="row">
-          <div className="col-md-2">
-            <InfoSideBar />
+          <div className="col-md-2" style={{ backgroundColor: "white", padding: 0}}>
+            <Sidebar />
           </div>
           <div
             className="col-md-10"
             style={{ backgroundColor: "#F5F5F5", height: "100vh" }}
           >
-            <InfoNav />
-            <UserProfile />
+            <Navbar />
+            <StaffProfile />
           </div>
         </div>
       </div>

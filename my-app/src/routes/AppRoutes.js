@@ -12,6 +12,7 @@ import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
 import Staff from "../page/StaffPage";
 import StaffInfo from "../page/StaffInfo";
+import StaffPage from "../page/StaffPage";
 
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
@@ -60,7 +61,7 @@ const AppRoutes = () => {
           <Route path="manage-package" element={<ManagePackage />}>
             <Route path="apartment/:id" element={<Rightbar />} />
           </Route>
-          <Route path="info" element={<UserPage />} />
+            <Route path="info" element={<UserPage />} />
         </Route>
 
         <Route
@@ -78,11 +79,14 @@ const AppRoutes = () => {
           path="/staff"
           element={
             <PrivateRoute allowedRole={["STAFF"]}>
-              <Staff />
+              <StaffPage />
             </PrivateRoute>
           }
-        />
+        >
+          {/* <Route path="/staff/info" element={<StaffInfo />} /> */}
+        </Route>
 
+        <Route path="/staff/info" element={<StaffInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
