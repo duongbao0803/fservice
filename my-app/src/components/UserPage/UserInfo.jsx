@@ -202,7 +202,7 @@ function UserInfo() {
                       <td>
                         <input
                           className="form-control"
-                          type="text"
+                          type="date"
                           name="dateOfBirth"
                           value={dateOfBirth}
                           onChange={handleDateOfBirthChange}

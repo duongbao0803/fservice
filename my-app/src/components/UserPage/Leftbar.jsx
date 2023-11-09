@@ -32,7 +32,11 @@ function Leftbar() {
           alt="Error..."
           width="50px"
           height="50px"
-          style={{ marginRight: "8px", borderRadius: "50%", objectFit:"cover" }}
+          style={{
+            marginRight: "8px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
         />
         <span>{localStorage.getItem("name")}</span>
       </div>

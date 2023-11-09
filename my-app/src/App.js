@@ -42,9 +42,9 @@ function App() {
   return (
     <>
       <Session.Provider value={{ user, setUser }}>
-        <Header />
+        {/* <Header /> */}
         <AppRoutes />
-        <Footer />
+        {/* <Footer /> */}
       </Session.Provider>
     </>
   );

@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { Session } from "../../App";
 
 function Sidebar() {
-
   const session = useContext(Session);
   // const user = session.user;
   const logged = localStorage.getItem("isLogged");
@@ -38,7 +37,7 @@ function Sidebar() {
 
   const theme = useContext(ThemeContext);
   return (
-    <div style={{margin: "8px"}}>
+    <div style={{ margin: "8px" }}>
       <div style={{ marginRight: "0" }}>
         {/* Sidebar */}
         <div>
@@ -70,13 +69,13 @@ function Sidebar() {
               <ul style={{ listStyleType: "none", padding: "0", margin: "0" }}>
                 <li>
                   <Link
-                    href="#"
+                    to="/user-profile"
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >
                     <ManageAccountsIcon
                       style={{ color: theme.palette.secondary.main }}
-                    />{" "}
+                    />
                     Tài khoản của tôi
                   </Link>
                 </li>
@@ -91,7 +90,7 @@ function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link 
+                  <Link
                     onClick={handleLogout}
                     href="#"
                     underline="none"
