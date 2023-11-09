@@ -76,12 +76,6 @@
   
 }
 
-  /* .orderedPackage_use .button button {
-    position: absolute;
-    right: 12px;
-    bottom: 10px;
-    outline: none;
-  } */
 
 .inside-details-main {
     
@@ -99,11 +93,38 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
    
 }
-
  
+.inside-details__table table tbody tr th {
+  min-width: 200px;
+}
 
+.ant-steps-item-process .ant-steps-item-icon {
+  background-color: #ff8228!important; 
+  border-color: #ff8228!important;
+}
 
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
+  border-color:#ff8228!important /* Your desired color */
+}
 
+/* Change the title color of the current step */
+.ant-steps-item-process .ant-steps-item-title {
+  color: #333!important; /* Your desired color */
+}
+
+/* Change the title color of the finished step */
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #ff8228; 
+    /* Your desired color */
+}
+.ant-steps-item-tail::after {
+  background-color: #ff8228!important;
+}
+
+.ant-steps-item:not(.ant-steps-item-finish):not(.ant-steps-item-process) .ant-steps-item-tail::after {
+ background-color: #c6c2c2!important /* Adjust the blur value as needed */
+}
 
 
 

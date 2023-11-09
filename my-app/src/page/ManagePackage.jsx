@@ -4,6 +4,7 @@ import Location from "../components/UserPage/Location";
 import "../assets/css/stylemanagePackage.css";
 import Leftbar from "../components/UserPage/Leftbar";
 import Rightbar from "../components/ManagePackage/Rightbar";
+import UsingModal from "../components/UsingModal/UsingModal";
 function ManagePackage() {
   return (
     <>

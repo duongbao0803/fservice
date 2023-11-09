@@ -27,6 +27,8 @@ import Rightbar from "../components/ManagePackage/Rightbar";
 import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
 
 import AddHouse from "../components/ManageHouse/AddHouse";
+import Rightbar_Use from "../page/ManagePackage_Use";
+
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
