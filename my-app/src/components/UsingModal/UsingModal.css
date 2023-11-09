@@ -1,0 +1,52 @@
+.UsingModal {
+    width: 670px;
+    max-width: 100%;
+}
+
+.form_table {
+   
+    border: 2px solid #ff8228;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.apartment-info {
+    font-weight: bold; /* if you want the font to be bold */
+    color: #333; /* change the color as needed */
+    margin-bottom: 8px; /* add some space below the text */
+  }
+  
+  .apartment-detail {
+    color: #555; /* change the color as needed */
+    margin-bottom: 4px; /* add some space below the text */
+  }
+  
+  /* If you need to target the table rows or cells specifically */
+  .apartment-table th,
+  .apartment-table td {
+
+    padding: 8px; /* adjust the padding as needed */
+   
+  }
+
+  .btn-secondary.modal-btn-close {
+  background-color: #aeaaaa; /* Change to your preferred color */
+  border-color: #aeaaaa; /* Change to match the background or as needed */
+  color: #fff; /* This will be the text color */
+}
+
+/* For the save button with a primary variant */
+.btn-primary.modal-btn-save {
+  background-color: #ff8228; /* Change to your preferred color */
+  border-color: #ff8228; /* Change to match the background or as needed */
+  color: #fff; /* This will be the text color */
+}
+
+/* If you also want to add hover effects */
+.btn-secondary.modal-btn-close:hover,
+.btn-primary.modal-btn-save:hover {
+  background-color: darken(#b35410, 10%); /* This darkens the color on hover */
+  border-color: darken(#b35410, 10%); /* This darkens the border color on hover */
+}

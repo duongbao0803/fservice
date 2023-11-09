@@ -1,10 +1,18 @@
 import React from "react";
+import { Steps, Row, Col } from 'antd';
+
 
 function Rightbar() {
+  const { Step } = Steps;
+
+  // You could format your dates here using a library like moment.js or date-fns
+  const waitingTime = " 03:00 PM"; // dynamic in practice
+  const finishedTime = " 05:00 PM"; // dynamic in practice
+
   return (
     <div className="right-bar_use">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
-      <div className="right_bar_use-main">
+      <div className="right_bar_use-main" style={{ padding: '20px' }}>
         <div className="chooseHouse_use pb-3">
           <a href="#">Căn hộ 1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a href="#">Căn hộ 2</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -36,47 +44,84 @@ function Rightbar() {
               </tbody>
             </table>
             <div className="inside-table">
-              <div className="inside-details_1">
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="inside-details-main">
-                    <span>Dịch vụ: </span>
-                    <strong>Tổng vệ sinh nhà cửa</strong>
+              <div className="row_use row">
+                <div className="col-md-6">
+               
+                  <div className="inside-details-main d-flex align-items-center" >
+                    <h6 className="mb-3" style={{ marginRight: '20px' }}>Dịch vụ: </h6>
+                    <h5 className="mb-3"><span style={{ color: '#ff8228', fontWeight: 'bold', borderBottom:'2px solid #ff8228', paddingBottom: '1px' }}> Tổng vệ sinh nhà cửa</span></h5>
+          
+                 </div>
+                </div>
+              </div>
+              <Row gutter={12}>
+                <Col md={10}>
+                  <Steps direction="vertical" current={0} style={{ minHeight: '30vh' }}>
+                    <Step title="Waiting" description={` ${waitingTime}`} />
+                    <Step title="In Progress" />
+                    <Step title="Finished" description={`${finishedTime}`} />
+                  </Steps>
+                </Col>
+                <Col md={12}>
+
+                  <div className="inside-details">
+
+                    <div className="inside-details__table" style={{ fontSize: '16px' }}>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <th>
+                              <p> Ngày thực hiện:</p>
+                            </th>
+                            <td>
+                              <p> 24.10.2023</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>
+                              <p>Giờ hẹn:</p>
+                            </th>
+                            <td>
+                              <p>3:00 PM - 5:00 PM</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>
+                              <p>Nhân viên:</p>
+                            </th>
+                            <td>
+                              <p>Dương Tôn Bảo</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>
+                              <p>Số điện thoại:</p>
+                            </th>
+                            <td>
+                              <p> 0909113114</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>
+                              <p>Ghi chú:</p>
+                            </th>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                  <span>24.10.2023 3:00 PM</span>
-                  <span className="status-waiting">ĐANG CHỜ</span>
-                </div>
-              </div>
-              <div className="inside-details_1">
-                <p>Ngày thực hiện: 24.10.2023</p>
-                <p>Giờ hẹn: 3:00 PM - 5:00 PM</p>
-                <p>Nhân viên: Dương Tôn Bảo</p>
-                <p>Số điện thoại: 0999 113 114</p>
-                <p>Ghi chú:</p>
-              </div>
+
+                </Col>
+              </Row>
             </div>
-            <div className="inside-table">
-              <div className="inside-details_2">
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="inside-details-main">
-                    <span>Dịch vụ: </span>
-                    <strong>Giặt ủi quần áo</strong>
-                  </div>
-                  <span>23.10.2023 9:20 PM</span>
-                  <span className="status-completed">ĐÃ HOÀN THÀNH</span>
-                </div>
-                <div className="inside-details_2">
-                  <p>Ngày thực hiện: 23.10.2023</p>
-                  <p>Giờ hẹn: 9:00 PM - 10:00 PM</p>
-                  <p>Nhân viên: Dương Tôn Bảo</p>
-                  <p>Số điện thoại: 0999 113 114</p>
-                  <p>Ghi chú:</p>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
     </div>
+
+
   );
 }
 
