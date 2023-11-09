@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import formatDate from "../../utils/tools";
+import { formatDate } from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
 import {
   Link,

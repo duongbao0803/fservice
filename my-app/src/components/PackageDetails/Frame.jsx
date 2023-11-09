@@ -5,11 +5,10 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Routes, Route, Link, redirect } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import BasicRating from "./Star";
-import PriceFormat from "./PriceFormat";
+import { PriceFormat } from "../../utils/tools";
 import Order from "../OrderCart/Order";
 import { toast } from "react-toastify";
 import config from "../../utils/cus-axios";
-import { ro } from "date-fns/locale";
 
 const Frame = () => {
   const [APIData, setAPIData] = useState({});

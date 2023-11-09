@@ -14,25 +14,13 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Session } from "../../App";
+import { handleLogout } from "../../utils/tools.js";
 
 function Sidebar() {
-  const session = useContext(Session);
-  // const user = session.user;
-  const logged = localStorage.getItem("isLogged");
-  const role = localStorage.getItem("role");
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("accesstoken");
-    localStorage.removeItem("refreshtoken");
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("role");
-    localStorage.removeItem("username");
-    localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("name");
-    session.setUser(null);
-    toast.success("Đăng xuất thành công");
-    navigate("/authen");
+  const handleLogoutClick = () => {
+    handleLogout(navigate);
   };
 
   const theme = useContext(ThemeContext);
@@ -98,7 +86,7 @@ function Sidebar() {
                 <li>
                   <NavLink
                     to={"/authen"}
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                     underline="none"
                     style={{ color: "#333", textDecoration: "none" }}
                   >

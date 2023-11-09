@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../assets/css/stylePaymentResult.css";
-import PriceFormat from "../components/PackageDetails/PriceFormat";
+import { PriceFormat } from "../utils/tools";
 
 const PaymentSuccess = () => {
   // const [paymentData, setPaymentData] = useState({});
   const location = useLocation();
-  const {state} = useLocation();
+  const { state } = useLocation();
 
   const paymentData = JSON.parse(state.jsonData);
-  console.log("check json:",paymentData);
+  console.log("check json:", paymentData);
 
   if (state !== null) {
     return (
@@ -47,7 +47,9 @@ const PaymentSuccess = () => {
                     <tr>
                       <th>Số tiền:</th>
                       <td class="amout">
-                        <PriceFormat price={Number(paymentData.vnp_Amount/100)} />
+                        <PriceFormat
+                          price={Number(paymentData.vnp_Amount / 100)}
+                        />
                       </td>
                     </tr>
                     <tr>

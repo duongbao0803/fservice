@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import PriceFormat from "../PackageDetails/PriceFormat";
 import { useState } from "react";
-import { Navigate, json, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import config from "../../utils/cus-axios";
-import { Payment } from "../../services/UserService";
-import axios from "axios";
 import { Spinner } from "react-bootstrap";
 
 export default function PaymentResult(props) {

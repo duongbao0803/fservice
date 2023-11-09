@@ -11,6 +11,7 @@ import "../Header/styleHeader.css";
 
 import { Session } from "../../App";
 import { Avatar } from "@mui/material";
+import { handleLogout } from "../../utils/tools";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
@@ -18,20 +19,8 @@ function Header() {
   const navigate = useNavigate();
   const linkAvt = localStorage.getItem("avatar");
 
-  const handleLogout = () => {
-    localStorage.removeItem("accesstoken");
-    localStorage.removeItem("refreshtoken");
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("role");
-    localStorage.removeItem("username");
-    localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("name");
-    localStorage.removeItem("dateOfBirth");
-    localStorage.removeItem("address");
-    localStorage.removeItem("avatar");
-    localStorage.removeItem("name");
-    toast.success("Đăng xuất thành công");
-    navigate("/authen");
+  const handleLogoutClick = () => {
+    handleLogout(navigate);
   };
 
   return (
@@ -126,7 +115,7 @@ function Header() {
                       </Link>
                     </Dropdown.Item>
                   )}
-                  <Dropdown.Item onClick={handleLogout}>
+                  <Dropdown.Item onClick={handleLogoutClick}>
                     Đăng xuất
                   </Dropdown.Item>
                 </DropdownButton>

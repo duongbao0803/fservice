@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
-import formatDate from "../../utils/tools";
+import { formatDate } from "../../utils/tools";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(

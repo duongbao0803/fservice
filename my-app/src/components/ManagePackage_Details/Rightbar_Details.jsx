@@ -3,7 +3,7 @@ import {
   getApartmentId,
   getApartmentPackageDetail,
 } from "../../services/UserService";
-import formatDate from "../../utils/tools";
+import { formatDate } from "../../utils/tools";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

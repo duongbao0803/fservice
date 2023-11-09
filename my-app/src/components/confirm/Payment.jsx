@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import PriceFormat from "../PackageDetails/PriceFormat";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-// import PriceFormat from "../PackageDetails/PriceFormat";
+import { PriceFormat } from "../../utils/tools";
 
 export default function Payment(props) {
-
-
   const payment = async () => {
     try {
     } catch (error) {
@@ -37,7 +34,6 @@ export default function Payment(props) {
                 <td>Số tiền</td>
                 <td>
                   <PriceFormat price={props.state.price} />
-                  {/* {props.state.price} */}
                 </td>
               </tr>
               <tr>

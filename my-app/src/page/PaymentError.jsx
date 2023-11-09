@@ -3,7 +3,7 @@ import "../assets/css/stylePaymentResult.css";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import PriceFormat from "../components/PackageDetails/PriceFormat";
+import { PriceFormat } from "../utils/tools";
 
 const PaymentError = () => {
   // const [paymentData, setPaymentData] = useState({});
@@ -47,7 +47,9 @@ const PaymentError = () => {
                     <tr>
                       <th>Số tiền:</th>
                       <td class="amout amout__error">
-                        <PriceFormat price={Number(paymentData.vnp_Amount/100)} />
+                        <PriceFormat
+                          price={Number(paymentData.vnp_Amount / 100)}
+                        />
                       </td>
                     </tr>
                     <tr>
