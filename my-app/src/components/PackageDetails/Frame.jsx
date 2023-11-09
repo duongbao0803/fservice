@@ -57,7 +57,6 @@ const Frame = () => {
       const building = await config.get("/api/types");
 
       setRoom(building.data);
-      console.log("check room:", room);
     } catch (error) {
       console.error("There was an error fetching the data:", error);
       setLoading(false);

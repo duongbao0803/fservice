@@ -1,60 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f2f6fa;
-}
-
-.first-line_house {
-  margin-bottom: 50px;
-}
-
-.main_info-list_house .user {
-  line-height: 45px;
-  padding: 0 20px 0 15px;
-  border: 1px solid #f2f6fa;
-  cursor: pointer;
-}
-
-.left-bar_house.user i {
-  color: #ff8228;
-}
-
-.left-bar_house .info-buiding:hover {
-  background-color: #f8e2db;
-  border-radius: 10px;
-  border: 1px solid #ff8228;
-}
-
-.left-bar_house .info-package:hover {
-  background-color: #f8e2db;
-  border-radius: 10px;
-  border: 1px solid #ff8228;
-}
-
-.left-bar_house .info-order:hover {
-  background-color: #f8e2db;
-  border-radius: 10px;
-  border: 1px solid #ff8228;
-}
-
-.left-bar_house .info-account:hover {
-  background-color: #f8e2db;
-  border-radius: 10px;
-  border: 1px solid #ff8228;
-}
-
-.left-bar_house .logout:hover {
-  background-color: #f8e2db;
-  border-radius: 10px;
-  border: 1px solid #ff8228;
-}
 .right-bar_house {
   font-family: Arial, sans-serif;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .row_house {
@@ -69,7 +17,7 @@ body {
   padding: 10px;
   /* margin: 20px; */
   /* border: 1px solid #FFA15D; */
-  
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -92,13 +40,57 @@ body {
   padding: 5px 0;
 }
 
+.add-box {
+  height: 144px;
+  padding: 10px;
+  background-color: #FFEBE1;
+  border-radius: 8px;
+}
+
 .icon-box {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background-color: #FFEBE1;
   height: 100%;
-  padding: 10px;
 }
 
+.add-apartment {
+
+}
+
+.add-apartment__text {
+  padding: 8px;
+  width: fit-content;
+}
+
+.add-apartment__text:hover {
+  background-color: #FFEBE1;
+  color: #FFA15D !important;
+}
+
+.add-apartment__text a {
+  color: #ff8228;
+  text-decoration: none;
+}
+
+/* add page */
+.add-apartment .add-btn {
+  display: flex;
+  justify-content: end;
+}
+
+.add-apartment .add-btn button {
+  border: none;
+  padding: 5px 15px;
+  background-color: #FFA15D;
+  border-radius: 8px;
+}
+
+.add-apartment .add-btn button:hover {
+  background-color: #ff8228;
+  /* color: #fff; */
+}
+
+.add-apartment .apartment-info table th {
+  min-width: 120px;
+}

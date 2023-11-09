@@ -5,6 +5,9 @@ import Header from "./components/Header/Header";
 import { createContext, useEffect, useState } from "react";
 import { Launch } from "./services/UserService";
 import AppRoutes from "./routes/AppRoutes";
+import { ManagePackage } from "./components/Dashboard/ManagePackage";
+import formatDate from "./utils/tools";
+
 export const Session = createContext(null);
 
 function App() {
@@ -21,8 +24,13 @@ function App() {
       console.log("check res launch", res);
       if (res && res.status === 200) {
         setUser(res.data);
+        localStorage.setItem("id", res.data.id);
+
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("phoneNumber", res.data.phoneNumber);
+        localStorage.setItem("dateOfBirth", res.data.dateOfBirth);
+        localStorage.setItem("address", res.data.address);
+        localStorage.setItem("avatar", res.data.avatar);
       } else {
         console.log("error");
       }
@@ -32,11 +40,13 @@ function App() {
   };
 
   return (
-    <Session.Provider value={{ user, setUser }}>
-      <Header />
-      <AppRoutes />
-      <Footer />
-    </Session.Provider>
+    <>
+      <Session.Provider value={{ user, setUser }}>
+        <Header />
+        <AppRoutes />
+        <Footer />
+      </Session.Provider>
+    </>
   );
 }
 

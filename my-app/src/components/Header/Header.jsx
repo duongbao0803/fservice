@@ -12,7 +12,6 @@ import "../Header/styleHeader.css";
 import { Session } from "../../App";
 
 function Header() {
-  const session = useContext(Session);
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
@@ -25,7 +24,10 @@ function Header() {
     localStorage.removeItem("username");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("name");
-    session.setUser(null);
+    localStorage.removeItem("dateOfBirth");
+    localStorage.removeItem("address");
+    localStorage.removeItem("avatar");
+    localStorage.removeItem("name");
     toast.success("Đăng xuất thành công");
     navigate("/authen");
   };
@@ -94,10 +96,13 @@ function Header() {
                   id="dropdown-basic-button"
                   title={
                     <img
-                      src={require("../../assets/img/ig_logo.png")}
-                      width="30"
-                      height="30"
-                      style={{ margin: "0" }}
+                      src={localStorage.getItem("avatar")}
+                      style={{
+                        margin: "0",
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                      }}
                     />
                   }
                 >

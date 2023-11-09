@@ -1,8 +1,8 @@
 import React from "react";
-import Location from "../components/ManagePackage/Location";
+import Location from "../components/UserPage/Location";
 
 import "../assets/css/stylemanagePackage.css";
-import Leftbar from "../components/ManagePackage/Leftbar";
+import Leftbar from "../components/UserPage/Leftbar";
 import Rightbar from "../components/ManagePackage/Rightbar";
 function ManagePackage() {
   return (

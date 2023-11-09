@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import config from "../../utils/cus-axios";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import formatDate from "../../utils/tools";
 import { getApartment, getApartmentPackage } from "../../services/UserService";
-import { Link } from "react-router-dom";
-
+import {
+  Link,
+  NavLink,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 function Rightbar() {
   const [apiData, setApiData] = useState(null);
   const [nameData, setNameData] = useState(null);
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setApartmentData] = useState([]);
-  // const [currentApartment, setcurrentApartmentData] = useState({});
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
+  const [noPackage, setNoPackage] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state !== null) {
+      handleApartmentClick(state.apartment);
+    }
+  }, []);
 
   useEffect(() => {
     fetchApartment();
     if (selectedApartment) {
+      console.log("checlk selected", selectedApartment.id);
       fetchApartmentPackage(selectedApartment.id);
     }
   }, [selectedApartment]);
 
   const handleApartmentClick = (apartment) => {
+    console.log("check log", apartment);
     setShow(true);
     setSelectedApartment(apartment);
   };
@@ -33,7 +44,7 @@ function Rightbar() {
   const fetchApartment = async () => {
     try {
       let response = await getApartment(username);
-      console.log("check apartment:", response.data);
+      console.log("check apartment", response.data);
       setApartmentData(response.data);
     } catch (Error) {
       console.log("error fetching: ", Error);
@@ -43,16 +54,25 @@ function Rightbar() {
   const fetchApartmentPackage = async (id) => {
     try {
       let response = await getApartmentPackage(id);
-      console.log("check apartment package:", response);
       if (response.status === 200 && response.data) {
         setApartmentPackageData(response.data);
+      } else {
+        setApartmentPackageData([]);
+        noPackage(true);
       }
     } catch (Error) {
       console.log("error fetching package: ", Error);
     }
   };
 
-  const showModal = () => {};
+  const handleClick = (id) => {
+    console.log("check apartment", selectedApartment);
+    navigate(`/user/manage-package/${id}`, {
+      state: {
+        selectedApartment: selectedApartment,
+      },
+    });
+  };
 
   return (
     <div className="right-bar mb-4">
@@ -61,22 +81,27 @@ function Rightbar() {
         <div className="chooseHouse ">
           <div className="choose">
             {apartments.map((apartment, index) => (
-              <a
+              <NavLink
+                to={`/user/manage-package/apartment/${apartment.id}`}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
                 onClick={() => handleApartmentClick(apartment)}
-                style={{ padding: "0 10px" }}
+                style={{ marginRight: "20px" }}
               >
-                {apartment.type.building.name} - {apartment.roomNo}
-              </a>
+                {apartment.roomNo} - {apartment.type.building.name}
+              </NavLink>
             ))}
           </div>
           <div className="apartment-package">
             {show === true ? (
-              apartmentsPackage.map((packages, index) => (
-                <>
-                  <div className="orderedPackage">
+              apartmentsPackage.length > 0 ? (
+                apartmentsPackage.map((packages, index) => (
+                  <div className="orderedPackage" key={index}>
                     <div className="orderedPackage_main d-flex justify-content-between">
-                      <div className="orderedPackage-name ">
-                        <span>{packages.package.name} (Cho căn 1PN)</span>
+                      <div className="orderedPackage-name">
+                        <span>
+                          {packages.package.name} (Cho căn{" "}
+                          {selectedApartment.type.type})
+                        </span>
                       </div>
                       <div className="orderedPackage-status">
                         {packages.packageStatus === "Active" ? (
@@ -99,8 +124,6 @@ function Rightbar() {
                     <div className="info-ordered">
                       <table className="info_ordered-table">
                         <tbody>
-                          <tr />
-                          <tr />
                           <tr>
                             <td>Căn hộ:</td>
                             <td>
@@ -108,7 +131,6 @@ function Rightbar() {
                               {selectedApartment.roomNo} - Vinhomes Grand Park
                             </td>
                           </tr>
-
                           <tr>
                             <td>Áp dụng từ:</td>
                             <td>
@@ -120,12 +142,8 @@ function Rightbar() {
                       </table>
                       {packages.packageStatus !== "Disable" ? (
                         <div className="button d-flex justify-content-end">
-                          <button onClick={() => showModal()}>
-                            <Link
-                              to={`/user/managePackage-detail/${packages.id}?buildingName=${selectedApartment.type.building.name}&roomNo=${selectedApartment.roomNo}`}
-                            >
-                              Xem chi tiết
-                            </Link>
+                          <button onClick={() => handleClick(packages.id)}>
+                            Xem chi tiết
                           </button>
                         </div>
                       ) : (
@@ -133,8 +151,19 @@ function Rightbar() {
                       )}
                     </div>
                   </div>
-                </>
-              ))
+                ))
+              ) : (
+                <span
+                  style={{
+                    color: "#ff7800",
+                    fontWeight: "700",
+                    paddingLeft: "10px",
+                    pointerEvents: "none",
+                  }}
+                >
+                  KHÔNG CÓ GÓI DỊCH VỤ
+                </span>
+              )
             ) : (
               <span
                 style={{

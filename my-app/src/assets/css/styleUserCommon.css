@@ -1,0 +1,45 @@
+body {
+  background-color: #f2f6fa;
+}
+
+.active-menu {
+  background-color: #f8e2db;
+  border-radius: 10px;
+  border: 1px solid #ff8228 !important;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+}
+
+.left-bar .user i {
+  color: #ff8228;
+}
+
+/* .left-bar .user .info :hover {
+    background-color: #f8e2db;
+    border-radius: 10px;
+    border: 1px solid #ff8228;
+  } */
+
+.main_info-list .user {
+  line-height: 45px;
+  /* padding: 0 20px 0 15px; */
+  border: 1px solid #f2f6fa;
+  cursor: pointer;
+}
+
+.main_info-list .user .info {
+  display: block;
+  padding: 3px 10px;
+  text-decoration: none;
+  color: #000000;
+  width: 100%;
+}
+
+.main_info-list .user :hover {
+  text-decoration: none;
+  background-color: #f8e2db;
+  border-radius: 10px;
+}

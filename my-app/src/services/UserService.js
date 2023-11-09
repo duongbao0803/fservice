@@ -27,15 +27,19 @@ const fetchUser = (page) => {
 };
 
 const loginAPI = (email, password) => {
-  return config.post("/api/authentication/SignIn", { email, password });
+  const refreshedConfig = refreshData();
+  return config.post(
+    "/api/authentication/SignIn",
+    { email, password },
+    refreshedConfig
+  );
 };
 
-const sendRefreshToken = (aToken, rToken) => {
+const sendRefreshToken = (data) => {
   const refreshedConfig = refreshData();
   return config.post(
     "/api/authentication/Refresh-token",
-    aToken,
-    rToken,
+    data,
     refreshedConfig
   );
 };
@@ -44,8 +48,9 @@ const signUp = (userData) => {
   return config.post("/api/authentication/SignUp", userData);
 };
 
-const editUser = (id) => {
-  return config.put(`/api/accounts/${id}`);
+const editUser = (id, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(`/api/accounts/${id}`, data, refreshedConfig);
 };
 
 const deleteUser = (id) => {
@@ -67,9 +72,39 @@ const getApartment = (apartment) => {
   return config.get(`/api/apartments?username=${apartment}`, refreshedConfig);
 };
 
+const getApartmentId = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments/${id}`, refreshedConfig);
+};
+
 const getApartmentPackage = (id) => {
   const refreshedConfig = refreshData();
   return config.get(`/api/apartment-packages/apartment${id}`, refreshedConfig);
+};
+
+const getApartmentPackageDetail = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartment-packages/${id}`, refreshedConfig);
+};
+
+const getFloor = (buildingId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/floors?buidingId=${buildingId}`, refreshedConfig);
+};
+
+const getBuilding = () => {
+  const refreshedConfig = refreshData();
+  return config.get("/api/buildings", refreshedConfig);
+};
+
+const getApartmentByFloor = (floorId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
+};
+
+const getTypeID = (floorId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
 };
 
 export {
@@ -82,6 +117,11 @@ export {
   Launch,
   Order,
   getApartmentPackage,
+  getApartmentPackageDetail,
   getApartment,
+  getApartmentId,
   Payment,
+  getFloor,
+  getApartmentByFloor,
+  getBuilding,
 };

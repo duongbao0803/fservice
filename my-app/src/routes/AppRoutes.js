@@ -21,6 +21,9 @@ import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
 import ManagePackage from "../page/ManagePackage";
 import ManageHouse from "../page/ManageHouse";
+import UserPage from "../page/UserPage";
+import Rightbar from "../components/ManagePackage/Rightbar";
+import AddHouse from "../components/ManageHouse/AddHouse";
 
 const AppRoutes = () => {
   return (
@@ -38,17 +41,14 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="/user"
           element={
             <PrivateRoute allowedRole={["USER"]}>
-              {/* Route con dành cho vai trò "USER" */}
               <ManageHouse />
-              {/* <ManagePackage_Use />
-              <ManagePackage_Details/> */}
             </PrivateRoute>
           }
-        />
+        /> */}
         <Route
           path="/staff"
           element={
@@ -66,14 +66,23 @@ const AppRoutes = () => {
         <Route path="/payment/success" element={<PaymentSuccess />} />
         <Route path="/payment/error" element={<PaymentError />} />
         <Route path="/payment/error" element={<PaymentError />} />
+
+        <Route path="/user" element={<ManageHouse />}>
+          <Route path="/user/add-apartment" element={<AddHouse />} />
+        </Route>
+
+        <Route path="/user/manage-package" element={<ManagePackage />}>
+          <Route
+            path="/user/manage-package/apartment/:id"
+            element={<Rightbar />}
+          />
+        </Route>
+
         <Route
-          path="/user/managePackage-detail/:id"
+          path="/user/manage-package/:id"
           element={<ManagePackage_Details />}
         />
-        <Route
-          path="/user/manage-package"
-          element={<ManagePackage />}
-        />
+        <Route path="/user/info" element={<UserPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

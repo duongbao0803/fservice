@@ -1,0 +1,68 @@
+.right_bar-main {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.right_bar-main .user_info-table input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.right-bar .user-info {
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.right-bar .user-info .user_info-table td {
+    padding: 15px 20px;
+}
+
+.right-bar .user-info .user_info-table td a {
+    color: #ff8585;
+}
+
+.right-bar .user-info {
+    margin: 30px 0;
+    padding: 0 15px;
+}
+
+.right-bar .user-list .user-list-table td input[type="submit"] {
+    border: none;
+    padding: 3px;
+    width: 00px;
+}
+
+.user_info-table th {
+    min-width: 120px;
+}
+
+.user_info-table button {
+    padding: 0 10px;
+    color: #ffb077;
+    border: 2px solid #ffb077;
+    background-color: #fff;
+}
+
+.user_info-table tr:last-child button:last-child {
+    background-color: #ffc9a3;
+    color: black;
+    font-weight: 400;
+    padding: 3px 20px;
+    margin-bottom: 20px;
+}
+
+.chooseImg p {
+    margin: 0;
+    color: #757575;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 768px) {
+    .user-info {
+        border: none;
+    }
+}

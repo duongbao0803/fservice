@@ -13,30 +13,12 @@ export default function BannerPackage() {
   const { id } = useParams();
 
   useEffect(() => {
-    // async function fetchUserData() {
-    //   const res = await fetch(baseURL);
-    //   if (res.ok) {
-    //     const data = await res.json();
-    //     setAPIData(data);
-    //     console.log(data.packageDetails[0].serviceId);
-    //     const respone = await fetch(
-    //       `https://fservices.azurewebsites.net/api/services/${data.packageDetails[0].serviceId}`
-    //     );
-    //     if (respone.ok) {
-    //       const data = await respone.json();
-    //       setAPIData1(data);
-    //     }
-    //     setLoading(false);
-    //   } else throw new Error(`HTTP Status: ${res.status}`);
-    //   setLoading(false);
-    // }
     fetchBanner();
   }, []);
 
   const fetchBanner = async () => {
     try {
       const res = await config.get(`/api/packages/${id}`);
-      console.log("check resssss", res);
       if (res.status === 200) {
         const data = res.data;
         setAPIData(data);
