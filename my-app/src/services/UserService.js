@@ -125,6 +125,11 @@ const getOrder = (id, data) => {
   return config.put(`/api/staffworks/${id}`, data, refreshedConfig);
 };
 
+const usingPackage = (data) => {
+  const refreshedConfig = refreshData();
+  return config.post("/api/usepackages", data, refreshedConfig);
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -145,4 +150,5 @@ export {
   getAddApartment,
   getStaffWork,
   getOrder,
+  usingPackage,
 };

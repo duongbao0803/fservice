@@ -21,8 +21,8 @@ function Modal({
 }) {
   const theme = useContext(ThemeContext);
   console.log("check modal:", staffData);
-  console.log("check modal:2", info);
-
+  console.log("check modal:2", info.note);
+  console.log("check info", info);
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
@@ -89,10 +89,7 @@ function Modal({
                   <tr>
                     <td className="modal-title">Ghi chú:</td>
                     <td>
-                      <p>
-                        {service?.notes ||
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
-                      </p>
+                      <p>{info?.note}</p>
                     </td>
                   </tr>
                 </tbody>
