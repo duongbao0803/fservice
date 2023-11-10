@@ -6,23 +6,33 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { editUser } from "../../services/UserService";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import '../UsingModal/UsingModal.css'
+import { editUser, usingPackage } from "../../services/UserService";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import "../UsingModal/UsingModal.css";
+import {
+  convertTimeFormat,
+  convertTimeRange,
+  formatTime,
+} from "../../utils/tools";
 
+const UsingModal = ({
+  show,
+  handleClose,
+  dataUserAdd,
+  selectedServiceId,
+  id,
+}) => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [note, setNote] = useState("");
+  const [time, setTime] = useState("");
 
-const UsingModal = ({ show, handleClose, dataUserAdd }) => {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [note, setNote] = useState('');
-  const [time, setTime] = useState('');
-
-  const [nameError, setNameError] = useState('');
-  const [phoneNumberError, setPhoneNumberError] = useState('');
-  const [noteError, setNoteError] = useState('');
+  const [nameError, setNameError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [noteError, setNoteError] = useState("");
 
   const handleChange = (event) => {
     setTime(event.target.value);
@@ -31,46 +41,42 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
   const validateName = () => {
     const trimmedName = name.trim();
 
-
     if (!trimmedName) {
-      setNameError('Tên khách hàng không được để trống');
+      setNameError("Tên khách hàng không được để trống");
       return false;
     }
-
 
     if (trimmedName.length < 2) {
-      setNameError('Tên phải dài hơn 2 kí tự');
+      setNameError("Tên phải dài hơn 2 kí tự");
       return false;
     }
-
 
     if (/[0-9]/.test(trimmedName)) {
-      setNameError('Tên không được chứa số');
+      setNameError("Tên không được chứa số");
       return false;
     }
 
-
-    setNameError('');
+    setNameError("");
     return true;
   };
 
   const validatePhoneNumber = () => {
     const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
     if (!phoneRegex.test(phoneNumber.trim())) {
-      setPhoneNumberError('Số điện thoại không hợp lệ (Vd: 0989xxxxxx)');
+      setPhoneNumberError("Số điện thoại phải có 10 số");
       return false;
     } else {
-      setPhoneNumberError('');
+      setPhoneNumberError("");
       return true;
     }
   };
 
   const validateNote = () => {
     if (note.trim().length > 200) {
-      setNoteError('Ghi chú phải ít hơn 200 kí tự');
+      setNoteError("Ghi chú phải ít hơn 200 kí tự");
       return false;
     } else {
-      setNoteError('');
+      setNoteError("");
       return true;
     }
   };
@@ -80,41 +86,61 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
     const isPhoneNumberValid = validatePhoneNumber();
     const isNoteValid = validateNote();
 
-    if (isNameValid && isPhoneNumberValid && isNoteValid) {
-      try {
+    try {
+      const res = await usingPackage({
+        apartmentPackageId: id,
+        serviceId: selectedServiceId,
+        customerName: name,
+        customerPhone: phoneNumber,
+        note: note,
+        shiftTime: Number(time),
+      });
 
-        handleClose();
-      } catch (error) {
-        toast.error('An error occurred!');
-
+      if (res && res.status === 200) {
+        toast.success("Sử dụng thành công");
       }
-    } else {
-
-      toast.error('Please correct the errors before saving.');
+      if (isNameValid && isPhoneNumberValid && isNoteValid) {
+        try {
+          handleClose();
+        } catch (error) {
+          toast.error("An error occurred!");
+        }
+      } else {
+        toast.error("Please correct the errors before saving.");
+      }
+    } catch (error) {
+      console.log("Error Using Service", error);
     }
   };
 
-
   const closeAndResetModal = () => {
-    setName('');
-    setPhoneNumber('');
-    setNote('');
-    setTime('');
-    setNameError('');
-    setPhoneNumberError('');
-    setNoteError('');
-    handleClose();
+    setName("");
+    setPhoneNumber("");
+    setNote("");
+    setTime("");
+    setNameError("");
+    setPhoneNumberError("");
+    setNoteError("");
+    // handleClose();
   };
 
   return (
     <>
-
-      <Modal show={true} onHide={handleClose} dialogClassName="UsingModal">
-        <Modal.Header closeButton style={{ backgroundColor: '#ff8228' }}>
-          <Modal.Title className="h6" style={{ color: 'white', marginLeft:"10px" }}>Sử Dụng Dịch Vụ</Modal.Title>
+      <Modal show={show} dialogClassName="UsingModal">
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "#ff8228" }}
+          onClick={handleClose}
+        >
+          <Modal.Title
+            className="h6"
+            style={{ color: "white", marginLeft: "10px" }}
+          >
+            Sử Dụng Dịch Vụ
+          </Modal.Title>
         </Modal.Header>
-        <div className="mt-3" style={{marginLeft:"15px"}}>
-          <table className="apartment-table" >
+        <div className="mt-3" style={{ marginLeft: "15px" }}>
+          <table className="apartment-table">
             <tbody>
               <tr>
                 <th className="apartment-info">
@@ -135,14 +161,16 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
             </tbody>
           </table>
         </div>
-        <div style={{ padding: '15px' }}>
+        <div style={{ padding: "15px" }}>
           <div className="form_table">
-            <p style={{
-              color: '#ff8228',
-              fontSize:"18px",
-              fontWeight:"bold"
-              // borderBottom: '2px solid #d9d9d9'
-            }}>
+            <p
+              style={{
+                color: "#ff8228",
+                fontSize: "18px",
+                fontWeight: "bold",
+                // borderBottom: '2px solid #d9d9d9'
+              }}
+            >
               Tổng vệ sinh nhà cửa
             </p>
             <Modal.Body>
@@ -195,7 +223,9 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <div className="time_selected">
-                  <Form.Label style={{ marginRight: '10px' }}>Giờ thực hiện</Form.Label>
+                  <Form.Label style={{ marginRight: "10px" }}>
+                    Giờ thực hiện
+                  </Form.Label>
                   <FormControl sx={{ minWidth: 130 }} size="small">
                     <InputLabel id="demo-select-small-label">Chọn</InputLabel>
                     <Select
@@ -205,10 +235,10 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
                       label="Time"
                       onChange={handleChange}
                     >
-                      <MenuItem value="7-9">7:00 AM - 9:00 AM</MenuItem>
-                      <MenuItem value="9-11">9:00 AM - 11:00 AM</MenuItem>
-                      <MenuItem value="13-15">1:00 PM - 3:00 PM</MenuItem>
-                      <MenuItem value="15-17">3:00 PM - 5:00 PM</MenuItem>
+                      <MenuItem value="0">7:00 AM - 9:00 AM</MenuItem>
+                      <MenuItem value="1">9:00 AM - 11:00 AM</MenuItem>
+                      <MenuItem value="2">1:00 PM - 3:00 PM</MenuItem>
+                      <MenuItem value="3">3:00 PM - 5:00 PM</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -216,16 +246,23 @@ const UsingModal = ({ show, handleClose, dataUserAdd }) => {
             </Modal.Body>
           </div>
         </div>
-        <Modal.Footer style={{border: 'none'}}>
-          <Button variant="secondary" className="modal-btn-close" onClick={handleClose}>
+        <Modal.Footer style={{ border: "none" }}>
+          <Button
+            variant="secondary"
+            className="modal-btn-close"
+            onClick={() => handleClose()}
+          >
             HUỶ
           </Button>
-          <Button variant="primary" className="modal-btn-save" onClick={() => handleUsingPackage()}>
+          <Button
+            variant="primary"
+            className="modal-btn-save"
+            onClick={() => handleUsingPackage()}
+          >
             SỬ DỤNG
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 };

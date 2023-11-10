@@ -3,19 +3,21 @@ import React, { useContext, useEffect } from "react";
 import "../assets/css/styleStaffCommon.css";
 import "../assets/css/styleStaffWork.css";
 
-
 import Navbar from "../components/StaffPage/Navbar";
 import Sidebar from "../components/StaffPage/Sidebar";
 import WorkTable from "../components/StaffPage/WorkTable";
+import { ToastContainer } from "react-toastify";
 
 function Staff() {
-  
   return (
     <>
       <div className="container-fluid">
         {/* <Navbar/> */}
         <div className="row">
-          <div className="col-md-2" style={{ backgroundColor: "white", padding: 0}}>
+          <div
+            className="col-md-2"
+            style={{ backgroundColor: "white", padding: 0 }}
+          >
             <Sidebar />
           </div>
           <div
@@ -27,7 +29,14 @@ function Staff() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        autoClose={2000}
+        pauseOnHover={false}
+        style={{
+          top: "3em",
+        }}
+      />
     </>
-  )
+  );
 }
 export default Staff;

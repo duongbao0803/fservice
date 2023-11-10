@@ -69,7 +69,6 @@ const Frame = () => {
   );
 
   const handleSubmit = () => {
-    console.log("check name: ", packageName);
     if (localStorage.getItem("isLogged") === "true") {
       navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
     } else {

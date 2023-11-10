@@ -3,20 +3,48 @@ import { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
 import "./Modal.css";
+import { formatDate } from "../../utils/tools.js";
+import { getOrder } from "../../services/UserService.js";
+import Info from "../confirm/Info.jsx";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
-function Modal({ isOpen, service, onClose , staffData}) {
+function Modal({
+  isOpen,
+  service,
+  onClose,
+  staffData,
+  info,
+  building,
+  roomNo,
+  fetchStaff,
+}) {
   const theme = useContext(ThemeContext);
-    console.log("check modal:", staffData);
-    
-    
+  console.log("check modal:", staffData);
+  console.log("check modal:2", info.note);
+  console.log("check info", info);
   if (!isOpen) return null;
 
+  const handleSubmit = async () => {
+    try {
+      const res = await getOrder(info.id, {
+        id: info.id,
+        status: 1,
+      });
+      if (res && res.status === 200) {
+        toast.success("Nhận việc thành công");
+        onClose();
+        fetchStaff();
+      } else {
+        toast.success("Nhận việc thất bại");
+      }
+    } catch (error) {
+      console.log("Error Submitting Order", error);
+    }
+  };
+
   return (
-    <div
-      onClick={onClose}
-      className="modal"
-      style={{ backgroundColor: theme.background }}
-    >
+    <div className="modal" style={{ backgroundColor: theme.background }}>
       <div className="modal-content">
         <div className="modal-header">
           <h5>CHI TIẾT CÔNG VIỆC</h5>
@@ -43,26 +71,25 @@ function Modal({ isOpen, service, onClose , staffData}) {
                   <tr>
                     <td className="modal-title">Địa chỉ:</td>
                     <td>
-                      <p>{service?.address || "Vinhomes Grand Park"}</p>
-                      <p>{service?.room || "S101-Tầng 3-Số phòng 0309"}</p>
+                      <p>"Vinhomes Grand Park"</p>
+                      <p>
+                        Tòa {building} - Phòng {roomNo}
+                      </p>
                     </td>
                   </tr>
                   <tr>
                     <td className="modal-title">Giờ làm việc:</td>
                     <td>
                       <p>
-                        {service?.workingHours ||
-                          "17/10/2023 7:00 AM - 11:00 AM"}
+                        {formatDate(info?.apartmentPackage.startDate)} -{" "}
+                        {info?.shiftTime}
                       </p>
                     </td>
                   </tr>
                   <tr>
                     <td className="modal-title">Ghi chú:</td>
                     <td>
-                      <p>
-                        {service?.notes ||
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
-                      </p>
+                      <p>{info?.note}</p>
                     </td>
                   </tr>
                 </tbody>
@@ -77,13 +104,13 @@ function Modal({ isOpen, service, onClose , staffData}) {
                   <tr>
                     <td className="modal-title">Khách Hàng:</td>
                     <td>
-                      <p>{service?.client || "Dương Tôn Bảo"}</p>
+                      <p>{info?.customerName}</p>
                     </td>
                   </tr>
                   <tr>
                     <td className="modal-title">Số điện thoại:</td>
                     <td>
-                      <p>{service?.phone || "0989898989"}</p>
+                      <p>{info?.customerPhone}</p>
                     </td>
                   </tr>
                 </tbody>
@@ -114,7 +141,7 @@ function Modal({ isOpen, service, onClose , staffData}) {
                             margin: "0",
                           }}
                         >
-                          Đang chờ xử lí
+                          {info?.status}
                         </p>
                       </div>
                     </td>
@@ -129,7 +156,12 @@ function Modal({ isOpen, service, onClose , staffData}) {
                             padding: "5px",
                             border: "none",
                             outline: "none",
+                            filter:
+                              info?.status === "working" ? "blur(4px)" : "none",
+                            pointerEvents:
+                              info?.status === "working" ? "none" : "auto",
                           }}
+                          onClick={() => handleSubmit()}
                         >
                           Nhận việc
                         </button>
@@ -141,7 +173,7 @@ function Modal({ isOpen, service, onClose , staffData}) {
                       <p>Ngày hoàn thành:</p>
                     </td>
                     <td>
-                      <p>10/10/2023</p>
+                      <p>{formatDate(info?.completeDate)}</p>
                     </td>
                     <td>
                       <div className="modal-btn">

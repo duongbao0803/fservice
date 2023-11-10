@@ -9,12 +9,11 @@ import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
-import { DatePicker, Space } from 'antd';
-import dayjs from 'dayjs';
+import { DatePicker, Space } from "antd";
+import dayjs from "dayjs";
 
 function UserInfo() {
   const email = localStorage.getItem("username");
-  const [username, setUserName] = useState("");
   const [name, setName] = useState(localStorage.getItem("name"));
   const [dateOfBirth, setDateOfBirth] = useState(
     localStorage.getItem("dateOfBirth")
@@ -174,7 +173,7 @@ function UserInfo() {
     setDateOfBirth(dateString);
     formik.setFieldValue("dateOfBirth", dateString);
   };
-  const dateFormat = 'YYYY-MM-DD';
+  const dateFormat = "YYYY-MM-DD";
 
   return (
     <>
@@ -215,7 +214,10 @@ function UserInfo() {
                           onChange={handleDateOfBirthChange}
                         /> */}
                         <Space direction="vertical">
-                          <DatePicker onChange={onChange} defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}/>
+                          <DatePicker
+                            onChange={onChange}
+                            defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
+                          />
                         </Space>
                       </td>
                     </tr>

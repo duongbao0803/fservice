@@ -34,8 +34,6 @@ import Footer from "../components/Footer/Footer";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
-  console.log("check role", role);
-  console.log("check role", typeof role);
 
   return (
     <>
@@ -75,7 +73,7 @@ const AppRoutes = () => {
           </>
         )}
 
-        {role === "ADMIN" && <Route path="/admin" element={<ListUser />} />}
+        {role === "ADMIN" && <Route path="/board" element={<ListUser />} />}
 
         {role === "STAFF" && (
           <>

@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
 import { formatDate } from "../../utils/tools";
+import { getApartmentId, getStaffWork } from "../../services/UserService";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -15,6 +16,9 @@ function DataTable() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
+  const [apartment, setApartment] = useState([]);
+  const [building, setBuilding] = useState({});
+  const [roomNo, setRoomNo] = useState({});
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
@@ -42,6 +46,9 @@ function DataTable() {
           const apartmentInfo = await fetchApartment(
             staff.apartmentPackage.apartmentId
           );
+          console.log("cehck apartment", staff.apartmentPackage.apartmentId);
+          setBuilding(apartmentInfo?.type.building.name);
+          setRoomNo(apartmentInfo?.roomNo);
           // Construct the row
           return {
             id: staff.id,
@@ -75,7 +82,7 @@ function DataTable() {
 
   const fetchStaff = async () => {
     try {
-      let response = await config.get(`/api/staffworks/${username}`);
+      let response = await getStaffWork(username);
       console.log("check staff:", response.data);
       if (response && response.data && response.status === 200) {
         setStaffData(response.data);
@@ -86,7 +93,7 @@ function DataTable() {
   };
   const fetchApartment = async (id) => {
     try {
-      const response = await config.get(`/api/apartments/${id}`);
+      const response = await getApartmentId(id);
       if (response && response.data && response.status === 200) {
         return response.data;
       }
@@ -111,9 +118,10 @@ function DataTable() {
     setModalOpen(true);
 
     const selectedStaff = staffData.find((staff) => staff.id === params.row.id);
-    // console.log("check selectrd staff", selectedStaff);
+    console.log("check selectrd staff", selectedStaff);
     if (selectedStaff) {
       setInfo(selectedStaff);
+      console.log("check info", info);
     } else {
       console.error("No staff found for id:", params.row.id);
     }
@@ -165,6 +173,10 @@ function DataTable() {
               isOpen={isModalOpen}
               service={selectedService}
               onClose={() => setModalOpen(false)}
+              info={info}
+              building={building}
+              roomNo={roomNo}
+              fetchStaff={() => fetchStaff()}
             />
           )}
         </div>

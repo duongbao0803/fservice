@@ -9,10 +9,8 @@ function ConfirmButton(props) {
   const navigate = useNavigate();
   const handleSubmit = async () => {
     const data = props.state.formData;
-
     try {
       let res = await Order(data);
-      console.log("check order", res);
       if (res && res.status === 200) {
         toast.success("Đơn hàng tạo thành công, vui lòng chờ trong giây lát", {
           autoClose: 2000,
@@ -20,12 +18,15 @@ function ConfirmButton(props) {
         setTimeout(() => {
           window.open(res.data.paymentUrl, "_blank");
         }, 3000);
+      } else if (res.message === "Package is using.") {
+        toast.warning("Gói này đang được sử dụng. Vui lòng chọn gói khác");
+        navigate("/");
       } else {
         toast.error("Đơn hàng tạo thất bại");
         navigate("/");
       }
     } catch (error) {
-      console.log("check submit", error);
+      console.log("Error Submitting", error);
     }
   };
   return (
