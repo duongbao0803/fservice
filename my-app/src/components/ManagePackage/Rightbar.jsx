@@ -30,22 +30,23 @@ function Rightbar() {
   useEffect(() => {
     fetchApartment();
     if (selectedApartment) {
-      console.log("checlk selected", selectedApartment.id);
       fetchApartmentPackage(selectedApartment.id);
     }
   }, [selectedApartment]);
 
   const handleApartmentClick = (apartment) => {
-    console.log("check log", apartment);
     setShow(true);
     setSelectedApartment(apartment);
   };
 
   const fetchApartment = async () => {
     try {
-      let response = await getApartment(username);
-      console.log("check apartment", response.data);
-      setApartmentData(response.data);
+      let res = await getApartment(username);
+      if (res && res.status === 200) {
+        setApartmentData(res.data);
+      } else {
+        setApartmentData([]);
+      }
     } catch (Error) {
       console.log("error fetching: ", Error);
     }
@@ -53,9 +54,9 @@ function Rightbar() {
 
   const fetchApartmentPackage = async (id) => {
     try {
-      let response = await getApartmentPackage(id);
-      if (response.status === 200 && response.data) {
-        setApartmentPackageData(response.data);
+      let res = await getApartmentPackage(id);
+      if (res.status === 200 && res.data) {
+        setApartmentPackageData(res.data);
       } else {
         setApartmentPackageData([]);
         noPackage(true);
@@ -66,7 +67,6 @@ function Rightbar() {
   };
 
   const handleClick = (id) => {
-    console.log("check apartment", selectedApartment);
     navigate(`/user/manage-package/${id}`, {
       state: {
         selectedApartment: selectedApartment,

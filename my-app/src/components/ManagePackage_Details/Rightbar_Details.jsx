@@ -24,12 +24,12 @@ function Rightbar({ id }) {
   const [apartmentId, setApartmentId] = useState(null);
   const [apartment, setApartment] = useState(null);
   const [selectedServiceId, setSelectedServiceId] = useState("");
+  const [selectedServiceName, setSelectedServiceName] = useState("");
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await getApartmentPackageDetail(id);
-        console.log("check dataaaa", response);
         setData(response.data);
         setApartmentId(response.data.apartmentId);
       } catch (err) {
@@ -53,7 +53,6 @@ function Rightbar({ id }) {
 
   const rows = data?.apartmentPackageServices?.map((apmPackage) => {
     const status = apmPackage.remainQuantity !== 0 ? "Sử dụng" : "Mua thêm";
-
     return createData(
       apmPackage.service.name,
       apmPackage.quantity,
@@ -65,24 +64,10 @@ function Rightbar({ id }) {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-  };
-
-  const handleShow = () => {
+  const handleClick = (item, index, serviceId, serviceName) => {
     setShow(true);
-  };
-
-  const handleClick = (item, index, serviceId) => {
-    setShow(true);
-    console.log("handle click", item, index, serviceId);
-    console.log("cehc", serviceId);
-    console.log(
-      "check service",
-      data.apartmentPackageServices[index].serviceId
-    );
-
     setSelectedServiceId(serviceId);
+    setSelectedServiceName(serviceName);
   };
 
   return (
@@ -100,7 +85,10 @@ function Rightbar({ id }) {
               <div className="orderedPackage-details">
                 <div className="orderedPackage-details_main d-flex justify-content-between">
                   <div className="orderedPackage-details-name ">
-                    <span>{data?.package?.name}</span>
+                    <span>
+                      {data?.package?.name} - Dành cho căn{" "}
+                      {apartment?.type.type}
+                    </span>
                   </div>
                   <div className="orderedPackage-details-status">
                     {data?.packageStatus === "Active" ? (
@@ -126,7 +114,6 @@ function Rightbar({ id }) {
                           {apartment?.roomNo} -{" "}
                           {apartment?.type?.building?.name} - Vinhomes Grand
                           Parks
-                          {/* {roomNo} - {buildingName} - Vinhomes Grand Park */}
                         </td>
                       </tr>
 
@@ -202,7 +189,9 @@ function Rightbar({ id }) {
                                     row.action,
                                     index,
                                     data.apartmentPackageServices[index]
-                                      .serviceId
+                                      .serviceId,
+                                    data?.apartmentPackageServices[index]
+                                      ?.service?.name
                                   )
                                 }
                               >
@@ -243,6 +232,8 @@ function Rightbar({ id }) {
           show={show}
           selectedServiceId={selectedServiceId}
           id={id}
+          selectedServiceName={selectedServiceName}
+          apartment={apartment}
         />
       </div>
     </>

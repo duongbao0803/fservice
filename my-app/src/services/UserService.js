@@ -102,11 +102,6 @@ const getApartmentByFloor = (floorId) => {
   return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
 };
 
-const getTypeID = (floorId) => {
-  const refreshedConfig = refreshData();
-  return config.get(`/api/apartments?floorId=${floorId}`, refreshedConfig);
-};
-
 const getAddApartment = (floorId, typeId) => {
   const refreshedConfig = refreshData();
   return config.get(
@@ -130,6 +125,24 @@ const usingPackage = (data) => {
   return config.post("/api/usepackages", data, refreshedConfig);
 };
 
+const confirmWork = (id, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(`/api/staffworks/${id}`, data, refreshedConfig);
+};
+
+const getApartmentType = (buildingId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/types?buildingId=${buildingId}`, refreshedConfig);
+};
+
+const createApartment = (id, username) => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/apartments/${id}?userName=${username}`,
+    refreshedConfig
+  );
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -151,4 +164,7 @@ export {
   getStaffWork,
   getOrder,
   usingPackage,
+  confirmWork,
+  createApartment,
+  getApartmentType,
 };

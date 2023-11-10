@@ -24,15 +24,19 @@ const UsingModal = ({
   dataUserAdd,
   selectedServiceId,
   id,
+  selectedServiceName,
+  apartment,
 }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [note, setNote] = useState("");
   const [time, setTime] = useState("");
-
   const [nameError, setNameError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [noteError, setNoteError] = useState("");
+
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
 
   const handleChange = (event) => {
     setTime(event.target.value);
@@ -155,7 +159,7 @@ const UsingModal = ({
                   <p>Loại căn hộ:</p>
                 </th>
                 <td className="apartment-detail">
-                  <p>1 Phòng Ngủ</p>
+                  <p>{apartment?.type.type}</p>
                 </td>
               </tr>
             </tbody>
@@ -171,7 +175,7 @@ const UsingModal = ({
                 // borderBottom: '2px solid #d9d9d9'
               }}
             >
-              Tổng vệ sinh nhà cửa
+              {selectedServiceName}
             </p>
             <Modal.Body>
               <Form>
@@ -235,10 +239,31 @@ const UsingModal = ({
                       label="Time"
                       onChange={handleChange}
                     >
-                      <MenuItem value="0">7:00 AM - 9:00 AM</MenuItem>
-                      <MenuItem value="1">9:00 AM - 11:00 AM</MenuItem>
-                      <MenuItem value="2">1:00 PM - 3:00 PM</MenuItem>
-                      <MenuItem value="3">3:00 PM - 5:00 PM</MenuItem>
+                      javascript Copy
+                      <MenuItem
+                        value="0"
+                        disabled={currentHour >= 7 && currentHour < 9}
+                      >
+                        7:00 AM - 9:00 AM
+                      </MenuItem>
+                      <MenuItem
+                        value="1"
+                        disabled={currentHour >= 9 && currentHour < 11}
+                      >
+                        9:00 AM - 11:00 AM
+                      </MenuItem>
+                      <MenuItem
+                        value="2"
+                        disabled={currentHour >= 13 && currentHour < 15}
+                      >
+                        1:00 PM - 3:00 PM
+                      </MenuItem>
+                      <MenuItem
+                        value="3"
+                        disabled={currentHour >= 15 && currentHour < 17}
+                      >
+                        3:00 PM - 5:00 PM
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </div>

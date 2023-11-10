@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
 import { formatDate } from "../../utils/tools";
 import { getApartmentId, getStaffWork } from "../../services/UserService";
+import { Spinner } from "react-bootstrap";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -25,8 +26,9 @@ function DataTable() {
     { field: "apartment", headerName: "Căn hộ", width: 150 },
     { field: "service", headerName: "Dịch vụ", width: 250 },
     { field: "customer", headerName: "Khách hàng", width: 200 },
-    { field: "phoneNumber", headerName: "Số điện thoại", width: 200 },
+    { field: "phoneNumber", headerName: "Số điện thoại", width: 150 },
     { field: "performDate", headerName: "Ngày thực hiện", width: 250 },
+    { field: "status", headerName: "Trạng thái", width: 100 },
   ];
 
   // const rows = [
@@ -46,7 +48,6 @@ function DataTable() {
           const apartmentInfo = await fetchApartment(
             staff.apartmentPackage.apartmentId
           );
-          console.log("cehck apartment", staff.apartmentPackage.apartmentId);
           setBuilding(apartmentInfo?.type.building.name);
           setRoomNo(apartmentInfo?.roomNo);
           // Construct the row
@@ -60,6 +61,7 @@ function DataTable() {
             customer: staff.customerName,
             phoneNumber: staff.customerPhone,
             performDate: `${formatDate(staff.createdDate)} ${staff.shiftTime}`,
+            status: staff.status,
           };
         })
       );
@@ -114,14 +116,11 @@ function DataTable() {
 
   const handleStaff = (params) => {
     setSelectedService(params.row.id);
-    console.log("check params:", params.row.id);
     setModalOpen(true);
 
     const selectedStaff = staffData.find((staff) => staff.id === params.row.id);
-    console.log("check selectrd staff", selectedStaff);
     if (selectedStaff) {
       setInfo(selectedStaff);
-      console.log("check info", info);
     } else {
       console.error("No staff found for id:", params.row.id);
     }
@@ -160,7 +159,6 @@ function DataTable() {
               pageSize={5}
               hideFooterSelectedRowCount
               rowsPerPageOptions={[5, 10]}
-              // onRowClick={handleRowClick}
               onRowClick={handleStaff}
               sx={{ cursor: "pointer" }}
             />

@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
 import "./Modal.css";
 import { formatDate } from "../../utils/tools.js";
-import { getOrder } from "../../services/UserService.js";
+import { confirmWork, getOrder } from "../../services/UserService.js";
 import Info from "../confirm/Info.jsx";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -20,9 +20,6 @@ function Modal({
   fetchStaff,
 }) {
   const theme = useContext(ThemeContext);
-  console.log("check modal:", staffData);
-  console.log("check modal:2", info.note);
-  console.log("check info", info);
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
@@ -40,6 +37,24 @@ function Modal({
       }
     } catch (error) {
       console.log("Error Submitting Order", error);
+    }
+  };
+
+  const handleConfirm = async () => {
+    try {
+      const res = await confirmWork(info.id, {
+        id: info.id,
+        status: 2,
+      });
+      if (res && res.status === 200) {
+        toast.success("Hoàn thành công việc");
+        onClose();
+        fetchStaff();
+      } else {
+        toast.success("Hoàn thành công việc thất bại");
+      }
+    } catch (error) {
+      console.log("Error Completing Service", error);
     }
   };
 
@@ -173,7 +188,11 @@ function Modal({
                       <p>Ngày hoàn thành:</p>
                     </td>
                     <td>
-                      <p>{formatDate(info?.completeDate)}</p>
+                      {info.completeDate ? (
+                        <p>{formatDate(info?.completeDate)}</p>
+                      ) : (
+                        ""
+                      )}
                     </td>
                     <td>
                       <div className="modal-btn">
@@ -187,6 +206,7 @@ function Modal({
                             border: "none",
                             outline: "none",
                           }}
+                          onClick={() => handleConfirm()}
                         >
                           Hoàn thành
                         </button>

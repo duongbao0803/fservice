@@ -22,10 +22,11 @@ function Rightbar_house() {
 
   const fetchApartment = async () => {
     try {
-      let response = await getApartment(username);
-      console.log("check apartment:", response.data);
-      if (response && response.data && response.status === 200) {
-        setApartmentData(response.data);
+      let res = await getApartment(username);
+      if (res && res.data && res.status === 200) {
+        setApartmentData(res.data);
+      } else {
+        setApartmentData([]);
       }
       setIsLoading(false);
     } catch (Error) {
