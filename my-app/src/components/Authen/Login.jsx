@@ -30,7 +30,6 @@ function Loginv2() {
   const [password, setPassword] = useState("");
   const [isLogged, setIsLogged] = useState(true);
   const [rememberMe, setRememberMe] = useState(false);
-
   const session = useContext(Session);
   const navigate = useNavigate();
   const accesstoken = localStorage.getItem("accesstoken");

@@ -48,11 +48,15 @@ function Rightbar_house() {
     setIsShowAdd(true);
   };
 
+  const handleClose = () => {
+    setIsShowAdd(false);
+  };
+
   return (
     <div className="container">
       <h5 className="mb-4">Căn hộ của bạn</h5>
       {isShowAdd === true ? (
-        <AddHouse />
+        <AddHouse isShowAdd={isShowAdd} handleClose={handleClose} />
       ) : (
         <div className="right-bar_house">
           <div className="add-apartment">

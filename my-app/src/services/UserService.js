@@ -79,7 +79,7 @@ const getApartmentId = (id) => {
 
 const getApartmentPackage = (id) => {
   const refreshedConfig = refreshData();
-  return config.get(`/api/apartment-packages/apartment${id}`, refreshedConfig);
+  return config.get(`/api/apartment-packages/apartment/${id}`, refreshedConfig);
 };
 
 const getApartmentPackageDetail = (id) => {
@@ -143,6 +143,14 @@ const createApartment = (id, username) => {
   );
 };
 
+const getUsingHistory = (apartmentPackgeId, pageNumber) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=10`,
+    refreshedConfig
+  );
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -167,4 +175,5 @@ export {
   confirmWork,
   createApartment,
   getApartmentType,
+  getUsingHistory,
 };

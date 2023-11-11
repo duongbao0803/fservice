@@ -14,6 +14,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Spinner } from "react-bootstrap";
 import UsingModal from "../UsingModal/UsingModal";
+import Rightbar_Use from "../ManagePackage_Use/Rightbar_Use";
+import ManagePackage_Use from "../../page/ManagePackage_Use";
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
@@ -25,6 +27,7 @@ function Rightbar({ id }) {
   const [apartment, setApartment] = useState(null);
   const [selectedServiceId, setSelectedServiceId] = useState("");
   const [selectedServiceName, setSelectedServiceName] = useState("");
+  const [isShowUsing, setIsShowUsing] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -68,6 +71,22 @@ function Rightbar({ id }) {
     setShow(true);
     setSelectedServiceId(serviceId);
     setSelectedServiceName(serviceName);
+  };
+
+  const handleUsing = (status) => {
+    if (status) {
+      setIsShowUsing(true);
+      const use = document.getElementById("use");
+      use.style.borderBottom = "3px solid #ff8228";
+      const service = document.getElementById("service");
+      service.style.border = "none";
+    } else {
+      setIsShowUsing(false);
+      const use = document.getElementById("use");
+      use.style.border = "none";
+      const service = document.getElementById("service");
+      service.style.borderBottom = "3px solid #ff8228";
+    }
   };
 
   return (
@@ -126,85 +145,96 @@ function Rightbar({ id }) {
                       </tr>
                     </tbody>
                   </table>
-
                   <div className="choose-details_table">
                     <tr>
-                      <td>
-                        <span style={{ borderBottom: "3px solid #ff8228" }}>
+                      <td onClick={() => handleUsing(false)}>
+                        <span
+                          id="service"
+                          style={{ borderBottom: "3px solid #ff8228" }}
+                        >
                           Dịch vụ
                         </span>
                       </td>
-                      <td>
-                        <span> Sử dụng</span>
+                      <td onClick={() => handleUsing(true)}>
+                        <span id="use"> Sử dụng</span>
                       </td>
                     </tr>
+                    {isShowUsing === true ? <Rightbar_Use /> : ""}
                   </div>
 
-                  <TableContainer
-                    component={Paper}
-                    style={{ boxShadow: "none" }}
-                  >
-                    <Table
-                      sx={{
-                        minWidth: 650,
-
-                        "& .MuiTableCell-root": {
-                          borderBottom: "none",
-                          backgroundColor: "transparent",
-                        },
-                        "& .MuiTableHead-root .MuiTableCell-root": {
-                          borderBottom: "none",
-                          backgroundColor: "transparent",
-                        },
-                        borderCollapse: "separate",
-                        borderSpacing: "0",
-                      }}
-                      size="small"
-                      aria-label="a dense table"
+                  {isShowUsing === false ? (
+                    <TableContainer
+                      component={Paper}
+                      style={{ boxShadow: "none" }}
                     >
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Tên dịch vụ</TableCell>
-                          <TableCell align="right">Số lượng</TableCell>
-                          <TableCell align="right">Đã dùng</TableCell>
-                          <TableCell align="right">Còn lại</TableCell>
-                          <TableCell align="right">Thao tác</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rows.map((row, index) => (
-                          <TableRow key={row.serviceName}>
-                            <TableCell component="th" scope="row">
-                              {row.serviceName}
-                            </TableCell>
-                            <TableCell align="right">{row.quantity}</TableCell>
-                            <TableCell align="right">{row.used}</TableCell>
-                            <TableCell align="right">{row.remaining}</TableCell>
-                            {data.packageStatus === "Active" ? (
-                              <TableCell
-                                align="right"
-                                className="action"
-                                onClick={() =>
-                                  handleClick(
-                                    row.action,
-                                    index,
-                                    data.apartmentPackageServices[index]
-                                      .serviceId,
-                                    data?.apartmentPackageServices[index]
-                                      ?.service?.name
-                                  )
-                                }
-                              >
-                                {row.action}
-                              </TableCell>
-                            ) : (
-                              <span></span>
-                            )}
+                      <Table
+                        sx={{
+                          minWidth: 650,
+
+                          "& .MuiTableCell-root": {
+                            borderBottom: "none",
+                            backgroundColor: "transparent",
+                          },
+                          "& .MuiTableHead-root .MuiTableCell-root": {
+                            borderBottom: "none",
+                            backgroundColor: "transparent",
+                          },
+                          borderCollapse: "separate",
+                          borderSpacing: "0",
+                        }}
+                        size="small"
+                        aria-label="a dense table"
+                      >
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Tên dịch vụ</TableCell>
+                            <TableCell align="right">Số lượng</TableCell>
+                            <TableCell align="right">Đã dùng</TableCell>
+                            <TableCell align="right">Còn lại</TableCell>
+                            <TableCell align="right">Thao tác</TableCell>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                          {rows.map((row, index) => (
+                            <TableRow key={row.serviceName}>
+                              <TableCell component="th" scope="row">
+                                {row.serviceName}
+                              </TableCell>
+                              <TableCell align="right">
+                                {row.quantity}
+                              </TableCell>
+                              <TableCell align="right">{row.used}</TableCell>
+                              <TableCell align="right">
+                                {row.remaining}
+                              </TableCell>
+                              {data.packageStatus === "Active" ? (
+                                <TableCell
+                                  align="right"
+                                  className="action"
+                                  onClick={() =>
+                                    handleClick(
+                                      row.action,
+                                      index,
+                                      data.apartmentPackageServices[index]
+                                        .serviceId,
+                                      data?.apartmentPackageServices[index]
+                                        ?.service?.name
+                                    )
+                                  }
+                                >
+                                  {row.action}
+                                </TableCell>
+                              ) : (
+                                <span></span>
+                              )}
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
