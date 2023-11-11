@@ -9,7 +9,7 @@ import {
 } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-function AddHouse() {
+function AddHouse({ isShowAdd, handleClose }) {
   const [buildings, setBuildings] = useState([]);
   const [floors, setFloors] = useState([]);
   const [apartments, setApartments] = useState([]);
@@ -86,6 +86,9 @@ function AddHouse() {
     const selectedFloorId = event.target.value;
     console.log("check flooriud", selectedFloorId);
     setSelectedFloor(selectedFloorId);
+    if (selectedType) {
+      await fetchApartment(selectedFloorId, selectedType);
+    }
   };
 
   const handleTypeChange = async (event) => {
@@ -113,6 +116,7 @@ function AddHouse() {
       console.log("cehck res", res);
       if (res && res.status === 200) {
         toast.success("Đăng kí căn hộ thành công");
+        handleClose();
       } else if (res.status === 404) {
         toast.error("Bạn đã đăng kí căn hộ này. Vui lòng đăng kí căn hộ khác");
       } else if (res.status === 405) {

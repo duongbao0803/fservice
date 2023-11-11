@@ -20,6 +20,7 @@ function Modal({
   fetchStaff,
 }) {
   const theme = useContext(ThemeContext);
+  let isSubmitSuccessful = false;
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
@@ -29,9 +30,11 @@ function Modal({
         status: 1,
       });
       if (res && res.status === 200) {
+        console.log("check working", res);
         toast.success("Nhận việc thành công");
         onClose();
         fetchStaff();
+        isSubmitSuccessful = true;
       } else {
         toast.success("Nhận việc thất bại");
       }
@@ -42,6 +45,11 @@ function Modal({
 
   const handleConfirm = async () => {
     try {
+      isSubmitSuccessful = true;
+      if (!isSubmitSuccessful) {
+        toast.error("Vui lòng nhận việc trước khi hoàn thành công việc");
+        return;
+      }
       const res = await confirmWork(info.id, {
         id: info.id,
         status: 2,
@@ -161,26 +169,27 @@ function Modal({
                       </div>
                     </td>
                     <td>
-                      <div className="modal-btn">
-                        <button
-                          style={{
-                            color: "white",
-                            backgroundColor: "#ff8228",
-                            borderRadius: "10px",
-                            minWidth: "120px",
-                            padding: "5px",
-                            border: "none",
-                            outline: "none",
-                            filter:
-                              info?.status === "working" ? "blur(4px)" : "none",
-                            pointerEvents:
-                              info?.status === "working" ? "none" : "auto",
-                          }}
-                          onClick={() => handleSubmit()}
-                        >
-                          Nhận việc
-                        </button>
-                      </div>
+                      {info.status.includes("Working") ||
+                      info.status.includes("Completed") ? (
+                        " "
+                      ) : (
+                        <div className="modal-btn">
+                          <button
+                            style={{
+                              color: "white",
+                              backgroundColor: "#ff8228",
+                              borderRadius: "10px",
+                              minWidth: "120px",
+                              padding: "5px",
+                              border: "none",
+                              outline: "none",
+                            }}
+                            onClick={() => handleSubmit()}
+                          >
+                            Nhận việc
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                   <tr>
@@ -194,24 +203,28 @@ function Modal({
                         ""
                       )}
                     </td>
-                    <td>
-                      <div className="modal-btn">
-                        <button
-                          style={{
-                            color: "white",
-                            backgroundColor: "#03AC00",
-                            borderRadius: "10px",
-                            minWidth: "120px",
-                            padding: "5px",
-                            border: "none",
-                            outline: "none",
-                          }}
-                          onClick={() => handleConfirm()}
-                        >
-                          Hoàn thành
-                        </button>
-                      </div>
-                    </td>
+                    {info.status.includes("Completed") ? (
+                      ""
+                    ) : (
+                      <td>
+                        <div className="modal-btn">
+                          <button
+                            style={{
+                              color: "white",
+                              backgroundColor: "#03AC00",
+                              borderRadius: "10px",
+                              minWidth: "120px",
+                              padding: "5px",
+                              border: "none",
+                              outline: "none",
+                            }}
+                            onClick={() => handleConfirm()}
+                          >
+                            Hoàn thành
+                          </button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 </tbody>
               </table>

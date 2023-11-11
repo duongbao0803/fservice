@@ -35,8 +35,7 @@ const UsingModal = ({
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [noteError, setNoteError] = useState("");
 
-  const currentTime = new Date();
-  const currentHour = currentTime.getHours();
+  const currentHour = new Date().getHours();
 
   const handleChange = (event) => {
     setTime(event.target.value);
@@ -107,25 +106,14 @@ const UsingModal = ({
         try {
           handleClose();
         } catch (error) {
-          toast.error("An error occurred!");
+          toast.error("Xảy ra sự cố");
         }
       } else {
-        toast.error("Please correct the errors before saving.");
+        toast.error("Vui lòng nhập đầy đủ thông tin");
       }
     } catch (error) {
       console.log("Error Using Service", error);
     }
-  };
-
-  const closeAndResetModal = () => {
-    setName("");
-    setPhoneNumber("");
-    setNote("");
-    setTime("");
-    setNameError("");
-    setPhoneNumberError("");
-    setNoteError("");
-    // handleClose();
   };
 
   return (
@@ -159,7 +147,7 @@ const UsingModal = ({
                   <p>Loại căn hộ:</p>
                 </th>
                 <td className="apartment-detail">
-                  <p>{apartment?.type.type}</p>
+                  <p>{apartment?.type?.type}</p>
                 </td>
               </tr>
             </tbody>
@@ -240,28 +228,17 @@ const UsingModal = ({
                       onChange={handleChange}
                     >
                       javascript Copy
-                      <MenuItem
-                        value="0"
-                        disabled={currentHour >= 7 && currentHour < 9}
-                      >
+                      <MenuItem value="0" disabled={currentHour >= 9}>
                         7:00 AM - 9:00 AM
                       </MenuItem>
-                      <MenuItem
-                        value="1"
-                        disabled={currentHour >= 9 && currentHour < 11}
-                      >
+                      <MenuItem value="1" disabled={currentHour >= 11}>
                         9:00 AM - 11:00 AM
                       </MenuItem>
-                      <MenuItem
-                        value="2"
-                        disabled={currentHour >= 13 && currentHour < 15}
-                      >
+                      <MenuItem value="2" disabled={currentHour >= 15}>
+                        {console.log("test currentHour", currentHour)}
                         1:00 PM - 3:00 PM
                       </MenuItem>
-                      <MenuItem
-                        value="3"
-                        disabled={currentHour >= 15 && currentHour < 17}
-                      >
+                      <MenuItem value="3" disabled={currentHour >= 17}>
                         3:00 PM - 5:00 PM
                       </MenuItem>
                     </Select>

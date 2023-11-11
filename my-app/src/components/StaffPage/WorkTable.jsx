@@ -20,6 +20,7 @@ function DataTable() {
   const [apartment, setApartment] = useState([]);
   const [building, setBuilding] = useState({});
   const [roomNo, setRoomNo] = useState({});
+  const [status, setStatus] = useState(""); // Add status state
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
@@ -81,6 +82,10 @@ function DataTable() {
   //   phoneNumber: staff.customerPhone,
   //   performDate: `${formatDate (staff.createdDate)} ${staff.shiftTime}`,
   // }));
+
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus);
+  };
 
   const fetchStaff = async () => {
     try {
@@ -175,6 +180,7 @@ function DataTable() {
               building={building}
               roomNo={roomNo}
               fetchStaff={() => fetchStaff()}
+              handleStatusChange={handleStatusChange}
             />
           )}
         </div>
