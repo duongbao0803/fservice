@@ -19,7 +19,6 @@ import { Helmet } from "react-helmet";
 import jwt_decode from "jwt-decode";
 import { useFormik } from "formik";
 import { Button, Typography } from "@mui/material";
-import ReCaptcha from "../ReCaptcha/GG_ReCaptcha";
 import "../../assets/css/styleLogin.css";
 import * as Yup from "yup";
 import "react-toastify/dist/ReactToastify.css";
@@ -94,9 +93,8 @@ function Loginv2() {
               localStorage.removeItem("rememberEmail");
               localStorage.removeItem("rememberPassword");
             }
-            // navigate("/");
           } else {
-            toast.error("Failed to decode the token.");
+            toast.error("Lỗi token.");
           }
         } else {
           toast.error(res.data);

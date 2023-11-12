@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Routes, Route, Link, redirect } from "react-router-dom";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import BasicRating from "./Star";
 import { PriceFormat } from "../../utils/tools";
-import Order from "../OrderCart/Order";
 import { toast } from "react-toastify";
 import config from "../../utils/cus-axios";
 
@@ -34,8 +31,6 @@ const Frame = () => {
       setPrice(res.data.packagePrices);
       setPackageName(res.data.name);
 
-      const prices = price.map((typePrice) => typePrice.typeId);
-
       //Load description
       const response = await config.get(`/api/packages/${id}?typeId=${1}`);
       setAPIData(response.data);
@@ -54,7 +49,6 @@ const Frame = () => {
 
       //Load building
       const building = await config.get("/api/types");
-
       setRoom(building.data);
     } catch (error) {
       console.error("There was an error fetching the data:", error);
@@ -73,7 +67,7 @@ const Frame = () => {
       navigate(`/detail/${id}/${encodeURIComponent(packageName)}`);
     } else {
       navigate("/authen");
-      toast.warning("You must login before ordering package");
+      toast.warning("Bạn phải đăng kí tài khoản trước khi đặt dịch vụ");
     }
   };
 
