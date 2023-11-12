@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
@@ -19,8 +19,16 @@ function Modal({
   roomNo,
   fetchStaff,
 }) {
+  useEffect(() => {
+    if (info.status.includes("Working") || info.status.includes("Completed")) {
+      setJobAccepted(true);
+    } else {
+      setJobAccepted(false);
+    }
+  }, [info.status]);
+
+  const [jobAccepted, setJobAccepted] = useState(false);
   const theme = useContext(ThemeContext);
-  let isSubmitSuccessful = false;
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
@@ -29,12 +37,12 @@ function Modal({
         id: info.id,
         status: 1,
       });
+
       if (res && res.status === 200) {
-        console.log("check working", res);
         toast.success("Nhận việc thành công");
         onClose();
         fetchStaff();
-        isSubmitSuccessful = true;
+        setJobAccepted(true);
       } else {
         toast.success("Nhận việc thất bại");
       }
@@ -42,18 +50,13 @@ function Modal({
       console.log("Error Submitting Order", error);
     }
   };
-
   const handleConfirm = async () => {
     try {
-      isSubmitSuccessful = true;
-      if (!isSubmitSuccessful) {
-        toast.error("Vui lòng nhận việc trước khi hoàn thành công việc");
-        return;
-      }
       const res = await confirmWork(info.id, {
         id: info.id,
         status: 2,
       });
+
       if (res && res.status === 200) {
         toast.success("Hoàn thành công việc");
         onClose();
@@ -203,9 +206,7 @@ function Modal({
                         ""
                       )}
                     </td>
-                    {info.status.includes("Completed") ? (
-                      ""
-                    ) : (
+                    {jobAccepted && !info.status.includes("Completed") && (
                       <td>
                         <div className="modal-btn">
                           <button

@@ -58,7 +58,6 @@ function UserInfo() {
         }
       };
 
-      console.log(values);
       await handleUploadFirebase();
 
       try {
@@ -141,35 +140,22 @@ function UserInfo() {
     setName(newName);
     formik.setFieldValue("name", newName);
     localStorage.setItem("name", newName);
-    console.log("check new name", newName);
-  };
-
-  const handleDateOfBirthChange = (e) => {
-    const newDateOfBirth = e.target.value;
-    setDateOfBirth(newDateOfBirth);
-    formik.setFieldValue("dateOfBirth", newDateOfBirth);
-
-    console.log("check new name", newDateOfBirth);
   };
 
   const handlePhoneNumberChange = (e) => {
     const newPhoneNumber = e.target.value;
     setPhoneNumber(newPhoneNumber);
     formik.setFieldValue("phoneNumber", newPhoneNumber);
-
-    console.log("check new name", newPhoneNumber);
   };
 
   const handleAddressChange = (e) => {
     const newAddress = e.target.value;
     setAddress(newAddress);
     formik.setFieldValue("address", newAddress);
-    console.log("check new name", newAddress);
   };
 
   // date picker
   const onChange = (date, dateString) => {
-    console.log("check date", dateString);
     setDateOfBirth(dateString);
     formik.setFieldValue("dateOfBirth", dateString);
   };
@@ -206,13 +192,6 @@ function UserInfo() {
                     <tr>
                       <th>Ngày sinh:</th>
                       <td>
-                        {/* <input
-                          className="form-control"
-                          type="date"
-                          name="dateOfBirth"
-                          value={dateOfBirth}
-                          onChange={handleDateOfBirthChange}
-                        /> */}
                         <Space direction="vertical">
                           <DatePicker
                             onChange={onChange}

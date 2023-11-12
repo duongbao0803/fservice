@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useRoutes } from "react-router-dom";
 import HomePage from "../page/HomePage";
 import About from "../components/AboutUs/About";
 import ListUser from "../components/TableUser/ListUser";
@@ -31,9 +31,12 @@ import Rightbar_Use from "../page/ManagePackage_Use";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import Admin from "../components/TableUser/Admin";
+import ThemeRoutes from "../components/ThemeContext/ThemeRoutes";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
+  const routing = useRoutes(ThemeRoutes);
 
   return (
     <>
@@ -73,7 +76,11 @@ const AppRoutes = () => {
           </>
         )}
 
-        {role === "ADMIN" && <Route path="/board" element={<ListUser />} />}
+        {role === "ADMIN" && (
+          <>
+            <Route path="/board" element={<Admin />} />
+          </>
+        )}
 
         {role === "STAFF" && (
           <>

@@ -80,7 +80,9 @@ function Header() {
                 <DropdownButton
                   id="dropdown-basic-button"
                   title={
-                    linkAvt !== null && linkAvt?.length > 0 && linkAvt !== "null" ? (
+                    linkAvt !== null &&
+                    linkAvt?.length > 0 &&
+                    linkAvt !== "null" ? (
                       <img
                         src={linkAvt}
                         style={{
@@ -129,7 +131,7 @@ function Header() {
         pauseOnHover={false}
         style={{
           top: "3em",
-          zIndex: 2,
+          zIndex: 1061,
         }}
       />
     </>

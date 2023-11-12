@@ -1,12 +1,8 @@
-import { Routes, Route, Link, redirect } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
+
 import { createContext, useEffect, useState } from "react";
 import { Launch } from "./services/UserService";
 import AppRoutes from "./routes/AppRoutes";
-import { ManagePackage } from "./components/Dashboard/ManagePackage";
-import formatDate from "./utils/tools";
 
 export const Session = createContext(null);
 

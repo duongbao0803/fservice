@@ -89,30 +89,28 @@ const UsingModal = ({
     const isPhoneNumberValid = validatePhoneNumber();
     const isNoteValid = validateNote();
 
-    try {
-      const res = await usingPackage({
-        apartmentPackageId: id,
-        serviceId: selectedServiceId,
-        customerName: name,
-        customerPhone: phoneNumber,
-        note: note,
-        shiftTime: Number(time),
-      });
+    if (isNameValid && isPhoneNumberValid && isNoteValid && time !== "") {
+      try {
+        handleClose();
 
-      if (res && res.status === 200) {
-        toast.success("Sử dụng thành công");
-      }
-      if (isNameValid && isPhoneNumberValid && isNoteValid) {
-        try {
-          handleClose();
-        } catch (error) {
-          toast.error("Xảy ra sự cố");
+        const res = await usingPackage({
+          apartmentPackageId: id,
+          serviceId: selectedServiceId,
+          customerName: name,
+          customerPhone: phoneNumber,
+          note: note,
+          shiftTime: Number(time),
+        });
+
+        if (res && res.status === 200) {
+          toast.success("Sử dụng thành công");
         }
-      } else {
-        toast.error("Vui lòng nhập đầy đủ thông tin");
+      } catch (error) {
+        console.log("Error Using Service", error);
+        toast.error("Xảy ra sự cố");
       }
-    } catch (error) {
-      console.log("Error Using Service", error);
+    } else {
+      toast.error("Vui lòng nhập đầy đủ thông tin");
     }
   };
 
@@ -228,14 +226,16 @@ const UsingModal = ({
                       onChange={handleChange}
                     >
                       javascript Copy
-                      <MenuItem value="0" disabled={currentHour >= 9}>
+                      <MenuItem
+                        value="0"
+                        disabled={currentHour < 7 || currentHour >= 9}
+                      >
                         7:00 AM - 9:00 AM
                       </MenuItem>
                       <MenuItem value="1" disabled={currentHour >= 11}>
                         9:00 AM - 11:00 AM
                       </MenuItem>
                       <MenuItem value="2" disabled={currentHour >= 15}>
-                        {console.log("test currentHour", currentHour)}
                         1:00 PM - 3:00 PM
                       </MenuItem>
                       <MenuItem value="3" disabled={currentHour >= 17}>

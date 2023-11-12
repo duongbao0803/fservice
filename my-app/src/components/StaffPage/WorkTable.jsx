@@ -4,7 +4,6 @@ import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
 import { formatDate } from "../../utils/tools";
 import { getApartmentId, getStaffWork } from "../../services/UserService";
-import { Spinner } from "react-bootstrap";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -17,26 +16,20 @@ function DataTable() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
-  const [apartment, setApartment] = useState([]);
   const [building, setBuilding] = useState({});
   const [roomNo, setRoomNo] = useState({});
   const [status, setStatus] = useState(""); // Add status state
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 90 },
+    { field: "stt", headerName: "STT", width: 80 },
     { field: "apartment", headerName: "Căn hộ", width: 150 },
     { field: "service", headerName: "Dịch vụ", width: 250 },
     { field: "customer", headerName: "Khách hàng", width: 200 },
     { field: "phoneNumber", headerName: "Số điện thoại", width: 150 },
-    { field: "performDate", headerName: "Ngày thực hiện", width: 250 },
-    { field: "status", headerName: "Trạng thái", width: 100 },
+    { field: "performDate", headerName: "Ngày thực hiện", width: 240 },
+    { field: "status", headerName: "Trạng thái", width: 120 },
   ];
 
-  // const rows = [
-  //   { id: 1, stt: 1, apartment: 'S101-0904', service: 'Vệ sinh nhà cửa, bàn ghế', customer: 'Dương Tôn Bảo', phoneNumber: '0989899999', creationDate: '10/10/2023 8:00-10:00' },
-  //   { id: 2, stt: 2, apartment: 'S101-0904', service: 'Vệ sinh nhà cửa, bàn ghế', customer: 'Dương Tôn Bảo', phoneNumber: '0989899999', creationDate: '10/10/2023 13:00-15:00' },
-  //   { id: 3, stt: 3, apartment: 'S101-0904', service: 'Vệ sinh nhà cửa, bàn ghế', customer: 'Dương Tôn Bảo', phoneNumber: '0989899999', creationDate: '10/10/2023 15:00-17:00' },
-  // ];
   useEffect(() => {
     fetchStaff();
   }, []);
@@ -57,7 +50,7 @@ function DataTable() {
             stt: index + 1,
             apartment:
               `${apartmentInfo?.type.building.name} - ${apartmentInfo?.roomNo} ` ||
-              "N/A", // Assuming you want the apartment name
+              "N/A",
             service: staff.service.name,
             customer: staff.customerName,
             phoneNumber: staff.customerPhone,
@@ -67,6 +60,7 @@ function DataTable() {
         })
       );
       setRows(rowsWithData);
+      console.log("cehcek row", rows);
       setLoading(false);
     };
 
@@ -106,7 +100,7 @@ function DataTable() {
       }
     } catch (error) {
       console.error("Error fetching apartment:", error);
-      return null; // Handle the error as needed
+      return null;
     }
   };
 
@@ -161,14 +155,15 @@ function DataTable() {
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={5}
-              hideFooterSelectedRowCount
-              rowsPerPageOptions={[5, 10]}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
               onRowClick={handleStaff}
-              sx={{ cursor: "pointer" }}
             />
           </div>
-
           {/* Modal */}
           {isModalOpen && (
             <Modal

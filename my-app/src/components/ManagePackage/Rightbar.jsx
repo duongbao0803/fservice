@@ -78,14 +78,20 @@ function Rightbar() {
     <div className="right-bar mb-4">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
       <div className="right_bar-main" style={{ padding: "20px" }}>
-        <div className="chooseHouse ">
-          <div className="choose">
+        <div className="chooseHouse">
+          <div
+            className="choose d-flex "
+            style={{
+              flexWrap: "wrap",
+              gap: "20px",
+              justifyContent: "space-between",
+            }}
+          >
             {apartments.map((apartment, index) => (
               <NavLink
                 to={`/user/manage-package/apartment/${apartment.id}`}
                 className={({ isActive }) => (isActive ? "active-link" : "")}
                 onClick={() => handleApartmentClick(apartment)}
-                style={{ marginRight: "20px" }}
               >
                 {apartment.roomNo} - {apartment.type.building.name}
               </NavLink>

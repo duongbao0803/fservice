@@ -32,9 +32,9 @@ function Rightbar({ id }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await getApartmentPackageDetail(id);
-        setData(response.data);
-        setApartmentId(response.data.apartmentId);
+        const res = await getApartmentPackageDetail(id);
+        setData(res.data);
+        setApartmentId(res.data.apartmentId);
       } catch (err) {
         setData(null);
       }
@@ -45,9 +45,9 @@ function Rightbar({ id }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await getApartmentId(apartmentId);
-        setApartment(response.data);
-      } catch (erro) {
+        const res = await getApartmentId(apartmentId);
+        setApartment(res.data);
+      } catch (error) {
         setApartment(null);
       }
     };
@@ -159,7 +159,11 @@ function Rightbar({ id }) {
                         <span id="use"> Sử dụng</span>
                       </td>
                     </tr>
-                    {isShowUsing === true ? <Rightbar_Use /> : ""}
+                    {isShowUsing === true ? (
+                      <Rightbar_Use selectedServiceName={selectedServiceName} />
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   {isShowUsing === false ? (

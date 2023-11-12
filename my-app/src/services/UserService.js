@@ -115,6 +115,11 @@ const getStaffWork = (username) => {
   return config.get(`/api/staffworks/${username}`, refreshedConfig);
 };
 
+const getStaffByUsingId = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/account-by-id/${id}`, refreshedConfig);
+};
+
 const getOrder = (id, data) => {
   const refreshedConfig = refreshData();
   return config.put(`/api/staffworks/${id}`, data, refreshedConfig);
@@ -146,7 +151,7 @@ const createApartment = (id, username) => {
 const getUsingHistory = (apartmentPackgeId, pageNumber) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=10`,
+    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=100`,
     refreshedConfig
   );
 };
@@ -170,6 +175,7 @@ export {
   getBuilding,
   getAddApartment,
   getStaffWork,
+  getStaffByUsingId,
   getOrder,
   usingPackage,
   confirmWork,
