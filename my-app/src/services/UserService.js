@@ -152,7 +152,7 @@ const createApartment = (id, username) => {
 const getUsingHistory = (apartmentPackgeId, pageNumber) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=100`,
+    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=3`,
     refreshedConfig
   );
 };

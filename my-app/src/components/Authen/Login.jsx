@@ -50,7 +50,6 @@ function Loginv2() {
       setPassword(rememberPassword);
       setRememberMe(true);
     }
-    // updateAccessToken();
   }, []);
 
   const handleLogin = async () => {

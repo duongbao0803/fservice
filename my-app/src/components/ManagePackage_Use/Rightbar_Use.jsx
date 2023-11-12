@@ -32,6 +32,12 @@ function Rightbar({ selectedServiceName }) {
     try {
       const res = await getUsingHistory(id, pageNum);
       if (res && res.status === 200) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalPages;
+          setTotalPage(sumPage);
+        }
         setWorkingHistory(res.data);
         const staffIds = res.data.map(
           (workingHistory) => workingHistory.staffId
@@ -147,32 +153,29 @@ function Rightbar({ selectedServiceName }) {
         </div>
       ))}
 
-      <ReactPaginate
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={10}
-        pageCount={totalPage}
-        marginPagesDisplayed={1}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
-      {/* <Pagination count={10} onPageChange={handlePageClick} /> */}
+      <div style={{ display: "flex", justifyContent: "end" }}>
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={2}
+          pageCount={totalPage}
+          marginPagesDisplayed={1}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
+      </div>
     </div>
-
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 

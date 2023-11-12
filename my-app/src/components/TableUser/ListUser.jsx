@@ -70,6 +70,7 @@ const ListUser = () => {
   const handlePageClick = (e) => {
     getUser(+e.selected + 1);
   };
+
   const handleLogoutClick = () => {
     handleLogout(navigate);
   };

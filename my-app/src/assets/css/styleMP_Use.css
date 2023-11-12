@@ -55,23 +55,6 @@ td:nth-child(4) {
   background-color: #952323;
 }
 
-/* .orderedPackage_use_main .orderedPackage_use-status span:nth-child(1) {
-    color: #757575;
-   
-    padding: 0 15px;
-    border-radius: 8px;
-    font-weight: none;
-  }
-  
-  .orderedPackage_use_main .orderedPackage_use-status span:nth-child(2) {
-    color: white;
-    background-color: #03AC00;
-    padding: 0 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    width: 500px;
-  } */
-
 .info-ordered_use .button button {
   background-color: #ffcaa3;
   border: none;
