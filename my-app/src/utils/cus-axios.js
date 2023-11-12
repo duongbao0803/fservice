@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { sendRefreshToken } from "../services/UserService";
+import UseRefreshToken from "../hooks/useRefreshToken";
 
 // console.log("check ls", localStorage.getItem("accesstoken"));
 const config = axios.create({
@@ -9,14 +11,26 @@ const config = axios.create({
     Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
   },
 });
-
+const refresh = UseRefreshToken();
 config.interceptors.response.use(
   function (response) {
     return response ? response : { status: response.status };
   },
-  function (error) {
+  async function (error) {
     let res = {};
     const eRes = error.response;
+
+    const prevRequest = error.config;
+    if (eRes?.status === 401 && !prevRequest.sent) {
+      prevRequest.sent = true;
+      const newAccessToken = await refresh();
+      if (newAccessToken) {
+        console.log("check new token", newAccessToken);
+        prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        return config(prevRequest);
+      }
+    }
+
     if (error.response) {
       res.data = eRes.data;
       res.status = eRes.status;
