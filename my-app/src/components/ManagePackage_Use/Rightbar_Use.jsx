@@ -101,7 +101,7 @@ function Rightbar({ selectedServiceName }) {
           </div>
           <div className="row_use row">
             <div className="col-md-4">
-              <Steps
+              {/* <Steps
                 direction="vertical"
                 current={0}
                 style={{ minHeight: "30vh" }}
@@ -126,73 +126,89 @@ function Rightbar({ selectedServiceName }) {
                 ) : (
                   <Step title="Đã hoàn thành" description={finishedTime} />
                 )}
-              </Steps>
-            </div>
-            <div className="col-md-8">
-              <div className="inside-details">
-                <div
-                  className="inside-details__table"
-                  style={{ fontSize: "16px" }}
-                >
-                  <table>
-                    <tbody>
-                      <tr>
-                        <th>Ngày thực hiện:</th>
-                        <td>{formatDate(workingHistory?.createdDate)}</td>
-                      </tr>
-                      <tr>
-                        <th>Giờ hẹn:</th>
-                        <td>{workingHistory?.shiftTime}</td>
-                      </tr>
-                      {staffInfo[index] && (
-                        <>
-                          <tr>
-                            <th>Nhân viên:</th>
-                            <td>{staffInfo[index]?.name}</td>
-                          </tr>
-                          <tr>
-                            <th>Số điện thoại:</th>
-                            <td>{staffInfo[index]?.phoneNumber}</td>
-                          </tr>
-                        </>
-                      )}
+              </Steps> */}
+              <Steps direction="vertical"
+                current=
+                {
+                  workingHistory?.status?.includes("Pending")
+                    ? 0
+                    : workingHistory?.status?.includes("Working")
+                      ? 1
+                      : workingHistory?.status?.includes("Completed")
+                        ? 2 : -1
+                }
+              style={{ minHeight: '30vh' }}>
+              <Step title="Đang chờ" description={` ${waitingTime}`} />
+              <Step title="Đang thực hiện" />
+              <Step title="Đã hoàn thành" description={`${finishedTime}`} />
+            </Steps>
+          </div>
+          <div className="col-md-8">
+            <div className="inside-details">
+              <div
+                className="inside-details__table"
+                style={{ fontSize: "16px" }}
+              >
+                <table>
+                  <tbody>
+                    <tr>
+                      <th>Ngày thực hiện:</th>
+                      <td>{formatDate(workingHistory?.createdDate)}</td>
+                    </tr>
+                    <tr>
+                      <th>Giờ hẹn:</th>
+                      <td>{workingHistory?.shiftTime}</td>
+                    </tr>
+                    {staffInfo[index] && (
+                      <>
+                        <tr>
+                          <th>Nhân viên:</th>
+                          <td>{staffInfo[index]?.name}</td>
+                        </tr>
+                        <tr>
+                          <th>Số điện thoại:</th>
+                          <td>{staffInfo[index]?.phoneNumber}</td>
+                        </tr>
+                      </>
+                    )}
 
-                      <tr>
-                        <th>Ghi chú:</th>
-                        <td>{workingHistory?.note}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                    <tr>
+                      <th>Ghi chú:</th>
+                      <td>{workingHistory?.note}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-      ))}
+        </div>
+  ))
+}
 
-      <div style={{ display: "flex", justifyContent: "end" }}>
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
-          pageCount={totalPage}
-          marginPagesDisplayed={1}
-          previousLabel="< previous"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-        />
-      </div>
-    </div>
+<div style={{ display: "flex", justifyContent: "end" }}>
+  <ReactPaginate
+    nextLabel="next >"
+    onPageChange={handlePageClick}
+    pageRangeDisplayed={2}
+    pageCount={totalPage}
+    marginPagesDisplayed={1}
+    previousLabel="< previous"
+    pageClassName="page-item"
+    pageLinkClassName="page-link"
+    previousClassName="page-item"
+    previousLinkClassName="page-link"
+    nextClassName="page-item"
+    nextLinkClassName="page-link"
+    breakLabel="..."
+    breakClassName="page-item"
+    breakLinkClassName="page-link"
+    containerClassName="pagination"
+    activeClassName="active"
+    renderOnZeroPageCount={null}
+  />
+</div>
+    </div >
   );
 }
 
