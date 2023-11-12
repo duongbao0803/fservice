@@ -7,7 +7,7 @@ import AddHouse from "./AddHouse";
 import Skeleton from "react-loading-skeleton";
 
 function Rightbar_house() {
-  const [selectedApartment, setSelectedApartment] = useState(null);
+  // const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setApartmentData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(true);
@@ -18,7 +18,7 @@ function Rightbar_house() {
 
   useEffect(() => {
     fetchApartment();
-  }, [selectedApartment]);
+  }, []);
 
   const fetchApartment = async () => {
     try {

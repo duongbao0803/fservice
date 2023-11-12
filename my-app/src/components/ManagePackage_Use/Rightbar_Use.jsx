@@ -107,8 +107,25 @@ function Rightbar({ selectedServiceName }) {
                 style={{ minHeight: "30vh" }}
               >
                 <Step title="Đang chờ" description={` ${waitingTime}`} />
-                <Step title="Đang thực hiện" />
-                <Step title="Đã hoàn thành" description={`${finishedTime}`} />
+
+                {workingHistory?.status.includes("Pending") ? (
+                  <Step title="Đang thực hiện" />
+                ) : (
+                  <Step
+                    title="Đang thực hiện"
+                    style={{ backgroundColor: "orange" }}
+                  />
+                )}
+
+                {workingHistory?.status.includes("Completed") ? (
+                  <Step
+                    title="Đã hoàn thành"
+                    description={finishedTime}
+                    style={{ backgroundColor: "orange" }}
+                  />
+                ) : (
+                  <Step title="Đã hoàn thành" description={finishedTime} />
+                )}
               </Steps>
             </div>
             <div className="col-md-8">
@@ -121,7 +138,7 @@ function Rightbar({ selectedServiceName }) {
                     <tbody>
                       <tr>
                         <th>Ngày thực hiện:</th>
-                        <td>24.10.2023</td>
+                        <td>{formatDate(workingHistory?.createdDate)}</td>
                       </tr>
                       <tr>
                         <th>Giờ hẹn:</th>

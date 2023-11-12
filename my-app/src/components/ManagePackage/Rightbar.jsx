@@ -17,7 +17,6 @@ function Rightbar() {
   const [apartmentsPackage, setApartmentPackageData] = useState([]);
   const username = localStorage.getItem("username");
   const [show, setShow] = useState(false);
-  const [noPackage, setNoPackage] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -59,7 +58,6 @@ function Rightbar() {
         setApartmentPackageData(res.data);
       } else {
         setApartmentPackageData([]);
-        noPackage(true);
       }
     } catch (Error) {
       console.log("error fetching package: ", Error);
@@ -84,7 +82,7 @@ function Rightbar() {
             style={{
               flexWrap: "wrap",
               gap: "20px",
-              justifyContent: "space-between",
+              justifyContent: "left",
             }}
           >
             {apartments.map((apartment, index) => (
@@ -183,9 +181,6 @@ function Rightbar() {
               </span>
             )}
           </div>
-          {/* <Stack spacing={2}>
-            <Pagination count={10} variant="outlined" shape="rounded" />
-          </Stack> */}
         </div>
       </div>
     </div>
