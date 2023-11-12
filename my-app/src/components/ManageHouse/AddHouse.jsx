@@ -26,8 +26,11 @@ function AddHouse({ isShowAdd, handleClose }) {
   const fetchBuilding = async () => {
     try {
       const res = await getBuilding();
-      console.log("check buiding", res.data);
-      if (res && res.status === 200) setBuildings(res.data);
+      if (res && res.status === 200) {
+        setBuildings(res.data);
+      } else {
+        setBuildings([]);
+      }
     } catch (error) {
       console.log("Error Fetching Buildings", error);
     }
@@ -36,7 +39,6 @@ function AddHouse({ isShowAdd, handleClose }) {
   const fetchFloor = async (buildingId) => {
     try {
       const res = await getFloor(buildingId);
-      console.log("check floor", res.data);
       if (res && res.status === 200) {
         setFloors(res.data);
       } else {
@@ -49,7 +51,6 @@ function AddHouse({ isShowAdd, handleClose }) {
   const fetchApartmentType = async (buildingId) => {
     try {
       const res = await getApartmentType(buildingId);
-      console.log("check type", res.data);
       if (res && res.status === 200) {
         setApartmentTypes(res.data);
       } else {
@@ -63,8 +64,6 @@ function AddHouse({ isShowAdd, handleClose }) {
   const fetchApartment = async (selectedFloor, selectedType) => {
     try {
       const res = await getAddApartment(selectedFloor, selectedType);
-      console.log("check apartment", res.data);
-
       if (res && res.status === 200) {
         setApartments(res.data);
       } else {
@@ -84,7 +83,6 @@ function AddHouse({ isShowAdd, handleClose }) {
 
   const handleFloorChange = async (event) => {
     const selectedFloorId = event.target.value;
-    console.log("check flooriud", selectedFloorId);
     setSelectedFloor(selectedFloorId);
     if (selectedType) {
       await fetchApartment(selectedFloorId, selectedType);
@@ -93,8 +91,6 @@ function AddHouse({ isShowAdd, handleClose }) {
 
   const handleTypeChange = async (event) => {
     const selectedTypeId = event.target.value;
-    console.log("check selectedType", selectedTypeId);
-    console.log("check selectedType", selectedFloor);
 
     setSelectedType(selectedTypeId);
     if (selectedFloor) {
@@ -113,7 +109,6 @@ function AddHouse({ isShowAdd, handleClose }) {
         selectedApartment,
         localStorage.getItem("username")
       );
-      console.log("cehck res", res);
       if (res && res.status === 200) {
         toast.success("Đăng kí căn hộ thành công");
         handleClose();
@@ -222,7 +217,9 @@ function AddHouse({ isShowAdd, handleClose }) {
         </div>
         <div className="button-container">
           <div style={{ margin: "10px" }}>
-            <button className="btn-cancel">Huỷ</button>
+            <button className="btn-cancel" onClick={handleClose}>
+              Huỷ
+            </button>
           </div>
           <div style={{ margin: "10px" }}>
             <button className="btn-add" onClick={handleCreate}>

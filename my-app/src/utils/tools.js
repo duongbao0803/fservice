@@ -21,6 +21,13 @@ export const PriceFormat = ({ price }) => {
   return <span>{formattedPrice}</span>;
 };
 
+export const formatTime = (date) => {
+  if (!date) return ""; // Kiểm tra nếu date là null hoặc undefined
+
+  const formattedTime = new Date(date).toLocaleTimeString(); // Chuyển đổi thành giờ dạng locale
+  return formattedTime;
+};
+
 export const handleLogout = (navigate) => {
   navigate("/authen");
   localStorage.removeItem("accesstoken");

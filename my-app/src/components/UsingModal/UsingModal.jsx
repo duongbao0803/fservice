@@ -12,11 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "../UsingModal/UsingModal.css";
-import {
-  convertTimeFormat,
-  convertTimeRange,
-  formatTime,
-} from "../../utils/tools";
 
 const UsingModal = ({
   show,
@@ -26,6 +21,7 @@ const UsingModal = ({
   id,
   selectedServiceName,
   apartment,
+  getApartmentPackage,
 }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -103,6 +99,7 @@ const UsingModal = ({
         });
 
         if (res && res.status === 200) {
+          getApartmentPackage();
           toast.success("Sử dụng thành công");
         }
       } catch (error) {

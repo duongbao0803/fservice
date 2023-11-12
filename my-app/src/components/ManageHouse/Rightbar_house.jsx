@@ -49,6 +49,7 @@ function Rightbar_house() {
   };
 
   const handleClose = () => {
+    fetchApartment();
     setIsShowAdd(false);
   };
 
@@ -107,7 +108,7 @@ function Rightbar_house() {
             <>
               {apartments.length > 0 ? (
                 <div className="row">
-                  {apartments.map((apartment) => (
+                  {apartments?.map((apartment) => (
                     <div className="col-md-6 house-info" key={apartment.id}>
                       <div className="house-box">
                         <div style={{ padding: "10px" }}>
@@ -116,7 +117,8 @@ function Rightbar_house() {
                               className="fa-solid fa-house"
                               style={{ color: "#ff8228" }}
                             />
-                            {apartment.type.building.name} - {apartment.roomNo}
+                            {apartment?.type?.building?.name} -{" "}
+                            {apartment?.roomNo}
                           </p>
                           <div className="house_info-address">
                             <table>
@@ -124,7 +126,7 @@ function Rightbar_house() {
                                 <tr>
                                   <th>Địa chỉ:</th>
                                   <td>
-                                    Toà {apartment.type.building.name} -
+                                    Toà {apartment?.type?.building?.name} -
                                     Vinhomes Grand Park
                                   </td>
                                 </tr>

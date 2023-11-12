@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { Pagination } from "@mui/material";
-import { formatDate } from "../../utils/tools";
+import { formatDate, formatTime } from "../../utils/tools";
 
 function Rightbar({ selectedServiceName }) {
   const { Step } = Steps;
@@ -23,7 +23,6 @@ function Rightbar({ selectedServiceName }) {
   // You could format your dates here using a library like moment.js or date-fns
   const waitingTime = " 03:00 PM"; // dynamic in practice
   const finishedTime = " 05:00 PM"; // dynamic in practice
-
   useEffect(() => {
     viewWorkingHistory(1);
   }, []);
@@ -38,6 +37,7 @@ function Rightbar({ selectedServiceName }) {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
+        console.log("Check date", res);
         setWorkingHistory(res.data);
         const staffIds = res.data.map(
           (workingHistory) => workingHistory.staffId
@@ -74,14 +74,14 @@ function Rightbar({ selectedServiceName }) {
     }
   };
 
-  const handlePageClick = (e) => {
-    viewWorkingHistory(+e.selected + 1);
+  const handlePageClick = (newPage) => {
+    viewWorkingHistory(newPage);
   };
 
-  return (
+  return workingHistory && workingHistory.length > 0 ? (
     <div className="info-ordered_use">
-      {workingHistory?.map((workingHistory, index) => (
-        <div className="inside-table">
+      {workingHistory.map((workingHistory, index) => (
+        <div className="inside-table" key={index}>
           <div className="d-flex justify-content-between">
             <p style={{ fontWeight: "bold", fontSize: "18px" }}>
               Dịch vụ:{" "}
@@ -101,114 +101,89 @@ function Rightbar({ selectedServiceName }) {
           </div>
           <div className="row_use row">
             <div className="col-md-4">
-              {/* <Steps
+              <Steps
                 direction="vertical"
-                current={0}
-                style={{ minHeight: "30vh" }}
-              >
-                <Step title="Đang chờ" description={` ${waitingTime}`} />
-
-                {workingHistory?.status.includes("Pending") ? (
-                  <Step title="Đang thực hiện" />
-                ) : (
-                  <Step
-                    title="Đang thực hiện"
-                    style={{ backgroundColor: "orange" }}
-                  />
-                )}
-
-                {workingHistory?.status.includes("Completed") ? (
-                  <Step
-                    title="Đã hoàn thành"
-                    description={finishedTime}
-                    style={{ backgroundColor: "orange" }}
-                  />
-                ) : (
-                  <Step title="Đã hoàn thành" description={finishedTime} />
-                )}
-              </Steps> */}
-              <Steps direction="vertical"
-                current=
-                {
+                current={
                   workingHistory?.status?.includes("Pending")
                     ? 0
                     : workingHistory?.status?.includes("Working")
-                      ? 1
-                      : workingHistory?.status?.includes("Completed")
-                        ? 2 : -1
+                    ? 1
+                    : workingHistory?.status?.includes("Completed")
+                    ? 2
+                    : -1
                 }
-              style={{ minHeight: '30vh' }}>
-              <Step title="Đang chờ" description={` ${waitingTime}`} />
-              <Step title="Đang thực hiện" />
-              <Step title="Đã hoàn thành" description={`${finishedTime}`} />
-            </Steps>
-          </div>
-          <div className="col-md-8">
-            <div className="inside-details">
-              <div
-                className="inside-details__table"
-                style={{ fontSize: "16px" }}
+                style={{ minHeight: "30vh" }}
               >
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>Ngày thực hiện:</th>
-                      <td>{formatDate(workingHistory?.createdDate)}</td>
-                    </tr>
-                    <tr>
-                      <th>Giờ hẹn:</th>
-                      <td>{workingHistory?.shiftTime}</td>
-                    </tr>
-                    {staffInfo[index] && (
-                      <>
-                        <tr>
-                          <th>Nhân viên:</th>
-                          <td>{staffInfo[index]?.name}</td>
-                        </tr>
-                        <tr>
-                          <th>Số điện thoại:</th>
-                          <td>{staffInfo[index]?.phoneNumber}</td>
-                        </tr>
-                      </>
-                    )}
+                <Step
+                  title="Đang chờ"
+                  description={` ${formatTime(workingHistory?.createdDate)}`}
+                />
+                <Step title="Đang thực hiện" />
+                <Step
+                  title="Đã hoàn thành"
+                  description={`${formatTime(workingHistory?.completeDate)}`}
+                />
+              </Steps>
+            </div>
+            <div className="col-md-8">
+              <div className="inside-details">
+                <div
+                  className="inside-details__table"
+                  style={{ fontSize: "16px" }}
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Ngày thực hiện:</th>
+                        <td>{formatDate(workingHistory?.createdDate)}</td>
+                      </tr>
+                      <tr>
+                        <th>Giờ hẹn:</th>
+                        <td>{workingHistory?.shiftTime}</td>
+                      </tr>
+                      {staffInfo[index] && (
+                        <>
+                          <tr>
+                            <th>Nhân viên:</th>
+                            <td>{staffInfo[index]?.name}</td>
+                          </tr>
+                          <tr>
+                            <th>Số điện thoại:</th>
+                            <td>{staffInfo[index]?.phoneNumber}</td>
+                          </tr>
+                        </>
+                      )}
 
-                    <tr>
-                      <th>Ghi chú:</th>
-                      <td>{workingHistory?.note}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                      <tr>
+                        <th>Ghi chú:</th>
+                        <td>{workingHistory?.note}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-  ))
-}
-
-<div style={{ display: "flex", justifyContent: "end" }}>
-  <ReactPaginate
-    nextLabel="next >"
-    onPageChange={handlePageClick}
-    pageRangeDisplayed={2}
-    pageCount={totalPage}
-    marginPagesDisplayed={1}
-    previousLabel="< previous"
-    pageClassName="page-item"
-    pageLinkClassName="page-link"
-    previousClassName="page-item"
-    previousLinkClassName="page-link"
-    nextClassName="page-item"
-    nextLinkClassName="page-link"
-    breakLabel="..."
-    breakClassName="page-item"
-    breakLinkClassName="page-link"
-    containerClassName="pagination"
-    activeClassName="active"
-    renderOnZeroPageCount={null}
-  />
-</div>
-    </div >
+      ))}
+      <div style={{ display: "flex", justifyContent: "end" }}>
+        <Pagination
+          count={totalPage}
+          onChange={(event, value) => handlePageClick(value)}
+        />
+      </div>
+    </div>
+  ) : (
+    <p
+      style={{
+        fontWeight: "bold",
+        fontSize: "18px",
+        textAlign: "center",
+        color: "#ff7f34",
+      }}
+    >
+      Bạn chưa sử dụng dịch vụ
+    </p>
   );
 }
 

@@ -28,34 +28,31 @@ function Leftbar() {
   return (
     <div className="left-bar">
       <div className="main-info mb-4">
-        {linkAvt !== null && linkAvt?.length > 0 && linkAvt !== "null" ?
-          (
-            <img
-              src={linkAvt}
-              alt="Link avatar"
-              width="50px"
-              height="50px"
-              style={{
-                marginRight: "8px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-            />
-          ) :
-          (
-            <img
-              src={require("../../assets/img/img-user.png")}
-              alt="Link avatar"
-              width="50px"
-              height="50px"
-              style={{
-                marginRight: "8px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-            />
-          )
-        }
+        {linkAvt !== null && linkAvt?.length > 0 && linkAvt !== "null" ? (
+          <img
+            src={linkAvt}
+            alt="Link avatar"
+            width="50px"
+            height="50px"
+            style={{
+              marginRight: "8px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <img
+            src={require("../../assets/img/img-user.png")}
+            alt="Link avatar"
+            width="50px"
+            height="50px"
+            style={{
+              marginRight: "8px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+        )}
 
         <span>{localStorage.getItem("name")}</span>
       </div>
@@ -87,7 +84,7 @@ function Leftbar() {
           </NavLink>
 
           <NavLink
-            to={"/user/order"}
+            to={"/user/manage-order"}
             className={({ isActive }) =>
               isActive ? "info active-menu" : "info"
             }

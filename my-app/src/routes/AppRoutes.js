@@ -33,6 +33,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Admin from "../components/TableUser/Admin";
 import ThemeRoutes from "../components/ThemeContext/ThemeRoutes";
+import ManageOrder from "../page/ManageOrder";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
@@ -73,6 +74,7 @@ const AppRoutes = () => {
               path="/user/manage-package/:id/using"
               element={<ManagePackage_Use />}
             />
+            <Route path="/user/manage-order" element={<ManageOrder />} />
           </>
         )}
 

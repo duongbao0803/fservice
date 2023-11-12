@@ -30,17 +30,17 @@ function Rightbar({ id }) {
   const [isShowUsing, setIsShowUsing] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getApartmentPackageDetail(id);
-        setData(res.data);
-        setApartmentId(res.data.apartmentId);
-      } catch (err) {
-        setData(null);
-      }
-    };
-    getData();
+    getApartmentPackage();
   }, []);
+  const getApartmentPackage = async () => {
+    try {
+      const res = await getApartmentPackageDetail(id);
+      setData(res.data);
+      setApartmentId(res.data.apartmentId);
+    } catch (error) {
+      setData(null);
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -55,12 +55,12 @@ function Rightbar({ id }) {
   }, [apartmentId]);
 
   const rows = data?.apartmentPackageServices?.map((apmPackage) => {
-    const status = apmPackage.remainQuantity !== 0 ? "Sử dụng" : "Mua thêm";
+    const status = apmPackage?.remainQuantity !== 0 ? "Sử dụng" : "Mua thêm";
     return createData(
-      apmPackage.service.name,
-      apmPackage.quantity,
-      apmPackage.usedQuantity,
-      apmPackage.remainQuantity,
+      apmPackage?.service.name,
+      apmPackage?.quantity,
+      apmPackage?.usedQuantity,
+      apmPackage?.remainQuantity,
       status
     );
   });
@@ -139,8 +139,8 @@ function Rightbar({ id }) {
                       <tr>
                         <td>Áp dụng từ:</td>
                         <td>
-                          {formatDate(data.startDate)} -{" "}
-                          {formatDate(data.endDate)}
+                          {formatDate(data?.startDate)} -{" "}
+                          {formatDate(data?.endDate)}
                         </td>
                       </tr>
                     </tbody>
@@ -199,7 +199,7 @@ function Rightbar({ id }) {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {rows.map((row, index) => (
+                          {rows?.map((row, index) => (
                             <TableRow key={row.serviceName}>
                               <TableCell component="th" scope="row">
                                 {row.serviceName}
@@ -211,7 +211,7 @@ function Rightbar({ id }) {
                               <TableCell align="right">
                                 {row.remaining}
                               </TableCell>
-                              {data.packageStatus === "Active" ? (
+                              {data?.packageStatus === "Active" ? (
                                 <TableCell
                                   align="right"
                                   className="action"
@@ -219,8 +219,8 @@ function Rightbar({ id }) {
                                     handleClick(
                                       row.action,
                                       index,
-                                      data.apartmentPackageServices[index]
-                                        .serviceId,
+                                      data?.apartmentPackageServices[index]
+                                        ?.serviceId,
                                       data?.apartmentPackageServices[index]
                                         ?.service?.name
                                     )
@@ -268,6 +268,7 @@ function Rightbar({ id }) {
           id={id}
           selectedServiceName={selectedServiceName}
           apartment={apartment}
+          getApartmentPackage={getApartmentPackage}
         />
       </div>
     </>
