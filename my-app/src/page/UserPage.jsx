@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/css/styleUserCommon.css";
 import UserInfo from "../components/UserPage/UserInfo";
 import "../assets/css/styleUserInfo.css";
-import UserLayout from "../components/Layout/UserLayout";
+import UserLayout from "../Layout/UserLayout";
 
 function UserPage() {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/css/styleMP_Details.css";
 import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
 import { useLocation, useParams } from "react-router-dom";
-import UserLayout from "../components/Layout/UserLayout";
+import UserLayout from "../Layout/UserLayout";
 
 function ManagePackage_Details() {
   const location = useLocation();
@@ -14,13 +14,8 @@ function ManagePackage_Details() {
   console.log("check id", id);
   return (
     <UserLayout>
-      <Rightbar_Details
-        id={id}
-        buildingName={buildingName}
-        roomNo={roomNo}
-      />
+      <Rightbar_Details id={id} buildingName={buildingName} roomNo={roomNo} />
     </UserLayout>
-
   );
 }
 

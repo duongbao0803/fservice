@@ -21,8 +21,6 @@ function Rightbar({ selectedServiceName }) {
   const [staffIds, setStaffIds] = useState([]);
 
   // You could format your dates here using a library like moment.js or date-fns
-  const waitingTime = " 03:00 PM"; // dynamic in practice
-  const finishedTime = " 05:00 PM"; // dynamic in practice
   useEffect(() => {
     viewWorkingHistory(1);
   }, []);
