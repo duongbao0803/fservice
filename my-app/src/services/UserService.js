@@ -36,7 +36,6 @@ const loginAPI = (email, password) => {
 };
 
 const sendRefreshToken = (data) => {
-  console.log("check data token", data);
   const refreshedConfig = refreshData();
   return config.post(
     "/api/authentication/Refresh-token",

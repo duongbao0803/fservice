@@ -58,6 +58,8 @@ function Rightbar({ selectedServiceName }) {
           const res = await getStaffByUsingId(staffId);
           if (res && res.status === 200) {
             fetchedStaffInfo.push(res.data);
+          } else {
+            fetchedStaffInfo([]);
           }
         } catch (error) {
           console.log("Error Fetching Staff Information", error);
