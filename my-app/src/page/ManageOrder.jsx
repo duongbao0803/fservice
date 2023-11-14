@@ -1,12 +1,20 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import UserOrder from "../components/UserPage/UserOrder";
 import UserLayout from "../components/Layout/UserLayout";
+import "../assets/css/styleUserOrder.css"
 
 function ManageOrder() {
   return (
-    <UserLayout>
-      <UserOrder />
-    </UserLayout>
+    <>
+      <Helmet>
+        <title> Đơn hàng của tôi | FService </title>
+      </Helmet>
+
+      <UserLayout>
+        <UserOrder />
+      </UserLayout>
+    </>
   );
 }
 
