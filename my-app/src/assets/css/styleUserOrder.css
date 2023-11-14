@@ -1,0 +1,52 @@
+.nav-order a {
+    color: #000;
+    font-weight: 500;
+}
+
+.header-order .status {
+    margin-left: 15px;
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 8px;
+    padding: 3px 15px;
+    text-align: center;
+    display: inline-block;
+    width: 140px;
+}
+
+.header-order .status__success {
+    background-color: #03ac00;
+}
+
+.header-order .status__error {
+    background-color: #952323;
+}
+
+.header-order .order-date {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #757575;
+}
+
+.order-body .package-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff8228;
+}
+
+.order-body .package-price {
+    font-weight: bold;
+}
+
+.order-body .total-price {
+    padding: 10px 0;
+    color: #757575;
+    font-size: 16px;
+}
+
+.order-body .total-price span {
+    color: #ff8228;
+    font-weight: bold;
+}
