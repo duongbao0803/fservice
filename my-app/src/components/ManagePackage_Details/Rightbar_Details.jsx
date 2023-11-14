@@ -91,186 +91,184 @@ function Rightbar({ id }) {
 
   return (
     <>
-      <div className="right-bar-details mb-5">
-        <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
-        <div className="right_bar-details-main" style={{ padding: "20px" }}>
-          {data && apartment ? (
-            <div className="chooseHouse-details pb-3">
-              <div className="choose">
-                <a href style={{ borderBottom: "3px solid #ff8228" }}>
-                  {apartment?.roomNo} - {apartment?.type?.building?.name}
-                </a>
-              </div>
-              <div className="orderedPackage-details">
-                <div className="orderedPackage-details_main d-flex justify-content-between">
-                  <div className="orderedPackage-details-name ">
-                    <span>
-                      {data?.package?.name} - Dành cho căn{" "}
-                      {apartment?.type.type}
-                    </span>
-                  </div>
-                  <div className="orderedPackage-details-status">
-                    {data?.packageStatus === "Active" ? (
-                      <span className="box-status box-status__active">
-                        ĐANG HOẠT ĐỘNG
-                      </span>
-                    ) : (
-                      <span className="box-status box-status__expired">
-                        ĐÃ HẾT HẠN
-                      </span>
-                    )}
-                  </div>
+      <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
+      <div className="right_bar-details-main" style={{ padding: "20px" }}>
+        {data && apartment ? (
+          <div className="chooseHouse-details pb-3">
+            <div className="choose">
+              <a href style={{ borderBottom: "3px solid #ff8228" }}>
+                {apartment?.roomNo} - {apartment?.type?.building?.name}
+              </a>
+            </div>
+            <div className="orderedPackage-details">
+              <div className="orderedPackage-details_main d-flex justify-content-between">
+                <div className="orderedPackage-details-name ">
+                  <span>
+                    {data?.package?.name} - Dành cho căn{" "}
+                    {apartment?.type.type}
+                  </span>
                 </div>
+                <div className="orderedPackage-details-status">
+                  {data?.packageStatus === "Active" ? (
+                    <span className="box-status box-status__active">
+                      ĐANG HOẠT ĐỘNG
+                    </span>
+                  ) : (
+                    <span className="box-status box-status__expired">
+                      ĐÃ HẾT HẠN
+                    </span>
+                  )}
+                </div>
+              </div>
 
-                <div className="info-ordered-details">
-                  <table className="info_ordered-details-table">
-                    <tbody>
-                      <tr />
-                      <tr />
-                      <tr>
-                        <td>Căn hộ:</td>
-                        <td>
-                          {apartment?.roomNo} -{" "}
-                          {apartment?.type?.building?.name} - Vinhomes Grand
-                          Parks
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>Áp dụng từ:</td>
-                        <td>
-                          {formatDate(data?.startDate)} -{" "}
-                          {formatDate(data?.endDate)}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div className="choose-details_table">
+              <div className="info-ordered-details">
+                <table className="info_ordered-details-table">
+                  <tbody>
+                    <tr />
+                    <tr />
                     <tr>
-                      <td onClick={() => handleUsing(false)}>
-                        <span
-                          id="service"
-                          style={{ borderBottom: "3px solid #ff8228" }}
-                        >
-                          Dịch vụ
-                        </span>
-                      </td>
-                      <td onClick={() => handleUsing(true)}>
-                        <span id="use"> Sử dụng</span>
+                      <td>Căn hộ:</td>
+                      <td>
+                        {apartment?.roomNo} -{" "}
+                        {apartment?.type?.building?.name} - Vinhomes Grand
+                        Parks
                       </td>
                     </tr>
-                    {isShowUsing === true ? (
-                      <Rightbar_Use selectedServiceName={selectedServiceName} />
-                    ) : (
-                      ""
-                    )}
-                  </div>
 
-                  {isShowUsing === false ? (
-                    <TableContainer
-                      component={Paper}
-                      style={{ boxShadow: "none" }}
-                    >
-                      <Table
-                        sx={{
-                          minWidth: 650,
-
-                          "& .MuiTableCell-root": {
-                            borderBottom: "none",
-                            backgroundColor: "transparent",
-                          },
-                          "& .MuiTableHead-root .MuiTableCell-root": {
-                            borderBottom: "none",
-                            backgroundColor: "transparent",
-                          },
-                          borderCollapse: "separate",
-                          borderSpacing: "0",
-                        }}
-                        size="small"
-                        aria-label="a dense table"
+                    <tr>
+                      <td>Áp dụng từ:</td>
+                      <td>
+                        {formatDate(data?.startDate)} -{" "}
+                        {formatDate(data?.endDate)}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="choose-details_table">
+                  <tr>
+                    <td onClick={() => handleUsing(false)}>
+                      <span
+                        id="service"
+                        style={{ borderBottom: "3px solid #ff8228" }}
                       >
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Tên dịch vụ</TableCell>
-                            <TableCell align="right">Số lượng</TableCell>
-                            <TableCell align="right">Đã dùng</TableCell>
-                            <TableCell align="right">Còn lại</TableCell>
-                            <TableCell align="right">Thao tác</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {rows?.map((row, index) => (
-                            <TableRow key={row.serviceName}>
-                              <TableCell component="th" scope="row">
-                                {row.serviceName}
-                              </TableCell>
-                              <TableCell align="right">
-                                {row.quantity}
-                              </TableCell>
-                              <TableCell align="right">{row.used}</TableCell>
-                              <TableCell align="right">
-                                {row.remaining}
-                              </TableCell>
-                              {data?.packageStatus === "Active" ? (
-                                <TableCell
-                                  align="right"
-                                  className="action"
-                                  onClick={() =>
-                                    handleClick(
-                                      row.action,
-                                      index,
-                                      data?.apartmentPackageServices[index]
-                                        ?.serviceId,
-                                      data?.apartmentPackageServices[index]
-                                        ?.service?.name
-                                    )
-                                  }
-                                >
-                                  {row.action}
-                                </TableCell>
-                              ) : (
-                                <span></span>
-                              )}
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
+                        Dịch vụ
+                      </span>
+                    </td>
+                    <td onClick={() => handleUsing(true)}>
+                      <span id="use"> Sử dụng</span>
+                    </td>
+                  </tr>
+                  {isShowUsing === true ? (
+                    <Rightbar_Use selectedServiceName={selectedServiceName} />
                   ) : (
                     ""
                   )}
                 </div>
+
+                {isShowUsing === false ? (
+                  <TableContainer
+                    component={Paper}
+                    style={{ boxShadow: "none" }}
+                  >
+                    <Table
+                      sx={{
+                        minWidth: 650,
+
+                        "& .MuiTableCell-root": {
+                          borderBottom: "none",
+                          backgroundColor: "transparent",
+                        },
+                        "& .MuiTableHead-root .MuiTableCell-root": {
+                          borderBottom: "none",
+                          backgroundColor: "transparent",
+                        },
+                        borderCollapse: "separate",
+                        borderSpacing: "0",
+                      }}
+                      size="small"
+                      aria-label="a dense table"
+                    >
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Tên dịch vụ</TableCell>
+                          <TableCell align="right">Số lượng</TableCell>
+                          <TableCell align="right">Đã dùng</TableCell>
+                          <TableCell align="right">Còn lại</TableCell>
+                          <TableCell align="right">Thao tác</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {rows?.map((row, index) => (
+                          <TableRow key={row.serviceName}>
+                            <TableCell component="th" scope="row">
+                              {row.serviceName}
+                            </TableCell>
+                            <TableCell align="right">
+                              {row.quantity}
+                            </TableCell>
+                            <TableCell align="right">{row.used}</TableCell>
+                            <TableCell align="right">
+                              {row.remaining}
+                            </TableCell>
+                            {data?.packageStatus === "Active" ? (
+                              <TableCell
+                                align="right"
+                                className="action"
+                                onClick={() =>
+                                  handleClick(
+                                    row.action,
+                                    index,
+                                    data?.apartmentPackageServices[index]
+                                      ?.serviceId,
+                                    data?.apartmentPackageServices[index]
+                                      ?.service?.name
+                                  )
+                                }
+                              >
+                                {row.action}
+                              </TableCell>
+                            ) : (
+                              <span></span>
+                            )}
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
-          ) : (
-            <div
-              style={{
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div className="text-center">
-                <Spinner
-                  animation="border"
-                  variant="primary"
-                  style={{ width: "50px", height: "50px" }}
-                />
-              </div>
+          </div>
+        ) : (
+          <div
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="text-center">
+              <Spinner
+                animation="border"
+                variant="primary"
+                style={{ width: "50px", height: "50px" }}
+              />
             </div>
-          )}
-        </div>
-        <UsingModal
-          handleClose={() => setShow(false)}
-          show={show}
-          selectedServiceId={selectedServiceId}
-          id={id}
-          selectedServiceName={selectedServiceName}
-          apartment={apartment}
-          getApartmentPackage={getApartmentPackage}
-        />
+          </div>
+        )}
       </div>
+      <UsingModal
+        handleClose={() => setShow(false)}
+        show={show}
+        selectedServiceId={selectedServiceId}
+        id={id}
+        selectedServiceName={selectedServiceName}
+        apartment={apartment}
+        getApartmentPackage={getApartmentPackage}
+      />
     </>
   );
 }

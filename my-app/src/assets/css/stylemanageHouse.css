@@ -5,27 +5,17 @@
   border-radius: 10px;
 }
 
-.row_house {
-  /* display: flex; */
-  /* align-items: center; */
-  padding: 20px 0;
-  background: white;
-
-}
-
-.house-info {
+/* .house-info {
   padding: 10px;
-  /* margin: 20px; */
-  /* border: 1px solid #FFA15D; */
-
   display: flex;
   flex-direction: column;
   width: 100%;
-}
+} */
 
 .house-info .house-box {
   border: 1px solid #FFA15D;
   border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .fa-solid.fa-house {
@@ -61,6 +51,7 @@
 .add-apartment__text {
   padding: 8px;
   width: fit-content;
+  margin-bottom: 10px;
 }
 
 .add-apartment__text:hover {

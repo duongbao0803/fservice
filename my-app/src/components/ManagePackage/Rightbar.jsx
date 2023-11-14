@@ -73,7 +73,7 @@ function Rightbar() {
   };
 
   return (
-    <div className="right-bar mb-4">
+    <div className="right-bar mb-5">
       <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
       <div className="right_bar-main" style={{ padding: "20px" }}>
         <div className="chooseHouse">
