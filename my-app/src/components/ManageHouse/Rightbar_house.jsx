@@ -54,7 +54,7 @@ function Rightbar_house() {
   };
 
   return (
-    <div className="container mb-5">
+    <>
       <h5 className="mb-4">Căn hộ của bạn</h5>
       {isShowAdd === true ? (
         <AddHouse isShowAdd={isShowAdd} handleClose={handleClose} />
@@ -181,7 +181,7 @@ function Rightbar_house() {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

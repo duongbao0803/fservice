@@ -163,137 +163,135 @@ function UserInfo() {
 
   return (
     <>
-      <div class="right-bar">
-        <h5 class="mb-4">Thông tin</h5>
-        <div class="right_bar-main">
-          <form onSubmit={formik.handleSubmit}>
-            <div class="row">
-              <div class="right-bar col-md-9 col-sm-12 col-lg-8">
-                <div class="user-info">
-                  <table class="user_info-table">
-                    <tr>
-                      <th>Email:</th>
-                      <td>{localStorage.getItem("username")}</td>
-                    </tr>
-                    <tr>
-                      <th>Họ và tên:</th>
-                      <td>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="name"
-                          name="name"
-                          defaultValue={localStorage.getItem("name")}
-                          value={name}
-                          onChange={handleNameChange}
+      <h5 class="mb-4">Thông tin</h5>
+      <div class="right_bar-main">
+        <form onSubmit={formik.handleSubmit}>
+          <div class="row">
+            <div class="right-bar col-md-9 col-sm-12 col-lg-8">
+              <div class="user-info">
+                <table class="user_info-table">
+                  <tr>
+                    <th>Email:</th>
+                    <td>{localStorage.getItem("username")}</td>
+                  </tr>
+                  <tr>
+                    <th>Họ và tên:</th>
+                    <td>
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="name"
+                        name="name"
+                        defaultValue={localStorage.getItem("name")}
+                        value={name}
+                        onChange={handleNameChange}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Ngày sinh:</th>
+                    <td>
+                      <Space direction="vertical">
+                        <DatePicker
+                          onChange={onChange}
+                          defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
                         />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Ngày sinh:</th>
-                      <td>
-                        <Space direction="vertical">
-                          <DatePicker
-                            onChange={onChange}
-                            defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
-                          />
-                        </Space>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Địa chỉ:</th>
-                      <td>
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="address"
-                          value={address}
-                          onChange={handleAddressChange}
-                        />
-                      </td>
-                    </tr>
+                      </Space>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Địa chỉ:</th>
+                    <td>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="address"
+                        value={address}
+                        onChange={handleAddressChange}
+                      />
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <th>Số điện thoại:</th>
-                      <td style={{ position: "relative" }}>
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="phoneNumber"
-                          value={phoneNumber}
-                          onChange={handlePhoneNumberChange}
-                        />
-                        <span style={{ position: "absolute" }}>
-                          {formik.errors.phoneNumber && (
-                            <Typography variant="caption" color="red">
-                              {formik.errors.phoneNumber}
-                            </Typography>
-                          )}
-                        </span>
-                      </td>
-                    </tr>
+                  <tr>
+                    <th>Số điện thoại:</th>
+                    <td style={{ position: "relative" }}>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="phoneNumber"
+                        value={phoneNumber}
+                        onChange={handlePhoneNumberChange}
+                      />
+                      <span style={{ position: "absolute" }}>
+                        {formik.errors.phoneNumber && (
+                          <Typography variant="caption" color="red">
+                            {formik.errors.phoneNumber}
+                          </Typography>
+                        )}
+                      </span>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td></td>
-                      <td>
-                        <Button variant="primary" type="submit">
-                          Lưu thay đổi
-                        </Button>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <Button variant="primary" type="submit">
+                        Lưu thay đổi
+                      </Button>
+                    </td>
+                  </tr>
+                </table>
               </div>
-              <div
-                class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center mb-3 mt-3"
-                style={{ borderLeft: "3px solid #efefef" }}
-              >
-                <div>
-                  <div className="text-center mb-3">
-                    <img
-                      src={selectedImage}
-                      alt=""
-                      width="90px"
-                      height="90px"
-                      style={{ borderRadius: "50%" }}
-                    />
-                  </div>
-                  <div class="chooseImg text-center" style={{ width: "100%" }}>
-                    <input
-                      ref={fileInputRef}
-                      style={{ display: "none" }}
-                      id="file"
-                      type="file"
-                      onBlur={formik.handleBlur}
-                      onChange={(event) => {
-                        formik.setFieldValue("file", event.target.files[0]);
-                        displaySelectedFileName(event);
-                      }}
-                      aria-label="Default"
-                      aria-describedby="inputGroup-sizing-default"
-                      accept="image/*"
-                    />
-                    <button
-                      onClick={handleFileInput}
-                      style={{
-                        padding: "5px",
-                        outline: "none",
-                        border: "2px solid #ffb077",
-                        backgroundColor: "#fff",
-                        marginBottom: "5px",
-                      }}
-                    >
-                      Chọn ảnh
-                    </button>
-                    <p>Dung lượng file tối đa 1 MB</p>
-                    <p>Định dạng: .JPEG, .PNG</p>
-                    <p>Ảnh đã chọn: {selectedFileName}</p>
-                  </div>
+            </div>
+            <div
+              class="col-sm-12 col-md-2 col-lg-4 d-flex align-items-center justify-content-center mb-3 mt-3"
+              style={{ borderLeft: "3px solid #efefef" }}
+            >
+              <div>
+                <div className="text-center mb-3">
+                  <img
+                    src={selectedImage}
+                    alt=""
+                    width="90px"
+                    height="90px"
+                    style={{ borderRadius: "50%" }}
+                  />
+                </div>
+                <div class="chooseImg text-center" style={{ width: "100%" }}>
+                  <input
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    id="file"
+                    type="file"
+                    onBlur={formik.handleBlur}
+                    onChange={(event) => {
+                      formik.setFieldValue("file", event.target.files[0]);
+                      displaySelectedFileName(event);
+                    }}
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    accept="image/*"
+                  />
+                  <button
+                    onClick={handleFileInput}
+                    style={{
+                      padding: "5px",
+                      outline: "none",
+                      border: "2px solid #ffb077",
+                      backgroundColor: "#fff",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    Chọn ảnh
+                  </button>
+                  <p>Dung lượng file tối đa 1 MB</p>
+                  <p>Định dạng: .JPEG, .PNG</p>
+                  <p>Ảnh đã chọn: {selectedFileName}</p>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </>
   );

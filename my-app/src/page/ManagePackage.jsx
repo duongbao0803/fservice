@@ -1,25 +1,12 @@
 import React from "react";
-import Location from "../components/UserPage/Location";
-
 import "../assets/css/stylemanagePackage.css";
-import Leftbar from "../components/UserPage/Leftbar";
 import Rightbar from "../components/ManagePackage/Rightbar";
-import UsingModal from "../components/UsingModal/UsingModal";
+import UserLayout from "../components/Layout/UserLayout";
 function ManagePackage() {
   return (
-    <>
-      <Location />
-      <div className="container" style={{ minHeight: "100vh" }}>
-        <div className="row">
-          <div class="col-md-12 col-sm-12 col-lg-3">
-            <Leftbar />
-          </div>
-          <div class="col-md-12 col-sm-12 col-lg-9">
-            <Rightbar />
-          </div>
-        </div>
-      </div>
-    </>
+    <UserLayout>
+      <Rightbar />
+    </UserLayout>
   );
 }
 
