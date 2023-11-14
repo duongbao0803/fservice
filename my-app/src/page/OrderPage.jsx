@@ -7,7 +7,7 @@ const OrderPage = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>FService | Order</title>
+        <title>FService | Đặt hàng</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
 

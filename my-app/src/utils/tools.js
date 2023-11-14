@@ -22,9 +22,9 @@ export const PriceFormat = ({ price }) => {
 };
 
 export const formatTime = (date) => {
-  if (!date) return ""; // Kiểm tra nếu date là null hoặc undefined
+  if (!date) return "";
 
-  const formattedTime = new Date(date).toLocaleTimeString(); // Chuyển đổi thành giờ dạng locale
+  const formattedTime = new Date(date).toLocaleTimeString();
   return formattedTime;
 };
 
@@ -41,5 +41,4 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem("avatar");
   localStorage.removeItem("name");
   localStorage.removeItem("role");
-  toast.success("Đăng xuất thành công");
 };

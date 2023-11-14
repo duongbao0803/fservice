@@ -8,6 +8,7 @@ import Payment from "../components/confirm/Payment";
 import ConfirmButton from "../components/confirm/ConfirmButton";
 import { AppDataProvider } from "../components/OrderCart/Order";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Confirm() {
   const { state } = useLocation();
@@ -15,6 +16,12 @@ function Confirm() {
   if (state !== null) {
     return (
       <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>FService | Xác nhận</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
+
         <TitleConfirm />
         <div
           className="confirm mb-5"

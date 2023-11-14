@@ -13,7 +13,7 @@ const HomePage = () => {
     <div className="homePage">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>FService | Home</title>
+        <title>FService | Trang chủ</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <Slider slides={slides} />

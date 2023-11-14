@@ -9,7 +9,7 @@ const PackageDetail = () => {
   return (
     <>
       <Helmet>
-        <title>FService | Detail</title>
+        <title>FService | Chi tiết gói</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <BannerPackage />

@@ -176,7 +176,7 @@ function Loginv2() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>FService | Authen</title>
+        <title>FService | Tài khoản</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
 

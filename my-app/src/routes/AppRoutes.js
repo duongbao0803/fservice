@@ -2,38 +2,28 @@ import React from "react";
 import { Outlet, Route, Routes, useRoutes } from "react-router-dom";
 import HomePage from "../page/HomePage";
 import About from "../components/AboutUs/About";
-import ListUser from "../components/TableUser/ListUser";
 import Loginv2 from "../components/Authen/Login";
-import PrivateRoute from "./PrivateRoute";
 import OrderPage from "../page/OrderPage";
 import Confirm from "../page/Confirm";
-
 import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
-import Staff from "../page/StaffPage";
 import StaffInfo from "../page/StaffInfo";
 import StaffPage from "../page/StaffPage";
-
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
-import Payment from "../components/confirm/Payment";
 import PaymentResult from "../components/Payment/PaymentResult";
 import ManagePackage_Details from "../page/ManagePackage_Details";
 import ManagePackage_Use from "../page/ManagePackage_Use";
 import ManagePackage from "../page/ManagePackage";
 import ManageHouse from "../page/ManageHouse";
 import UserPage from "../page/UserPage";
-import Rightbar from "../components/ManagePackage/Rightbar";
-import Rightbar_Details from "../components/ManagePackage_Details/Rightbar_Details";
-
 import AddHouse from "../components/ManageHouse/AddHouse";
-import Rightbar_Use from "../page/ManagePackage_Use";
-
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Admin from "../components/TableUser/Admin";
 import ThemeRoutes from "../components/ThemeContext/ThemeRoutes";
 import ManageOrder from "../page/ManageOrder";
+import UserOrder from "../components/UserPage/UserOrder";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
@@ -74,7 +64,10 @@ const AppRoutes = () => {
               path="/user/manage-package/:id/using"
               element={<ManagePackage_Use />}
             />
-            <Route path="/user/manage-order" element={<ManageOrder />} />
+            <Route path="/user/manage-order/" element={<ManageOrder />}>
+              <Route path="success" element={<UserOrder />} />
+              <Route path="error" element={<UserOrder />} />
+            </Route>
           </>
         )}
 

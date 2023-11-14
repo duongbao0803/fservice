@@ -10,8 +10,6 @@ import {
 } from "react-router-dom";
 
 function Rightbar() {
-  const [apiData, setApiData] = useState(null);
-  const [nameData, setNameData] = useState(null);
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setApartmentData] = useState([]);
   const [apartmentsPackage, setApartmentPackageData] = useState([]);

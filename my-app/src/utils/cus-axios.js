@@ -1,10 +1,7 @@
 import axios from "axios";
-import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { sendRefreshToken } from "../services/UserService";
 import UseRefreshToken from "../hooks/useRefreshToken";
 
-// console.log("check ls", localStorage.getItem("accesstoken"));
 const config = axios.create({
   baseURL: "https://fservices.azurewebsites.net",
   headers: {
@@ -31,7 +28,7 @@ config.interceptors.response.use(
       }
     }
 
-    if (error.response) {
+    if (eRes) {
       res.data = eRes.data;
       res.status = eRes.status;
       res.message = eRes.data.message;

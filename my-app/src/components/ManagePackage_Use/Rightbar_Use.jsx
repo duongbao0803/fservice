@@ -35,7 +35,6 @@ function Rightbar({ selectedServiceName }) {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
-        console.log("Check date", res);
         setWorkingHistory(res.data);
         const staffIds = res.data.map(
           (workingHistory) => workingHistory.staffId

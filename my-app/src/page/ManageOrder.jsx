@@ -8,7 +8,7 @@ function ManageOrder() {
   return (
     <>
       <Helmet>
-        <title> Đơn hàng của tôi | FService </title>
+        <title> FService | Đơn hàng </title>
       </Helmet>
 
       <UserLayout>

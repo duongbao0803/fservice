@@ -4,25 +4,15 @@ import { toast } from "react-toastify";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Session } from "../../App";
+import { handleLogout } from "../../utils/tools";
 
 function Leftbar() {
   // const session = useContext(Session);
   const navigate = useNavigate();
   const linkAvt = localStorage.getItem("avatar");
 
-  const handleLogout = () => {
-    localStorage.removeItem("accesstoken");
-    localStorage.removeItem("refreshtoken");
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("role");
-    localStorage.removeItem("username");
-    localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("name");
-    localStorage.removeItem("date");
-
-    // session.setUser(null);
-    toast.success("Đăng xuất thành công");
-    navigate("/authen");
+  const handleClick = () => {
+    handleLogout(navigate);
   };
 
   return (
@@ -112,7 +102,7 @@ function Leftbar() {
             className={({ isActive }) =>
               isActive ? "info active-menu" : "info"
             }
-            onClick={() => handleLogout()}
+            onClick={() => handleClick()}
           >
             <span>
               <i className="fa-solid fa-arrow-right-from-bracket" />

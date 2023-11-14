@@ -157,6 +157,14 @@ const getUsingHistory = (apartmentPackgeId, pageNumber) => {
   );
 };
 
+const getOrderHistory = (username, pageNumber) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/orders/${username}?PageNumber=${pageNumber}&PageSize=3`,
+    refreshedConfig
+  );
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -183,4 +191,5 @@ export {
   createApartment,
   getApartmentType,
   getUsingHistory,
+  getOrderHistory,
 };
