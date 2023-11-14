@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { PriceFormat } from "../utils/tools";
 
 const PaymentError = () => {
-  // const [paymentData, setPaymentData] = useState({});
   const location = useLocation();
   const { state } = useLocation();
   const paymentData = JSON.parse(state.jsonData);

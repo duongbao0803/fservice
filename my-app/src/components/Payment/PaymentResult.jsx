@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import config from "../../utils/cus-axios";
 import { Spinner } from "react-bootstrap";
 
-export default function PaymentResult(props) {
+export default function PaymentResult() {
   const [paymentData, setPaymentData] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,8 +24,6 @@ export default function PaymentResult(props) {
   paymentData.vnp_Amount = parseFloat(paymentData.vnp_Amount);
 
   const jsonData = JSON.stringify(paymentData);
-  console.log("check amount", typeof parseFloat(paymentData.vnp_Amount));
-  console.log("check object payment:", jsonData);
 
   const postPaymentData = async () => {
     const headers = {
@@ -34,8 +32,6 @@ export default function PaymentResult(props) {
 
     try {
       const res = await config.post("/api/payment", jsonData, { headers });
-      console.log("check json", jsonData);
-      console.log("check res postdata", res);
       if (res && res.status === 200) {
         navigate("/payment/success", {
           state: {

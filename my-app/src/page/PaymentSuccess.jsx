@@ -5,7 +5,6 @@ import { PriceFormat } from "../utils/tools";
 
 const PaymentSuccess = () => {
   // const [paymentData, setPaymentData] = useState({});
-  const location = useLocation();
   const { state } = useLocation();
 
   const paymentData = JSON.parse(state.jsonData);

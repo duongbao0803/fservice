@@ -86,16 +86,16 @@ const Order = () => {
     try {
       const res = await config.get(`/api/apartments?username=${username}`);
 
-      const typeIdArray = res.data.map((apartment) => apartment.typeId);
+      const typeIdArray = res.data?.map((apartment) => apartment?.typeId);
       setTypeId(typeIdArray);
 
-      const yourRoomArray = res.data.map((apartment) => apartment.roomNo);
-      const yourTowerArray = res.data.map(
-        (apartment) => apartment.type.building.name
+      const yourRoomArray = res.data?.map((apartment) => apartment?.roomNo);
+      const yourTowerArray = res.data?.map(
+        (apartment) => apartment?.type?.building?.name
       );
-      const apartmentIdArray = res.data.map((apartment) => apartment.id);
+      const apartmentIdArray = res.data.map((apartment) => apartment?.id);
 
-      const typeRoomArray = res.data.map((apartment) => apartment.type.type);
+      const typeRoomArray = res.data.map((apartment) => apartment?.type?.type);
       setYourRoom(yourRoomArray);
       setYourTower(yourTowerArray);
       setTypeRoom(typeRoomArray);
@@ -221,7 +221,7 @@ const Order = () => {
                       required
                     >
                       <option value="">Chọn nhà / căn hộ</option>
-                      {yourRoom.map((room, index) => (
+                      {yourRoom?.map((room, index) => (
                         <option
                           key={index}
                           value={`${room} - ${yourTower[index]}`}
