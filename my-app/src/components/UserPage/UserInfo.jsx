@@ -23,7 +23,7 @@ function UserInfo() {
   );
   const [address, setAddress] = useState(localStorage.getItem("address"));
   const [selectedFileName, setSelectedFileName] = useState("Chưa chọn ảnh");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("avatar"));
 
   const formik = useFormik({
     initialValues: {
@@ -265,6 +265,11 @@ function UserInfo() {
                     type="file"
                     onBlur={formik.handleBlur}
                     onChange={(event) => {
+                      const file = event.target.files[0];
+                      if (file.size > 3 * 1024 * 1024) {
+                        toast.error("Dung lượng ảnh quá giới hạn cho phép");
+                        return;
+                      }
                       formik.setFieldValue("file", event.target.files[0]);
                       displaySelectedFileName(event);
                     }}
@@ -284,7 +289,7 @@ function UserInfo() {
                   >
                     Chọn ảnh
                   </button>
-                  <p>Dung lượng file tối đa 1 MB</p>
+                  <p>Dung lượng ảnh tối đa 3 MB</p>
                   <p>Định dạng: .JPEG, .PNG</p>
                   <p>Ảnh đã chọn: {selectedFileName}</p>
                 </div>
