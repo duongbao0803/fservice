@@ -27,6 +27,7 @@ function UserOrder() {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
+
         setOrderInfo(res.data);
       }
     } catch (error) {
@@ -85,9 +86,9 @@ function UserOrder() {
         {orderInfo
           ?.filter((order) => {
             if (status === true) {
-              return order.transactionNo !== null;
+              return order.paymentDate !== null;
             } else if (status === false) {
-              return order.transactionNo === null;
+              return order.paymentDate === null;
             } else {
               return true;
             }
@@ -110,7 +111,7 @@ function UserOrder() {
                     <span style={{ fontWeight: "bold" }}>#{orderInfo.id}</span>
                   </div>
                   <div className="col-md-6 text-right">
-                    {orderInfo.transactionNo !== null ? (
+                    {orderInfo.paymentDate !== null ? (
                       <span className="status status__success">THÀNH CÔNG</span>
                     ) : (
                       <span className="status status__error">THẤT BẠI</span>
@@ -151,8 +152,8 @@ function UserOrder() {
                           />{" "}
                           Ngày thanh toán:{" "}
                           <span>
-                            {formatDate(orderInfo?.orderDate)} -{" "}
-                            {formatTime(orderInfo?.orderDate)}
+                            {formatDate(orderInfo?.paymentDate)} -{" "}
+                            {formatTime(orderInfo?.paymentDate)}
                           </span>
                         </p>
                       </div>

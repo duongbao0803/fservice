@@ -1,3 +1,93 @@
+.staff-profile {
+    /* border: 1px solid #ddd;        
+    border-radius:5px;         
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);   
+    background-color: #ffffff; */
+    padding: 20px;                
+    max-width: 100%;
+}
+
+.info-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.info-img .img-container {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.info-img img {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.info-img .update-img {
+
+}
+
+.info-img .update-img p {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.info-img .update-img button {
+    border: none;
+    padding: 5px 15px;
+    background-color: #ffb077;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.info-text {
+    border-radius: 8px;
+}
+
+.info-text .header-info {
+    margin-top: 15px;
+    border-bottom: 2px solid #ccc;
+}
+
+.info-text .header-info p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.info-text .body-info {
+    margin-top: 15px;
+}
+
+.info-text .update-btn button {
+    border: none;
+    padding: 5px 15px;
+    background-color: #ffb077;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* date picker */
+.ant-space {
+    width: 100%;
+}
+
+.ant-picker {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+}
+
+.ant-picker .ant-picker-input > input{
+    font-size: 1rem !important;
+}
+
 .InfoSideBar {
     position: absolute;
     top: 0;
@@ -41,16 +131,7 @@
 } */
 
 .staff-info {
-    /* display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;  */
-    margin-top: 20px;
-    border: 1px solid #ddd;        
-    border-radius:5px;         
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);   
-    padding: 20px;                
-    background-color: #ffffff;
-    max-width: 100%;
+    
 }
 
 .staff-info__table td {
@@ -103,17 +184,3 @@
     padding: 5px 10px;
 }
 
-/* date picker */
-.ant-space {
-    width: 100%;
-}
-
-.ant-picker {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-}
-
-.ant-picker .ant-picker-input > input{
-    font-size: 1rem !important;
-}

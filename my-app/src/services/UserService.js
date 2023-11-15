@@ -115,6 +115,14 @@ const getStaffWork = (username) => {
   return config.get(`/api/staffworks/${username}`, refreshedConfig);
 };
 
+const getStaffWorkPaging = (username, pageNum) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/staffworks/${username}?PageNumber=${pageNum}&PageSize=10`,
+    refreshedConfig
+  );
+};
+
 const getStaffByUsingId = (id) => {
   const refreshedConfig = refreshData();
   return config.get(`/account-by-id/${id}`, refreshedConfig);
@@ -200,5 +208,5 @@ export {
   getApartmentType,
   getUsingHistory,
   getOrderHistory,
-  getCustomerConfirm,
+  getStaffWorkPaging,
 };

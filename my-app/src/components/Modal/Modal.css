@@ -20,6 +20,7 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   overflow: auto;
 }
+
 .modal-header {
   background-color: #e7e7e7;
   border: none;
@@ -36,6 +37,7 @@
 .modal-body {
   padding: 20px;
 }
+
 .modal-body h6 {
   color: #757575;
   padding-bottom: 5px;
@@ -50,13 +52,15 @@
   display: flex;
   flex-direction: column;
 }
+
 .modal-table {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
 }
+
 .modal-table td {
-  min-width: 200px;
+  min-width: 220px;
   padding: 10px;
   border: none;
 }
@@ -68,4 +72,42 @@
 .modal-btn {
   display: flex;
   justify-content: flex-end;
+}
+
+.working-status {
+  border-radius: 10px;
+  min-width: 140px;
+  padding: 3px 15px;
+  text-align: center;
+}
+
+.working-status p {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.working-status__pending {
+  background-color: #0a6ebd;
+}
+
+.working-status__working {
+  background-color: #9aa14b;
+}
+
+.working-status__completed {
+  background-color: #03ac00;
+}
+
+/* confirmation space */
+.confimation {
+}
+
+.confimation table th {
+  min-width: 220px;
+  padding: 10px;
+}
+
+.confimation table td {
+  padding: 10px;
 }

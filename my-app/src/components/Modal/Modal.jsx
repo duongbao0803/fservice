@@ -5,9 +5,9 @@ import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
 import "./Modal.css";
 import { formatDate } from "../../utils/tools.js";
 import { confirmWork, getOrder } from "../../services/UserService.js";
-import Info from "../confirm/Info.jsx";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { Rating } from "@mui/material";
 
 function Modal({
   isOpen,
@@ -20,6 +20,7 @@ function Modal({
   fetchStaff,
 }) {
   useEffect(() => {
+
     if (info.status.includes("Working") || info.status.includes("Completed")) {
       setJobAccepted(true);
     } else {
@@ -29,6 +30,9 @@ function Modal({
 
   const [jobAccepted, setJobAccepted] = useState(false);
   const theme = useContext(ThemeContext);
+
+  const [value, setValue] = React.useState(2);
+
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
@@ -97,7 +101,7 @@ function Modal({
                   <tr>
                     <td className="modal-title">Địa chỉ:</td>
                     <td>
-                      <p>"Vinhomes Grand Park"</p>
+                      <p>Vinhomes Grand Park</p>
                       <p>
                         Tòa {building} - Phòng {roomNo}
                       </p>
@@ -151,29 +155,25 @@ function Modal({
                   <tr>
                     <td className="modal-title">Trạng thái:</td>
                     <td>
-                      <div
-                        style={{
-                          backgroundColor: "#0A6EBD",
-                          borderRadius: "10px",
-                          minWidth: "110px",
-                          padding: "5px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <p
-                          style={{
-                            color: "white",
-                            padding: "0",
-                            margin: "0",
-                          }}
-                        >
-                          {info?.status}
-                        </p>
-                      </div>
+                      {
+                        info?.status.includes("Pending") ? (
+                          <div className="working-status working-status__pending">
+                            <p>Đang chờ</p>
+                          </div>
+                        ) : info?.status.includes("Working") ? (
+                          <div className="working-status working-status__working">
+                            <p>Đã nhận việc</p>
+                          </div>
+                        ) : (
+                          <div className="working-status working-status__completed">
+                            <p>Đã hoàn thành</p>
+                          </div>
+                        )
+                      }
                     </td>
                     <td>
                       {info.status.includes("Working") ||
-                      info.status.includes("Completed") ? (
+                        info.status.includes("Completed") ? (
                         " "
                       ) : (
                         <div className="modal-btn">
@@ -231,6 +231,75 @@ function Modal({
               </table>
             </div>
           </section>
+          {info?.status.includes("Completed") ?
+            (
+              <div className="confimation">
+                {info.isConfirm === null ?
+                  (
+                    <p style={{ padding: '10px' }}>
+                      <i class="fa-solid fa-spinner" style={{ color: "#9AA14B" }}></i>
+                      <span style={{ color: "#9AA14B" }}> Đang chờ xác nhận</span>
+                    </p>
+                  ) :
+                  (
+                    info?.isConfirm === true ?
+                      (
+                        <div>
+                          <p style={{ padding: '10px' }}>
+                            <i className="fa-solid fa-check" style={{ color: "#03AC00" }} />
+                            <span style={{ color: "#03AC00" }}> Đã xác nhận hoàn thành</span>
+                          </p>
+                          <table>
+                            <tr>
+                              <th><p>Đánh giá:</p></th>
+                              <td>
+                                <p>
+                                  <Rating
+                                    name="simple-controlled"
+                                    value={value}
+                                    readOnly
+                                  />
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th><p>Nhận xét:</p></th>
+                              <td><p>Làm tốt lắm</p></td>
+                            </tr>
+                          </table>
+                        </div>
+                      ) :
+                      (
+                        <div>
+                          <p style={{ padding: '10px' }}>
+                            <i class="fa-solid fa-xmark" style={{ color: "#952323" }}></i>
+                            <span style={{ color: "#952323" }}> Chưa hoàn thành</span>
+                          </p>
+                          <table>
+                            <tr>
+                              <th><p>Đánh giá:</p></th>
+                              <td>
+                                <p>
+                                  <Rating
+                                    name="simple-controlled"
+                                    value={value}
+                                    readOnly
+                                  />
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th><p>Nhận xét:</p></th>
+                              <td><p>Quá tệ</p></td>
+                            </tr>
+                          </table>
+                        </div>
+                      )
+                  )}
+              </div>
+            ) : ""
+          }
+
         </div>
       </div>
     </div>
