@@ -115,7 +115,7 @@ function Rightbar({ state }) {
               staffInfo[index] && (
                 <div className="inside-table" key={index}>
                   <div className="d-flex justify-content-between">
-                    <p style={{ fontWeight: "bold", fontSize: "18px" }}>
+                    <p style={{ fontWeight: "bold", fontSize: "16px" }}>
                       Dịch vụ:{" "}
                       <span style={{ color: "#ff8228" }}>
                         {workingHistory?.service?.name}
@@ -124,7 +124,7 @@ function Rightbar({ state }) {
                     <p
                       style={{
                         fontWeight: "bold",
-                        fontSize: "18px",
+                        fontSize: "16px",
                         color: "#757575",
                       }}
                     >
@@ -139,12 +139,12 @@ function Rightbar({ state }) {
                           workingHistory?.status?.includes("Pending")
                             ? 0
                             : workingHistory?.status?.includes("Working")
-                            ? 1
-                            : workingHistory?.status?.includes("Completed")
-                            ? 2
-                            : -1
+                              ? 1
+                              : workingHistory?.status?.includes("Completed")
+                                ? 2
+                                : -1
                         }
-                        style={{ minHeight: "30vh" }}
+                        style={{ minHeight: "30vh", marginTop: '8px' }}
                       >
                         <Step
                           title="Đang chờ"
@@ -203,7 +203,10 @@ function Rightbar({ state }) {
                     {workingHistory?.status.includes("Completed") ? (
                       <div className="feedback-btn">
                         {workingHistory?.isConfirm !== null ? (
-                          <div style={{ color: "green" }}>Đã xác nhận</div>
+                          <div style={{ color: "#03AC00" }}>
+                            <i className="fa-solid fa-check"/>
+                            <span> Đã xác nhận</span>
+                          </div>
                         ) : (
                           <button
                             className="confirm"
