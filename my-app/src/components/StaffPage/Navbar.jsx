@@ -7,7 +7,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ButtonBase from "@mui/material/ButtonBase";
 
 function Navbar() {
-  // Use theme from the context
   const theme = useContext(ThemeContext);
   const username = localStorage.getItem("username");
   const avt = localStorage.getItem("avatar");
@@ -51,14 +50,14 @@ function Navbar() {
             className="account"
             sx={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
           >
-            {avt?.length === 0 ? (
+            {avt === null ? (
               <Avatar
                 className="account-icon"
                 sx={{ backgroundColor: "grey", marginRight: "20px" }}
               />
             ) : (
               <img
-                src={localStorage.getItem("avatar")}
+                src={avt}
                 style={{
                   margin: "20px",
                   width: "30px",

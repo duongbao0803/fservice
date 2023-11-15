@@ -24,7 +24,8 @@ function StaffProfile() {
   );
   const [address, setAddress] = useState(localStorage.getItem("address"));
   const [selectedFileName, setSelectedFileName] = useState("Chưa chọn ảnh");
-  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("avatar"));
+  const [selectedImage, setSelectedImage] = useState("");
+  const checkImage = localStorage.getItem("avatar");
 
   const formik = useFormik({
     initialValues: {
@@ -98,6 +99,12 @@ function StaffProfile() {
     const storedDateOfBirth = localStorage.getItem("dateOfBirth");
     const storedAddress = localStorage.getItem("address");
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
+
+    if (checkImage !== null && checkImage?.length > 0 && checkImage !== "null") {
+      setSelectedImage(checkImage);
+    } else {
+      setSelectedImage(require("../../assets/img/img-user.png"));
+    }
 
     if (storedName) {
       setName(storedName);
