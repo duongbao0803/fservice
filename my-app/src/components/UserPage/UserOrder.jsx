@@ -34,44 +34,9 @@ function UserOrder() {
     }
   };
 
-  const viewOrderHistorySuccess = async (pageNumber) => {
-    try {
-      const res = await getOrderHistory(
-        localStorage.getItem("username"),
-        pageNumber
-      );
-      if (res && res.status === 200) {
-        const xPaginationHeader = res.headers?.["x-pagination"];
-        if (xPaginationHeader) {
-          const paginationData = JSON.parse(xPaginationHeader);
-          const sumPage = paginationData.TotalPages;
-          setTotalPage(sumPage);
-        }
-        const sortedData = res.data.sort((a, b) => b.id - a.id);
-        setOrderInfo(sortedData);
-      }
-    } catch (error) {
-      console.log("Error Getting Order History", error);
-    }
-  };
-
   const handlePageClick = (newPage) => {
     viewOrderHistory(newPage);
   };
-
-  // const handleClick = () => {
-  //   setStatus(null);
-  //   setActiveLink("all");
-  // };
-  // const handleSuccess = () => {
-  //   setStatus(true);
-  //   setActiveLink("success");
-  // };
-
-  // const handleError = () => {
-  //   setStatus(false);
-  //   setActiveLink("error");
-  // };
 
   const handleStatusChange = (status, activeLink) => {
     setStatus(status);

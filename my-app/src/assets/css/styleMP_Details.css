@@ -1,7 +1,6 @@
 .right_bar-details-main {
   background-color: #fff;
   border-radius: 10px;
-
 }
 
 .info_ordered-details-table tr td:nth-child(2),
@@ -9,17 +8,16 @@ td:nth-child(4) {
   font-weight: 700;
 }
 
-
 .info_ordered-details-table tr td {
   padding: 10px;
 }
 
 .orderedPackage-details {
-  border: 2px solid #ff8228;
+  border: 1px solid #ff8228;
   border-radius: 15px;
   padding: 15px 20px;
-  margin-bottom: 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
 }
 
 .orderedPackage-details_main {
@@ -90,7 +88,7 @@ td:nth-child(4) {
 .action {
   cursor: pointer;
   text-decoration: underline;
-  color: #ff8228 ! important;
+  color: #ff8228 !important;
 }
 
 /* css data table */

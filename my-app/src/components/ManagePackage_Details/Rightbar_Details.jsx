@@ -16,6 +16,7 @@ import { Spinner } from "react-bootstrap";
 import UsingModal from "../UsingModal/UsingModal";
 import Rightbar_Use from "../ManagePackage_Use/Rightbar_Use";
 import ManagePackage_Use from "../../page/ManagePackage_Use";
+import { useLocation } from "react-router-dom";
 
 function createData(serviceName, quantity, used, remaining, action) {
   return { serviceName, quantity, used, remaining, action };
@@ -28,7 +29,9 @@ function Rightbar({ id }) {
   const [selectedServiceId, setSelectedServiceId] = useState("");
   const [selectedServiceName, setSelectedServiceName] = useState("");
   const [isShowUsing, setIsShowUsing] = useState(false);
+  const { state } = useLocation();
 
+  console.log("check apartment", state);
   useEffect(() => {
     getApartmentPackage();
   }, []);
@@ -104,8 +107,7 @@ function Rightbar({ id }) {
               <div className="orderedPackage-details_main d-flex justify-content-between">
                 <div className="orderedPackage-details-name ">
                   <span>
-                    {data?.package?.name} - Dành cho căn{" "}
-                    {apartment?.type.type}
+                    {data?.package?.name} - Dành cho căn {apartment?.type.type}
                   </span>
                 </div>
                 <div className="orderedPackage-details-status">
@@ -129,9 +131,8 @@ function Rightbar({ id }) {
                     <tr>
                       <td>Căn hộ:</td>
                       <td>
-                        {apartment?.roomNo} -{" "}
-                        {apartment?.type?.building?.name} - Vinhomes Grand
-                        Parks
+                        {apartment?.roomNo} - {apartment?.type?.building?.name}{" "}
+                        - Vinhomes Grand Parks
                       </td>
                     </tr>
 
@@ -159,7 +160,10 @@ function Rightbar({ id }) {
                     </td>
                   </tr>
                   {isShowUsing === true ? (
-                    <Rightbar_Use selectedServiceName={selectedServiceName} />
+                    <Rightbar_Use
+                      selectedServiceName={selectedServiceName}
+                      state={state}
+                    />
                   ) : (
                     ""
                   )}
@@ -203,13 +207,9 @@ function Rightbar({ id }) {
                             <TableCell component="th" scope="row">
                               {row.serviceName}
                             </TableCell>
-                            <TableCell align="right">
-                              {row.quantity}
-                            </TableCell>
+                            <TableCell align="right">{row.quantity}</TableCell>
                             <TableCell align="right">{row.used}</TableCell>
-                            <TableCell align="right">
-                              {row.remaining}
-                            </TableCell>
+                            <TableCell align="right">{row.remaining}</TableCell>
                             {data?.packageStatus === "Active" ? (
                               <TableCell
                                 align="right"

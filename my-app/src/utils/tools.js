@@ -1,6 +1,7 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+// import { Navigate, useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
 
 export const formatDate = (inputDate) => {
   const date = new Date(inputDate);
@@ -41,4 +42,5 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem("avatar");
   localStorage.removeItem("name");
   localStorage.removeItem("role");
+  toast.success("Đăng xuất thành công");
 };

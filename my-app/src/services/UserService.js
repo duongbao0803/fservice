@@ -164,6 +164,15 @@ const getOrderHistory = (username, pageNumber) => {
   );
 };
 
+const getCustomerConfirm = (orderDetailId, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/orderdetails/${orderDetailId}`,
+    data,
+    refreshedConfig
+  );
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -191,4 +200,5 @@ export {
   getApartmentType,
   getUsingHistory,
   getOrderHistory,
+  getCustomerConfirm,
 };

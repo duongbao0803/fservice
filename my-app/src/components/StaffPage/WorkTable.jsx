@@ -66,16 +66,6 @@ function DataTable() {
 
     fetchAllApartmentsAndCreateRows();
   }, [staffData, config, formatDate]);
-  // Assuming 'staffData' is the state that holds the fetched data.
-  // const rows = staffData.map((staff, index) => ({
-  //   id: staff.id, // Make sure 'id' is unique
-  //   stt: index + 1, // Sequential number, if needed
-  //   apartment: staff.apartmentPackage.apartmentId,
-  //   service: staff.service.name,
-  //   customer: staff.customerName,
-  //   phoneNumber: staff.customerPhone,
-  //   performDate: `${formatDate (staff.createdDate)} ${staff.shiftTime}`,
-  // }));
 
   const handleStatusChange = (newStatus) => {
     setStatus(newStatus);
