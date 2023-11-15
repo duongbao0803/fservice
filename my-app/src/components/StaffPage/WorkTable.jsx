@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
 import { formatDate } from "../../utils/tools";
-import { getApartmentId, getStaffWork } from "../../services/UserService";
+import { getApartmentId, getStaffWork, getStaffWorkPaging } from "../../services/UserService";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -19,9 +19,11 @@ function DataTable() {
   const [building, setBuilding] = useState({});
   const [roomNo, setRoomNo] = useState({});
   const [status, setStatus] = useState(""); // Add status state
+  const [totalPage, setTotalPage] = useState(0);
+
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 80 },
+    { field: "stt", headerName: "STT", width: 50 },
     { field: "apartment", headerName: "Căn hộ", width: 150 },
     { field: "service", headerName: "Dịch vụ", width: 250 },
     { field: "customer", headerName: "Khách hàng", width: 200 },
@@ -31,7 +33,7 @@ function DataTable() {
   ];
 
   useEffect(() => {
-    fetchStaff();
+    fetchStaff(1);
   }, []);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ function DataTable() {
           const apartmentInfo = await fetchApartment(
             staff.apartmentPackage.apartmentId
           );
+          console.log("check satf", apartmentInfo);
           setBuilding(apartmentInfo?.type.building.name);
           setRoomNo(apartmentInfo?.roomNo);
           // Construct the row
@@ -81,12 +84,20 @@ function DataTable() {
     setStatus(newStatus);
   };
 
-  const fetchStaff = async () => {
+  const fetchStaff = async (pageNum) => {
     try {
-      let response = await getStaffWork(username);
-      console.log("check staff:", response.data);
-      if (response && response.data && response.status === 200) {
-        setStaffData(response.data);
+      let res = await getStaffWorkPaging(username, pageNum);
+      console.log("Check res1", res);
+
+      if (res && res.status === 200) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalCount;
+          setTotalPage(sumPage);
+        }
+
+        setStaffData(res.data);
       }
     } catch (Error) {
       console.log("error fetching: ", Error);
@@ -126,8 +137,8 @@ function DataTable() {
   };
 
   return (
-    <div className="data-table mt-5">
-      <div>
+    <div className="staff-container mt-5">
+      <div className="data-table">
         <div>
           <h4>DANH SÁCH CÔNG VIỆC</h4>
           <div
@@ -157,10 +168,10 @@ function DataTable() {
               columns={columns}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: totalPage, pageSize: 10 },
                 },
               }}
-              pageSizeOptions={[5, 10]}
+              // rowCount={totalPage}
               onRowClick={handleStaff}
             />
           </div>

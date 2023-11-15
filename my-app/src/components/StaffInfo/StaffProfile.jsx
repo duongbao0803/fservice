@@ -24,7 +24,7 @@ function StaffProfile() {
   );
   const [address, setAddress] = useState(localStorage.getItem("address"));
   const [selectedFileName, setSelectedFileName] = useState("Chưa chọn ảnh");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(localStorage.getItem("avatar"));
 
   const formik = useFormik({
     initialValues: {
@@ -164,136 +164,114 @@ function StaffProfile() {
   const dateFormat = "YYYY-MM-DD";
 
   return (
-    <div className="Info-container mt-5">
-      <div className="staff-info">
-        <h4>THÔNG TIN</h4>
-        <form onSubmit={formik.handleSubmit}>
-          <div className="row">
-            <div className="col-md-7 staff-info__table">
-              <table style={{ width: "100%" }}>
-                <tbody>
-                  <tr>
-                    <th>
-                      <label>Email:</label>
-                    </th>
-                    <td>
-                      <p>{email}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label>Họ và tên:</label>
-                    </th>
-                    <td>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="name"
-                        name="name"
-                        defaultValue={localStorage.getItem("name")}
-                        value={name}
-                        onChange={handleNameChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label>Ngày sinh:</label>
-                    </th>
-                    <td>
-                      <Space direction="vertical">
-                        <DatePicker
-                          onChange={onChange}
-                          defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
-                        />
-                      </Space>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label>Địa chỉ:</label>
-                    </th>
-                    <td>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="address"
-                        value={address}
-                        onChange={handleAddressChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label>Số điện thoại:</label>
-                    </th>
-                    <td>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="phoneNumber"
-                        value={phoneNumber}
-                        onChange={handlePhoneNumberChange}
-                      />
-                      <span style={{ position: "absolute" }}>
-                        {formik.errors.phoneNumber && (
-                          <Typography variant="caption" color="red">
-                            {formik.errors.phoneNumber}
-                          </Typography>
-                        )}
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <td className="text-right">
-                      <Button variant="primary" type="submit">
-                        Lưu thay đổi
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+    <div className="staff-profile mt-5">
+      <h4>THÔNG TIN</h4>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="row">
+
+          <div className="col-md-3 info-img" style={{ backgroundColor: '#fff', marginRight: '30px' }}>
+            <div className="img-container">
+              <img
+                src={selectedImage}
+                width={'100%'}
+                height={'100%'}
+                alt="avatar"
+              />
             </div>
-            <div className="col-md-5">
-              <div
-                className="avatar-section"
-                style={{ borderLeft: "3px solid #efefef" }}
-              >
-                <div className="text-center mb-3">
-                  <img
-                    src={selectedImage}
-                    alt=""
-                    width="90px"
-                    height="90px"
-                    style={{ borderRadius: "50%" }}
-                  />
-                </div>
-                <div class="chooseImg text-center" style={{ width: "100%" }}>
-                  <input
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    id="file"
-                    type="file"
-                    onBlur={formik.handleBlur}
-                    onChange={(event) => {
-                      formik.setFieldValue("file", event.target.files[0]);
-                      displaySelectedFileName(event);
-                    }}
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    accept="image/*"
-                  />
-                  <button onClick={handleFileInput}>Chọn ảnh</button>
-                  <p>Dung lượng file tối đa 1 MB</p>
-                  <p>Định dạng: .JPEG, .PNG</p>
-                  <p>Ảnh đã chọn: {selectedFileName}</p>
-                </div>
-              </div>
+            <div>
+              <h4 style={{ fontWeight: '400' }}>Bảo Bất Lực</h4>
+              <p style={{ color: '#757575' }}>Nhân viên</p>
+            </div>
+            <div className="update-img">
+              <input
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                id="file"
+                type="file"
+                onBlur={formik.handleBlur}
+                onChange={(event) => {
+                  formik.setFieldValue("file", event.target.files[0]);
+                  displaySelectedFileName(event);
+                }}
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                accept="image/*"
+              />
+              <button onClick={handleFileInput}>Chọn ảnh</button>
+              <p>Dung lượng file tối đa 1 MB</p>
+              <p>Định dạng: .JPEG, .PNG</p>
+              <p>Ảnh đã chọn: {selectedFileName}</p>
             </div>
           </div>
-        </form>
-      </div>
+          <div className="col md-9 info-text" style={{ backgroundColor: '#fff' }}>
+            <div className="header-info">
+              <p>Chi tiết tài khoản</p>
+            </div>
+            <div className="body-info">
+              <div className="row">
+                <div class="col-md-6 form-group">
+                  <label for="">Họ và tên</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="name"
+                    name="name"
+                    defaultValue={localStorage.getItem("name")}
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="exampleInputEmail1">Địa chỉ email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" readOnly value={email} />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Địa chỉ</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="address"
+                  value={address}
+                  onChange={handleAddressChange}
+                />
+              </div>
+              <div className="row">
+                <div class="col-md-6 form-group">
+                  <label for="">Số điện thoại</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="phoneNumber"
+                    value={phoneNumber}
+                    onChange={handlePhoneNumberChange}
+                  />
+                  <span style={{ position: "absolute" }}>
+                    {formik.errors.phoneNumber && (
+                      <Typography variant="caption" color="red">
+                        {formik.errors.phoneNumber}
+                      </Typography>
+                    )}
+                  </span>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="">Ngày sinh</label>
+                  <Space direction="vertical">
+                    <DatePicker
+                      onChange={onChange}
+                      defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
+                    />
+                  </Space>
+                </div>
+              </div>
+              <div className="update-btn mt-3">
+                <button type="submit">Cập nhật thông tin</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
