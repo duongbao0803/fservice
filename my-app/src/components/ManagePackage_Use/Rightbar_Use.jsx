@@ -20,7 +20,6 @@ function Rightbar({ selectedServiceName }) {
   const [staffInfo, setStaffInfo] = useState([]);
   const [staffIds, setStaffIds] = useState([]);
 
-  // You could format your dates here using a library like moment.js or date-fns
   useEffect(() => {
     viewWorkingHistory(1);
   }, []);

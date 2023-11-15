@@ -14,7 +14,7 @@ function UserOrder() {
     viewOrderHistory(1);
   }, []);
 
-  const viewOrderHistory = async (pageNumber, status) => {
+  const viewOrderHistory = async (pageNumber) => {
     try {
       const res = await getOrderHistory(
         localStorage.getItem("username"),
@@ -27,7 +27,26 @@ function UserOrder() {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
+        setOrderInfo(res.data);
+      }
+    } catch (error) {
+      console.log("Error Getting Order History", error);
+    }
+  };
 
+  const viewOrderHistorySuccess = async (pageNumber) => {
+    try {
+      const res = await getOrderHistory(
+        localStorage.getItem("username"),
+        pageNumber
+      );
+      if (res && res.status === 200) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalPages;
+          setTotalPage(sumPage);
+        }
         const sortedData = res.data.sort((a, b) => b.id - a.id);
         setOrderInfo(sortedData);
       }
@@ -39,18 +58,32 @@ function UserOrder() {
   const handlePageClick = (newPage) => {
     viewOrderHistory(newPage);
   };
-  const handleClick = () => {
-    setStatus(null);
-    setActiveLink("all");
-  };
-  const handleSuccess = () => {
-    setStatus(true);
-    setActiveLink("success");
-  };
 
-  const handleError = () => {
-    setStatus(false);
-    setActiveLink("error");
+  // const handleClick = () => {
+  //   setStatus(null);
+  //   setActiveLink("all");
+  // };
+  // const handleSuccess = () => {
+  //   setStatus(true);
+  //   setActiveLink("success");
+  // };
+
+  // const handleError = () => {
+  //   setStatus(false);
+  //   setActiveLink("error");
+  // };
+
+  const handleStatusChange = (status, activeLink) => {
+    setStatus(status);
+    setActiveLink(activeLink);
+
+    if (status === null) {
+      setActiveLink("all");
+    } else if (status === true) {
+      setActiveLink("success");
+    } else {
+      setActiveLink("error");
+    }
   };
 
   return (
@@ -61,7 +94,7 @@ function UserOrder() {
           <NavLink
             to={`/user/manage-order/`}
             className={`nav-link ${activeLink === "all" ? "active-link" : ""}`}
-            onClick={() => handleClick()}
+            onClick={() => handleStatusChange(null, "all")}
           >
             Tất cả
           </NavLink>
@@ -70,7 +103,7 @@ function UserOrder() {
             className={`nav-link ${
               activeLink === "success" ? "active-link" : ""
             }`}
-            onClick={() => handleSuccess()}
+            onClick={() => handleStatusChange(true, "success")}
           >
             Thành công
           </NavLink>
@@ -79,7 +112,7 @@ function UserOrder() {
             className={`nav-link ${
               activeLink === "error" ? "active-link" : ""
             }`}
-            onClick={() => handleError()}
+            onClick={() => handleStatusChange(false, "error")}
           >
             Thất bại
           </NavLink>
@@ -186,7 +219,7 @@ function UserOrder() {
           <Pagination
             count={totalPage}
             onChange={(event, value) => handlePageClick(value)}
-            defaultPage={6}
+            defaultPage={1}
             siblingCount={0}
           />
         </div>
