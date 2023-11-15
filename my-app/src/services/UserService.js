@@ -209,4 +209,5 @@ export {
   getUsingHistory,
   getOrderHistory,
   getStaffWorkPaging,
+  getCustomerConfirm,
 };
