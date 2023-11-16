@@ -8,6 +8,7 @@ const config = axios.create({
     Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
   },
 });
+
 const refresh = UseRefreshToken();
 config.interceptors.response.use(
   function (response) {
@@ -16,17 +17,6 @@ config.interceptors.response.use(
   async function (error) {
     let res = {};
     const eRes = error.response;
-
-    const prevRequest = error.config;
-    if (eRes?.status === 401 && !prevRequest.sent) {
-      prevRequest.sent = true;
-      const newAccessToken = await refresh();
-      if (newAccessToken) {
-        console.log("check new token", newAccessToken);
-        prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-        return config(prevRequest);
-      }
-    }
 
     if (eRes) {
       res.data = eRes.data;
@@ -37,6 +27,22 @@ config.interceptors.response.use(
     } else {
       console.log("Error", error.message);
     }
+
+    const prevRequest = error.config;
+    if (eRes?.status === 401 && !prevRequest.sent) {
+      prevRequest.sent = true;
+      try {
+        const newAccessToken = await refresh();
+        if (newAccessToken) {
+          console.log("check new token", newAccessToken);
+          prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          return config(prevRequest);
+        }
+      } catch (refreshError) {
+        console.error("Error refreshing token:", refreshError);
+      }
+    }
+
     return res;
   }
 );

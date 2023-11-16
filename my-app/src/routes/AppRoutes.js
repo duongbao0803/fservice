@@ -24,6 +24,7 @@ import Admin from "../components/TableUser/Admin";
 import ThemeRoutes from "../components/ThemeContext/ThemeRoutes";
 import ManageOrder from "../page/ManageOrder";
 import UserOrder from "../components/UserPage/UserOrder";
+import ServiceList from "../components/HomePage/ServiceList";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
@@ -34,6 +35,7 @@ const AppRoutes = () => {
       {role !== "STAFF" && role !== "ADMIN" && <Header />}
       <Routes>
         <Route path="/authen" element={<Loginv2 />} />
+        <Route path="/servicelist" element={<ServiceList />} />
         {role !== "STAFF" && role !== "ADMIN" && (
           <>
             <Route path="/" element={<HomePage />} />
@@ -54,7 +56,6 @@ const AppRoutes = () => {
             <Route path="/user/add-apartment" element={<AddHouse />} />
             <Route path="/user/manage-package" element={<ManagePackage />}>
               <Route path="apartment/:id" element={<ManagePackage />} />
-              {/* <Route path=":id" element={<ManagePackage_Details />} /> */}
             </Route>
             <Route
               path="/user/manage-package/:id"

@@ -113,7 +113,7 @@ function AddHouse({ isShowAdd, handleClose }) {
         toast.success("Đăng kí căn hộ thành công");
         handleClose();
       } else if (res.status === 404) {
-        toast.error("Bạn đã đăng kí căn hộ này. Vui lòng đăng kí căn hộ khác");
+        toast.error("Căn hộ đã có người đăng ký. Vui lòng đăng kí căn hộ khác");
       } else if (res.status === 405) {
         toast.error("Vui lòng chọn đầy đủ thông tin để đăng kí căn hộ");
       } else {

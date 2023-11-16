@@ -56,7 +56,8 @@ function Loginv2() {
       toast.error("Mật khẩu không được để trống");
     }
     try {
-      let res = await loginAPI(email, password);
+      const res = await loginAPI(email, password);
+      console.log("check res", res);
       if (res.status !== 401 && res.status !== 400) {
         if (res && res.data && res.data.status === true) {
           session.setUser(res.data);
@@ -69,7 +70,7 @@ function Loginv2() {
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
               ];
             if (role === "ADMIN") {
-              navigate("/board");
+              navigate("/error");
             } else if (role === "STAFF") {
               navigate("/staff");
             } else {
