@@ -3,6 +3,7 @@ import {
   createApartment,
   getAddApartment,
   getApartmentByFloor,
+  getApartmentInfo,
   getApartmentType,
   getBuilding,
   getFloor,
@@ -18,6 +19,7 @@ function AddHouse({ isShowAdd, handleClose }) {
   const [selectedFloor, setSelectedFloor] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [selectedApartment, setSelectedApartment] = useState("");
+  const [selectedApartmentInfo, setSelectedApartmentInfo] = useState({});
 
   useEffect(() => {
     fetchBuilding();
@@ -74,6 +76,19 @@ function AddHouse({ isShowAdd, handleClose }) {
     }
   };
 
+  const fetchApartmentInfo = async (apartmentId) => {
+    try {
+      const res = await getApartmentInfo(apartmentId);
+      if (res && res.status === 200) {
+        setSelectedApartmentInfo(res.data);
+      } else {
+        setSelectedApartmentInfo({});
+      }
+    } catch (error) {
+      console.log("Error Fetching Apartments", error);
+    }
+  };
+
   const handleBuildingChange = async (event) => {
     const selectedBuildingId = event.target.value;
     setSelectedBuilding(selectedBuildingId);
@@ -84,23 +99,31 @@ function AddHouse({ isShowAdd, handleClose }) {
   const handleFloorChange = async (event) => {
     const selectedFloorId = event.target.value;
     setSelectedFloor(selectedFloorId);
+    setSelectedApartment("");
     if (selectedType) {
       await fetchApartment(selectedFloorId, selectedType);
+    } else {
+      setApartments([]);
     }
   };
 
   const handleTypeChange = async (event) => {
     const selectedTypeId = event.target.value;
-
     setSelectedType(selectedTypeId);
+    setSelectedApartment("");
     if (selectedFloor) {
       await fetchApartment(selectedFloor, selectedTypeId);
+    } else {
+      setApartments([]);
     }
   };
 
   const handleApartmentChange = (e) => {
     const selectedApartmentId = e.target.value;
     setSelectedApartment(selectedApartmentId);
+    if (selectedApartmentId) {
+      fetchApartmentInfo(selectedApartmentId);
+    }
   };
 
   const handleCreate = async () => {
@@ -205,13 +228,13 @@ function AddHouse({ isShowAdd, handleClose }) {
             <tr>
               <th>Địa chỉ:</th>
               <td>
-                Số {selectedApartment} - Tòa {selectedBuilding} - Vinhomes Grand
-                Park
+                Tòa {selectedApartmentInfo?.type?.building?.name} - Vinhomes
+                Grand Park - Số phòng {selectedApartmentInfo?.roomNo}
               </td>
             </tr>
             <tr>
               <th>Loại phòng:</th>
-              <td>{selectedType}</td>
+              <td>{selectedApartmentInfo?.type?.type}</td>
             </tr>
           </table>
         </div>

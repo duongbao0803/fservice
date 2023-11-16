@@ -72,6 +72,11 @@ const getApartment = (apartment) => {
   return config.get(`/api/apartments?username=${apartment}`, refreshedConfig);
 };
 
+const getApartmentInfo = (apartmentId) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/apartments/${apartmentId}`, refreshedConfig);
+};
+
 const getApartmentId = (id) => {
   const refreshedConfig = refreshData();
   return config.get(`/api/apartments/${id}`, refreshedConfig);
@@ -224,5 +229,6 @@ export {
   getStaffWorkPaging,
   getCustomerConfirm,
   getOrderHistorySuccess,
-  getOrderHistoryError
+  getOrderHistoryError,
+  getApartmentInfo,
 };
