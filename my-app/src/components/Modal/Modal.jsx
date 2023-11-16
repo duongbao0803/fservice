@@ -20,7 +20,6 @@ function Modal({
   fetchStaff,
 }) {
   useEffect(() => {
-
     if (info.status.includes("Working") || info.status.includes("Completed")) {
       setJobAccepted(true);
     } else {
@@ -155,25 +154,23 @@ function Modal({
                   <tr>
                     <td className="modal-title">Trạng thái:</td>
                     <td>
-                      {
-                        info?.status.includes("Pending") ? (
-                          <div className="working-status working-status__pending">
-                            <p>Đang chờ</p>
-                          </div>
-                        ) : info?.status.includes("Working") ? (
-                          <div className="working-status working-status__working">
-                            <p>Đã nhận việc</p>
-                          </div>
-                        ) : (
-                          <div className="working-status working-status__completed">
-                            <p>Đã hoàn thành</p>
-                          </div>
-                        )
-                      }
+                      {info?.status.includes("Pending") ? (
+                        <div className="working-status working-status__pending">
+                          <p>Đang chờ</p>
+                        </div>
+                      ) : info?.status.includes("Working") ? (
+                        <div className="working-status working-status__working">
+                          <p>Đã nhận việc</p>
+                        </div>
+                      ) : (
+                        <div className="working-status working-status__completed">
+                          <p>Đã hoàn thành</p>
+                        </div>
+                      )}
                     </td>
                     <td>
                       {info.status.includes("Working") ||
-                        info.status.includes("Completed") ? (
+                      info.status.includes("Completed") ? (
                         " "
                       ) : (
                         <div className="modal-btn">
@@ -231,75 +228,92 @@ function Modal({
               </table>
             </div>
           </section>
-          {info?.status.includes("Completed") ?
-            (
-              <div className="confimation">
-                {info.isConfirm === null ?
-                  (
-                    <p style={{ padding: '10px' }}>
-                      <i class="fa-solid fa-spinner" style={{ color: "#9AA14B" }}></i>
-                      <span style={{ color: "#9AA14B" }}> Đang chờ xác nhận</span>
-                    </p>
-                  ) :
-                  (
-                    info?.isConfirm === true ?
-                      (
-                        <div>
-                          <p style={{ padding: '10px' }}>
-                            <i className="fa-solid fa-check" style={{ color: "#03AC00" }} />
-                            <span style={{ color: "#03AC00" }}> Đã xác nhận hoàn thành</span>
-                          </p>
-                          <table>
-                            <tr>
-                              <th><p>Đánh giá:</p></th>
-                              <td>
-                                <p>
-                                  <Rating
-                                    name="simple-controlled"
-                                    value={value}
-                                    readOnly
-                                  />
-                                </p>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th><p>Nhận xét:</p></th>
-                              <td><p>Làm tốt lắm</p></td>
-                            </tr>
-                          </table>
-                        </div>
-                      ) :
-                      (
-                        <div>
-                          <p style={{ padding: '10px' }}>
-                            <i class="fa-solid fa-xmark" style={{ color: "#952323" }}></i>
-                            <span style={{ color: "#952323" }}> Chưa hoàn thành</span>
-                          </p>
-                          <table>
-                            <tr>
-                              <th><p>Đánh giá:</p></th>
-                              <td>
-                                <p>
-                                  <Rating
-                                    name="simple-controlled"
-                                    value={value}
-                                    readOnly
-                                  />
-                                </p>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th><p>Nhận xét:</p></th>
-                              <td><p>Quá tệ</p></td>
-                            </tr>
-                          </table>
-                        </div>
-                      )
-                  )}
-              </div>
-            ) : ""
-          }
-
+          {info?.status.includes("Completed") ? (
+            <div className="confimation">
+              {info.isConfirm === null ? (
+                <p style={{ padding: "10px" }}>
+                  <i
+                    class="fa-solid fa-spinner"
+                    style={{ color: "#9AA14B" }}
+                  ></i>
+                  <span style={{ color: "#9AA14B" }}> Đang chờ xác nhận</span>
+                </p>
+              ) : info?.isConfirm === true ? (
+                <div>
+                  <p style={{ padding: "10px" }}>
+                    <i
+                      className="fa-solid fa-check"
+                      style={{ color: "#03AC00" }}
+                    />
+                    <span style={{ color: "#03AC00" }}>
+                      {" "}
+                      Đã xác nhận hoàn thành
+                    </span>
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        <p>Đánh giá:</p>
+                      </th>
+                      <td>
+                        <p>
+                          <Rating
+                            name="simple-controlled"
+                            value={value}
+                            readOnly
+                          />
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <p>Nhận xét:</p>
+                      </th>
+                      <td>
+                        <p>Làm tốt lắm</p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              ) : (
+                <div>
+                  <p style={{ padding: "10px" }}>
+                    <i
+                      class="fa-solid fa-xmark"
+                      style={{ color: "#952323" }}
+                    ></i>
+                    <span style={{ color: "#952323" }}> Chưa hoàn thành</span>
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        <p>Đánh giá:</p>
+                      </th>
+                      <td>
+                        <p>
+                          <Rating
+                            name="simple-controlled"
+                            value={value}
+                            readOnly
+                          />
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <p>Nhận xét:</p>
+                      </th>
+                      <td>
+                        <p>Quá tệ</p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

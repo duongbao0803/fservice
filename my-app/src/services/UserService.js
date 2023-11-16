@@ -115,10 +115,10 @@ const getStaffWork = (username) => {
   return config.get(`/api/staffworks/${username}`, refreshedConfig);
 };
 
-const getStaffWorkPaging = (username, pageNum) => {
+const getStaffWorkPaging = (username) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/staffworks/${username}?PageNumber=${pageNum}&PageSize=10`,
+    `/api/staffworks/${username}?PageSize=100`,
     refreshedConfig
   );
 };

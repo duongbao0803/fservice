@@ -32,12 +32,10 @@ function Rightbar({ state }) {
   useEffect(() => {
     viewWorkingHistory(1);
   }, []);
-  console.log("check status confirm,", workingHistory);
 
   const viewWorkingHistory = async (pageNum) => {
     try {
       const res = await getUsingHistory(id, pageNum);
-      console.log("check res", res);
       if (res && res.status === 200) {
         const xPaginationHeader = res.headers?.["x-pagination"];
         if (xPaginationHeader) {
@@ -139,12 +137,12 @@ function Rightbar({ state }) {
                           workingHistory?.status?.includes("Pending")
                             ? 0
                             : workingHistory?.status?.includes("Working")
-                              ? 1
-                              : workingHistory?.status?.includes("Completed")
-                                ? 2
-                                : -1
+                            ? 1
+                            : workingHistory?.status?.includes("Completed")
+                            ? 2
+                            : -1
                         }
-                        style={{ minHeight: "30vh", marginTop: '8px' }}
+                        style={{ minHeight: "30vh", marginTop: "8px" }}
                       >
                         <Step
                           title="Đang chờ"
@@ -204,7 +202,7 @@ function Rightbar({ state }) {
                       <div className="feedback-btn">
                         {workingHistory?.isConfirm !== null ? (
                           <div style={{ color: "#03AC00" }}>
-                            <i className="fa-solid fa-check"/>
+                            <i className="fa-solid fa-check" />
                             <span> Đã xác nhận</span>
                           </div>
                         ) : (

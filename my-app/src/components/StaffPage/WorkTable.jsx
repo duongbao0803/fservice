@@ -3,7 +3,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import Modal from "../Modal/Modal";
 import config from "../../utils/cus-axios";
 import { formatDate } from "../../utils/tools";
-import { getApartmentId, getStaffWork, getStaffWorkPaging } from "../../services/UserService";
+import {
+  getApartmentId,
+  getStaffWork,
+  getStaffWorkPaging,
+} from "../../services/UserService";
+import { TablePagination } from "@mui/material";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -18,17 +23,18 @@ function DataTable() {
   const [info, setInfo] = useState({});
   const [building, setBuilding] = useState({});
   const [roomNo, setRoomNo] = useState({});
-  const [status, setStatus] = useState(""); // Add status state
+  const [status, setStatus] = useState("");
   const [totalPage, setTotalPage] = useState(0);
-
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 50 },
+    { field: "stt", headerName: "STT", width: 70 },
     { field: "apartment", headerName: "Căn hộ", width: 150 },
-    { field: "service", headerName: "Dịch vụ", width: 250 },
-    { field: "customer", headerName: "Khách hàng", width: 200 },
-    { field: "phoneNumber", headerName: "Số điện thoại", width: 150 },
-    { field: "performDate", headerName: "Ngày thực hiện", width: 240 },
+    { field: "service", headerName: "Dịch vụ", width: 300 },
+    { field: "customer", headerName: "Khách hàng", width: 230 },
+    { field: "phoneNumber", headerName: "Số điện thoại", width: 170 },
+    { field: "performDate", headerName: "Ngày thực hiện", width: 280 },
     { field: "status", headerName: "Trạng thái", width: 120 },
   ];
 
@@ -37,14 +43,13 @@ function DataTable() {
   }, []);
 
   useEffect(() => {
-    const fetchAllApartmentsAndCreateRows = async () => {
+    const fetchAllApartmentsAndCreateRows = async (page) => {
       setLoading(true);
       const rowsWithData = await Promise.all(
         staffData?.map(async (staff, index) => {
           const apartmentInfo = await fetchApartment(
             staff.apartmentPackage.apartmentId
           );
-          console.log("check satf", apartmentInfo);
           setBuilding(apartmentInfo?.type.building.name);
           setRoomNo(apartmentInfo?.roomNo);
           // Construct the row
@@ -63,7 +68,6 @@ function DataTable() {
         })
       );
       setRows(rowsWithData);
-      console.log("cehcek row", rows);
       setLoading(false);
     };
 
@@ -76,18 +80,20 @@ function DataTable() {
 
   const fetchStaff = async (pageNum) => {
     try {
-      let res = await getStaffWorkPaging(username, pageNum);
-      console.log("Check res1", res);
+      const res = await getStaffWorkPaging(username, pageNum);
 
       if (res && res.status === 200) {
         const xPaginationHeader = res.headers?.["x-pagination"];
         if (xPaginationHeader) {
           const paginationData = JSON.parse(xPaginationHeader);
-          const sumPage = paginationData.TotalCount;
+          const sumPage = paginationData.TotalPages;
+          const totalCount = paginationData.TotalCount;
+          setTotalCount(totalCount);
           setTotalPage(sumPage);
         }
-
         setStaffData(res.data);
+      } else {
+        setStaffData([]);
       }
     } catch (Error) {
       console.log("error fetching: ", Error);
@@ -105,22 +111,18 @@ function DataTable() {
     }
   };
 
-  // const handleRowClick = (params) => {
-  //   setSelectedService(params.row.service);
-  //   console.log("check params:", params.row.id);
-  //   console.log("check params:", params.row.id);
-
-  //   setModalOpen(true);
-
-  // }
-
-  const handleStaff = (params) => {
+  const handleRowClick = async (params) => {
     setSelectedService(params.row.id);
     setModalOpen(true);
 
     const selectedStaff = staffData.find((staff) => staff.id === params.row.id);
     if (selectedStaff) {
       setInfo(selectedStaff);
+      const apartmentInfo = await fetchApartment(
+        selectedStaff.apartmentPackage.apartmentId
+      );
+      setBuilding(apartmentInfo?.type.building.name);
+      setRoomNo(apartmentInfo?.roomNo);
     } else {
       console.error("No staff found for id:", params.row.id);
     }
@@ -156,13 +158,14 @@ function DataTable() {
             <DataGrid
               rows={rows}
               columns={columns}
+              pagination
+              rowCount={totalCount}
               initialState={{
                 pagination: {
-                  paginationModel: { page: totalPage, pageSize: 10 },
+                  paginationModel: { page: 1, pageSize: 10 },
                 },
               }}
-              // rowCount={totalPage}
-              onRowClick={handleStaff}
+              onRowClick={handleRowClick}
             />
           </div>
           {/* Modal */}
