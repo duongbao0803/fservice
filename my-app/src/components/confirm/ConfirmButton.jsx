@@ -15,6 +15,7 @@ function ConfirmButton(props) {
         toast.success("Đơn hàng tạo thành công, vui lòng chờ trong giây lát", {
           autoClose: 2000,
         });
+        navigate("/");
         setTimeout(() => {
           window.open(res.data.paymentUrl, "_blank");
         }, 3000);
