@@ -28,6 +28,8 @@ function Rightbar({ state }) {
   const [selectedCompleteTime, setSelectedCompleteTime] = useState("");
   const [selectedShiftTime, setSelectedShiftTime] = useState("");
   const [selectedServiceName, setSelectedServiceName] = useState("");
+  const [selectedCreateDate, setSelectedCreateDate] = useState("");
+
 
   useEffect(() => {
     viewWorkingHistory(1);
@@ -90,7 +92,10 @@ function Rightbar({ state }) {
     info,
     completeTime,
     shiftTime,
-    serviceName
+    serviceName,
+    createDate
+
+
   ) => {
     setIsOpen(true);
     setSelectedWorkingHistory(id);
@@ -98,6 +103,7 @@ function Rightbar({ state }) {
     setSelectedCompleteTime(completeTime);
     setSelectedShiftTime(shiftTime);
     setSelectedServiceName(serviceName);
+    setSelectedCreateDate(createDate)
   };
 
   const handleClose = () => {
@@ -137,10 +143,10 @@ function Rightbar({ state }) {
                           workingHistory?.status?.includes("Pending")
                             ? 0
                             : workingHistory?.status?.includes("Working")
-                            ? 1
-                            : workingHistory?.status?.includes("Completed")
-                            ? 3
-                            : -1
+                              ? 1
+                              : workingHistory?.status?.includes("Completed")
+                                ? 3
+                                : -1
                         }
                         style={{ minHeight: "30vh", marginTop: "8px" }}
                       >
@@ -218,7 +224,8 @@ function Rightbar({ state }) {
                                 staffInfo[index],
                                 workingHistory?.completeDate,
                                 workingHistory?.shiftTime,
-                                workingHistory?.service.name
+                                workingHistory?.service.name,
+                                workingHistory?.createdDate
                               )
                             }
                           >
@@ -262,6 +269,7 @@ function Rightbar({ state }) {
         selectedCompleteTime={selectedCompleteTime}
         selectedShiftTime={selectedShiftTime}
         selectedServiceName={selectedServiceName}
+        selectedCreateDate={selectedCreateDate}
         state={state}
       ></ConfirmModal>
     </>

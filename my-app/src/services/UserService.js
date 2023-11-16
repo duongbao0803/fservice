@@ -169,6 +169,22 @@ const getOrderHistory = (username, pageNumber) => {
   );
 };
 
+const getOrderHistorySuccess = (username, pageNum) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/orders/${username}?PageNumber=${pageNum}&PageSize=2&Sort=success`,
+    refreshedConfig
+  );
+};
+
+const getOrderHistoryError = (username, pageNum) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/orders/${username}?PageNumber=${pageNum}&PageSize=2&Sort=error`,
+    refreshedConfig
+  );
+};
+
 const getCustomerConfirm = (orderDetailId, data) => {
   const refreshedConfig = refreshData();
   return config.put(
@@ -207,4 +223,6 @@ export {
   getOrderHistory,
   getStaffWorkPaging,
   getCustomerConfirm,
+  getOrderHistorySuccess,
+  getOrderHistoryError
 };

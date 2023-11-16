@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { storage } from "../../firebase/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useFormik } from "formik";
-import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
@@ -186,7 +185,7 @@ function StaffProfile() {
               />
             </div>
             <div>
-              <h4 style={{ fontWeight: '400' }}>Bảo Bất Lực</h4>
+              <h4 style={{ fontWeight: '400' }}>{name}</h4>
               <p style={{ color: '#757575' }}>Nhân viên</p>
             </div>
             <div className="update-img">

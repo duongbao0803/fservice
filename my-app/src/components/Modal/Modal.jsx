@@ -27,6 +27,8 @@ function Modal({
     }
   }, [info.status]);
 
+  console.log("chec ìno", info);
+
   console.log("Check info", info);
 
   const [jobAccepted, setJobAccepted] = useState(false);
@@ -263,7 +265,7 @@ function Modal({
                         <p>
                           <Rating
                             name="simple-controlled"
-                            value={value}
+                            value={info?.rating}
                             readOnly
                           />
                         </p>

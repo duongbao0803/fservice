@@ -22,22 +22,29 @@ function Modal({
   selectedShiftTime,
   selectedServiceName,
   state,
+  selectedCreateDate
 }) {
   const [rating, setValue] = useState(5);
   const [feedBack, setFeedBack] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
-  const [activeSuccess, setActiveSuccess] = useState(false);
-  const [activeError, setActiveError] = useState(false);
+  // const [activeSuccess, setActiveSuccess] = useState(false);
+  const [active, setActive] = useState(0);
+
+  // const [activeError, setActiveError] = useState(false);
   const theme = useContext(ThemeContext);
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
     try {
+      if (active === 0) {
+        toast.error('Bạn phải xác nhận "Đã hoàn thành" hoặc "Chưa hoàn thành"');
+        return;
+      }
       const res = await getCustomerConfirm(selectedSworkingHistory, {
         id: selectedSworkingHistory,
         status: 2,
         feedback: feedBack,
-        isConfirm: true,
+        isConfirm: active === 1 ? true : false,
         rating: rating,
       });
       if (res && res.status === 200) {
@@ -53,17 +60,12 @@ function Modal({
     }
   };
 
-  const handleClickSuccess = () => {
-    console.info('You clicked the Chip.');
-    setActiveSuccess(!activeSuccess);
-    setActiveError(false);
 
-  };
-  const handleClickError = () => {
-    console.info('You clicked the Chip.');
-    setActiveError(!activeError);
-    setActiveSuccess(false);
-  };
+  const handleClick = (status) => {
+    setActive(status);
+  }
+
+
 
 
   return (
@@ -94,7 +96,7 @@ function Modal({
                 </tr>
                 <tr>
                   <th>Giờ làm việc:</th>
-                  <td>{selectedShiftTime}</td>
+                  <td>{formatDate(selectedCreateDate)} - {selectedShiftTime}</td>
                 </tr>
                 <tr>
                   <th>Tên dịch vụ:</th>
@@ -135,13 +137,16 @@ function Modal({
               </tbody>
             </table>
             <div className="rating mt-3">
-              <h5 style={{ fontWeight: '600' }}>ĐÁNH GIÁ</h5>
+              <h5 style={{ fontWeight: '500' }}>Bạn có hài lòng khi sử dụng dịch vụ?</h5>
               <Box sx={{ "& > legend": { mt: 2 } }}>
                 <Rating
                   name="simple-controlled"
                   value={rating}
                   onChange={(event, newValue) => {
                     setValue(newValue);
+                  }}
+                  style={{
+                    fontSize: "2.8rem"
                   }}
                 />
               </Box>
@@ -155,31 +160,31 @@ function Modal({
                 style={{ width: '60%', marginBottom: '20px' }}
               />
               <Stack direction="row" spacing={1}>
-                <Chip className={activeSuccess ? 'active' : ''}
+                <Chip className={active === 1 ? 'active' : ''}
                   label="Đã hoàn thành"
                   variant="outlined"
-                  onClick={handleClickSuccess}
+                  onClick={() => handleClick(1)}
                   sx={{
                     borderColor: 'green',
-                    color: activeSuccess ? '#fff' : 'green',
-                    backgroundColor: activeSuccess ? 'green' : 'transparent',
+                    color: active === 1 ? '#fff' : 'green',
+                    backgroundColor: active === 1 ? 'green' : 'transparent',
                     '&:hover': {
-                      backgroundColor: activeSuccess ? 'lightgreen' : 'transparent',
-                      color: activeSuccess ? 'black' : 'green',
+                      backgroundColor: active === 1 ? 'lightgreen' : 'transparent',
+                      color: active === 1 ? 'black' : 'green',
                     },
                   }}
                 />
-                <Chip
+                <Chip className={active === 2 ? 'active' : ''}
                   label="Chưa hoàn thành"
                   variant="outlined"
-                  onClick={handleClickError}
+                  onClick={() => handleClick(2)}
                   sx={{
                     borderColor: 'red',
-                    color: activeError ? '#fff' : 'red',
-                    backgroundColor: activeError ? 'red' : 'transparent',
+                    color: active === 2 ? '#fff' : 'red',
+                    backgroundColor: active === 2 ? 'red' : 'transparent',
                     '&:hover': {
-                      backgroundColor: activeError ? 'lightred' : 'transparent',
-                      color: activeError ? 'black' : 'red',
+                      backgroundColor: active === 2 ? 'lightred' : 'transparent',
+                      color: active === 2 ? 'black' : 'red',
                     },
                   }}
 
