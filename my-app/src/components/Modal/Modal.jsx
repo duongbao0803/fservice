@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
 import "./Modal.css";
-import { formatDate } from "../../utils/tools.js";
+import { formatDate, formatTime } from "../../utils/tools.js";
 import { confirmWork, getOrder } from "../../services/UserService.js";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -26,6 +26,8 @@ function Modal({
       setJobAccepted(false);
     }
   }, [info.status]);
+
+  console.log("Check info", info);
 
   const [jobAccepted, setJobAccepted] = useState(false);
   const theme = useContext(ThemeContext);
@@ -92,7 +94,7 @@ function Modal({
           <section className="job-details">
             <h6>CÔNG VIỆC</h6>
             <p style={{ color: "#ff8228", fontWeight: "bold" }}>
-              {service?.description || "VỆ SINH NHÀ CỬA, BÀN GHẾ"}
+              {info?.service.name || "VỆ SINH NHÀ CỬA, BÀN GHẾ"}
             </p>
             <div className="modal-table">
               <table>
@@ -110,8 +112,7 @@ function Modal({
                     <td className="modal-title">Giờ làm việc:</td>
                     <td>
                       <p>
-                        {formatDate(info?.apartmentPackage.startDate)} -{" "}
-                        {info?.shiftTime}
+                        {formatDate(info?.createdDate)} - {info?.shiftTime}
                       </p>
                     </td>
                   </tr>
@@ -198,7 +199,10 @@ function Modal({
                     </td>
                     <td>
                       {info.completeDate ? (
-                        <p>{formatDate(info?.completeDate)}</p>
+                        <p>
+                          {formatDate(info?.completeDate)} -{" "}
+                          {formatTime(info?.completeDate)}
+                        </p>
                       ) : (
                         ""
                       )}
