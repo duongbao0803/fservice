@@ -1,4 +1,3 @@
-/* Ensures the modal covers the entire screen with a semi-transparent background */
 .confirm.modal {
   position: fixed;
   top: 0;
@@ -12,45 +11,41 @@
   overflow: auto;
 }
 
-/* Sets the modal content area with a fixed max width and responsive height */
 .confirm.modal-content {
   background-color: #fff;
-  max-width: 700px; /* Reduced width */
+  max-width: 700px;
   margin: 0;
-  height: 100%; /* Changed to auto for content-based height */
+  height: 90%;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   overflow: auto;
 }
 
-/* Styles for the header of the modal */
 .confirm.modal-header {
   background-color: #e7e7e7;
-  padding: 10px 16px; /* Reduced padding */
+  padding: 10px 16px;
   display: flex;
-  justify-content: space-between; /* Ensures title and close button are on opposite ends */
+  justify-content: space-between;
 }
 
 .confirm.modal-header h5 {
-  font-size: 16px; /* Reduced font size */
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-/* Styles for the body of the modal */
 .confirm.modal-body {
-  padding: 16px; /* Reduced padding */
+  padding: 16px;
 }
 
 .confirm.modal-body h6 {
   color: #757575;
-  padding-bottom: 4px; /* Reduced padding */
+  padding-bottom: 4px;
   border-bottom: 1px solid #ff8228;
-  margin-bottom: 8px; /* Reduced margin */
+  margin-bottom: 8px;
   font-weight: bold;
 }
 
-/* Flexbox settings for sections */
 .confirm.modal-job,
 .confirm.modal-contact,
 .confirm.modal-Info {
@@ -58,25 +53,21 @@
   flex-direction: column;
 }
 
-/* Table display settings */
 .modal-confirm_table {
   display: flex;
-  flex-direction: column; /* Changed to column for a tighter layout */
-  margin-bottom: 5px; /* Added margin for spacing between table and other content */
+  flex-direction: column;
+  margin-bottom: 5px;
 }
 
-/* Table data styling */
 .modal-confirm_table td {
-  padding: 6px 10px; /* Reduced padding */
+  padding: 6px 10px;
 }
 
-/* Button container styling */
 .modal-btn {
   display: flex;
   justify-content: flex-end;
-  padding: 10px; /* Added padding */
+  padding: 10px;
 }
-
 
 .modal-confirm_table th {
   min-width: 200px;

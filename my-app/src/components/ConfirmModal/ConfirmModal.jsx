@@ -144,7 +144,6 @@ function Modal({
                     setValue(newValue);
                   }}
                 />
-
               </Box>
 
               <input
@@ -156,16 +155,16 @@ function Modal({
                 style={{ width: '60%', marginBottom: '20px' }}
               />
               <Stack direction="row" spacing={1}>
-                <Chip   className={activeSuccess ? 'active' : ''}
+                <Chip className={activeSuccess ? 'active' : ''}
                   label="Đã hoàn thành"
                   variant="outlined"
-                  onClick={ handleClickSuccess}
+                  onClick={handleClickSuccess}
                   sx={{
                     borderColor: 'green',
                     color: activeSuccess ? '#fff' : 'green',
-                    backgroundColor: activeSuccess ? 'green' : 'transparent', // Change background color based on activeSuccess
+                    backgroundColor: activeSuccess ? 'green' : 'transparent',
                     '&:hover': {
-                      backgroundColor:  activeSuccess ? 'lightgreen' : 'transparent',
+                      backgroundColor: activeSuccess ? 'lightgreen' : 'transparent',
                       color: activeSuccess ? 'black' : 'green',
                     },
                   }}
@@ -177,14 +176,14 @@ function Modal({
                   sx={{
                     borderColor: 'red',
                     color: activeError ? '#fff' : 'red',
-                    backgroundColor: activeError ? 'red' : 'transparent', // Change background color based on activeSuccess
+                    backgroundColor: activeError ? 'red' : 'transparent',
                     '&:hover': {
-                      backgroundColor:  activeError ? 'lightred' : 'transparent',
+                      backgroundColor: activeError ? 'lightred' : 'transparent',
                       color: activeError ? 'black' : 'red',
                     },
                   }}
 
-              
+
                 />
               </Stack>
             </div>
