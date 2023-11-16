@@ -1,4 +1,4 @@
-.confirm modal {
+.confirm.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,61 +11,75 @@
   overflow: auto;
 }
 
-.confirm modal-content {
+.confirm.modal-content {
   background-color: #fff;
   max-width: 700px;
   margin: 0;
   height: 90%;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   overflow: auto;
 }
-.confirm modal-header {
+
+.confirm.modal-header {
   background-color: #e7e7e7;
-  border: none;
-  padding: 8px;
-  align-items: center;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.confirm modal-header h5 {
-  font-size: 18px;
+.confirm.modal-header h5 {
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.confirm modal-body {
-  padding: 20px;
+.confirm.modal-body {
+  padding: 16px;
 }
-.confirm modal-body h6 {
+
+.confirm.modal-body h6 {
   color: #757575;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   border-bottom: 1px solid #ff8228;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: bold;
 }
 
-.confirm modal-job,
-.confirm modal-contact,
-.confirm modal-Info {
+.confirm.modal-job,
+.confirm.modal-contact,
+.confirm.modal-Info {
   display: flex;
   flex-direction: column;
 }
+
 .modal-confirm_table {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 15px;
-}
-.modal-confirm_table td {
-  min-width: 200px;
-  padding: 10px;
-  border: none;
+  flex-direction: column;
+  margin-bottom: 5px;
 }
 
-.confirm modal-title {
-  font-weight: bold;
+.modal-confirm_table td {
+  padding: 6px 10px;
 }
 
 .modal-btn {
   display: flex;
   justify-content: flex-end;
+  padding: 10px;
+}
+
+.modal-confirm_table th {
+  min-width: 200px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.css-iljtu2-MuiRating-root {
+  font-size: 2.5rem;
 }
