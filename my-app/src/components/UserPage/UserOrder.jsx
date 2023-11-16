@@ -161,7 +161,10 @@ function UserOrder() {
                       style={{ objectFit: "cover" }}
                     />
                     <div className="ml-3">
-                      <p className="package-name">{orderInfo.package.name}</p>
+                      <p className="package-name">
+                        {orderInfo.package.name} (
+                        {apartmentInfo[index]?.type.type})
+                      </p>
                       <div className="ml-3">
                         {apartmentInfo[index] && (
                           <p>
@@ -171,8 +174,7 @@ function UserOrder() {
                             />{" "}
                             Căn hộ: Tòa{" "}
                             {apartmentInfo[index]?.type.building.name} - Phòng{" "}
-                            {apartmentInfo[index]?.roomNo} (
-                            {apartmentInfo[index]?.type.type})
+                            {apartmentInfo[index]?.roomNo}
                           </p>
                         )}
 
@@ -183,17 +185,27 @@ function UserOrder() {
                           />{" "}
                           Thanh toán: {orderInfo?.paymentMethod}
                         </p>
-                        <p>
-                          <i
-                            className="fa-solid fa-check"
-                            style={{ color: "#03AC00" }}
-                          />{" "}
-                          Ngày thanh toán:{" "}
-                          <span>
-                            {formatDate(orderInfo?.paymentDate)} -{" "}
-                            {formatTime(orderInfo?.paymentDate)}
-                          </span>
-                        </p>
+                        {orderInfo.transactionNo !== null ? (
+                          <p>
+                            <i
+                              className="fa-solid fa-check"
+                              style={{ color: "#03AC00" }}
+                            />{" "}
+                            Ngày thanh toán:{" "}
+                            <span>
+                              {formatDate(orderInfo?.paymentDate)} -{" "}
+                              {formatTime(orderInfo?.paymentDate)}
+                            </span>
+                          </p>
+                        ) : (
+                          <p>
+                            <i
+                              className="fa-solid fa-times"
+                              style={{ color: "#952323" }}
+                            />{" "}
+                            Ngày thanh toán: <span>Chưa thanh toán</span>
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>

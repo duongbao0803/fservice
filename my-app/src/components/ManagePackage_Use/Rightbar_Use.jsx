@@ -231,6 +231,8 @@ function Rightbar({ state }) {
             <Pagination
               count={totalPage}
               onChange={(event, value) => handlePageClick(value)}
+              defaultPage={1}
+              siblingCount={0}
             />
           </div>
         </div>
