@@ -15,7 +15,7 @@ function Field() {
                 </span>
                 <span>Bạn đã sẵn sàng trải nghiệm FServices chưa ?</span>
                 <span>Tham gia ngay</span>
-                <Link to="/package">Trải nghiệm ngay</Link>
+                <Link to="#">Trải nghiệm ngay</Link>
               </div>
             </div>
           </div>

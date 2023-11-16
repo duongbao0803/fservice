@@ -228,7 +228,7 @@ function Loginv2() {
                 label="Email"
                 id="form1"
                 type="email"
-                required
+                required={true}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -238,7 +238,7 @@ function Loginv2() {
                 label="Mật khẩu"
                 id="form2"
                 type="password"
-                required
+                required={true}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -247,12 +247,11 @@ function Loginv2() {
                   name="flexCheck"
                   value=""
                   id="flexCheckDefault"
-                  required
                   label="Ghi nhớ"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
-                <a href="!#">Quên mật khẩu?</a>
+                <a href="#">Quên mật khẩu?</a>
               </div>
 
               <MDBBtn className="mb-4 w-100" onClick={handleLogin}>
