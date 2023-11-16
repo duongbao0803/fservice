@@ -31,7 +31,6 @@ function Rightbar({ id }) {
   const [isShowUsing, setIsShowUsing] = useState(false);
   const { state } = useLocation();
 
-  console.log("check apartment", state);
   useEffect(() => {
     getApartmentPackage();
   }, []);

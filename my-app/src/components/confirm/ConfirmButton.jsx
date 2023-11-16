@@ -15,9 +15,9 @@ function ConfirmButton(props) {
         toast.success("Đơn hàng tạo thành công, vui lòng chờ trong giây lát", {
           autoClose: 2000,
         });
+        navigate("/");
         setTimeout(() => {
           window.open(res.data.paymentUrl, "_blank");
-          navigate("/");
         }, 3000);
       } else if (res.message === "Package is using.") {
         toast.warning("Gói này đang được sử dụng. Vui lòng chọn gói khác");
