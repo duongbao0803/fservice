@@ -60,11 +60,11 @@ function Header() {
             </li>
             <li className="nav-item">
               <Link to="/about" className="nav-link">
-                About Us
+                Về chúng tôi
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/contact" className="nav-link">
+              <Link to="#" className="nav-link">
                 Liên hệ
               </Link>
             </li>

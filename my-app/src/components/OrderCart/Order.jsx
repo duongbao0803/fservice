@@ -28,6 +28,11 @@ const Order = () => {
   const instead = 0;
 
   const navigate = useNavigate();
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsCheckboxChecked(!isCheckboxChecked);
+  };
 
   useEffect(() => {
     fetchHouse();
@@ -64,6 +69,10 @@ const Order = () => {
   const handleConfirm = async () => {
     if (price === 0) {
       toast.error("Vui lòng chọn số nhà / căn hộ");
+      return;
+    }
+    if (!isCheckboxChecked) {
+      toast.error("Vui lòng nhấn nút xác nhận");
       return;
     }
     navigate("/confirm", {
@@ -374,7 +383,8 @@ const Order = () => {
                         required
                         className="check-box"
                         type="checkbox"
-                        defaultValue
+                        checked={isCheckboxChecked}
+                        onChange={handleCheckboxChange}
                         id="defaultCheck"
                       />
                       <label

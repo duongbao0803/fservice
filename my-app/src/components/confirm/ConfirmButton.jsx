@@ -7,8 +7,18 @@ import { toast } from "react-toastify";
 
 function ConfirmButton(props) {
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const handleSubmit = async () => {
     const data = props.state.formData;
+    if (!isChecked) {
+      toast.error("Vui lòng nhấn nút xác nhận");
+      return;
+    }
     try {
       let res = await Order(data);
       if (res && res.status === 200) {
@@ -39,6 +49,8 @@ function ConfirmButton(props) {
             className="check-box"
             type="checkbox"
             defaultValue
+            checked={isChecked}
+            onChange={handleCheckboxChange}
             id="defaultCheck"
           />
           <label className="form-check-label" htmlFor="defaultCheck">
