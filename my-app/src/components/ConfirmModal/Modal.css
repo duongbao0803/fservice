@@ -1,4 +1,4 @@
-.modal {
+.confirm modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   overflow: auto;
 }
 
-.modal-content {
+.confirm modal-content {
   background-color: #fff;
   max-width: 700px;
   margin: 0;
@@ -20,23 +20,23 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   overflow: auto;
 }
-.modal-header {
+.confirm modal-header {
   background-color: #e7e7e7;
   border: none;
   padding: 8px;
   align-items: center;
 }
 
-.modal-header h5 {
+.confirm modal-header h5 {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
 }
 
-.modal-body {
+.confirm modal-body {
   padding: 20px;
 }
-.modal-body h6 {
+.confirm modal-body h6 {
   color: #757575;
   padding-bottom: 5px;
   border-bottom: 1px solid #ff8228;
@@ -44,24 +44,24 @@
   font-weight: bold;
 }
 
-.job-details,
-.contact-details,
-.info-details {
+.confirm modal-job,
+.confirm modal-contact,
+.confirm modal-Info {
   display: flex;
   flex-direction: column;
 }
-.modal-table {
+.modal-confirm_table {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
 }
-.modal-table td {
+.modal-confirm_table td {
   min-width: 200px;
   padding: 10px;
   border: none;
 }
 
-.modal-title {
+.confirm modal-title {
   font-weight: bold;
 }
 

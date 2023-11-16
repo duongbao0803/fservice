@@ -52,9 +52,10 @@ function Modal({
   };
 
   return (
-    <div className="modal" style={{ backgroundColor: theme.background }}>
-      <div className="modal-content">
-        <div className="modal-header">
+   
+    <div className="confirm modal" style={{ backgroundColor: theme.background }}>
+      <div className="confirm modal-content">
+        <div className="confirm modal-header">
           <h5>CHI TIẾT CÔNG VIỆC</h5>
           <button
             style={{
@@ -67,83 +68,85 @@ function Modal({
             <CloseIcon>ĐÓNG</CloseIcon>
           </button>
         </div>
-        <div className="modal-body">
-          <section className="job-details">
-            <h6>DỊCH VỤ</h6>
-            <div className="modal-table">
-              <div>
-                <p className="modal-title">Thông tin căn hộ:</p>
-                <p>
-                  {state.selectedApartment.roomNo} -{" "}
-                  {state.selectedApartment.type.building.name} - Vinhomes Grand
-                  Park
-                </p>
-              </div>
-              <div>
-                <td className="modal-title">Giờ làm việc:</td>
-                <p>{selectedShiftTime}</p>
-              </div>
-              <div>
-                <p className="modal-title">Tên dịch vụ</p>
-                <p>{selectedServiceName}</p>
-              </div>
-            </div>
-          </section>
-          <section className="contact-details">
-            <h6>STAFF</h6>
-            <div className="modal-table">
-              <div>
-                <p className="modal-title">Tên nhân viên:</p>
-
-                <p>{staffInfoOrder.name}</p>
-              </div>
-              <div>
-                <p className="modal-title">Số điện thoại:</p>
-
-                <p>{staffInfoOrder.phoneNumber}</p>
-              </div>
-              <div>
-                <p className="modal-title">Email</p>
-
-                <p>{staffInfoOrder.email}</p>
-              </div>
-            </div>
-          </section>
-          <section className="Info-details">
-            <h6>CÔNG VIỆC</h6>
-            <div className="modal-table">
-              <p className="modal-title">Thời gian hoàn thành</p>
-              <p>
-                {formatDate(selectedCompleteTime)} -{" "}
-                {formatTime(selectedCompleteTime)}
-              </p>
-
-              <p className="modal-title">Đánh giá</p>
-
-              <input
-                type="text"
-                name="feedback"
-                value={feedBack}
-                onChange={(e) => setFeedBack(e.target.value)}
-              />
-              <p className="modal-title">Rate sao</p>
-
-              <Box
-                sx={{
-                  "& > legend": { mt: 2 },
+        <div className="confirm modal-body">
+  <section className="confirm modal-job">
+    <h6>DỊCH VỤ</h6>
+    <table className="modal-confirm_table">
+      <tbody>
+        <tr>
+          <th>Thông tin căn hộ:</th>
+          <td>{state.selectedApartment.roomNo} - {state.selectedApartment.type.building.name} - Vinhomes Grand Park</td>
+        </tr>
+        <tr>
+          <th>Giờ làm việc:</th>
+          <td>{selectedShiftTime}</td>
+        </tr>
+        <tr>
+          <th>Tên dịch vụ:</th>
+          <td>{selectedServiceName}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+  <section className="confirm modal-contact">
+    <h6>STAFF</h6>
+    <table className="modal-confirm_table">
+      <tbody>
+        <tr>
+          <th>Tên nhân viên:</th>
+          <td>{staffInfoOrder.name}</td>
+        </tr>
+        <tr>
+          <th>Số điện thoại:</th>
+          <td>{staffInfoOrder.phoneNumber}</td>
+        </tr>
+        <tr>
+          <th>Email:</th>
+          <td>{staffInfoOrder.email}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+  <section className="confirm modal-Info">
+    <h6>CÔNG VIỆC</h6>
+    <table className="modal-confirm_table">
+      <tbody>
+        <tr>
+          <th>Thời gian hoàn thành:</th>
+          <td>{formatDate(selectedCompleteTime)} - {formatTime(selectedCompleteTime)}</td>
+        </tr>
+        <tr>
+          <th>Đánh giá:</th>
+          <td>
+            <input
+              type="text"
+              name="feedback"
+              value={feedBack}
+              onChange={(e) => setFeedBack(e.target.value)}
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>Rate sao:</th>
+          <td>
+            <Box sx={{ "& > legend": { mt: 2 } }}>
+              <Rating
+                name="simple-controlled"
+                value={rating}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
                 }}
-              >
-                <Rating
-                  name="simple-controlled"
-                  value={rating}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                />
-              </Box>
-            </div>
-          </section>
-        </div>
+              />
+            </Box>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
         <div
           className="function-button"
           style={{ textAlign: "right", margin: "10px" }}
@@ -182,6 +185,7 @@ function Modal({
         </div>
       </div>
     </div>
+    
   );
 }
 
