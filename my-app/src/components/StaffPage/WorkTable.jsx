@@ -133,7 +133,7 @@ function DataTable() {
       <div className="data-table">
         <div>
           <h4>DANH SÁCH CÔNG VIỆC</h4>
-          <div
+          {/* <div
             className="dropdown-container d-flex align-items-center"
             style={{ justifyContent: "flex-end" }}
           >
@@ -150,7 +150,7 @@ function DataTable() {
               <option>Theo tuần</option>
               <option>Theo tháng</option>
             </select>
-          </div>
+          </div> */}
           <div
             className="content-table mt-4"
             style={{ height: 500, width: "100%" }}

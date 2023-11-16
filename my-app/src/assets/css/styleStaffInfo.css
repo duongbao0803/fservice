@@ -80,7 +80,7 @@
 
 .ant-picker {
     width: 100%;
-    padding: 6px;
+    padding: 6px !important;
     border: 1px solid #ccc;
 }
 

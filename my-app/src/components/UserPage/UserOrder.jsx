@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getApartmentId, getOrderHistory } from "../../services/UserService";
+import { getApartmentId, getOrderHistory, getOrderHistoryError, getOrderHistorySuccess } from "../../services/UserService";
 import { Pagination } from "@mui/material";
 import { PriceFormat, formatDate, formatTime } from "../../utils/tools";
 
@@ -33,13 +33,61 @@ function UserOrder() {
         const apartmentIds = res.data.map((apartment) => apartment.apartmentId);
         getCustomerApartment(apartmentIds);
       } else {
-        viewOrderHistory([]);
         setApartmentIds([]);
       }
     } catch (error) {
       console.log("Error Getting Order History", error);
     }
   };
+
+  const viewOrderHistorySuccess = async (pageNumber) => {
+    try {
+      const res = await getOrderHistorySuccess(
+        localStorage.getItem("username"),
+        pageNumber
+      );
+      if (res && res.status === 200) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalPages;
+          setTotalPage(sumPage);
+        }
+        setOrderInfo(res.data);
+        const apartmentIds = res.data.map((apartment) => apartment.apartmentId);
+        getCustomerApartment(apartmentIds);
+      } else {
+        setApartmentIds([]);
+      }
+    } catch (error) {
+      console.log("Error Getting Order History", error);
+    }
+  };
+
+  const viewOrderHistoryError = async (pageNumber) => {
+    try {
+      const res = await getOrderHistoryError(
+        localStorage.getItem("username"),
+        pageNumber
+      );
+      if (res && res.status === 200) {
+        const xPaginationHeader = res.headers?.["x-pagination"];
+        if (xPaginationHeader) {
+          const paginationData = JSON.parse(xPaginationHeader);
+          const sumPage = paginationData.TotalPages;
+          setTotalPage(sumPage);
+        }
+        setOrderInfo(res.data);
+        const apartmentIds = res.data.map((apartment) => apartment.apartmentId);
+        getCustomerApartment(apartmentIds);
+      } else {
+        setApartmentIds([]);
+      }
+    } catch (error) {
+      console.log("Error Getting Order History", error);
+    }
+  };
+
 
   const getCustomerApartment = async (apartmentIds) => {
     try {
@@ -63,19 +111,33 @@ function UserOrder() {
   };
 
   const handlePageClick = (newPage) => {
-    viewOrderHistory(newPage);
-  };
+    if (activeLink === "all") {
+      viewOrderHistory(newPage);
+    } else if (activeLink === "success") {
+      viewOrderHistorySuccess(newPage);
+    } else if (activeLink === "error") {
+      viewOrderHistoryError(newPage)
+    } else {
+      console.log("Error");
+    }
+  }
 
   const handleStatusChange = (status, activeLink) => {
     setStatus(status);
     setActiveLink(activeLink);
 
+
     if (status === null) {
       setActiveLink("all");
+      viewOrderHistory(1)
     } else if (status === true) {
       setActiveLink("success");
-    } else {
+      viewOrderHistorySuccess(1)
+    } else if (status === false){
+      viewOrderHistoryError(1)
       setActiveLink("error");
+    } else {
+      console.log("Error");
     }
   };
 
@@ -93,18 +155,16 @@ function UserOrder() {
           </NavLink>
           <NavLink
             to={`/user/manage-order/success`}
-            className={`nav-link ${
-              activeLink === "success" ? "active-link" : ""
-            }`}
+            className={`nav-link ${activeLink === "success" ? "active-link" : ""
+              }`}
             onClick={() => handleStatusChange(true, "success")}
           >
             Thành công
           </NavLink>
           <NavLink
             to={`/user/manage-order/error`}
-            className={`nav-link ${
-              activeLink === "error" ? "active-link" : ""
-            }`}
+            className={`nav-link ${activeLink === "error" ? "active-link" : ""
+              }`}
             onClick={() => handleStatusChange(false, "error")}
           >
             Thất bại

@@ -73,7 +73,7 @@ function Sidebar() {
                     Tài khoản của tôi
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink
                     to={"/staff/change-password"}
                     underline="none"
@@ -82,7 +82,7 @@ function Sidebar() {
                     <KeyIcon style={{ color: theme.palette.secondary.main }} />
                     Thay đổi mật khẩu
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink
                     to={"/authen"}
