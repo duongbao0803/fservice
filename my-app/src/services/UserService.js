@@ -117,10 +117,7 @@ const getStaffWork = (username) => {
 
 const getStaffWorkPaging = (username) => {
   const refreshedConfig = refreshData();
-  return config.get(
-    `/api/staffworks/${username}?PageSize=100`,
-    refreshedConfig
-  );
+  return config.get(`/api/staffworks/${username}?PageSize=50`, refreshedConfig);
 };
 
 const getStaffByUsingId = (id) => {
@@ -159,7 +156,7 @@ const createApartment = (id, username) => {
 const getUsingHistory = (apartmentPackgeId, pageNumber) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=3`,
+    `/api/orderdetails/apartment-package/${apartmentPackgeId}?PageNumber=${pageNumber}&PageSize=2`,
     refreshedConfig
   );
 };
@@ -167,7 +164,7 @@ const getUsingHistory = (apartmentPackgeId, pageNumber) => {
 const getOrderHistory = (username, pageNumber) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/orders/${username}?PageNumber=${pageNumber}&PageSize=3`,
+    `/api/orders/${username}?PageNumber=${pageNumber}&PageSize=2`,
     refreshedConfig
   );
 };

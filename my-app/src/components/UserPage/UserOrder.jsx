@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getOrderHistory } from "../../services/UserService";
+import { getApartmentId, getOrderHistory } from "../../services/UserService";
 import { Pagination } from "@mui/material";
 import { PriceFormat, formatDate, formatTime } from "../../utils/tools";
 
@@ -9,6 +9,8 @@ function UserOrder() {
   const [orderInfo, setOrderInfo] = useState([]);
   const [status, setStatus] = useState(null);
   const [activeLink, setActiveLink] = useState("all");
+  const [apartmentInfo, setApartmentInfo] = useState([]);
+  const [apartmentIds, setApartmentIds] = useState([]);
 
   useEffect(() => {
     viewOrderHistory(1);
@@ -27,9 +29,34 @@ function UserOrder() {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
-
         setOrderInfo(res.data);
+        const apartmentIds = res.data.map((apartment) => apartment.apartmentId);
+        getCustomerApartment(apartmentIds);
+      } else {
+        viewOrderHistory([]);
+        setApartmentIds([]);
       }
+    } catch (error) {
+      console.log("Error Getting Order History", error);
+    }
+  };
+
+  const getCustomerApartment = async (apartmentIds) => {
+    try {
+      const fetchApartmentInfo = [];
+      for (const apartmentId of apartmentIds) {
+        try {
+          const res = await getApartmentId(apartmentId);
+          if (res && res.status === 200) {
+            fetchApartmentInfo.push(res.data);
+          } else {
+            fetchApartmentInfo([]);
+          }
+        } catch (error) {
+          console.log("Error Getting apartment", error);
+        }
+      }
+      setApartmentInfo(fetchApartmentInfo);
     } catch (error) {
       console.log("Error Getting Order History", error);
     }
@@ -93,7 +120,7 @@ function UserOrder() {
               return true;
             }
           })
-          ?.map((orderInfo) => (
+          ?.map((orderInfo, index) => (
             <div
               className="mt-4"
               style={{ backgroundColor: "#fff", borderRadius: "8px" }}
@@ -134,10 +161,21 @@ function UserOrder() {
                       style={{ objectFit: "cover" }}
                     />
                     <div className="ml-3">
-                      <p className="package-name">
-                        Gói dịch vụ trọn gói - premium
-                      </p>
+                      <p className="package-name">{orderInfo.package.name}</p>
                       <div className="ml-3">
+                        {apartmentInfo[index] && (
+                          <p>
+                            <i
+                              className="fa-solid fa-check"
+                              style={{ color: "#03AC00" }}
+                            />{" "}
+                            Căn hộ: Tòa{" "}
+                            {apartmentInfo[index]?.type.building.name} - Phòng{" "}
+                            {apartmentInfo[index]?.roomNo} (
+                            {apartmentInfo[index]?.type.type})
+                          </p>
+                        )}
+
                         <p>
                           <i
                             className="fa-solid fa-check"
