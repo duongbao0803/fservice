@@ -139,24 +139,28 @@ function Rightbar({ state }) {
                             : workingHistory?.status?.includes("Working")
                             ? 1
                             : workingHistory?.status?.includes("Completed")
-                            ? 2
+                            ? 3
                             : -1
                         }
                         style={{ minHeight: "30vh", marginTop: "8px" }}
                       >
                         <Step
                           title="Đang chờ"
-                          description={` ${formatTime(
+                          description={` ${formatDate(
                             workingHistory?.createdDate
-                          )}`}
+                          )} - ${formatTime(workingHistory?.createdDate)}`}
                         />
                         <Step title="Đang thực hiện" />
-                        <Step
-                          title="Đã hoàn thành"
-                          description={`${formatTime(
-                            workingHistory?.completeDate
-                          )}`}
-                        />
+                        {workingHistory?.status?.includes("Completed") ? (
+                          <Step
+                            title="Đã hoàn thành"
+                            description={`${formatDate(
+                              workingHistory?.completeDate
+                            )} - ${formatTime(workingHistory?.completeDate)}`}
+                          />
+                        ) : (
+                          <Step title="Đã hoàn thành" />
+                        )}
                       </Steps>
                     </div>
                     <div className="col-md-8">
