@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { PriceFormat } from "../../utils/tools";
+import { PriceFormat, formatDate, formatTime } from "../../utils/tools";
 
 export default function Payment(props) {
   const payment = async () => {
@@ -28,7 +28,11 @@ export default function Payment(props) {
             <tbody>
               <tr>
                 <td>Ngày đặt dịch vụ</td>
-                <td> {props.state.orderDate} </td>
+                <td>
+                  {" "}
+                  {formatDate(props.state.orderDate)} -{" "}
+                  {formatTime(props.state.orderDate)}{" "}
+                </td>
               </tr>
               <tr>
                 <td>Số tiền</td>

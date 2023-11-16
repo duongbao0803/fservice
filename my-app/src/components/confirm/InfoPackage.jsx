@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { useAppData } from "../OrderCart/Order";
 import { useLocation } from "react-router-dom";
+import { formatDate } from "../../utils/tools";
 
 export default function InfoPackage(props) {
   return (
@@ -29,7 +30,8 @@ export default function InfoPackage(props) {
               <tr>
                 <td>Thời hạn gói</td>
                 <td>
-                  {props.state.startDate} - {props.state.endDate}
+                  {formatDate(props.state.startDate)} -{" "}
+                  {formatDate(props.state.endDate)}
                 </td>
               </tr>
               <tr>
