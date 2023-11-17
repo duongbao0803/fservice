@@ -213,9 +213,9 @@ function AddHouse({ isShowAdd, handleClose }) {
               onChange={handleApartmentChange}
             >
               <option value="">Chọn căn hộ</option>
-              {apartments.map((apartment) => (
-                <option key={apartment.id} value={apartment.id}>
-                  {apartment.roomNo}
+              {apartments?.map((apartment) => (
+                <option key={apartment?.id} value={apartment?.id}>
+                  {apartment?.roomNo}
                 </option>
               ))}
             </select>

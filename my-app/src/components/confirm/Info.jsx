@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Info() {
+  const { state } = useLocation();
+  console.log("check log", state);
   return (
     // form
     <div className="card-confirm" style={{ backgroundColor: "#F8F8F8" }}>
       <h3 className="form-title-cf text-center mb-3" style={{ color: "white" }}>
-        VỆ SINH PHÒNG KHÁCH
+        {state.formData.packageName}
       </h3>
       <div className="title" style={{ display: "flex", alignItems: "center" }}>
         <div className="tilte-img">
@@ -16,7 +19,7 @@ export default function Info() {
           />
         </div>
         <div className="icon-title">
-          <h5 style={{ marginLeft: "10px" }}>VỆ SINH PHÒNG KHÁCH</h5>
+          <h5 style={{ marginLeft: "10px" }}>{state.formData.packageName}</h5>
         </div>
       </div>
     </div>

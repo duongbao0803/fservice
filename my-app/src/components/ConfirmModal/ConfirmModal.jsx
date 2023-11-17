@@ -9,9 +9,8 @@ import { useState } from "react";
 import { getCustomerConfirm } from "../../services/UserService.js";
 import { formatDate, formatTime } from "../../utils/tools.js";
 import { toast } from "react-toastify";
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 function Modal({
   isOpen,
@@ -22,15 +21,13 @@ function Modal({
   selectedShiftTime,
   selectedServiceName,
   state,
-  selectedCreateDate
+  selectedCreateDate,
 }) {
   const [rating, setValue] = useState(5);
   const [feedBack, setFeedBack] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
-  // const [activeSuccess, setActiveSuccess] = useState(false);
   const [active, setActive] = useState(0);
 
-  // const [activeError, setActiveError] = useState(false);
   const theme = useContext(ThemeContext);
   if (!isOpen) return null;
 
@@ -60,17 +57,15 @@ function Modal({
     }
   };
 
-
   const handleClick = (status) => {
     setActive(status);
-  }
-
-
-
+  };
 
   return (
-
-    <div className="confirm modal" style={{ backgroundColor: theme.background }}>
+    <div
+      className="confirm modal"
+      style={{ backgroundColor: theme.background }}
+    >
       <div className="confirm modal-content">
         <div className="confirm modal-header">
           <h5>XÁC NHẬN CÔNG VIỆC</h5>
@@ -92,11 +87,17 @@ function Modal({
               <tbody>
                 <tr>
                   <th>Thông tin căn hộ:</th>
-                  <td>{state.selectedApartment.roomNo} - {state.selectedApartment.type.building.name} - Vinhomes Grand Park</td>
+                  <td>
+                    {state.selectedApartment.roomNo} -{" "}
+                    {state.selectedApartment.type.building.name} - Vinhomes
+                    Grand Park
+                  </td>
                 </tr>
                 <tr>
                   <th>Giờ làm việc:</th>
-                  <td>{formatDate(selectedCreateDate)} - {selectedShiftTime}</td>
+                  <td>
+                    {formatDate(selectedCreateDate)} - {selectedShiftTime}
+                  </td>
                 </tr>
                 <tr>
                   <th>Tên dịch vụ:</th>
@@ -132,12 +133,17 @@ function Modal({
               <tbody>
                 <tr>
                   <th>Thời gian hoàn thành:</th>
-                  <td>{formatDate(selectedCompleteTime)} - {formatTime(selectedCompleteTime)}</td>
+                  <td>
+                    {formatDate(selectedCompleteTime)} -{" "}
+                    {formatTime(selectedCompleteTime)}
+                  </td>
                 </tr>
               </tbody>
             </table>
             <div className="rating mt-3">
-              <h5 style={{ fontWeight: '500' }}>Bạn có hài lòng khi sử dụng dịch vụ?</h5>
+              <h5 style={{ fontWeight: "500" }}>
+                Bạn có hài lòng khi sử dụng dịch vụ?
+              </h5>
               <Box sx={{ "& > legend": { mt: 2 } }}>
                 <Rating
                   name="simple-controlled"
@@ -146,7 +152,7 @@ function Modal({
                     setValue(newValue);
                   }}
                   style={{
-                    fontSize: "2.8rem"
+                    fontSize: "2.8rem",
                   }}
                 />
               </Box>
@@ -157,42 +163,43 @@ function Modal({
                 value={feedBack}
                 onChange={(e) => setFeedBack(e.target.value)}
                 className="form-control"
-                style={{ width: '60%', marginBottom: '20px' }}
+                style={{ width: "60%", marginBottom: "20px" }}
               />
               <Stack direction="row" spacing={1}>
-                <Chip className={active === 1 ? 'active' : ''}
+                <Chip
+                  className={active === 1 ? "active" : ""}
                   label="Đã hoàn thành"
                   variant="outlined"
                   onClick={() => handleClick(1)}
                   sx={{
-                    borderColor: 'green',
-                    color: active === 1 ? '#fff' : 'green',
-                    backgroundColor: active === 1 ? 'green' : 'transparent',
-                    '&:hover': {
-                      backgroundColor: active === 1 ? 'lightgreen' : 'transparent',
-                      color: active === 1 ? 'black' : 'green',
+                    borderColor: "green",
+                    color: active === 1 ? "#fff" : "green",
+                    backgroundColor: active === 1 ? "green" : "transparent",
+                    "&:hover": {
+                      backgroundColor:
+                        active === 1 ? "lightgreen" : "transparent",
+                      color: active === 1 ? "black" : "green",
                     },
                   }}
                 />
-                <Chip className={active === 2 ? 'active' : ''}
+                <Chip
+                  className={active === 2 ? "active" : ""}
                   label="Chưa hoàn thành"
                   variant="outlined"
                   onClick={() => handleClick(2)}
                   sx={{
-                    borderColor: 'red',
-                    color: active === 2 ? '#fff' : 'red',
-                    backgroundColor: active === 2 ? 'red' : 'transparent',
-                    '&:hover': {
-                      backgroundColor: active === 2 ? 'lightred' : 'transparent',
-                      color: active === 2 ? 'black' : 'red',
+                    borderColor: "red",
+                    color: active === 2 ? "#fff" : "red",
+                    backgroundColor: active === 2 ? "red" : "transparent",
+                    "&:hover": {
+                      backgroundColor:
+                        active === 2 ? "lightred" : "transparent",
+                      color: active === 2 ? "black" : "red",
                     },
                   }}
-
-
                 />
               </Stack>
             </div>
-
           </section>
         </div>
 
@@ -234,7 +241,6 @@ function Modal({
         </div>
       </div>
     </div>
-
   );
 }
 

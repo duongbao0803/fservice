@@ -31,7 +31,7 @@ function Confirm() {
             className="form-card"
             style={{ backgroundColor: "#F8F8F8", width: "600px" }}
           >
-            <Info />
+            <Info state={state} />
             <InfoPackage state={state} />
             <Contact />
             <Payment state={state} />
