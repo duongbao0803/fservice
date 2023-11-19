@@ -3,7 +3,7 @@
 
 ### Welcome to FService (Frontend);
 
-### Demo: [https](https://fservices.vercel.app/)
+### Demo: [FService](https://fservice.vercel.app)
 
 
 #### Instructor: Thầy Lâm Hữu Khánh Phương
