@@ -1,4 +1,4 @@
-## Project SWP391 - FPTU - Student Home Membership
+## Project SWP391 - Student Home Membership
 
 
 ### Welcome to FService
