@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /public/bootstrap-4.3.1
+/front-end
 # testing
 /coverage
 
