@@ -1,7 +1,7 @@
 ## Project SWP391 - FPTU - Student Home Membership
 
 
-### Welcome to FService (Frontend);
+### Welcome to FService;
 
 ### Demo: [FService](https://fservice.vercel.app)
 
