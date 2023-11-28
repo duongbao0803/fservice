@@ -3,7 +3,7 @@
 
 ### Welcome to FService
 
-### Demo: [FService](https://fservice.vercel.app)
+### Demo: [FService](https://fservices.vercel.app)
 
 
 #### Instructor: Thầy Lâm Hữu Khánh Phương
@@ -22,6 +22,6 @@
 ![Fservce introduction](https://github.com/duongbao0803/SWP391_FService/blob/main/screenshots/introShot.png?raw=true)
 
 
-##### Content me via: tonbao0803@gmail.com
+##### Contact me via: tonbao0803@gmail.com
 
 ##### Copyright &#169; 2023 FService
