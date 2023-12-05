@@ -37,6 +37,7 @@ Fservice was developed such as a simplified online platform for Vinhomes Grand P
 
 
 
+
 #### Techstacks
 
 - Front-end: ReactJS, CSS3, Bootstrap, Ant Design, MUI, MDB, Axios, Firebase, Figma.
@@ -46,9 +47,11 @@ Fservice was developed such as a simplified online platform for Vinhomes Grand P
 
 
 
+
 #### Deployment:
 - Back-end: https://fservices.azurewebsites.net/swagger/index.html
 - Front-end: https://fservices.vercel.app/
+
 
 
 
@@ -56,7 +59,8 @@ Fservice was developed such as a simplified online platform for Vinhomes Grand P
 - Front-end: https://github.com/duongbao0803/FService
 - Front-end Admin: https://github.com/giaducdang03/FServiceWebAdmin
 - Back-end: https://github.com/giaducdang03/FserviceWebApp
-- Figma: [FService UI](https://www.figma.com/file/CleRjdHnXB8jfVlJiRP3lh/UI_StudentMemberShipCart?type=design&node-id=764-647&mode=design&t=22J07FcfanuYv0hB-0)
+- Figma: [FService UI](https://www.figma.com/file/CleRjdHnXB8jfVlJiRP3lh/UI_StudentMemberShipCart)
+
 
 
 
