@@ -1,7 +1,7 @@
 # FService - Student House Membership Cart
 
 <div align="center">
-    <img src="https://cdn.discordapp.com/attachments/1084829266581147658/1172830452499894272/logo_web.png" />
+    <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1084829266581147658/1172830452499894272/logo_web.png" />
     <p><a href="https://fservices.vercel.app/">FService</a> is a web application that provides service for students living in Vinhomes Grand Park residents in Thu Duc, HCMC.</p>
 </div>
 
@@ -47,16 +47,16 @@ Fservice was developed such as a simplified online platform for Vinhomes Grand P
 
 
 #### Deployment:
-Back-end: https://fservices.azurewebsites.net/swagger/index.html
-Front-end: https://fservices.vercel.app/
+- Back-end: https://fservices.azurewebsites.net/swagger/index.html
+- Front-end: https://fservices.vercel.app/
 
 
 
 #### References:
-Front-end: https://github.com/duongbao0803/FService
-Front-end Admin: https://github.com/giaducdang03/FServiceWebAdmin
-Back-end: https://github.com/giaducdang03/FserviceWebApp
-Figma: FService UI
+- Front-end: https://github.com/duongbao0803/FService
+- Front-end Admin: https://github.com/giaducdang03/FServiceWebAdmin
+- Back-end: https://github.com/giaducdang03/FserviceWebApp
+- Figma: [FService UI](https://www.figma.com/file/CleRjdHnXB8jfVlJiRP3lh/UI_StudentMemberShipCart?type=design&node-id=764-647&mode=design&t=22J07FcfanuYv0hB-0)
 
 
 
