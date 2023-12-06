@@ -14,7 +14,7 @@
 #### Introduction
 
 Fservice was developed such as a simplified online platform for Vinhomes Grand Park residents in Thu Duc, HCMC, facilitating convenient purchase of pre-designed apartment services via integrated VNPAY. Offers defined service periods and the flexibility to add individual services as needed.
-+ Guess can only refer to service package details.
++ Guest can only view detailed service packages. They can also register an account by verifying their email.
 + Customer can create home, order and track used services.
 + Staff can perform work and update results of services.
 + Admin can manage services, service packages, users...
