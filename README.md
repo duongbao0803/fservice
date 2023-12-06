@@ -2,7 +2,7 @@
 
 <div align="center">
     <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1084829266581147658/1172830452499894272/logo_web.png" />
-    <p><a href="https://fservices.vercel.app/">FService</a> is a web application that provides service for students living in [Vinhomes Grand Park](https://vinhome.com.vn/vinhomes-grand-park/) in Thu Duc, HCMC.</p>
+    <p><a href="https://fservices.vercel.app/">FService</a> is a web application that provides service for students living in <a href="https://vinhome.com.vn/vinhomes-grand-park/">Vinhomes Grand Park</a> in Thu Duc, HCMC.</p>
 </div>
 
 
