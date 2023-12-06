@@ -24,8 +24,8 @@ Fservice was developed such as a simplified online platform for Vinhomes Grand P
 
 #### 4 Members:
 
-- [Đăng Phan Gia Đức](https://github.com/giaducdang03) (Leader, Back-end, Front-end Dev, UI Design)
-- [Dương Tôn Bảo](https://github.com/duongbao0803) (Front-end Dev)
+- [Đăng Phan Gia Đức](https://github.com/giaducdang03) (Leader, Main Back-end Dev, Front-end Dev, UI Design)
+- [Dương Tôn Bảo](https://github.com/duongbao0803) (Main Front-end Dev)
 - [Phạm Ngọc Bảo](https://github.com/ngocbubuh) (Back-end dev)
 - [Nguyễn Bình Phương Trâm](https://github.com/phwtram) (Front-end Dev)
 
