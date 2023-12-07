@@ -1,4 +1,4 @@
-# FService - Student House Membership Cart
+# FService - Student Home Membership Cart
 
 <div align="center">
     <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1084829266581147658/1172830452499894272/logo_web.png" />
