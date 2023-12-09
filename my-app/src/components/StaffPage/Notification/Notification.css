@@ -1,0 +1,31 @@
+.check-read {
+    color: #ff8b38;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.check-read:hover {
+    background-color: rgba(143, 143, 143, 0.1);
+    cursor: pointer;
+}
+
+.noti-detail {
+    margin: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.noti-detail:hover {
+    cursor: pointer;
+    background-color: #ffe3cc4b;
+}
+
+.noti-detail__read {
+    background-color: #ffc18f5e;
+}
+
+.noti-detail__read:hover {
+    background-color: #ffc18f77;
+}
