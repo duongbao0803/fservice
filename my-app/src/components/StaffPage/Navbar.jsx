@@ -1,15 +1,57 @@
 import React, { useContext } from "react";
 import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
-import { Box, Avatar, Typography } from "@mui/material";
+import { Box, Avatar, Typography, Badge } from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ButtonBase from "@mui/material/ButtonBase";
+import { Button, Dropdown } from "antd";
+import Notification from "./Notification/Notification.jsx";
 
 function Navbar() {
   const theme = useContext(ThemeContext);
   const username = localStorage.getItem("username");
   const avt = localStorage.getItem("avatar");
+
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          1st menu item
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          2nd menu item
+        </a>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          3rd menu item
+        </a>
+      ),
+    },
+  ];
+
   return (
     <div className="Navbar">
       <Box
@@ -31,20 +73,48 @@ function Navbar() {
               marginRight: "20px",
             }}
           >
-            <ChatBubbleOutlineIcon fontSize="inherit" />
+            {/* <ChatBubbleOutlineIcon fontSize="inherit" /> */}
           </ButtonBase>
 
-          <ButtonBase
-            focusRipple
-            className="header-icon"
-            sx={{
+          <Button
+            style={{
+              boxShadow: "none",
+              backgroundColor: "transparent",
+              border: "none",
               color: theme.palette.primary.main,
-              fontSize: "24px",
-              marginRight: "20px",
             }}
           >
-            <NotificationsIcon fontSize="inherit" />
-          </ButtonBase>
+            <ChatBubbleOutlineIcon />
+          </Button>
+
+          <Dropdown
+            overlay={<Notification />}
+            placement="bottomRight"
+            arrow={{
+              pointAtCenter: true,
+            }}
+            trigger={["click"]}
+          >
+            <Button
+              style={{
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                border: "none",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <Badge
+                color="error"
+                variant="dot"
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <NotificationsIcon />
+              </Badge>
+            </Button>
+          </Dropdown>
 
           <Box
             className="account"

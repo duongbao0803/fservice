@@ -199,6 +199,30 @@ const getCustomerConfirm = (orderDetailId, data) => {
   );
 };
 
+const getAllNotification = (pageNum) => {
+  const refreshedConfig = refreshData();
+  return config.get(
+    `/api/notifications/account?PageNumber=${pageNum}&PageSize=3`,
+    refreshedConfig
+  );
+};
+
+const markNotificationRead = (id) => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/notifications/${id}`,
+    refreshedConfig
+  );
+}
+
+const markAllNotificationRead = () => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/notifications/account`,
+    refreshedConfig
+  );
+}
+
 export {
   fetchUser,
   loginAPI,
@@ -231,4 +255,7 @@ export {
   getOrderHistorySuccess,
   getOrderHistoryError,
   getApartmentInfo,
+  getAllNotification,
+  markNotificationRead,
+  markAllNotificationRead
 };

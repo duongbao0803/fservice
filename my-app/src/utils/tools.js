@@ -29,6 +29,38 @@ export const formatTime = (date) => {
   return formattedTime;
 };
 
+export const formatDateTime = (date) => {
+  const formattedDate = new Date(date);
+
+  const day = formattedDate.getDate().toString().padStart(2, '0');
+  const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const year = formattedDate.getFullYear().toString().slice(2, 4);
+  const hours = formattedDate.getHours().toString().padStart(2, '0');
+  const minutes = formattedDate.getMinutes().toString().padStart(2, '0');
+
+  return `${day}.${month}.${year} ${hours}:${minutes}`;
+}
+
+export const caculateTimeAgo = (datetime) => {
+  const currentDate = new Date();
+  const pastDate = new Date(datetime);
+  const timeDifference = currentDate - pastDate;
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (seconds < 60) {
+    return `vài giây trước`;
+  } else if (minutes < 60) {
+    return `${minutes} phút trước`;
+  } else if (hours < 24) {
+    return `${hours} giờ trước`;
+  } else {
+    return `${days} ngày trước`;
+  }
+};
+
 export const handleLogout = (navigate) => {
   navigate("/authen");
   localStorage.removeItem("accesstoken");
