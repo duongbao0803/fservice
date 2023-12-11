@@ -244,7 +244,7 @@ function DataTable() {
               rowCount={totalCount}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 1, pageSize: 10 },
+                  paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
               onRowClick={handleRowClick}

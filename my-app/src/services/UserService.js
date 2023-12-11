@@ -215,6 +215,14 @@ const markNotificationRead = (id) => {
   );
 }
 
+const markAllNotificationRead = () => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/notifications/account`,
+    refreshedConfig
+  );
+}
+
 export {
   fetchUser,
   loginAPI,
@@ -248,5 +256,6 @@ export {
   getOrderHistoryError,
   getApartmentInfo,
   getAllNotification,
-  markNotificationRead
+  markNotificationRead,
+  markAllNotificationRead
 };

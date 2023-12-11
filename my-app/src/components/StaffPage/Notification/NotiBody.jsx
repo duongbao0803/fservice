@@ -4,7 +4,10 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { getAllNotification, markNotificationRead } from "../../../services/UserService";
+import {
+  getAllNotification,
+  markNotificationRead,
+} from "../../../services/UserService";
 import { caculateTimeAgo, formatDateTime } from "../../../utils/tools";
 
 function NotiBody() {
@@ -27,7 +30,6 @@ function NotiBody() {
           setTotalPage(sumPage);
         }
         setNotiInfo(res.data);
-        console.log("check noti", res.data);
       }
     } catch (error) {
       console.log("Error Getting Notification", error);
@@ -38,161 +40,88 @@ function NotiBody() {
     getNotification(newPage);
   };
 
-  const handleNotiClick = (id) => {
-    markNotificationRead(id);
-    getNotification(1);
+  const handleNotiClick = async (id) => {
+    await markNotificationRead(id);
+    await getNotification(1);
   };
 
   return (
     <>
-      <div className="pb-3" style={{ height: "400px", overflow: "scroll" }}>
-        {notiInfo?.map((noti, index) => (
-          <div
-            className={
-              !noti.isRead
-                ? "mb-2 noti-detail noti-detail__read"
-                : "mb-2 noti-detail"
-            }
-            style={{ display: "flex", alignItems: "center" }}
-            onClick={() => handleNotiClick(noti.id)}
-          >
-            <div style={{ flex: "1" }}>
-              <img
-                src="https://media.discordapp.net/attachments/1084829266581147658/1172830452499894272/logo_web.png"
-                alt=""
-                width={"60%"}
-              />
-            </div>
-            <div style={{ flex: "5" }}>
-              <p
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  margin: 0,
-                  color: "#ff8228",
-                }}
-              >
-                {noti.title}
-              </p>
-              <p style={{ fontSize: "13px", margin: 0 }}>
-                <span style={{ fontWeight: "bold" }}>{noti.action} </span>
-                {noti.message}
-              </p>
+      {notiInfo.length > 0 ? (
+        <div>
+          <div className="" style={{ height: "360px", overflow: "scroll" }}>
+            {notiInfo?.map((noti, index) => (
               <div
-                className="mt-1"
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "13px",
-                }}
+                className={
+                  !noti.isRead
+                    ? "mb-2 noti-detail noti-detail__read"
+                    : "mb-2 noti-detail"
+                }
+                style={{ display: "flex", alignItems: "center" }}
+                onClick={() => handleNotiClick(noti.id)}
               >
-                <span style={{ fontWeight: "bold" }}>{caculateTimeAgo(noti.createDate)}</span>
-                <span>{formatDateTime(noti.createDate)}</span>
+                <div style={{ flex: "1" }}>
+                  <img
+                    src="https://media.discordapp.net/attachments/1084829266581147658/1172830452499894272/logo_web.png"
+                    alt=""
+                    width={"60%"}
+                  />
+                </div>
+                <div style={{ flex: "5" }}>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: "bold",
+                      margin: 0,
+                      color: "#ff8228",
+                    }}
+                  >
+                    {noti.title}
+                  </p>
+                  <p style={{ fontSize: "13px", margin: 0 }}>
+                    <span style={{ fontWeight: "bold" }}>{noti.action} </span>
+                    {noti.message}
+                  </p>
+                  <div
+                    className="mt-1"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: "13px",
+                    }}
+                  >
+                    <span style={{ fontWeight: "bold" }}>
+                      {caculateTimeAgo(noti.createDate)}
+                    </span>
+                    <span>{formatDateTime(noti.createDate)}</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-
-        {/* <div
-          className="mb-2 noti-detail"
-          style={{ display: "flex", alignItems: "center" }}
-        >
-          <div style={{ flex: "1" }}>
-            <img
-              src="https://media.discordapp.net/attachments/1084829266581147658/1172830452499894272/logo_web.png"
-              alt=""
-              width={"60%"}
-            />
-          </div>
-          <div style={{ flex: "5" }}>
-            <p
-              style={{
-                fontSize: "13px",
-                fontWeight: "bold",
-                margin: 0,
-                color: "#ff8228",
-              }}
-            >
-              Dịch vụ Tổng vệ sinh nhà cửa
-            </p>
-            <p style={{ fontSize: "13px", margin: 0 }}>
-              <span style={{ fontWeight: "bold" }}>Công việc mới </span>
-              Công việc của bạn đã được lên lịch làm việc, hãy kiểm tra bảng
-              công việc.
-            </p>
-            <div
-              className="mt-1"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "13px",
-              }}
-            >
-              <span style={{ fontWeight: "bold" }}>5 phút trước</span>
-              <span>16:28 09.12.23</span>
-            </div>
+          <div
+            className="d-flex justify-content-center"
+            style={{ position: "sticky", bottom: 0 }}
+          >
+            <Stack spacing={2}>
+              <Pagination
+                onChange={(event, value) => handlePageClick(value)}
+                count={totalPage}
+                renderItem={(item) => (
+                  <PaginationItem
+                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                    {...item}
+                  />
+                )}
+              />
+            </Stack>
           </div>
         </div>
-
-        <div
-          className="mb-2 noti-detail"
-          style={{ display: "flex", alignItems: "center" }}
-        >
-          <div style={{ flex: "1" }}>
-            <img
-              src="https://media.discordapp.net/attachments/1084829266581147658/1172830452499894272/logo_web.png"
-              alt=""
-              width={"60%"}
-            />
-          </div>
-          <div style={{ flex: "5" }}>
-            <p
-              style={{
-                fontSize: "13px",
-                fontWeight: "bold",
-                margin: 0,
-                color: "#ff8228",
-              }}
-            >
-              Dịch vụ Tổng vệ sinh nhà cửa
-            </p>
-            <p style={{ fontSize: "13px", margin: 0 }}>
-              <span style={{ fontWeight: "bold" }}>Công việc mới </span>
-              Công việc của bạn đã được lên lịch làm việc, hãy kiểm tra bảng
-              công việc.
-            </p>
-            <div
-              className="mt-1"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "13px",
-              }}
-            >
-              <span style={{ fontWeight: "bold" }}>5 phút trước</span>
-              <span>16:28 09.12.23</span>
-            </div>
-          </div>
-        </div> */}
-      </div>
-
-      <div
-        className="d-flex justify-content-center"
-        style={{ position: "sticky", bottom: 0 }}
-      >
-        <Stack spacing={2}>
-          <Pagination
-            onChange={(event, value) => handlePageClick(value)}
-            count={totalPage}
-            renderItem={(item) => (
-              <PaginationItem
-                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                {...item}
-              />
-            )}
-          />
-        </Stack>
-      </div>
+      ) : (
+        <div style={{ height: "90%", display:'flex', justifyContent:'center', alignItems:'center' }}>
+          <h6>Không có thông báo</h6>
+        </div>
+      )}
     </>
   );
 }
