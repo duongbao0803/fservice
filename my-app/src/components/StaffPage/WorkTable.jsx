@@ -248,6 +248,7 @@ function DataTable() {
                 },
               }}
               onRowClick={handleRowClick}
+              sx={{minHeight:'70vh'}}
             />
           </div>
           {/* Modal */}
