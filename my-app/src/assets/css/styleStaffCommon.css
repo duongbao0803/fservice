@@ -5,6 +5,7 @@
     padding: 20px;                
     background-color: #ffffff;
     max-width: 100%;
+    min-height: 80vh;
 }
 
 .active-staff {

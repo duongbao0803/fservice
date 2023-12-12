@@ -8,7 +8,6 @@ import {
   getStaffWork,
   getStaffWorkPaging,
 } from "../../services/UserService";
-import { TablePagination } from "@mui/material";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -30,13 +29,95 @@ function DataTable() {
 
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
-    { field: "apartment", headerName: "Căn hộ", width: 150 },
-    { field: "service", headerName: "Dịch vụ", width: 300 },
+    { field: "apartment", headerName: "Căn hộ", width: 130 },
+    { field: "service", headerName: "Dịch vụ", width: 250 },
     { field: "customer", headerName: "Khách hàng", width: 230 },
     { field: "phoneNumber", headerName: "Số điện thoại", width: 170 },
-    { field: "performDate", headerName: "Ngày thực hiện", width: 280 },
-    { field: "status", headerName: "Trạng thái", width: 120 },
+    { field: "performDate", headerName: "Ngày thực hiện", width: 250 },
+    {
+      field: "status",
+      headerName: "Trạng thái",
+      width: 160,
+      renderCell: (params) => (
+        <div
+          style={{
+            color: "#fff",
+            fontWeight: "500",
+            fontSize: "14px",
+            backgroundColor: getBackgroundStatusColor(params.value),
+            minWidth: "120px",
+            textAlign: "center",
+            padding: "3px",
+            borderRadius: "5px",
+          }}
+        >
+          {getStatus(params.value)}
+        </div>
+      ),
+    },
+    {
+      field: "feedback",
+      headerName: "Đánh giá",
+      width: 100,
+      renderCell: (params) => (
+        <div
+          style={{
+            display:'flex',
+            justifyContent:'center',
+            flex:'auto'
+          }}
+        >
+          {params.value === null ? (
+            <i class="fa-solid fa-spinner" style={{ color: "#9AA14B" }}></i>
+          ) : params.value === true ? (
+            <i className="fa-solid fa-check" style={{ color: "#03AC00" }} />
+          ) : (
+            <i class="fa-solid fa-xmark" style={{ color: "#952323" }}></i>
+          )}
+        </div>
+      ),
+    },
+    // { field: "feedback", headerName: "Đánh giá", width: 200 },
   ];
+
+  const getStatus = (status) => {
+    switch (status.trim()) {
+      case "Pending":
+        return "Đang chờ";
+      case "Completed":
+        return "Hoàn thành";
+      case "Working":
+        return "Làm việc";
+      default:
+        return "Đã hủy";
+    }
+  };
+
+  // const getStatusColor = (status) => {
+  //   switch (status.trim()) {
+  //     case 'Pending':
+  //       return 'black';
+  //     case 'Completed':
+  //       return 'green';
+  //     case 'Working':
+  //       return 'orange';
+  //     default:
+  //       return 'red';
+  //   }
+  // };
+
+  const getBackgroundStatusColor = (status) => {
+    switch (status.trim()) {
+      case "Pending":
+        return "#9aa14b";
+      case "Completed":
+        return "#03ac00";
+      case "Working":
+        return "#0a6ebd";
+      default:
+        return "#952323";
+    }
+  };
 
   useEffect(() => {
     fetchStaff(1);
@@ -64,6 +145,7 @@ function DataTable() {
             phoneNumber: staff.customerPhone,
             performDate: `${formatDate(staff.createdDate)} ${staff.shiftTime}`,
             status: staff.status,
+            feedback: staff.isConfirm,
           };
         })
       );
@@ -162,10 +244,11 @@ function DataTable() {
               rowCount={totalCount}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 1, pageSize: 10 },
+                  paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
               onRowClick={handleRowClick}
+              sx={{minHeight:'70vh'}}
             />
           </div>
           {/* Modal */}
