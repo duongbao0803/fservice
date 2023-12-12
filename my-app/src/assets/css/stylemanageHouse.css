@@ -5,15 +5,8 @@
   border-radius: 10px;
 }
 
-/* .house-info {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-} */
-
 .house-info .house-box {
-  border: 1px solid #FFA15D;
+  border: 1px solid #ffa15d;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -33,7 +26,7 @@
 .add-box {
   height: 144px;
   padding: 10px;
-  background-color: #FFEBE1;
+  background-color: #ffebe1;
   border-radius: 8px;
 }
 
@@ -45,7 +38,6 @@
 }
 
 .add-apartment {
-
 }
 
 .add-apartment__text {
@@ -55,8 +47,8 @@
 }
 
 .add-apartment__text:hover {
-  background-color: #FFEBE1;
-  color: #FFA15D !important;
+  background-color: #ffebe1;
+  color: #ffa15d !important;
 }
 
 .add-apartment__text a {
@@ -78,13 +70,12 @@
 }
 
 .add-apartment .button-container .btn-add {
-  background-color: #FFA15D;
+  background-color: #ffa15d;
   color: #fff;
 }
 
 .add-apartment .button-container .btn-add:hover {
   background-color: #ff8228;
-  /* color: #fff; */
 }
 
 .add-apartment .button-container .btn-cancel {
@@ -93,7 +84,7 @@
 }
 
 .add-apartment .button-container .btn-cancel:hover {
-  background-color: #FFEBE1 !important;
+  background-color: #ffebe1 !important;
 }
 
 .add-apartment .apartment-info table th {
