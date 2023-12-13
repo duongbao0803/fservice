@@ -79,9 +79,9 @@ const Frame = () => {
 
   return (
     <>
-      <div className="container mt-5 pt-5">
+      <div className="container mt-2 pt-5">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 mb-5">
             <div className="left-content-package-detail">
               <h5 className="package-name">{APIData?.name}</h5>
               <p style={{ fontWeight: 900, display: "flex" }}>

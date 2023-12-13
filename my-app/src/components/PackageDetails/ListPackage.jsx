@@ -66,7 +66,7 @@ const ListPackage = () => {
           : data.serviceDetails?.map((service, idx) => (
               <div
                 key={idx}
-                className="col-12 col-sm-12 col-md-6 col-lg-4 package-detail"
+                className="col-12 col-sm-12 col-md-6 col-lg-4 package-detail mb-4"
               >
                 <div className="package-img mb-3">
                   <img

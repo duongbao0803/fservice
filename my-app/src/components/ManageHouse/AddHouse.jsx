@@ -239,7 +239,7 @@ function AddHouse({ isShowAdd, handleClose }) {
           </table>
         </div>
         <div className="button-container">
-          <div style={{ margin: "10px" }}>
+          <div className="d-flex " style={{ margin: "10px" }}>
             <button className="btn-cancel" onClick={handleClose}>
               Huỷ
             </button>

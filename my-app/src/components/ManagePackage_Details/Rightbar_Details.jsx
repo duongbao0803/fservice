@@ -15,7 +15,6 @@ import Paper from "@mui/material/Paper";
 import { Spinner } from "react-bootstrap";
 import UsingModal from "../UsingModal/UsingModal";
 import Rightbar_Use from "../ManagePackage_Use/Rightbar_Use";
-import ManagePackage_Use from "../../page/ManagePackage_Use";
 import { useLocation } from "react-router-dom";
 
 function createData(serviceName, quantity, used, remaining, action) {
@@ -93,11 +92,11 @@ function Rightbar({ id }) {
 
   return (
     <>
-      <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
+      <h5 className="mb-4">Gói vụ của căn hộ</h5>
       <div className="right_bar-details-main" style={{ padding: "20px" }}>
         {data && apartment ? (
           <div className="chooseHouse-details pb-3">
-            <div className="choose">
+            <div className="choose justify-content-sm-center mt-5">
               <a href style={{ borderBottom: "3px solid #ff8228" }}>
                 {apartment?.roomNo} - {apartment?.type?.building?.name}
               </a>

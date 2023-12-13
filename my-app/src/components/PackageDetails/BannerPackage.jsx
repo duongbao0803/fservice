@@ -67,7 +67,6 @@ export default function BannerPackage() {
                 </button>
               </div>
             </div>
-            ``
           </div>
         </div>
       </section>
