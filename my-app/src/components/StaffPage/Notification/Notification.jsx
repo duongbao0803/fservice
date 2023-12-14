@@ -1,5 +1,4 @@
 import React from "react";
-import NotiHeader from "./NotiHeader";
 import NotiBody from "./NotiBody";
 import "./Notification.css";
 
@@ -9,11 +8,9 @@ function Notification() {
       style={{
         backgroundColor: "#fff",
         width: "400px",
-        height: "450px",
         boxShadow: "0px 3px 8px rgba(0, 0, 0, 0.3)",
       }}
     >
-      <NotiHeader />
       <NotiBody />
     </div>
   );
