@@ -6,6 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {
   getAllNotification,
+  markAllNotificationRead,
   markNotificationRead,
 } from "../../../services/UserService";
 import { caculateTimeAgo, formatDateTime } from "../../../utils/tools";
@@ -45,8 +46,28 @@ function NotiBody() {
     await getNotification(1);
   };
 
+  const handleReadAllClick = async () => {
+    await markAllNotificationRead();
+    await getNotification(1);
+  }
+
   return (
     <>
+      <div
+        className="d-flex justify-content-between px-3 pt-3"
+        style={{ position: "sticky", top: 0 }}
+      >
+        <p style={{ fontSize: "18px", fontWeight: "bold", margin: "0" }}>
+          Thông báo
+        </p>
+        <p
+          className="check-read"
+          style={{ fontSize: "15px", margin: "0" }}
+          onClick={() => handleReadAllClick()}
+        >
+          Đánh dấu đã đọc
+        </p>
+      </div>
       {notiInfo.length > 0 ? (
         <div>
           <div className="" style={{ height: "360px", overflow: "scroll" }}>
@@ -118,7 +139,14 @@ function NotiBody() {
           </div>
         </div>
       ) : (
-        <div style={{ height: "90%", display:'flex', justifyContent:'center', alignItems:'center' }}>
+        <div
+          style={{
+            height: "90%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <h6>Không có thông báo</h6>
         </div>
       )}
