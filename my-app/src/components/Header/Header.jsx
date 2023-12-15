@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 import "../Header/styleHeader.css";
 
 import { Session } from "../../App";
-import { Avatar } from "@mui/material";
+import { Avatar, Badge } from "@mui/material";
 import { handleLogout } from "../../utils/tools";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Notification from "../Notification/Notification";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
@@ -67,6 +69,12 @@ function Header() {
               <Link to="#" className="nav-link">
                 Liên hệ
               </Link>
+            </li>
+
+            <li>
+              <DropdownButton variant="Secondary" title={<NotificationsIcon/>}>
+                <Notification />
+              </DropdownButton>
             </li>
 
             <li className="nav-item" style={{ paddingRight: 0 }}>

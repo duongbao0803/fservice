@@ -3,8 +3,8 @@ import {
   getAllNotification,
   markAllNotificationRead,
   markNotificationRead,
-} from "../../../services/UserService";
-import { caculateTimeAgo, formatDateTime } from "../../../utils/tools";
+} from "../../services/UserService";
+import { caculateTimeAgo, formatDateTime } from "../../utils/tools";
 import InfiniteList from "./InfiniteList";
 
 function NotiBody() {

@@ -6,51 +6,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ButtonBase from "@mui/material/ButtonBase";
 import { Button, Dropdown } from "antd";
-import Notification from "./Notification/Notification.jsx";
+import Notification from "../Notification/Notification.jsx";
 
 function Navbar() {
   const theme = useContext(ThemeContext);
   const username = localStorage.getItem("username");
   const avt = localStorage.getItem("avatar");
-
-  const items = [
-    {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item
-        </a>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item
-        </a>
-      ),
-    },
-  ];
 
   return (
     <div className="Navbar">
