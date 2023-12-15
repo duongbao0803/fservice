@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/styleConfirm.css";
+import "../assets/css/styleconfirm.css";
 import TitleConfirm from "../components/Confirm/TitleConfirm";
 import Info from "../components/Confirm/Info";
 import InfoPackage from "../components/Confirm/InfoPackage";
