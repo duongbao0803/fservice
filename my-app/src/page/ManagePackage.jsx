@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/styleManagePackage.css";
+import "../assets/css/stylemanagePackage.css";
 import Rightbar from "../components/ManagePackage/Rightbar";
 import UserLayout from "../Layout/UserLayout";
 import { Helmet } from "react-helmet";

@@ -1,4 +1,4 @@
-import "../assets/css/styleManageHouse.css";
+import "../assets/css/stylemanageHouse.css";
 import React from "react";
 import Rightbar_house from "../components/ManageHouse/Rightbar_house";
 import UserLayout from "../Layout/UserLayout";
