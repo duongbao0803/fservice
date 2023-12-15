@@ -16,10 +16,6 @@ footer li:last-child {
   list-style-type: none;
 }
 
-footer .footer_component {
-  margin-bottom: 30px;
-}
-
 footer .footer_component ul {
   line-height: 40px;
   list-style-type: none;
@@ -32,4 +28,22 @@ footer .footer_component-last {
 
 .footer_component-last .footer-last {
   padding-top: 16px;
+}
+
+@media screen and (max-width: 586px) {
+  .footer-last {
+    text-align: center !important;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .footer-last {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .footer-last {
+    font-size: 14px;
+  }
 }

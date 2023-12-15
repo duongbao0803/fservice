@@ -1,12 +1,11 @@
 import React from "react";
-import "../assets/css/styleconfirm.css";
-import TitleConfirm from "../components/confirm/TitleConfirm";
-import Info from "../components/confirm/Info";
-import InfoPackage from "../components/confirm/InfoPackage";
-import Contact from "../components/confirm/Contact";
-import Payment from "../components/confirm/Payment";
-import ConfirmButton from "../components/confirm/ConfirmButton";
-import { AppDataProvider } from "../components/OrderCart/Order";
+import "../assets/css/styleConfirm.css";
+import TitleConfirm from "../components/Confirm/TitleConfirm";
+import Info from "../components/Confirm/Info";
+import InfoPackage from "../components/Confirm/InfoPackage";
+import Contact from "../components/Confirm/Contact";
+import Payment from "../components/Confirm/Payment";
+import ConfirmButton from "../components/Confirm/ConfirmButton";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 

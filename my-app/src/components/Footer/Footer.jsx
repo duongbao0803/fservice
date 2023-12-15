@@ -88,7 +88,7 @@ function Footer() {
                       <li>Liên hệ</li>
                     </div>
                   </div>
-                  <div className="certi">
+                  <div className="certi d-none d-lg-block ">
                     <li style={{ visibility: "hidden" }}>d</li>
                   </div>
                 </ul>
@@ -96,12 +96,15 @@ function Footer() {
             </div>
             <div className="footer_component-last row">
               <div className="footer-last col-md-6 col-sm-6 col-12">
-                <p className="float-left" style={{ margin: "0" }}>
+                <p
+                  className="float-md-left float-sm-left float-lg-left"
+                  style={{ margin: "0" }}
+                >
                   Copyright ©2023 All rights reserved | FService
                 </p>
               </div>
-              <div className="col-md-6 col-sm-6 col-12">
-                <p className="footer-last float-md-right float-sm-right float-lg-right">
+              <div className="footer-last col-md-6 col-sm-6 col-12">
+                <p className="float-md-right float-sm-right float-lg-right">
                   Privacy Policy | Terms &amp; Conditions | Site Map
                 </p>
               </div>

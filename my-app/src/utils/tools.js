@@ -32,14 +32,14 @@ export const formatTime = (date) => {
 export const formatDateTime = (date) => {
   const formattedDate = new Date(date);
 
-  const day = formattedDate.getDate().toString().padStart(2, '0');
-  const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const day = formattedDate.getDate().toString().padStart(2, "0");
+  const month = (formattedDate.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
   const year = formattedDate.getFullYear().toString().slice(2, 4);
-  const hours = formattedDate.getHours().toString().padStart(2, '0');
-  const minutes = formattedDate.getMinutes().toString().padStart(2, '0');
+  const hours = formattedDate.getHours().toString().padStart(2, "0");
+  const minutes = formattedDate.getMinutes().toString().padStart(2, "0");
 
   return `${day}.${month}.${year} ${hours}:${minutes}`;
-}
+};
 
 export const caculateTimeAgo = (datetime) => {
   const currentDate = new Date();

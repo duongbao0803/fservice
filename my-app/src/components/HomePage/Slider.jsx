@@ -1,6 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import React, { useState } from "react";
-import "../../assets/css/slider.css";
+import "../../assets/css/styleSlider.css";
 
 function Slider({ slides }) {
   const [index, setIndex] = useState(0);
@@ -21,7 +21,7 @@ function Slider({ slides }) {
             className="d-block w-100"
             src={slide.image}
             alt="First slide"
-            style={{ height: "650px", objectFit: "cover" }}
+            style={{ maxHeight: "550px", objectFit: "cover" }}
           />
           <Carousel.Caption
             style={{

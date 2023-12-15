@@ -92,7 +92,6 @@ function UserInfo() {
     },
   });
 
-  // Hàm để tạo tên tệp tin duy nhất
   const generateUniqueFileName = (originalFileName) => {
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 8);
@@ -106,7 +105,11 @@ function UserInfo() {
     const storedAddress = localStorage.getItem("address");
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
 
-    if (checkImage !== null && checkImage?.length > 0 && checkImage !== "null") {
+    if (
+      checkImage !== null &&
+      checkImage?.length > 0 &&
+      checkImage !== "null"
+    ) {
       setSelectedImage(checkImage);
     } else {
       setSelectedImage(require("../../assets/img/img-user.png"));
@@ -182,7 +185,7 @@ function UserInfo() {
         <form onSubmit={formik.handleSubmit}>
           <div class="row">
             <div class="right-bar col-md-9 col-sm-12 col-lg-8">
-              <div class="user-info">
+              <div class="user-info d-flex justify-content-center justify-content-md-start">
                 <table class="user_info-table">
                   <tr>
                     <th>Email:</th>

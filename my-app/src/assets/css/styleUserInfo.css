@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 15px;
+  /* overflow: auto; */
 }
 
 .right-bar .user-info .user_info-table td {
@@ -37,7 +38,7 @@
 }
 
 .user_info-table th {
-  min-width: 120px;
+  max-width: 120px;
 }
 
 .user_info-table button {
