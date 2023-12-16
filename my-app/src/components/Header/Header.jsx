@@ -93,14 +93,10 @@ function Header() {
                 </Dropdown>
               )}
             </li>
-
-            <li className="nav-item" style={{ paddingRight: 0 }}>
-=========
             <li
               className="nav-item d-flex align-items-center"
               style={{ paddingRight: 0 }}
             >
->>>>>>>>> Temporary merge branch 2
               {logged !== "true" ? (
                 <div class="dropdown">
                   <button class="dropbtn fill">
