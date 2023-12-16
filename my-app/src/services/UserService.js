@@ -127,7 +127,7 @@ const getStaffWorkPaging = (username) => {
 
 const getStaffByUsingId = (id) => {
   const refreshedConfig = refreshData();
-  return config.get(`/account-by-id/${id}`, refreshedConfig);
+  return config.get(`/api/accounts/account-by-id/${id}`, refreshedConfig);
 };
 
 const getOrder = (id, data) => {
