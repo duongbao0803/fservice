@@ -12,12 +12,8 @@ import { useNavigate } from "react-router-dom";
 function NotiBody({ handleCountChange }) {
   const [totalNoti, setTotalNoti] = useState(0);
   const [notiInfo, setNotiInfo] = useState([]);
-  const [isRead, setIsRead] = useState(false);
   const [page, setPage] = useState(1);
   const [newNoticeCount, setNewNoticeCount] = useState(0);
-  const [isShowUsing, setIsShowUsing] = useState(true);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -39,6 +35,7 @@ function NotiBody({ handleCountChange }) {
           const totalNoti = paginationData.TotalCount;
           setTotalNoti(totalNoti);
         }
+        console.log("check noti", res.data);
         setNotiInfo([...notiInfo, ...res.data]);
       }
     } catch (error) {
@@ -52,10 +49,17 @@ function NotiBody({ handleCountChange }) {
     handleCountChange(newNotices);
   };
 
-  const handleNotiClick = async (id, packageId) => {
+  const handleNotiClick = async (id, packageId, type) => {
     await markNotificationRead(id);
     await getNotification(page);
-    window.location.href = `/user/manage-package/${packageId}`;
+    console.log("check type", type);
+    if (type.includes("Order")) {
+      window.location.href = "/user/manage-order/";
+    } else if (type.includes("Service")) {
+      window.location.href = `/user/manage-package/${packageId}`;
+    } else {
+      window.location.href = "#";
+    }
   };
 
   const handleReadAllClick = async () => {
@@ -67,7 +71,7 @@ function NotiBody({ handleCountChange }) {
     <>
       <div
         className="d-flex justify-content-between px-3 pt-3"
-        style={{ position: "sticky", top: 0 }}
+        style={{ top: 0 }}
       >
         <p style={{ fontSize: "18px", fontWeight: "bold", margin: "0" }}>
           Thông báo
@@ -103,7 +107,9 @@ function NotiBody({ handleCountChange }) {
                       : "mb-2 noti-detail"
                   }
                   style={{ display: "flex", alignItems: "center" }}
-                  onClick={() => handleNotiClick(noti.id, noti.modelId)}
+                  onClick={() =>
+                    handleNotiClick(noti.id, noti.modelId, noti.type)
+                  }
                 >
                   <div style={{ flex: "1" }}>
                     <img
