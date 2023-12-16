@@ -132,6 +132,22 @@
   vertical-align: middle;
 }
 
-/* .dropdown-menu {
-  padding: 0 !important;
-} */
+/* notification */
+.ant-btn-default:hover {
+  color: #ffa500 !important;
+  border-color: #ffa500 !important;
+  transition: color 0.3s, border-color 0.2s;
+}
+
+.btn-noti,
+.btn-noti:hover {
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+  transition: color 0.2s;
+}
+
+.noti-icon,
+.noti-icon:hover {
+  transition: color 0.2s;
+}

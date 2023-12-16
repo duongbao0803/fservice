@@ -1,18 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "react-toastify/dist/ReactToastify.css";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../utils/tools";
 import "../Header/styleHeader.css";
-
-import { Session } from "../../App";
-import { Avatar, Badge } from "@mui/material";
-import { handleLogout } from "../../utils/tools";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Button, Dropdown } from "antd";
 import Notification from "../Notification/Notification";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { Badge } from "@mui/material";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
@@ -71,9 +67,31 @@ function Header() {
             </li>
 
             <li>
-              <DropdownButton variant="Secondary" title={<NotificationsIcon/>}>
-                <Notification />
-              </DropdownButton>
+              {logged !== "true" ? (
+                ""
+              ) : (
+                <Dropdown
+                  overlay={<Notification />}
+                  placement="bottomRight"
+                  arrow={{
+                    pointAtCenter: true,
+                  }}
+                  trigger={["click"]}
+                >
+                  <Button className="btn-noti">
+                    <Badge
+                      color="error"
+                      variant="dot"
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    >
+                      <NotificationsNoneIcon className="noti-icon" />
+                    </Badge>
+                  </Button>
+                </Dropdown>
+              )}
             </li>
 
             <li
