@@ -7,6 +7,7 @@
 }
 .nav-link {
   width: max-content;
+  font-size: 15px;
 }
 
 .nav-item {
@@ -15,7 +16,7 @@
 
 .navbar-nav .nav-item .nav-link::before {
   content: "";
-  background-color: #ff8228;
+  background-color: #ffa500;
   position: absolute;
   left: 10px;
   bottom: 0;
@@ -36,18 +37,99 @@
   box-shadow: none !important;
 }
 
-#dropdown-basic-button {
-  background-color: white;
-  color: #ff8228;
-  border: 2px solid #ff8228;
-  font-weight: 900;
-  box-shadow: none !important;
-  transition: 0.5s ease;
+.fill:hover {
+  box-shadow: inset 0 0 0 2em var(--hover);
 }
-#dropdown-basic-button:hover {
-  transition: 0.5s ease;
+
+.fill {
+  --color: #ffa500;
+  --hover: #ffa500;
+}
+
+.fill a {
+  color: var(--color);
+  font-weight: 900;
+  font-size: 15px !important;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.fill:hover a {
+  text-decoration: none;
+  color: white;
+}
+
+.fill {
+  color: var(--color) !important;
+  transition: 0.25s !important;
+}
+
+.fill:hover {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+
+.fill {
+  background: none !important;
+  border: 2px solid !important;
+  font: inherit !important;
+  line-height: 1 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-nav .nav-item .nav-link::before {
+    content: "";
+    background-color: transparent;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4caf50;
+  color: orange !important;
+  width: 107px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: white !important;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  right: 0;
+  z-index: 1063;
+}
+
+.dropdown-content a {
   color: black;
-  border: 2px solid black;
+  padding: 12px 16px;
+  text-decoration: none;
+  width: 220px;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.not-fill {
+  background-color: transparent;
+  width: 50px;
+  padding: 0;
+  vertical-align: middle;
 }
 
 /* .dropdown-menu {

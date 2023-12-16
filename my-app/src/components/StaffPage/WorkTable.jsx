@@ -28,16 +28,16 @@ function DataTable() {
   const [totalCount, setTotalCount] = useState(0);
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 70 },
-    { field: "apartment", headerName: "Căn hộ", width: 130 },
-    { field: "service", headerName: "Dịch vụ", width: 250 },
-    { field: "customer", headerName: "Khách hàng", width: 230 },
-    { field: "phoneNumber", headerName: "Số điện thoại", width: 170 },
+    { field: "stt", headerName: "STT", width: 50 },
+    { field: "apartment", headerName: "Căn hộ", width: 110 },
+    { field: "service", headerName: "Dịch vụ", width: 200 },
+    { field: "customer", headerName: "Khách hàng", width: 200 },
+    { field: "phoneNumber", headerName: "Số điện thoại", width: 120 },
     { field: "performDate", headerName: "Ngày thực hiện", width: 250 },
     {
       field: "status",
       headerName: "Trạng thái",
-      width: 160,
+      width: 140,
       renderCell: (params) => (
         <div
           style={{
@@ -62,9 +62,9 @@ function DataTable() {
       renderCell: (params) => (
         <div
           style={{
-            display:'flex',
-            justifyContent:'center',
-            flex:'auto'
+            display: "flex",
+            justifyContent: "center",
+            flex: "auto",
           }}
         >
           {params.value === null ? (
@@ -248,7 +248,7 @@ function DataTable() {
                 },
               }}
               onRowClick={handleRowClick}
-              sx={{minHeight:'70vh'}}
+              sx={{ minHeight: "70vh" }}
             />
           </div>
           {/* Modal */}

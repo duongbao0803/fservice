@@ -6,7 +6,6 @@ import InfoPackage from "../components/confirm/InfoPackage";
 import Contact from "../components/confirm/Contact";
 import Payment from "../components/confirm/Payment";
 import ConfirmButton from "../components/confirm/ConfirmButton";
-import { AppDataProvider } from "../components/OrderCart/Order";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 

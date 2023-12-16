@@ -59,7 +59,7 @@ function ServiceList() {
               ))
             : data?.map((packages) => (
                 <div
-                  className="col-12 col-sm-12 col-md-6 col-lg-4"
+                  className="col-12 col-sm-12 col-md-6 col-lg-4 mb-4"
                   style={{ position: "relative" }}
                   key={packages.id}
                 >

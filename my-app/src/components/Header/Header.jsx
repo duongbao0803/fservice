@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
+/* eslint-disable jsx-a11y/alt-text */
 import "react-toastify/dist/ReactToastify.css";
-import Cookies from "js-cookie";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../../utils/tools";
 import "../Header/styleHeader.css";
 
 import { Session } from "../../App";
@@ -47,7 +46,7 @@ function Header() {
             style={{ margin: "0" }}
           />
         </div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row" />
         </div>
         <div
@@ -77,58 +76,67 @@ function Header() {
               </DropdownButton>
             </li>
 
-            <li className="nav-item" style={{ paddingRight: 0 }}>
+            <li
+              className="nav-item d-flex align-items-center"
+              style={{ paddingRight: 0 }}
+            >
               {logged !== "true" ? (
-                <DropdownButton id="dropdown-basic-button" title="Tài khoản">
-                  <Dropdown.Item as={Link} to="/authen">
-                    Đăng nhập
-                  </Dropdown.Item>
-                </DropdownButton>
+                <div class="dropdown">
+                  <button class="dropbtn fill">
+                    <Link to="/authen">Đăng nhập</Link>
+                  </button>
+                </div>
               ) : (
-                <DropdownButton
-                  id="dropdown-basic-button"
-                  title={
-                    linkAvt !== null &&
-                    linkAvt?.length > 0 &&
-                    linkAvt !== "null" ? (
-                      <img
-                        src={linkAvt}
-                        style={{
-                          margin: "0",
-                          width: "30px",
-                          height: "30px",
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={require("../../assets/img/img-user.png")}
-                        style={{
-                          margin: "0",
-                          width: "30px",
-                          height: "30px",
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    )
-                  }
-                >
-                  {role === "USER" && (
-                    <Dropdown.Item>
-                      <Link
-                        to="/user"
-                        style={{ color: "black", textDecoration: "none" }}
+                <>
+                  <div class="dropdown">
+                    <button class="dropbtn not-fill">
+                      <div>
+                        {linkAvt !== null &&
+                        linkAvt?.length > 0 &&
+                        linkAvt !== "null" ? (
+                          <img
+                            src={linkAvt}
+                            style={{
+                              margin: "0",
+                              width: "37px",
+                              height: "37px",
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={require("../../assets/img/img-user.png")}
+                            style={{
+                              margin: "0",
+                              width: "37px",
+                              height: "37px",
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        )}
+                      </div>
+                    </button>
+                    <div class="dropdown-content">
+                      {role === "USER" && (
+                        <Link
+                          to="/user"
+                          style={{ color: "black", textDecoration: "none" }}
+                        >
+                          Thông tin người dùng
+                        </Link>
+                      )}
+
+                      <div
+                        onClick={handleLogoutClick}
+                        style={{ cursor: "pointer" }}
                       >
-                        Thông tin người dùng
-                      </Link>
-                    </Dropdown.Item>
-                  )}
-                  <Dropdown.Item onClick={handleLogoutClick}>
-                    Đăng xuất
-                  </Dropdown.Item>
-                </DropdownButton>
+                        <Link>Đăng xuất</Link>
+                      </div>
+                    </div>
+                  </div>
+                </>
               )}
             </li>
           </ul>
@@ -137,9 +145,10 @@ function Header() {
       <ToastContainer
         autoClose={2000}
         pauseOnHover={false}
+        pauseOnFocusLoss={false}
         style={{
           top: "3em",
-          zIndex: 1061,
+          zIndex: 1060,
         }}
       />
     </>

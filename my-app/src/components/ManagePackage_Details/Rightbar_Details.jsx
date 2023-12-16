@@ -92,29 +92,29 @@ function Rightbar({ id }) {
 
   return (
     <>
-      <h5 className="mb-4">Gói vụ của căn hộ</h5>
+      <h5 className="mb-4">Gói dịch vụ của căn hộ</h5>
       <div className="right_bar-details-main" style={{ padding: "20px" }}>
         {data && apartment ? (
           <div className="chooseHouse-details pb-3">
-            <div className="choose justify-content-sm-center mt-5">
+            <div className="choose ">
               <a href style={{ borderBottom: "3px solid #ff8228" }}>
                 {apartment?.roomNo} - {apartment?.type?.building?.name}
               </a>
             </div>
             <div className="orderedPackage-details">
-              <div className="orderedPackage-details_main d-flex justify-content-between">
+              <div className="orderedPackage-details_main d-md-flex justify-content-between">
                 <div className="orderedPackage-details-name ">
                   <span>
                     {data?.package?.name} - Dành cho căn {apartment?.type.type}
                   </span>
                 </div>
-                <div className="orderedPackage-details-status">
+                <div className="orderedPackage-details-status d-md-block">
                   {data?.packageStatus === "Active" ? (
                     <span className="box-status box-status__active">
                       ĐANG HOẠT ĐỘNG
                     </span>
                   ) : (
-                    <span className="box-status box-status__expired">
+                    <span className="box-status box-status__expired ">
                       ĐÃ HẾT HẠN
                     </span>
                   )}

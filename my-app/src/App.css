@@ -10,8 +10,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(152, 152, 152);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+  background-color: #d9d9d9;
+
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8); */
   border-radius: 20px;
 }
 
@@ -47,6 +48,12 @@ h3,
 h4,
 h5 {
   font-weight: 800;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #e3ebf7;
+  color: black;
 }
 
 @keyframes App-logo-spin {
