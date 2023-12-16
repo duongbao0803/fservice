@@ -76,11 +76,11 @@ function Rightbar() {
       <div className="right_bar-main" style={{ padding: "20px" }}>
         <div className="chooseHouse">
           <div
-            className="choose d-flex "
+            className="choose d-flex justify-content-left"
             style={{
               flexWrap: "wrap",
               gap: "20px",
-              justifyContent: "left",
+              // justifyContent: "left",
             }}
           >
             {apartments.map((apartment, index) => (
@@ -98,14 +98,14 @@ function Rightbar() {
               apartmentsPackage.length > 0 ? (
                 apartmentsPackage.map((packages, index) => (
                   <div className="orderedPackage" key={index}>
-                    <div className="orderedPackage_main d-flex justify-content-between">
+                    <div className="orderedPackage_main d-md-flex justify-content-between">
                       <div className="orderedPackage-name">
                         <span>
                           {packages.package.name} (Cho căn{" "}
                           {selectedApartment.type.type})
                         </span>
                       </div>
-                      <div className="orderedPackage-status">
+                      <div className="orderedPackage-status d-md-block">
                         {packages.packageStatus === "Active" ? (
                           <span className="box-status box-status__active">
                             ĐANG HOẠT ĐỘNG

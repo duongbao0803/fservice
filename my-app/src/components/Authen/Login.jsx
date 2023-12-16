@@ -52,12 +52,8 @@ function Loginv2() {
   }, []);
 
   const handleLogin = async () => {
-    if (!password) {
-      toast.error("Mật khẩu không được để trống");
-    }
     try {
       const res = await loginAPI(email, password);
-      console.log("check res", res);
       if (res.status !== 401 && res.status !== 400) {
         if (res && res.data && res.data.status === true) {
           session.setUser(res.data);
@@ -105,6 +101,9 @@ function Loginv2() {
       }
     } catch (error) {
       console.log("Error fetching Signin", error);
+    }
+    if (!password) {
+      toast.error("Mật khẩu không được để trống");
     }
   };
 
@@ -165,7 +164,7 @@ function Loginv2() {
           toast.success(
             "Đăng kí thành công, vui lòng kiểm tra email để xác nhận tài khoản"
           );
-          navigate("/");
+          window.location.href("/");
         }
       } catch (error) {
         console.log("Error Adding User", error);

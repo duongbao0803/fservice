@@ -21,7 +21,7 @@ function Slider({ slides }) {
             className="d-block w-100"
             src={slide.image}
             alt="First slide"
-            style={{ height: "650px", objectFit: "cover" }}
+            style={{ maxHeight: "550px", objectFit: "cover" }}
           />
           <Carousel.Caption
             style={{

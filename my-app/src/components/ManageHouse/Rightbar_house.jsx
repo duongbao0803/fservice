@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { getApartment } from "../../services/UserService";
 import AddHouse from "./AddHouse";
@@ -109,7 +108,10 @@ function Rightbar_house() {
               {apartments.length > 0 ? (
                 <div className="row">
                   {apartments?.map((apartment) => (
-                    <div className="col-md-6 house-info" key={apartment.id}>
+                    <div
+                      className="col-md-6 mb-3 house-info"
+                      key={apartment.id}
+                    >
                       <div className="house-box">
                         <div style={{ padding: "10px" }}>
                           <p className="fw-bold">
