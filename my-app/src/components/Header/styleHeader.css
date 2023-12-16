@@ -80,6 +80,13 @@
     content: "";
     background-color: transparent;
   }
+  .nav-item {
+    position: relative;
+  }
+  .dropdown-content {
+    left: 0;
+    width: fit-content;
+  }
 }
 
 .dropdown {

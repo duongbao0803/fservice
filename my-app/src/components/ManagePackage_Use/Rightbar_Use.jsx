@@ -1,14 +1,8 @@
 import React from "react";
-import { Steps, Row, Col, Modal } from "antd";
-import {
-  getCustomerConfirm,
-  getStaffByUsingId,
-  getStaffInfo,
-  getUsingHistory,
-} from "../../services/UserService";
+import { Steps } from "antd";
+import { getStaffByUsingId, getUsingHistory } from "../../services/UserService";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { Pagination } from "@mui/material";
 import { formatDate, formatTime } from "../../utils/tools";
@@ -30,7 +24,6 @@ function Rightbar({ state }) {
   const [selectedServiceName, setSelectedServiceName] = useState("");
   const [selectedCreateDate, setSelectedCreateDate] = useState("");
 
-
   useEffect(() => {
     viewWorkingHistory(1);
   }, []);
@@ -45,6 +38,7 @@ function Rightbar({ state }) {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
+        console.log("check wh", workingHistory);
         setWorkingHistory(res.data);
         const staffIds = res.data.map(
           (workingHistory) => workingHistory.staffId
@@ -67,19 +61,19 @@ function Rightbar({ state }) {
         try {
           const res = await getStaffByUsingId(staffId);
           if (res && res.status === 200) {
+            console.log("check resdata", res.data);
             fetchStaffInfo.push(res.data);
           } else {
-            fetchStaffInfo([]);
+            fetchStaffInfo.push(null);
           }
         } catch (error) {
           console.log("Error Fetching Staff Information", error);
         }
       }
-
       setStaffInfo(fetchStaffInfo);
     } catch (error) {
       console.log("Error Fetching Staff Information", error);
-      setStaffInfo([]);
+      return [];
     }
   };
 
@@ -94,8 +88,6 @@ function Rightbar({ state }) {
     shiftTime,
     serviceName,
     createDate
-
-
   ) => {
     setIsOpen(true);
     setSelectedWorkingHistory(id);
@@ -103,7 +95,7 @@ function Rightbar({ state }) {
     setSelectedCompleteTime(completeTime);
     setSelectedShiftTime(shiftTime);
     setSelectedServiceName(serviceName);
-    setSelectedCreateDate(createDate)
+    setSelectedCreateDate(createDate);
   };
 
   const handleClose = () => {
@@ -143,10 +135,10 @@ function Rightbar({ state }) {
                           workingHistory?.status?.includes("Pending")
                             ? 0
                             : workingHistory?.status?.includes("Working")
-                              ? 1
-                              : workingHistory?.status?.includes("Completed")
-                                ? 3
-                                : -1
+                            ? 1
+                            : workingHistory?.status?.includes("Completed")
+                            ? 3
+                            : -1
                         }
                         style={{ minHeight: "30vh", marginTop: "8px" }}
                       >
