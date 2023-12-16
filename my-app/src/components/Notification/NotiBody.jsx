@@ -55,9 +55,7 @@ function NotiBody({ handleCountChange }) {
   const handleNotiClick = async (id, packageId) => {
     await markNotificationRead(id);
     await getNotification(page);
-    localStorage.setItem("isShowUsing", true);
-
-    navigate(`/user/manage-package/${packageId}`);
+    window.location.href = `/user/manage-package/${packageId}`;
   };
 
   const handleReadAllClick = async () => {

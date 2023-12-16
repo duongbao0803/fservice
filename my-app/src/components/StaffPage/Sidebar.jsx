@@ -20,6 +20,7 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
+    navigate("/staff");
     handleLogout(navigate);
   };
 

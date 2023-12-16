@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Route, Routes, useRoutes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useRoutes } from "react-router-dom";
 import HomePage from "../page/HomePage";
 import About from "../components/AboutUs/About";
 import Loginv2 from "../components/Authen/Login";
@@ -43,7 +43,6 @@ const AppRoutes = () => {
             <Route path="/detail/:id" element={<PackageDetail />} />
           </>
         )}
-
         {role === "USER" && (
           <>
             <Route path="/detail/:id/:packageName" element={<OrderPage />} />
@@ -62,7 +61,7 @@ const AppRoutes = () => {
               element={<ManagePackage_Details />}
             />
             <Route
-              path="/user/manage-package/:id/using"
+              path="/user/manage-package/using/:id"
               element={<ManagePackage_Use />}
             />
             <Route path="/user/manage-order/" element={<ManageOrder />}>
@@ -71,20 +70,19 @@ const AppRoutes = () => {
             </Route>
           </>
         )}
-
         {role === "ADMIN" && (
           <>
             <Route path="/board" element={<Admin />} />
+            <Route path="/*" element={<Navigate to="/board" />} />
           </>
         )}
-
         {role === "STAFF" && (
           <>
             <Route path="/staff" element={<StaffPage />} />
             <Route path="/staff/info" element={<StaffInfo />} />
+            <Route path="/*" element={<Navigate to="/staff" />} />
           </>
         )}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
       {role !== "STAFF" && role !== "ADMIN" && <Footer />}
