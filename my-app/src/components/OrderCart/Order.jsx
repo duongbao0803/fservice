@@ -59,7 +59,7 @@ const Order = () => {
     type: "normal",
     paymentMethod: "VNPAY",
     startDate: startDate,
-    CallBackUrl: currentHostWithPayment,
+    callBackUrl: currentHostWithPayment,
     customerName: localStorage.getItem("name"),
     phone: localStorage.getItem("phoneNumber"),
     userName: localStorage.getItem("username"),
