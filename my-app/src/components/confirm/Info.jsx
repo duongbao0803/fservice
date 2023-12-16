@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Info() {
   const { state } = useLocation();
-  console.log("check log", state);
   return (
     // form
     <div className="card-confirm" style={{ backgroundColor: "#F8F8F8" }}>

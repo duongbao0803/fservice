@@ -1,17 +1,38 @@
 import React, { useContext } from "react";
-import { ThemeContext, customTheme } from "../ThemeContext/ThemeContext.jsx";
+import { ThemeContext } from "../ThemeContext/ThemeContext.jsx";
 import { Box, Avatar, Typography, Badge } from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ButtonBase from "@mui/material/ButtonBase";
 import { Button, Dropdown } from "antd";
 import Notification from "../Notification/Notification.jsx";
+import { useState } from "react";
 
 function Navbar() {
   const theme = useContext(ThemeContext);
   const username = localStorage.getItem("username");
   const avt = localStorage.getItem("avatar");
+  const [noticeCount, setNoticeCount] = useState(0);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const style = {
+    position: "absolute",
+    top: "-5px",
+    right: "5px",
+    backgroundColor: "red",
+    color: "white",
+    fontSize: "10px",
+    padding: "0px 4px",
+    borderRadius: "50%",
+  };
+
+  const handleDropdownVisibleChange = (visible) => {
+    setDropdownVisible(visible);
+  };
+
+  const handleCount = (count) => {
+    setNoticeCount(count);
+  };
 
   return (
     <div className="Navbar">
@@ -49,12 +70,14 @@ function Navbar() {
           </Button>
 
           <Dropdown
-            overlay={<Notification />}
+            overlay={<Notification handleCount={handleCount} />}
             placement="bottomRight"
             arrow={{
               pointAtCenter: true,
             }}
             trigger={["click"]}
+            visible={dropdownVisible}
+            onVisibleChange={handleDropdownVisibleChange}
           >
             <Button
               style={{
@@ -64,16 +87,21 @@ function Navbar() {
                 color: theme.palette.primary.main,
               }}
             >
-              <Badge
+              <span className="notification-count" style={style}>
+                {noticeCount}
+              </span>
+
+              {/* <Badge
                 color="error"
                 variant="dot"
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
                 }}
-              >
-                <NotificationsIcon />
-              </Badge>
+              > */}
+
+              <NotificationsIcon />
+              {/* </Badge> */}
             </Button>
           </Dropdown>
 

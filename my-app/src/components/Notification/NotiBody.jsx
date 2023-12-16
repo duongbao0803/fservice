@@ -6,18 +6,28 @@ import {
 } from "../../services/UserService";
 import { caculateTimeAgo, formatDateTime } from "../../utils/tools";
 import InfiniteList from "./InfiniteList";
+import { Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function NotiBody() {
+function NotiBody({ handleCountChange }) {
   const [totalNoti, setTotalNoti] = useState(0);
   const [notiInfo, setNotiInfo] = useState([]);
   const [isRead, setIsRead] = useState(false);
   const [page, setPage] = useState(1);
+  const [newNoticeCount, setNewNoticeCount] = useState(0);
+  const [isShowUsing, setIsShowUsing] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       await getNotification(page);
     })();
   }, [page]);
+
+  useEffect(() => {
+    countNewNotices();
+  }, [notiInfo]);
 
   const getNotification = async (pageNumber) => {
     try {
@@ -36,13 +46,18 @@ function NotiBody() {
     }
   };
 
-  const handlePageClick = (newPage) => {
-    getNotification(newPage);
+  const countNewNotices = () => {
+    const newNotices = notiInfo.filter((noti) => !noti.isRead).length;
+    setNewNoticeCount(newNotices);
+    handleCountChange(newNotices);
   };
 
-  const handleNotiClick = async (id) => {
+  const handleNotiClick = async (id, packageId) => {
     await markNotificationRead(id);
     await getNotification(page);
+    localStorage.setItem("isShowUsing", true);
+
+    navigate(`/user/manage-package/${packageId}`);
   };
 
   const handleReadAllClick = async () => {
@@ -71,7 +86,13 @@ function NotiBody() {
         <div>
           <div className="" style={{ height: "360px", overflow: "scroll" }}>
             <InfiniteList
-              loader={<p>loading...</p>}
+              loader={
+                <div style={{ minHeight: "100vh" }}>
+                  <div className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                  </div>
+                </div>
+              }
               fetchMore={() => setPage((prev) => prev + 1)}
               hasMore={notiInfo?.length < totalNoti}
               endMessage={<span>Bạn đã đọc hết thông báo</span>}
@@ -84,7 +105,7 @@ function NotiBody() {
                       : "mb-2 noti-detail"
                   }
                   style={{ display: "flex", alignItems: "center" }}
-                  onClick={() => handleNotiClick(noti.id)}
+                  onClick={() => handleNotiClick(noti.id, noti.modelId)}
                 >
                   <div style={{ flex: "1" }}>
                     <img
@@ -134,7 +155,7 @@ function NotiBody() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height:'360px'
+            height: "360px",
           }}
         >
           <h6>Không có thông báo</h6>

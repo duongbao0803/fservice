@@ -9,13 +9,30 @@ import { Button, Dropdown } from "antd";
 import Notification from "../Notification/Notification";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Badge } from "@mui/material";
+import { useState } from "react";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
   const linkAvt = localStorage.getItem("avatar");
+  const [noticeCount, setNoticeCount] = useState(0);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  const style = {
+    position: "absolute",
+    top: "-5px",
+    right: "5px",
+    backgroundColor: "red",
+    color: "white",
+    fontSize: "10px",
+    padding: "0px 4px",
+    borderRadius: "50%",
+  };
+
+  const handleCount = (count) => {
+    setNoticeCount(count);
+  };
   const handleLogoutClick = () => {
     handleLogout(navigate);
   };
@@ -71,7 +88,7 @@ function Header() {
                 ""
               ) : (
                 <Dropdown
-                  overlay={<Notification />}
+                  overlay={<Notification handleCount={handleCount} />}
                   placement="bottomRight"
                   arrow={{
                     pointAtCenter: true,
@@ -79,16 +96,19 @@ function Header() {
                   trigger={["click"]}
                 >
                   <Button className="btn-noti">
-                    <Badge
+                    {/* <Badge
                       color="error"
                       variant="dot"
                       anchorOrigin={{
                         vertical: "top",
                         horizontal: "right",
                       }}
-                    >
-                      <NotificationsNoneIcon className="noti-icon" />
-                    </Badge>
+                    > */}
+                    <span className="notification-count" style={style}>
+                      {noticeCount}
+                    </span>
+                    <NotificationsNoneIcon className="noti-icon" />
+                    {/* </Badge> */}
                   </Button>
                 </Dropdown>
               )}
