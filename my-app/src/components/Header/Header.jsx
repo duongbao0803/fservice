@@ -59,7 +59,7 @@ function Header() {
             style={{ margin: "0" }}
           />
         </div>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row" />
         </div>
         <div

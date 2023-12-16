@@ -21,7 +21,6 @@ function ConfirmButton(props) {
     }
     try {
       let res = await Order(data);
-      console.log("check confirm", res);
       if (res && res.status === 200) {
         toast.success("Đơn hàng tạo thành công, vui lòng chờ trong giây lát", {
           autoClose: 2000,
