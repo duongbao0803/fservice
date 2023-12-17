@@ -1,0 +1,48 @@
+.section-title {
+  border-bottom: 1px solid #ff8228;
+  font-weight: 600;
+}
+
+.table-work {
+  width: inherit;
+}
+
+.table-work td {
+  padding: 8px 0;
+}
+
+.table-work .table-title {
+  min-width: 150px;
+}
+
+.text-date {
+  padding: 3px;
+  font-size: 15px;
+}
+
+.btn-work {
+  border: none;
+  background-color: #ff8d3c;
+  color: #fff;
+  border-radius: 5px;
+  padding: 3px 5px;
+  transition: background-color 0.2s ease;
+  font-size: 15px;
+  width: 140px;
+}
+
+.btn-active:hover {
+  background-color: #ff7919;
+}
+
+.btn-disable {
+  background-color: #757575;
+}
+
+.feedback-table td {
+  padding: 8px 0;
+}
+
+.feedback-table tr td:first-child {
+  min-width: 150px;
+}

@@ -9,6 +9,7 @@ import PackageDetail from "../page/PackageDetail";
 import NotFound from "../components/NotFound/NotFound";
 import StaffInfo from "../page/StaffInfo";
 import StaffPage from "../page/StaffPage";
+import StaffWorkDetail from "../page/StaffWorkDetail";
 import PaymentSuccess from "../page/PaymentSuccess";
 import PaymentError from "../page/PaymentError";
 import PaymentResult from "../components/Payment/PaymentResult";
@@ -78,9 +79,10 @@ const AppRoutes = () => {
         )}
         {role === "STAFF" && (
           <>
-            <Route path="/staff" element={<StaffPage />} />
+            <Route path="/staff/work" element={<StaffPage />} />
             <Route path="/staff/info" element={<StaffInfo />} />
             <Route path="/*" element={<Navigate to="/staff" />} />
+            <Route path="/staff/work/:id" element={<StaffWorkDetail />} />
           </>
         )}
         <Route path="*" element={<NotFound />} />

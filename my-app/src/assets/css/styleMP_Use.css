@@ -116,8 +116,8 @@ td:nth-child(4) {
 /* Change the title color of the finished step */
 
 .ant-steps-item-finish .ant-steps-item-icon {
-  background-color: #ff8228;
-  /* Your desired color */
+  background-color: #ffd4b8bb !important;
+  border-color: #ffd4b8bb !important;
 }
 .ant-steps-item-tail::after {
   background-color: #ff8228 !important;
@@ -126,6 +126,10 @@ td:nth-child(4) {
 .ant-steps-item:not(.ant-steps-item-finish):not(.ant-steps-item-process)
   .ant-steps-item-tail::after {
   background-color: #c6c2c2 !important; /* Adjust the blur value as needed */
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+  color: #ff8228 !important;
 }
 
 /* feedback */

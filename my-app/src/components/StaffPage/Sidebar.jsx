@@ -41,8 +41,7 @@ function Sidebar() {
               <ul style={{ listStyleType: "none" }}>
                 <li>
                   <NavLink
-                    to={"/staff"}
-                    end
+                    to={"/staff/work"}
                     className={({ isActive }) =>
                       isActive ? "active-staff" : ""
                     }

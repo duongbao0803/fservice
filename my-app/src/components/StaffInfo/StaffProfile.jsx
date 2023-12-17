@@ -99,7 +99,11 @@ function StaffProfile() {
     const storedAddress = localStorage.getItem("address");
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
 
-    if (checkImage !== null && checkImage?.length > 0 && checkImage !== "null") {
+    if (
+      checkImage !== null &&
+      checkImage?.length > 0 &&
+      checkImage !== "null"
+    ) {
       setSelectedImage(checkImage);
     } else {
       setSelectedImage(require("../../assets/img/img-user.png"));
@@ -171,22 +175,24 @@ function StaffProfile() {
 
   return (
     <div className="staff-profile mt-5">
-      <h4>THÔNG TIN</h4>
+      <h5>Thông tin</h5>
       <form onSubmit={formik.handleSubmit}>
         <div className="row">
-
-          <div className="col-md-3 info-img" style={{ backgroundColor: '#fff', marginRight: '30px' }}>
+          <div
+            className="col-md-3 info-img"
+            style={{ backgroundColor: "#fff", marginRight: "30px" }}
+          >
             <div className="img-container">
               <img
                 src={selectedImage}
-                width={'100%'}
-                height={'100%'}
+                width={"100%"}
+                height={"100%"}
                 alt="avatar"
               />
             </div>
             <div>
-              <h4 style={{ fontWeight: '400' }}>{name}</h4>
-              <p style={{ color: '#757575' }}>Nhân viên</p>
+              <h4 style={{ fontWeight: "400" }}>{name}</h4>
+              <p style={{ color: "#757575" }}>Nhân viên</p>
             </div>
             <div className="update-img">
               <input
@@ -214,7 +220,10 @@ function StaffProfile() {
               <p>Ảnh đã chọn: {selectedFileName}</p>
             </div>
           </div>
-          <div className="col md-9 info-text" style={{ backgroundColor: '#fff' }}>
+          <div
+            className="col md-9 info-text"
+            style={{ backgroundColor: "#fff" }}
+          >
             <div className="header-info">
               <p>Chi tiết tài khoản</p>
             </div>
@@ -234,7 +243,13 @@ function StaffProfile() {
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="exampleInputEmail1">Địa chỉ email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" readOnly value={email} />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    readOnly
+                    value={email}
+                  />
                 </div>
               </div>
               <div class="form-group">
@@ -279,7 +294,6 @@ function StaffProfile() {
                 <button type="submit">Cập nhật thông tin</button>
               </div>
             </div>
-
           </div>
         </div>
       </form>
