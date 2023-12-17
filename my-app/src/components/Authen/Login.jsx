@@ -68,7 +68,7 @@ function Loginv2() {
             if (role === "ADMIN") {
               navigate("/error");
             } else if (role === "STAFF") {
-              navigate("/staff");
+              navigate("/staff/work");
             } else {
               navigate("/");
             }
