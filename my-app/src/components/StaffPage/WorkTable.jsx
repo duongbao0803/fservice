@@ -8,6 +8,7 @@ import {
   getStaffWork,
   getStaffWorkPaging,
 } from "../../services/UserService";
+import { useNavigate } from "react-router-dom";
 
 function DataTable() {
   const [selectedValue, setSelectedValue] = useState(
@@ -26,6 +27,7 @@ function DataTable() {
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const navigate = useNavigate();
 
   const columns = [
     { field: "stt", headerName: "STT", width: 50 },
@@ -181,6 +183,10 @@ function DataTable() {
       console.log("error fetching: ", Error);
     }
   };
+
+  const fetchStaffInfo = () => {
+    fetchStaff();
+  };
   const fetchApartment = async (id) => {
     try {
       const response = await getApartmentId(id);
@@ -195,16 +201,25 @@ function DataTable() {
 
   const handleRowClick = async (params) => {
     setSelectedService(params.row.id);
-    setModalOpen(true);
 
     const selectedStaff = staffData.find((staff) => staff.id === params.row.id);
     if (selectedStaff) {
-      setInfo(selectedStaff);
       const apartmentInfo = await fetchApartment(
         selectedStaff.apartmentPackage.apartmentId
       );
       setBuilding(apartmentInfo?.type.building.name);
       setRoomNo(apartmentInfo?.roomNo);
+
+      navigate(`/staff/work/${params.row.id}`, {
+        state: {
+          staffData,
+          selectedService: params.row.id,
+          info: selectedStaff,
+          building: apartmentInfo?.type.building.name,
+          roomNo: apartmentInfo?.roomNo,
+          // fetchStaff: fetchStaffInfo,
+        },
+      });
     } else {
       console.error("No staff found for id:", params.row.id);
     }

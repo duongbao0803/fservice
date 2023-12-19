@@ -27,10 +27,6 @@ function Modal({
     }
   }, [info.status]);
 
-  console.log("chec ìno", info);
-
-  console.log("Check info", info);
-
   const [jobAccepted, setJobAccepted] = useState(false);
   const theme = useContext(ThemeContext);
 

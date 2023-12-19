@@ -1,23 +1,81 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import "./WorkDetail.css";
 import { Button, Steps } from "antd";
 import { Rating } from "@mui/material";
+import { confirmWork, getOrder } from "../../services/UserService";
+import { toast } from "react-toastify";
+import { formatDate } from "../../utils/tools";
 
 function WorkDetail() {
   const { Step } = Steps;
-  const description = "This is a description.";
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (
+      state.info.status.includes("Working") ||
+      state.info.status.includes("Completed")
+    ) {
+      setJobAccepted(true);
+    } else {
+      setJobAccepted(false);
+    }
+  }, [state.info.status]);
+
+  const [jobAccepted, setJobAccepted] = useState(false);
+
+  const [value, setValue] = React.useState(2);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await getOrder(state.info.id, {
+        id: state.info.id,
+        status: 1,
+      });
+
+      if (res && res.status === 200) {
+        toast.success("Nhận việc thành công");
+        state.fetchStaff();
+        setJobAccepted(true);
+      } else {
+        toast.success("Nhận việc thất bại");
+      }
+    } catch (error) {
+      console.log("Error Submitting Order", error);
+    }
+  };
+  const handleConfirm = async () => {
+    try {
+      const res = await confirmWork(state.info.id, {
+        id: state.info.id,
+        status: 2,
+      });
+
+      if (res && res.status === 200) {
+        toast.success("Hoàn thành công việc");
+        state.fetchStaff();
+      } else {
+        toast.success("Hoàn thành công việc thất bại");
+      }
+    } catch (error) {
+      console.log("Error Completing Service", error);
+    }
+  };
+
   return (
-    <div className="staff-container mt-5" style={{ overflow: "scroll" }}>
-      <div className="data-table">
-        <div>
-          <h5 style={{ color: "#ff8228" }}>
-            <Link to={"/staff/work"} style={{ color: "#000" }}>
-              Danh sách công việc
-            </Link>{" "}
-            <ArrowRightIcon /> Công việc chi tiết
-          </h5>
+    <>
+      <div className="mt-4">
+        <h5 style={{ color: "#ff8228" }}>
+          <Link to={"/staff/work"} style={{ color: "#000" }}>
+            Danh sách công việc
+          </Link>{" "}
+          <ArrowRightIcon /> Công việc chi tiết
+        </h5>
+      </div>
+
+      <div className="staff-container mt-3" style={{ overflow: "scroll" }}>
+        <div className="data-table">
           <div className="mt-4" style={{ height: 500, width: "100%" }}>
             <div className="row">
               <div className="col-md-6">
@@ -28,13 +86,21 @@ function WorkDetail() {
                       <tr>
                         <td className="table-title">Công việc:</td>
                         <td>
-                          <p>Vệ sinh máy lạnh</p>
+                          <p>
+                            {" "}
+                            {state.info?.service.name ||
+                              "VỆ SINH NHÀ CỬA, BÀN GHẾ"}
+                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td className="table-title">Địa chỉ:</td>
                         <td>
-                          <p>Phòng 0301 - Tòa S101 - Vinhomes Grand Park</p>
+                          <p>
+                            {" "}
+                            Tòa {state.building} - Phòng {state.roomNo} -
+                            Vinhomes Grand Park
+                          </p>
                         </td>
                       </tr>
                       <tr>
@@ -46,13 +112,17 @@ function WorkDetail() {
                       <tr>
                         <td className="table-title">Giờ làm việc:</td>
                         <td>
-                          <p>17.12.2023 3PM - 5PM</p>
+                          <p>
+                            {" "}
+                            {formatDate(state.info?.createdDate)} -{" "}
+                            {state.info?.shiftTime}
+                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td className="table-title">Ghi chú:</td>
                         <td>
-                          <p>Day la note</p>
+                          <p>{state.info?.note}</p>
                         </td>
                       </tr>
                     </tbody>
@@ -65,118 +135,17 @@ function WorkDetail() {
                       <tr>
                         <td className="table-title">Khách hàng:</td>
                         <td>
-                          <p>Bảo Bất Lực</p>
+                          <p>{state.info?.customerName}</p>
                         </td>
                       </tr>
                       <tr>
                         <td className="table-title">Điện thoại:</td>
                         <td>
-                          <p>0909113114</p>
+                          <p>{state.info?.customerPhone}</p>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div className="mb-3">
-                  <h6 className="section-title">THÔNG TIN</h6>
-                  {/* <table className="table-work">
-                    <tbody>
-                      <tr>
-                        <td className="table-title">Trạng thái:</td>
-                        <td>
-                          <div className="working-status working-status__pending">
-                            <p>Đang chờ</p>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="modal-btn">
-                            <button
-                              style={{
-                                color: "white",
-                                backgroundColor: "#ff8228",
-                                borderRadius: "10px",
-                                minWidth: "120px",
-                                padding: "5px",
-                                border: "none",
-                                outline: "none",
-                              }}
-                            >
-                              Nhận việc
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="table-title">
-                          <p>Ngày hoàn thành:</p>
-                        </td>
-                        <td>
-                          <p>dd.mm.yyyy hh:mm</p>
-                        </td>
-                        <td>
-                          <div className="modal-btn">
-                            <button
-                              style={{
-                                color: "white",
-                                backgroundColor: "#03AC00",
-                                borderRadius: "10px",
-                                minWidth: "120px",
-                                padding: "5px",
-                                border: "none",
-                                outline: "none",
-                              }}
-                            >
-                              Hoàn thành
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table> */}
-                  <div className="mt-3">
-                    <Steps direction="vertical" current={0}>
-                      <Step
-                        title="Đang chờ"
-                        description={
-                          <div>
-                            <p className="text-date">17.12.2023 - 7:00</p>
-                            <button className="btn-work btn-disable">
-                              Nhận việc
-                            </button>
-                          </div>
-                        }
-                      />
-                      <Step
-                        title="Đang thực hiện"
-                        description={
-                          <div>
-                            <p className="text-date">17.12.2023 - 7:30</p>
-                            <button className="btn-work btn-active">
-                              Hoàn thành
-                            </button>
-                          </div>
-                        }
-                      />
-                      <Step
-                        title="Đã hoàn thành"
-                        description={
-                          <div>
-                            <p className="text-date">17.12.2023 - 8:00</p>
-                            <p style={{ fontSize: "15px", padding: "3px" }}>
-                              <i
-                                className="fa-solid fa-spinner"
-                                style={{ color: "#9AA14B" }}
-                              ></i>
-                              <span style={{ color: "#9AA14B" }}>
-                                {" "}
-                                Đang chờ xác nhận
-                              </span>
-                            </p>
-                          </div>
-                        }
-                      />
-                    </Steps>
-                  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -208,10 +177,62 @@ function WorkDetail() {
                 </div>
               </div>
             </div>
+            <div className="mb-3">
+              <h6 className="section-title">THÔNG TIN</h6>
+              <div className="mt-3">
+                <Steps direction="horizontal" current={0}>
+                  <Step
+                    title="Đang chờ"
+                    description={
+                      <div>
+                        <p className="text-date">17.12.2023 - 7:00</p>
+                        <button
+                          className="btn-work btn-disable"
+                          onClick={() => handleSubmit()}
+                        >
+                          Nhận việc
+                        </button>
+                      </div>
+                    }
+                  />
+
+                  <Step
+                    title="Đang thực hiện"
+                    description={
+                      <div>
+                        <p className="text-date">17.12.2023 - 7:30</p>
+                        <button className="btn-work btn-active">
+                          Hoàn thành
+                        </button>
+                      </div>
+                    }
+                  />
+
+                  <Step
+                    title="Đã hoàn thành"
+                    description={
+                      <div>
+                        <p className="text-date">17.12.2023 - 8:00</p>
+                        <p style={{ fontSize: "15px", padding: "3px" }}>
+                          <i
+                            className="fa-solid fa-spinner"
+                            style={{ color: "#9AA14B" }}
+                          ></i>
+                          <span style={{ color: "#9AA14B" }}>
+                            {" "}
+                            Đang chờ xác nhận
+                          </span>
+                        </p>
+                      </div>
+                    }
+                  />
+                </Steps>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
