@@ -36,7 +36,7 @@ function WorkDetail() {
 
       if (res && res.status === 200) {
         toast.success("Nhận việc thành công");
-        state.fetchStaff();
+        // state.fetchStaff();
         setJobAccepted(true);
       } else {
         toast.success("Nhận việc thất bại");
@@ -51,6 +51,7 @@ function WorkDetail() {
         id: state.info.id,
         status: 2,
       });
+      console.log("check log", res);
 
       if (res && res.status === 200) {
         toast.success("Hoàn thành công việc");
@@ -98,15 +99,15 @@ function WorkDetail() {
                         <td>
                           <p>
                             {" "}
-                            Tòa {state.building} - Phòng {state.roomNo} -
-                            Vinhomes Grand Park
+                            Tòa {state.apartmentInfo.building} - Phòng{" "}
+                            {state.apartmentInfo.roomNo} - Vinhomes Grand Park
                           </p>
                         </td>
                       </tr>
                       <tr>
                         <td className="table-title">Loại căn hộ:</td>
                         <td>
-                          <p>1 phòng ngủ</p>
+                          <p>{state.apartmentInfo.type.type}</p>
                         </td>
                       </tr>
                       <tr>
@@ -180,34 +181,54 @@ function WorkDetail() {
             <div className="mb-3">
               <h6 className="section-title">THÔNG TIN</h6>
               <div className="mt-3">
-                <Steps direction="horizontal" current={0}>
+                <Steps
+                  direction="horizontal"
+                  current={
+                    state?.info?.status.includes("Pending")
+                      ? 0
+                      : state?.info?.status.includes("Working")
+                      ? 1
+                      : state?.info?.status.includes("Completed")
+                      ? 3
+                      : -1
+                  }
+                >
                   <Step
                     title="Đang chờ"
                     description={
                       <div>
                         <p className="text-date">17.12.2023 - 7:00</p>
-                        <button
-                          className="btn-work btn-disable"
-                          onClick={() => handleSubmit()}
-                        >
-                          Nhận việc
-                        </button>
+                        {state?.info?.status.includes("Completed") ||
+                        state?.info?.status.includes("Working") ? (
+                          ""
+                        ) : (
+                          <button
+                            className="btn-work"
+                            onClick={() => handleSubmit()}
+                          >
+                            Nhận việc
+                          </button>
+                        )}
                       </div>
                     }
                   />
-
                   <Step
                     title="Đang thực hiện"
                     description={
                       <div>
                         <p className="text-date">17.12.2023 - 7:30</p>
-                        <button className="btn-work btn-active">
-                          Hoàn thành
-                        </button>
+                        {jobAccepted &&
+                          !state?.info?.status.includes("Completed") && (
+                            <button
+                              className="btn-work btn-active"
+                              onClick={() => handleConfirm()}
+                            >
+                              Hoàn thành
+                            </button>
+                          )}
                       </div>
                     }
                   />
-
                   <Step
                     title="Đã hoàn thành"
                     description={

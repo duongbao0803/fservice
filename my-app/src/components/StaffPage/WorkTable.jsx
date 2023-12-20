@@ -21,8 +21,7 @@ function DataTable() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
-  const [building, setBuilding] = useState({});
-  const [roomNo, setRoomNo] = useState({});
+  const [apartmentInfo, setApartmentInfo] = useState({});
   const [status, setStatus] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
@@ -95,19 +94,6 @@ function DataTable() {
     }
   };
 
-  // const getStatusColor = (status) => {
-  //   switch (status.trim()) {
-  //     case 'Pending':
-  //       return 'black';
-  //     case 'Completed':
-  //       return 'green';
-  //     case 'Working':
-  //       return 'orange';
-  //     default:
-  //       return 'red';
-  //   }
-  // };
-
   const getBackgroundStatusColor = (status) => {
     switch (status.trim()) {
       case "Pending":
@@ -133,8 +119,7 @@ function DataTable() {
           const apartmentInfo = await fetchApartment(
             staff.apartmentPackage.apartmentId
           );
-          setBuilding(apartmentInfo?.type.building.name);
-          setRoomNo(apartmentInfo?.roomNo);
+          setApartmentInfo(apartmentInfo);
           // Construct the row
           return {
             id: staff.id,
@@ -207,17 +192,15 @@ function DataTable() {
       const apartmentInfo = await fetchApartment(
         selectedStaff.apartmentPackage.apartmentId
       );
-      setBuilding(apartmentInfo?.type.building.name);
-      setRoomNo(apartmentInfo?.roomNo);
+      setApartmentInfo(apartmentInfo);
 
       navigate(`/staff/work/${params.row.id}`, {
         state: {
           staffData,
           selectedService: params.row.id,
           info: selectedStaff,
-          building: apartmentInfo?.type.building.name,
-          roomNo: apartmentInfo?.roomNo,
-          // fetchStaff: fetchStaffInfo,
+          apartmentInfo,
+          // fetchStaff: fetchStaffInfo(),
         },
       });
     } else {
@@ -230,24 +213,6 @@ function DataTable() {
       <div className="data-table">
         <div>
           <h5>Danh sách công việc</h5>
-          {/* <div
-            className="dropdown-container d-flex align-items-center"
-            style={{ justifyContent: "flex-end" }}
-          >
-            <label style={{ paddingRight: "10px", margin: "0" }}>
-              Hiển thị:
-            </label>
-            <select
-              className="form-control w-auto"
-              value={selectedValue}
-              onChange={(e) => setSelectedValue(e.target.value)}
-            >
-              <option>Mặc định</option>
-              <option>Theo ngày</option>
-              <option>Theo tuần</option>
-              <option>Theo tháng</option>
-            </select>
-          </div> */}
           <div
             className="content-table mt-4"
             style={{ height: 500, width: "100%" }}
@@ -274,8 +239,8 @@ function DataTable() {
               service={selectedService}
               onClose={() => setModalOpen(false)}
               info={info}
-              building={building}
-              roomNo={roomNo}
+              // building={building}
+              // roomNo={roomNo}
               fetchStaff={() => fetchStaff()}
               handleStatusChange={handleStatusChange}
             />

@@ -117,7 +117,7 @@ function Modal({
                   <tr>
                     <td className="modal-title">Ghi chú:</td>
                     <td>
-                      <p>{info?.note}</p>
+                      <p>{StaticRange.info?.note}</p>
                     </td>
                   </tr>
                 </tbody>
@@ -168,8 +168,8 @@ function Modal({
                       )}
                     </td>
                     <td>
-                      {info.status.includes("Working") ||
-                      info.status.includes("Completed") ? (
+                      {info?.status.includes("Working") ||
+                      info?.status.includes("Completed") ? (
                         " "
                       ) : (
                         <div className="modal-btn">

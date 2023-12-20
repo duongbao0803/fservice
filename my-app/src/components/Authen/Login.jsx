@@ -70,7 +70,7 @@ function Loginv2() {
             } else if (role === "STAFF") {
               navigate("/staff/work");
             } else {
-              navigate("/");
+              window.location.href = "/";
             }
             const userName =
               decoded[

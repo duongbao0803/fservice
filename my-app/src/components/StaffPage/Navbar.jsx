@@ -76,8 +76,8 @@ function Navbar() {
               pointAtCenter: true,
             }}
             trigger={["click"]}
-            visible={dropdownVisible}
-            onVisibleChange={handleDropdownVisibleChange}
+            open={dropdownVisible}
+            onOpenChange={handleDropdownVisibleChange}
           >
             <Button
               style={{

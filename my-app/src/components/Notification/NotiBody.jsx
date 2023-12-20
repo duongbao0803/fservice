@@ -14,10 +14,13 @@ function NotiBody({ handleCountChange }) {
   const [notiInfo, setNotiInfo] = useState([]);
   const [page, setPage] = useState(1);
   const [newNoticeCount, setNewNoticeCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       await getNotification(page);
+      setIsLoading(false);
     })();
   }, [page]);
 
@@ -84,7 +87,13 @@ function NotiBody({ handleCountChange }) {
           Đánh dấu đã đọc
         </p>
       </div>
-      {notiInfo.length > 0 ? (
+      {isLoading ? (
+        <div style={{ height: "360px", overflow: "scroll" }}>
+          <div className="text-center">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        </div>
+      ) : notiInfo.length > 0 ? (
         <div>
           <div className="" style={{ height: "360px", overflow: "scroll" }}>
             <InfiniteList
