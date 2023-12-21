@@ -16,7 +16,6 @@ function DataTable() {
   );
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [selectedService, setSelectedService] = React.useState(null);
-  const username = localStorage.getItem("username");
   const [staffData, setStaffData] = useState([]);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -78,7 +77,6 @@ function DataTable() {
         </div>
       ),
     },
-    // { field: "feedback", headerName: "Đánh giá", width: 200 },
   ];
 
   const getStatus = (status) => {
@@ -149,8 +147,10 @@ function DataTable() {
 
   const fetchStaff = async (pageNum) => {
     try {
-      const res = await getStaffWorkPaging(username, pageNum);
-
+      const res = await getStaffWorkPaging(
+        localStorage.getItem("username"),
+        pageNum
+      );
       if (res && res.status === 200) {
         const xPaginationHeader = res.headers?.["x-pagination"];
         if (xPaginationHeader) {
@@ -169,9 +169,6 @@ function DataTable() {
     }
   };
 
-  const fetchStaffInfo = () => {
-    fetchStaff();
-  };
   const fetchApartment = async (id) => {
     try {
       const response = await getApartmentId(id);
@@ -200,7 +197,6 @@ function DataTable() {
           selectedService: params.row.id,
           info: selectedStaff,
           apartmentInfo,
-          // fetchStaff: fetchStaffInfo(),
         },
       });
     } else {

@@ -235,9 +235,7 @@ const UsingModal = ({
                       <MenuItem value="2" disabled={currentHour >= 15}>
                         1:00 PM - 3:00 PM
                       </MenuItem>
-                      <MenuItem value="3" disabled={currentHour >= 17}>
-                        3:00 PM - 5:00 PM
-                      </MenuItem>
+                      <MenuItem value="3">3:00 PM - 5:00 PM</MenuItem>
                     </Select>
                   </FormControl>
                 </div>

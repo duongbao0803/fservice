@@ -38,7 +38,6 @@ function Rightbar({ state }) {
           const sumPage = paginationData.TotalPages;
           setTotalPage(sumPage);
         }
-        console.log("check wh", workingHistory);
         setWorkingHistory(res.data);
         const staffIds = res.data.map(
           (workingHistory) => workingHistory.staffId
@@ -61,7 +60,6 @@ function Rightbar({ state }) {
         try {
           const res = await getStaffByUsingId(staffId);
           if (res && res.status === 200) {
-            console.log("check resdata", res.data);
             fetchStaffInfo.push(res.data);
           } else {
             fetchStaffInfo.push(null);

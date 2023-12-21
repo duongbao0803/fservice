@@ -38,7 +38,6 @@ function NotiBody({ handleCountChange }) {
           const totalNoti = paginationData.TotalCount;
           setTotalNoti(totalNoti);
         }
-        console.log("check noti", res.data);
         setNotiInfo([...notiInfo, ...res.data]);
       }
     } catch (error) {
@@ -55,7 +54,6 @@ function NotiBody({ handleCountChange }) {
   const handleNotiClick = async (id, packageId, type) => {
     await markNotificationRead(id);
     await getNotification(page);
-    console.log("check type", type);
     if (type.includes("Order")) {
       window.location.href = "/user/manage-order/";
     } else if (type.includes("Service")) {
