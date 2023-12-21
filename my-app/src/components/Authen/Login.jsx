@@ -68,7 +68,7 @@ function Loginv2() {
             if (role === "ADMIN") {
               navigate("/error");
             } else if (role === "STAFF") {
-              navigate("/staff/work");
+              window.location.href = "/staff/work";
             } else {
               window.location.href = "/";
             }
