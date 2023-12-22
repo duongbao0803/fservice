@@ -90,7 +90,7 @@ function WorkDetail() {
 
   return (
     <>
-      <div className="mt-4">
+      <div className="container mt-4">
         <h5 style={{ color: "#ff8228" }}>
           <Link to={"/staff/work"} style={{ color: "#000" }}>
             Danh sách công việc
@@ -99,9 +99,12 @@ function WorkDetail() {
         </h5>
       </div>
 
-      <div className="staff-container mt-3" style={{ overflow: "scroll" }}>
-        <div className="data-table">
-          <div className="mt-4" style={{ height: 500, width: "100%" }}>
+      <div className="container mt-3">
+        <div
+          className="data-table px-3 staff-container"
+          style={{ overflow: "scroll" }}
+        >
+          <div className="mt-4" style={{ width: "100%" }}>
             <div className="row">
               <div className="col-md-6">
                 <div className="mb-3">
@@ -206,7 +209,7 @@ function WorkDetail() {
             <div className="mb-3">
               <h6 className="section-title">THÔNG TIN</h6>
               <div className="mt-3">
-                <Steps direction="horizontal" current={currentSteps}>
+                <Steps direction="vertical" current={currentSteps}>
                   <Step
                     title="Đang chờ"
                     description={
@@ -232,6 +235,10 @@ function WorkDetail() {
                     title="Đang thực hiện"
                     description={
                       <div>
+                        <p className="text-date">
+                          {formatDate(state?.info?.workingDate)} -{" "}
+                          {formatTime(state?.info?.workingDate)}
+                        </p>
                         {jobAccepted &&
                           !state?.info?.status.includes("Completed") && (
                             <button
@@ -258,7 +265,7 @@ function WorkDetail() {
                           </p>
 
                           {state?.info?.isConfirm === null ? (
-                            <p style={{ padding: "10px" }}>
+                            <p style={{ padding: "10px 0" }}>
                               <i
                                 className="fa-solid fa-spinner"
                                 style={{ color: "#9AA14B" }}

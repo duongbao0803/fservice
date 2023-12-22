@@ -205,10 +205,10 @@ function DataTable() {
   };
 
   return (
-    <div className="staff-container mt-5">
+    <div className="container mt-5">
+      <h5>Danh sách công việc</h5>
       <div className="data-table">
         <div>
-          <h5>Danh sách công việc</h5>
           <div
             className="content-table mt-4"
             style={{ height: 500, width: "100%" }}
