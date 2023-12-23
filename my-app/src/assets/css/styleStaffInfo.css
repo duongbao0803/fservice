@@ -1,120 +1,123 @@
 .staff-profile {
-    /* border: 1px solid #ddd;        
+  /* border: 1px solid #ddd;        
     border-radius:5px;         
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);   
     background-color: #ffffff; */
-    padding: 20px;                
-    max-width: 100%;
+  padding: 20px;
+  max-width: 100%;
 }
 
 .info-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
 }
 
 .info-img .img-container {
-    width: 130px;
-    height: 130px;
-    margin-bottom: 10px;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 10px;
 }
 
 .info-img img {
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
 }
 
 .info-img .update-img {
-
 }
 
 .info-img .update-img p {
-    margin: 0;
-    font-size: 13px;
-    color: #777;
+  margin: 0;
+  font-size: 13px;
+  color: #777;
 }
 
 .info-img .update-img button {
-    border: none;
-    padding: 5px 15px;
-    background-color: #ffb077;
-    border-radius: 5px;
-    margin-bottom: 15px;
+  border: none;
+  padding: 5px 15px;
+  background-color: #ffb077;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .info-text {
-    border-radius: 8px;
+  border-radius: 8px;
+  padding: 0 15px;
 }
 
 .info-text .header-info {
-    margin-top: 15px;
-    border-bottom: 2px solid #ccc;
+  padding-top: 15px;
+  border-bottom: 2px solid #ccc;
 }
 
 .info-text .header-info p {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .info-text .body-info {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .info-text .update-btn button {
-    border: none;
-    padding: 5px 15px;
-    background-color: #ffb077;
-    border-radius: 5px;
-    margin-bottom: 15px;
+  border: none;
+  padding: 5px 15px;
+  background-color: #ffb077;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 /* date picker */
 .ant-space {
-    width: 100%;
+  width: 100%;
 }
 
 .ant-picker {
-    width: 100%;
-    padding: 6px !important;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 6px !important;
+  border: 1px solid #ccc;
 }
 
-.ant-picker .ant-picker-input > input{
-    font-size: 1rem !important;
+.ant-picker .ant-picker-input > input {
+  font-size: 1rem !important;
 }
 
 .InfoSideBar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    min-height: 108vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  min-height: 108vh;
 }
 
-.Info-Job ul li a, .Info-Information ul li a {
-    transition: all 0.1s ease;
+.Info-Job ul li a,
+.Info-Information ul li a {
+  transition: all 0.1s ease;
 }
 
-.Info-Job ul li a:hover, .Info-Information ul li a:hover {
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #ff8228;
-    color: #fff !important;
+.Info-Job ul li a:hover,
+.Info-Information ul li a:hover {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ff8228;
+  color: #fff !important;
 }
-.Info-Information .Info-active, .Info-Information ul li a .Info-active {
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #ff8228;
-    color: white !important;
+.Info-Information .Info-active,
+.Info-Information ul li a .Info-active {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ff8228;
+  color: white !important;
 }
 /* .Info-container {
     
@@ -131,56 +134,54 @@
 } */
 
 .staff-info {
-    
 }
 
 .staff-info__table td {
-    padding: 15px 20px;
+  padding: 15px 20px;
 }
 
 .staff-info__table td input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    outline: none;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  outline: none;
 }
 
 .Info-container th {
-    min-width: 90px;
+  min-width: 90px;
 }
 
 .Info-container button {
-    padding: 10px 15px;
-    background-color: #ff8228;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
+  padding: 10px 15px;
+  background-color: #ff8228;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .avatar-section {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .avatar-section img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: 15px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
 }
 
 .avatar-section p {
-    font-size: 14px;
-    color: #777;
+  font-size: 14px;
+  color: #777;
 }
 .avatar-section button {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
-

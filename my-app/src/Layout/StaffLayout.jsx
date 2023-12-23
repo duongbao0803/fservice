@@ -9,21 +9,20 @@ import { ToastContainer } from "react-toastify";
 function StaffLayout({ children }) {
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
+      <div>
+        <div className="staff-layout">
           <div
-            className="col-md-2"
-            style={{ backgroundColor: "white", padding: 0 }}
+            style={{
+              backgroundColor: "white",
+              padding: 0,
+              flex: 1,
+            }}
           >
             <Sidebar />
           </div>
-          <div
-            className="col-md-10"
-            style={{ backgroundColor: "#F5F5F5", height: "100vh" }}
-          >
+          <div style={{ backgroundColor: "#F5F5F5", height: "100vh", flex: 6 }}>
             <Navbar />
-
-            {children}
+            <div style={{ overflow: "scroll" }}>{children}</div>
           </div>
         </div>
       </div>

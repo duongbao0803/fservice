@@ -1,3 +1,7 @@
+.workdetail p {
+  margin: 0;
+}
+
 .section-title {
   border-bottom: 1px solid #ff8228;
   font-weight: 600;

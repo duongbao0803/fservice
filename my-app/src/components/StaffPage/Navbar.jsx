@@ -35,7 +35,13 @@ function Navbar() {
   };
 
   return (
-    <div className="Navbar">
+    <div
+      className="Navbar"
+      style={{
+        backgroundColor: "#fff",
+        zIndex: "9999",
+      }}
+    >
       <Box
         sx={{
           display: "flex",

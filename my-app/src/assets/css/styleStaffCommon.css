@@ -1,3 +1,8 @@
+.staff-layout {
+  display: flex;
+  flex-direction: row;
+}
+
 .staff-container {
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -65,3 +70,9 @@
     background-color: #ff8228;
     color: white !important;
 } */
+
+@media screen and (max-width: 768px) {
+  .staff-layout {
+    flex-direction: column;
+  }
+}

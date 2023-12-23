@@ -205,42 +205,41 @@ function DataTable() {
   };
 
   return (
-    <div className="container mt-5">
-      <h5>Danh sách công việc</h5>
-      <div className="data-table">
-        <div>
-          <div
-            className="content-table mt-4"
-            style={{ height: 500, width: "100%" }}
-          >
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pagination
-              rowCount={totalCount}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 10 },
-                },
-              }}
-              onRowClick={handleRowClick}
-              sx={{ minHeight: "70vh" }}
-            />
+    <div className="container-fluid mt-5">
+      <div className="col-md-12">
+        <h5>Danh sách công việc</h5>
+        <div className="data-table">
+          <div>
+            <div className="content-table mt-4" style={{ width: "100%" }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pagination
+                rowCount={totalCount}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 10 },
+                  },
+                }}
+                onRowClick={handleRowClick}
+                sx={{ minHeight: "70vh" }}
+              />
+            </div>
+            {/* Modal */}
+            {isModalOpen && (
+              <Modal
+                staffData={staffData}
+                isOpen={isModalOpen}
+                service={selectedService}
+                onClose={() => setModalOpen(false)}
+                info={info}
+                // building={building}
+                // roomNo={roomNo}
+                fetchStaff={() => fetchStaff()}
+                handleStatusChange={handleStatusChange}
+              />
+            )}
           </div>
-          {/* Modal */}
-          {isModalOpen && (
-            <Modal
-              staffData={staffData}
-              isOpen={isModalOpen}
-              service={selectedService}
-              onClose={() => setModalOpen(false)}
-              info={info}
-              // building={building}
-              // roomNo={roomNo}
-              fetchStaff={() => fetchStaff()}
-              handleStatusChange={handleStatusChange}
-            />
-          )}
         </div>
       </div>
     </div>
