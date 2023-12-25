@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
 import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
+import moment from "moment";
 
 function StaffProfile() {
   const email = localStorage.getItem("username");
@@ -167,22 +168,20 @@ function StaffProfile() {
 
   // date picker
   const onChange = (date, dateString) => {
-    console.log("check date", dateString);
-    setDateOfBirth(dateString);
-    formik.setFieldValue("dateOfBirth", dateString);
+    setDateOfBirth(date.toISOString().slice(0, 10));
+    formik.setFieldValue("dateOfBirth", date.toISOString().slice(0, 10));
   };
+
   const dateFormat = "YYYY-MM-DD";
+  const displayFormat = "DD/MM/YYYY";
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="container-fluid mt-5">
+    <div className="container-fluid mt-5">
+      <form onSubmit={formik.handleSubmit}>
         <div className="row">
           <h5>Thông tin</h5>
           <div className="col-md-3">
-            <div
-              className="info-img"
-              style={{ backgroundColor: "#fff", height: "100%" }}
-            >
+            <div className="info-img">
               <div className="img-container">
                 <img
                   src={selectedImage}
@@ -232,8 +231,8 @@ function StaffProfile() {
               </div>
               <div className="body-info">
                 <div className="row">
-                  <div class="col-md-6 form-group">
-                    <label for="">Họ và tên</label>
+                  <div className="col-md-6 form-group">
+                    <label>Họ và tên</label>
                     <input
                       className="form-control"
                       type="text"
@@ -244,8 +243,8 @@ function StaffProfile() {
                       onChange={handleNameChange}
                     />
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label for="exampleInputEmail1">Địa chỉ email</label>
+                  <div className="col-md-6 form-group">
+                    <label htmlFor="exampleInputEmail1">Địa chỉ email</label>
                     <input
                       type="email"
                       class="form-control"
@@ -255,8 +254,8 @@ function StaffProfile() {
                     />
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="">Địa chỉ</label>
+                <div className="form-group">
+                  <label>Địa chỉ</label>
                   <input
                     className="form-control"
                     type="text"
@@ -266,8 +265,8 @@ function StaffProfile() {
                   />
                 </div>
                 <div className="row">
-                  <div class="col-md-6 form-group">
-                    <label for="">Số điện thoại</label>
+                  <div className="col-md-6 form-group">
+                    <label>Số điện thoại</label>
                     <input
                       className="form-control"
                       type="text"
@@ -283,12 +282,13 @@ function StaffProfile() {
                       )}
                     </span>
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label for="">Ngày sinh</label>
+                  <div className="col-md-6 form-group">
+                    <label>Ngày sinh</label>
                     <Space direction="vertical">
                       <DatePicker
                         onChange={onChange}
                         defaultValue={dayjs(`${dateOfBirth}`, dateFormat)}
+                        format={displayFormat}
                       />
                     </Space>
                   </div>
@@ -300,8 +300,8 @@ function StaffProfile() {
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 

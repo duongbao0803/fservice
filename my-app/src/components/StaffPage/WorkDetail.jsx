@@ -91,7 +91,7 @@ function WorkDetail() {
   return (
     <>
       <div className="container-fluid mt-5">
-        <div className="workdetail px-3">
+        <div className="workdetail">
           <div className="mt-4" style={{ width: "100%" }}>
             <div className="row">
               <div className="col-md-12 mb-4">
@@ -265,7 +265,7 @@ function WorkDetail() {
                                   </span>
                                 </p>
                               ) : state?.info?.isConfirm === true ? (
-                                <p style={{ padding: "10px" }}>
+                                <p style={{ padding: "10px 0" }}>
                                   <i
                                     className="fa-solid fa-check"
                                     style={{ color: "#03AC00" }}
@@ -276,7 +276,7 @@ function WorkDetail() {
                                   </span>
                                 </p>
                               ) : state?.info?.isConfirm === false ? (
-                                <p style={{ padding: "10px" }}>
+                                <p style={{ padding: "10px 0" }}>
                                   <i
                                     class="fa-solid fa-xmark"
                                     style={{ color: "#952323" }}
