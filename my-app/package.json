@@ -28,7 +28,6 @@
     "mdb": "^0.1.0",
     "mdb-react-ui-kit": "^6.3.0",
     "mdbreact": "^5.2.0",
-    "moment": "^2.29.4",
     "react": "^17.0.0 || ^18.0.0",
     "react-apexcharts": "^1.4.1",
     "react-bootstrap": "^2.9.0",
