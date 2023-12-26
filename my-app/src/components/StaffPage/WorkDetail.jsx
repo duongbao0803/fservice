@@ -6,23 +6,24 @@ import { Steps } from "antd";
 import { Rating } from "@mui/material";
 import {
   confirmWork,
+  getApartmentId,
   getOrder,
-  getStaffWorkPaging,
+  getWorkDetail,
 } from "../../services/UserService";
 import { toast } from "react-toastify";
 import { formatDate, formatTime } from "../../utils/tools";
 
-function WorkDetail() {
+function WorkDetail({ id }) {
   const { Step } = Steps;
   const { state } = useLocation();
   const [jobAccepted, setJobAccepted] = useState(false);
   const [currentSteps, setCurrentSteps] = useState(0);
+  const [workDetail, setWorkDetail] = useState({});
+  const [apartmentInfo, setApartmentInfo] = useState({});
+  const [workStatus, setWorkStatus] = useState("");
 
   useEffect(() => {
-    if (
-      state?.info?.status.includes("Working") ||
-      state?.info?.status.includes("Completed")
-    ) {
+    if (workStatus?.includes("Working") || workStatus?.includes("Completed")) {
       setJobAccepted(true);
     } else {
       setJobAccepted(false);
@@ -30,40 +31,39 @@ function WorkDetail() {
     // fetchStaff(1);
 
     setCurrentSteps(
-      state?.info?.status.includes("Pending")
+      workStatus?.includes("Pending")
         ? 0
-        : state?.info?.status.includes("Working")
+        : workStatus?.includes("Working")
         ? 1
-        : state?.info?.status.includes("Completed")
+        : workStatus?.includes("Completed")
         ? 3
         : -1
     );
-  }, [state?.info?.status]);
+  }, [workStatus]);
 
-  const fetchStaff = async (pageNum) => {
-    try {
-      const res = await getStaffWorkPaging(
-        localStorage.getItem("username"),
-        pageNum
-      );
-      if (res && res.status === 200) {
-      }
-    } catch (Error) {
-      console.log("Error fetching: ", Error);
-    }
-  };
+  // const fetchStaff = async (pageNum) => {
+  //   try {
+  //     const res = await getStaffWorkPaging(
+  //       localStorage.getItem("username"),
+  //       pageNum
+  //     );
+  //     if (res && res.status === 200) {
+  //     }
+  //   } catch (Error) {
+  //     console.log("Error fetching: ", Error);
+  //   }
+  // };
 
   const handleSubmit = async () => {
     try {
-      const res = await getOrder(state?.info?.id, {
-        id: state?.info?.id,
+      const res = await getOrder(id, {
+        id: id,
         status: 1,
       });
       if (res && res.status === 200) {
         toast.success("Nhận việc thành công");
-        await fetchStaff(1);
+        await getWork(id);
         setJobAccepted(true);
-        console.log("check res", res);
       } else {
         toast.success("Nhận việc thất bại");
       }
@@ -73,18 +73,48 @@ function WorkDetail() {
   };
   const handleConfirm = async () => {
     try {
-      const res = await confirmWork(state?.info?.id, {
-        id: state?.info?.id,
+      const res = await confirmWork(id, {
+        id: id,
         status: 2,
       });
       if (res && res.status === 200) {
-        fetchStaff(1);
+        getWork(id);
         toast.success("Hoàn thành công việc");
       } else {
         toast.success("Hoàn thành công việc thất bại");
       }
     } catch (error) {
       console.log("Error Completing Service", error);
+    }
+  };
+
+  // new
+  useEffect(() => {
+    getWork(id);
+  }, []);
+
+  const getWork = async (id) => {
+    try {
+      const res = await getWorkDetail(id);
+      if (res && res.status === 200) {
+        setWorkDetail(res.data);
+        setWorkStatus(res.data.status);
+        await fetchApartment(res.data.apartmentPackage.apartmentId);
+      }
+    } catch (Error) {
+      console.log("Error fetching: ", Error);
+    }
+  };
+
+  const fetchApartment = async (id) => {
+    try {
+      const response = await getApartmentId(id);
+      if (response && response.data && response.status === 200) {
+        setApartmentInfo(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching apartment:", error);
+      return null;
     }
   };
 
@@ -119,7 +149,7 @@ function WorkDetail() {
                           <td>
                             <p>
                               {" "}
-                              {state?.info?.service?.name ||
+                              {workDetail?.service?.name ||
                                 "VỆ SINH NHÀ CỬA, BÀN GHẾ"}
                             </p>
                           </td>
@@ -129,16 +159,15 @@ function WorkDetail() {
                           <td>
                             <p>
                               {" "}
-                              Tòa {state?.apartmentInfo?.type?.building?.name} -
-                              Phòng {state?.apartmentInfo?.roomNo} - Vinhomes
-                              Grand Park
+                              Tòa {apartmentInfo?.type?.building?.name} - Phòng{" "}
+                              {apartmentInfo?.roomNo} - Vinhomes Grand Park
                             </p>
                           </td>
                         </tr>
                         <tr>
                           <td className="table-title">Loại căn hộ:</td>
                           <td>
-                            <p>{state?.apartmentInfo?.type?.type}</p>
+                            <p>{apartmentInfo?.type?.type}</p>
                           </td>
                         </tr>
                         <tr>
@@ -146,15 +175,15 @@ function WorkDetail() {
                           <td>
                             <p>
                               {" "}
-                              {formatDate(state?.info?.createdDate)} -{" "}
-                              {state?.info?.shiftTime}
+                              {formatDate(workDetail?.createdDate)} -{" "}
+                              {workDetail?.shiftTime}
                             </p>
                           </td>
                         </tr>
                         <tr>
                           <td className="table-title">Ghi chú:</td>
                           <td>
-                            <p>{state?.info?.note}</p>
+                            <p>{workDetail?.note}</p>
                           </td>
                         </tr>
                       </tbody>
@@ -167,13 +196,13 @@ function WorkDetail() {
                         <tr>
                           <td className="table-title">Khách hàng:</td>
                           <td>
-                            <p>{state?.info?.customerName}</p>
+                            <p>{workDetail?.customerName}</p>
                           </td>
                         </tr>
                         <tr>
                           <td className="table-title">Điện thoại:</td>
                           <td>
-                            <p>{state?.info?.customerPhone}</p>
+                            <p>{workDetail?.customerPhone}</p>
                           </td>
                         </tr>
                       </tbody>
@@ -199,12 +228,12 @@ function WorkDetail() {
                         description={
                           <div>
                             <p className="text-date">
-                              {formatDate(state?.info?.createdDate)} -{" "}
-                              {formatTime(state?.info?.createdDate)}
+                              {formatDate(workDetail?.createdDate)} -{" "}
+                              {formatTime(workDetail?.createdDate)}
                             </p>
                             {!jobAccepted &&
-                            !state?.info?.status.includes("Completed") &&
-                            !state?.info?.status.includes("Working") ? (
+                            !workStatus?.includes("Completed") &&
+                            !workStatus?.includes("Working") ? (
                               <button
                                 className="btn-work"
                                 onClick={() => handleSubmit()}
@@ -219,17 +248,17 @@ function WorkDetail() {
                         title="Đang thực hiện"
                         description={
                           <div>
-                            {state?.info?.workingDate !== null ? (
+                            {workDetail?.workingDate !== null ? (
                               <p className="text-date">
-                                {formatDate(state?.info?.workingDate)} -{" "}
-                                {formatTime(state?.info?.workingDate)}
+                                {formatDate(workDetail?.workingDate)} -{" "}
+                                {formatTime(workDetail?.workingDate)}
                               </p>
                             ) : (
                               ""
                             )}
 
                             {jobAccepted &&
-                              !state?.info?.status.includes("Completed") && (
+                              !workStatus?.includes("Completed") && (
                                 <button
                                   className="btn-work btn-active"
                                   onClick={() => handleConfirm()}
@@ -243,17 +272,17 @@ function WorkDetail() {
                       <Step
                         title="Đã hoàn thành"
                         description={
-                          state?.info?.status.includes("Pending") ||
-                          state?.info?.status.includes("Working") ? (
+                          workStatus?.includes("Pending") ||
+                          workStatus?.includes("Working") ? (
                             ""
                           ) : (
                             <div>
                               <p className="text-date">
-                                {formatDate(state?.info?.completeDate)} -{" "}
-                                {formatTime(state?.info?.completeDate)}
+                                {formatDate(workDetail?.completeDate)} -{" "}
+                                {formatTime(workDetail?.completeDate)}
                               </p>
 
-                              {state?.info?.isConfirm === null ? (
+                              {workDetail?.isConfirm === null ? (
                                 <p style={{ padding: "10px 0" }}>
                                   <i
                                     className="fa-solid fa-spinner"
@@ -264,7 +293,7 @@ function WorkDetail() {
                                     Chưa xác nhận
                                   </span>
                                 </p>
-                              ) : state?.info?.isConfirm === true ? (
+                              ) : workDetail?.isConfirm === true ? (
                                 <p style={{ padding: "10px 0" }}>
                                   <i
                                     className="fa-solid fa-check"
@@ -275,7 +304,7 @@ function WorkDetail() {
                                     Đã xác nhận hoàn thành
                                   </span>
                                 </p>
-                              ) : state?.info?.isConfirm === false ? (
+                              ) : workDetail?.isConfirm === false ? (
                                 <p style={{ padding: "10px 0" }}>
                                   <i
                                     class="fa-solid fa-xmark"
@@ -303,7 +332,7 @@ function WorkDetail() {
                   }}
                 >
                   <h6 className="section-title">ĐÁNH GIÁ</h6>
-                  {state?.info?.isConfirm !== null ? (
+                  {workDetail?.isConfirm !== null ? (
                     <div>
                       <table className="feedback-table">
                         <tr>
@@ -313,7 +342,7 @@ function WorkDetail() {
                           <td>
                             <Rating
                               name="simple-controlled"
-                              value={state?.info?.rating}
+                              value={workDetail?.rating}
                               readOnly
                               sx={{ fontSize: "1.8rem" }}
                             />
@@ -324,7 +353,7 @@ function WorkDetail() {
                             <p>Nhận xét:</p>
                           </td>
                           <td>
-                            <p>{state?.info?.feedback || "None"}</p>
+                            <p>{workDetail?.feedback || ""}</p>
                           </td>
                         </tr>
                       </table>

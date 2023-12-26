@@ -3,8 +3,10 @@ import "../assets/css/styleStaffWork.css";
 import WorkDetail from "../components/StaffPage/WorkDetail";
 import StaffLayout from "../Layout/StaffLayout";
 import { Helmet } from "react-helmet";
+import { useParams } from "react-router-dom";
 
 function Staff() {
+  const { id } = useParams();
   return (
     <>
       <Helmet>
@@ -12,7 +14,7 @@ function Staff() {
       </Helmet>
 
       <StaffLayout>
-        <WorkDetail />
+        <WorkDetail id={id} />
       </StaffLayout>
     </>
   );

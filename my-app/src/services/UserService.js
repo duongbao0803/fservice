@@ -209,19 +209,23 @@ const getAllNotification = (pageNum) => {
 
 const markNotificationRead = (id) => {
   const refreshedConfig = refreshData();
-  return config.put(
-    `/api/notifications/${id}`,
-    refreshedConfig
-  );
-}
+  return config.put(`/api/notifications/${id}`, refreshedConfig);
+};
 
 const markAllNotificationRead = () => {
   const refreshedConfig = refreshData();
-  return config.put(
-    `/api/notifications/account`,
-    refreshedConfig
-  );
-}
+  return config.put(`/api/notifications/account`, refreshedConfig);
+};
+
+const getNumbersUnReadNotification = () => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/notifications/numbers-unread`, refreshedConfig);
+};
+
+const getWorkDetail = (id) => {
+  const refreshedConfig = refreshData();
+  return config.get(`/api/orderdetails/${id}`, refreshedConfig);
+};
 
 export {
   fetchUser,
@@ -257,5 +261,7 @@ export {
   getApartmentInfo,
   getAllNotification,
   markNotificationRead,
-  markAllNotificationRead
+  markAllNotificationRead,
+  getNumbersUnReadNotification,
+  getWorkDetail,
 };

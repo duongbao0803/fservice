@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../ThemeContext/ThemeContext.jsx";
 import { Box, Avatar, Typography, Badge } from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -7,6 +7,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { Button, Dropdown } from "antd";
 import Notification from "../Notification/Notification.jsx";
 import { useState } from "react";
+import { getNumbersUnReadNotification } from "../../services/UserService.js";
 
 function Navbar() {
   const theme = useContext(ThemeContext);
@@ -33,6 +34,15 @@ function Navbar() {
   const handleCount = (count) => {
     setNoticeCount(count);
   };
+
+  const countNewNotices = async () => {
+    const newNotices = (await getNumbersUnReadNotification()).data.message;
+    setNoticeCount(newNotices);
+  };
+
+  useEffect(() => {
+    countNewNotices();
+  }, []);
 
   return (
     <div
@@ -76,7 +86,7 @@ function Navbar() {
           </Button>
 
           <Dropdown
-            overlay={<Notification handleCount={handleCount} />}
+            overlay={<Notification />}
             placement="bottomRight"
             arrow={{
               pointAtCenter: true,
@@ -96,18 +106,7 @@ function Navbar() {
               <span className="notification-count" style={style}>
                 {noticeCount}
               </span>
-
-              {/* <Badge
-                color="error"
-                variant="dot"
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              > */}
-
               <NotificationsIcon />
-              {/* </Badge> */}
             </Button>
           </Dropdown>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   getAllNotification,
+  getNumbersUnReadNotification,
   markAllNotificationRead,
   markNotificationRead,
 } from "../../services/UserService";
@@ -15,6 +16,8 @@ function NotiBody({ handleCountChange }) {
   const [page, setPage] = useState(1);
   const [newNoticeCount, setNewNoticeCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -25,8 +28,18 @@ function NotiBody({ handleCountChange }) {
   }, [page]);
 
   useEffect(() => {
-    countNewNotices();
-  }, [notiInfo]);
+    const currentUrl = window.location.href;
+    console.log("check url", currentUrl);
+    if (currentUrl.includes("/staff")) {
+      setCurrentPage("staff");
+    } else {
+      setCurrentPage("user");
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   countNewNotices();
+  // }, [notiInfo]);
 
   const getNotification = async (pageNumber) => {
     try {
@@ -45,19 +58,26 @@ function NotiBody({ handleCountChange }) {
     }
   };
 
-  const countNewNotices = () => {
-    const newNotices = notiInfo.filter((noti) => !noti.isRead).length;
-    setNewNoticeCount(newNotices);
-    handleCountChange(newNotices);
-  };
+  // const countNewNotices = async () => {
+  //   // const newNotices = notiInfo.filter((noti) => !noti.isRead).length;
+  //   // setNewNoticeCount(newNotices);
+  //   // handleCountChange(newNotices);
+  // };
 
-  const handleNotiClick = async (id, packageId, type) => {
+  const handleNotiClick = async (id, modelId, type) => {
     await markNotificationRead(id);
     await getNotification(page);
     if (type.includes("Order")) {
-      window.location.href = "/user/manage-order/";
+      navigate("/user/manage-order/");
+      // window.location.href = "/user/manage-order/";
     } else if (type.includes("Service")) {
-      window.location.href = `/user/manage-package/${packageId}`;
+      if (currentPage === "user") {
+        navigate(`/user/manage-package/${modelId}`);
+        // window.location.href = `/user/manage-package/${modelId}`;
+      } else if (currentPage === "staff") {
+        navigate(`/staff/work/${modelId}`);
+        // window.location.href = `/staff/work/${modelId}`;
+      }
     } else {
       window.location.href = "#";
     }

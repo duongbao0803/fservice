@@ -10,6 +10,8 @@ import Notification from "../Notification/Notification";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Badge } from "@mui/material";
 import { useState } from "react";
+import { useEffect } from "react";
+import { getNumbersUnReadNotification } from "../../services/UserService";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
@@ -30,12 +32,25 @@ function Header() {
     borderRadius: "50%",
   };
 
-  const handleCount = (count) => {
-    setNoticeCount(count);
+  const countNewNotices = async () => {
+    const newNotices = (await getNumbersUnReadNotification()).data.message;
+    setNoticeCount(newNotices);
   };
+
+  // const handleCount = (count) => {
+  //   setNoticeCount(count);
+  // };
   const handleLogoutClick = () => {
     handleLogout(navigate);
   };
+
+  const handleClickLogo = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
+    countNewNotices();
+  }, []);
 
   return (
     <>
@@ -56,7 +71,8 @@ function Header() {
             src={require("../../assets/img/logo_web_2.png")}
             alt=""
             width="90px"
-            style={{ margin: "0" }}
+            style={{ margin: "0", cursor: "pointer" }}
+            onClick={handleClickLogo}
           />
         </div>
         <div className="container-fluid">
@@ -88,7 +104,8 @@ function Header() {
                 ""
               ) : (
                 <Dropdown
-                  overlay={<Notification handleCount={handleCount} />}
+                  // overlay={<Notification handleCount={handleCount} />}
+                  overlay={<Notification />}
                   placement="bottomRight"
                   arrow={{
                     pointAtCenter: true,
@@ -96,14 +113,6 @@ function Header() {
                   trigger={["click"]}
                 >
                   <Button className="btn-noti">
-                    {/* <Badge
-                      color="error"
-                      variant="dot"
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                    > */}
                     <span className="notification-count" style={style}>
                       {noticeCount}
                     </span>
