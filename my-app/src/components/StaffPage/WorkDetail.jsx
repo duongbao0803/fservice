@@ -21,6 +21,7 @@ function WorkDetail({ id }) {
   const [workDetail, setWorkDetail] = useState({});
   const [apartmentInfo, setApartmentInfo] = useState({});
   const [workStatus, setWorkStatus] = useState("");
+  const [rating, setRating] = React.useState(2);
 
   useEffect(() => {
     if (workStatus?.includes("Working") || workStatus?.includes("Completed")) {
@@ -100,6 +101,8 @@ function WorkDetail({ id }) {
         setWorkDetail(res.data);
         setWorkStatus(res.data.status);
         await fetchApartment(res.data.apartmentPackage.apartmentId);
+        console.log("check work", res.data);
+        setRating(res.data.rating);
       }
     } catch (Error) {
       console.log("Error fetching: ", Error);
@@ -342,7 +345,7 @@ function WorkDetail({ id }) {
                           <td>
                             <Rating
                               name="simple-controlled"
-                              value={workDetail?.rating}
+                              value={rating}
                               readOnly
                               sx={{ fontSize: "1.8rem" }}
                             />
