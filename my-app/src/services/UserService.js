@@ -227,6 +227,15 @@ const getWorkDetail = (id) => {
   return config.get(`/api/orderdetails/${id}`, refreshedConfig);
 };
 
+const updateDeviceToken = (id, data) => {
+  const refreshedConfig = refreshData();
+  return config.put(
+    `/api/authentication/update-device-token?accountId=${data.accountId}&token=${data.token}`,
+    data,
+    refreshedConfig
+  );
+};
+
 export {
   fetchUser,
   loginAPI,
@@ -264,4 +273,5 @@ export {
   markAllNotificationRead,
   getNumbersUnReadNotification,
   getWorkDetail,
+  updateDeviceToken,
 };

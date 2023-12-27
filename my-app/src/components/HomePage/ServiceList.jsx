@@ -36,8 +36,9 @@ function ServiceList() {
 
         <div className="row row-content service d-flex justify-center">
           {loading
-            ? Array.from({ length: 3 }).map((_) => (
+            ? Array.from({ length: 3 }).map((_, index) => (
                 <div
+                  key={index}
                   className="col-12 col-sm-12 col-md-6 col-lg-4"
                   style={{ position: "relative" }}
                 >

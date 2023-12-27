@@ -29,7 +29,6 @@ function NotiBody({ handleCountChange }) {
 
   useEffect(() => {
     const currentUrl = window.location.href;
-    console.log("check url", currentUrl);
     if (currentUrl.includes("/staff")) {
       setCurrentPage("staff");
     } else {
@@ -128,6 +127,7 @@ function NotiBody({ handleCountChange }) {
             >
               {notiInfo?.map((noti, index) => (
                 <div
+                  key={noti.id}
                   className={
                     !noti.isRead
                       ? "mb-2 noti-detail noti-detail__read"

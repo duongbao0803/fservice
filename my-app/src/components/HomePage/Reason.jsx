@@ -20,8 +20,8 @@ function Reason() {
                 />
               </div>
             </div>
-            {reasonList.map((reason) => (
-              <div className="col-12 col-sm-12 col-md-6 col-lg-3">
+            {reasonList.map((reason, index) => (
+              <div key={index} className="col-12 col-sm-12 col-md-6 col-lg-3">
                 <div className="service-img mb-3">
                   <img
                     src={reason.image}
