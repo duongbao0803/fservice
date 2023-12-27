@@ -29,3 +29,10 @@
 .noti-detail__read:hover {
   background-color: #ffc18f77;
 }
+
+.loading-noti {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}

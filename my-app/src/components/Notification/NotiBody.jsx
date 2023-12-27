@@ -107,7 +107,7 @@ function NotiBody({ handleCountChange }) {
       </div>
       {isLoading ? (
         <div style={{ height: "360px", overflow: "scroll" }}>
-          <div className="text-center">
+          <div className="loading-noti">
             <Spinner animation="border" variant="primary" />
           </div>
         </div>
@@ -117,7 +117,7 @@ function NotiBody({ handleCountChange }) {
             <InfiniteList
               loader={
                 <div style={{ minHeight: "100vh" }}>
-                  <div className="text-center">
+                  <div className="loading-noti">
                     <Spinner animation="border" variant="primary" />
                   </div>
                 </div>

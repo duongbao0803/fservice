@@ -202,7 +202,7 @@ const getCustomerConfirm = (orderDetailId, data) => {
 const getAllNotification = (pageNum) => {
   const refreshedConfig = refreshData();
   return config.get(
-    `/api/notifications/account?PageNumber=${pageNum}&PageSize=3`,
+    `/api/notifications/account?PageNumber=${pageNum}&PageSize=5`,
     refreshedConfig
   );
 };
