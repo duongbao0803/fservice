@@ -8,6 +8,8 @@ import { Button, Dropdown } from "antd";
 import Notification from "../Notification/Notification.jsx";
 import { useState } from "react";
 import { getNumbersUnReadNotification } from "../../services/UserService.js";
+import { onMessageListener } from "../../firebase/firebase.js";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const theme = useContext(ThemeContext);
@@ -43,6 +45,14 @@ function Navbar() {
   useEffect(() => {
     countNewNotices();
   }, []);
+
+  onMessageListener()
+    .then((payload) => {
+      console.log("check noti", payload);
+      toast.info(payload.notification.body);
+      countNewNotices();
+    })
+    .catch((err) => console.log("failed: ", err));
 
   return (
     <div

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../utils/tools";
 import "../Header/styleHeader.css";
@@ -12,6 +12,7 @@ import { Badge } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getNumbersUnReadNotification } from "../../services/UserService";
+import { onMessageListener } from "../../firebase/firebase";
 
 function Header() {
   const logged = localStorage.getItem("isLogged");
@@ -51,6 +52,18 @@ function Header() {
   useEffect(() => {
     countNewNotices();
   }, []);
+
+  onMessageListener()
+    .then((payload) => {
+      // setNotification({
+      //   title: payload.notification.title,
+      //   body: payload.notification.body,
+      // });
+      console.log("check noti", payload);
+      toast.info(payload.notification.body);
+      countNewNotices();
+    })
+    .catch((err) => console.log("failed: ", err));
 
   return (
     <>

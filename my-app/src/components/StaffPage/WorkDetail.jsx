@@ -101,7 +101,6 @@ function WorkDetail({ id }) {
         setWorkDetail(res.data);
         setWorkStatus(res.data.status);
         await fetchApartment(res.data.apartmentPackage.apartmentId);
-        console.log("check work", res.data);
         setRating(res.data.rating);
       }
     } catch (Error) {

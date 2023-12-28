@@ -230,7 +230,7 @@ const getWorkDetail = (id) => {
 const updateDeviceToken = (id, data) => {
   const refreshedConfig = refreshData();
   return config.put(
-    `/api/authentication/update-device-token?accountId=${data.accountId}&token=${data.token}`,
+    `/api/authentication/update-device-token`,
     data,
     refreshedConfig
   );

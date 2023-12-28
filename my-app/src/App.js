@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { Launch, updateDeviceToken } from "./services/UserService";
 import AppRoutes from "./routes/AppRoutes";
 import { fetchToken, onMessageListener } from "./firebase/firebase";
+import { toast } from "react-toastify";
 
 export const Session = createContext(null);
 
@@ -39,7 +40,7 @@ function App() {
         ) {
           const tokenData = {
             accountId: localStorage.getItem("id"),
-            token: localStorage.getItem("deviceToken"),
+            deviceToken: localStorage.getItem("deviceToken"),
           };
           sendToken(tokenData.accountId, tokenData);
         }
@@ -56,15 +57,16 @@ function App() {
     fetchToken(setDeviceTokenFound);
   }, []);
 
-  onMessageListener()
-    .then((payload) => {
-      setNotification({
-        title: payload.notification.title,
-        body: payload.notification.body,
-      });
-      console.log(payload);
-    })
-    .catch((err) => console.log("failed: ", err));
+  // onMessageListener()
+  //   .then((payload) => {
+  //     setNotification({
+  //       title: payload.notification.title,
+  //       body: payload.notification.body,
+  //     });
+  //     console.log("check noti", payload);
+  //     toast.info(payload.notification.body);
+  //   })
+  //   .catch((err) => console.log("failed: ", err));
 
   const sendToken = async (id, data) => {
     try {
