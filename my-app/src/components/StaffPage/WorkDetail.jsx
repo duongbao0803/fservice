@@ -92,7 +92,7 @@ function WorkDetail({ id }) {
   // new
   useEffect(() => {
     getWork(id);
-  }, []);
+  }, [id]);
 
   const getWork = async (id) => {
     try {

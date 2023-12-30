@@ -11,7 +11,7 @@ const ListPackage = () => {
 
   useEffect(() => {
     fetchPackage();
-  }, []);
+  }, [id]);
 
   const fetchPackage = async () => {
     try {

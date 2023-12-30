@@ -19,6 +19,7 @@ const Frame = () => {
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [currentPackageId, setCurrentPackageId] = useState(0);
 
   useEffect(() => {
     fetchFrame();
@@ -30,6 +31,7 @@ const Frame = () => {
       const res = await config.get(`/api/packages/${id}`);
       setPrice(res.data.packagePrices);
       setPackageName(res.data.name);
+      setCurrentPackageId(id);
 
       //Load description
       const response = await config.get(`/api/packages/${id}?typeId=${1}`);
@@ -70,6 +72,10 @@ const Frame = () => {
       toast.warning("Bạn phải đăng kí tài khoản trước khi đặt dịch vụ");
     }
   };
+
+  if (id !== currentPackageId) {
+    fetchFrame();
+  }
 
   const style = {
     border: "1px solid #333",

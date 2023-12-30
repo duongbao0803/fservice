@@ -29,7 +29,7 @@ import ServiceList from "../components/HomePage/ServiceList";
 
 const AppRoutes = () => {
   const role = localStorage.getItem("role");
-  const routing = useRoutes(ThemeRoutes);
+  // const routing = useRoutes(ThemeRoutes);
 
   return (
     <>

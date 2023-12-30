@@ -4,6 +4,7 @@ import BannerPackage from "../components/PackageDetails/BannerPackage";
 import Frame from "../components/PackageDetails/Frame";
 import ListPackage from "../components/PackageDetails/ListPackage";
 import "../assets/css/stylepackageDetail.css";
+import ServiceList from "../components/HomePage/ServiceList";
 
 const PackageDetail = () => {
   return (
@@ -16,6 +17,7 @@ const PackageDetail = () => {
       <div className="section mb-5 mt-5">
         <ListPackage />
         <Frame />
+        <ServiceList />
       </div>
     </>
   );

@@ -32,7 +32,7 @@ function Rightbar({ id }) {
 
   useEffect(() => {
     getApartmentPackage();
-  }, []);
+  }, [id]);
   const getApartmentPackage = async () => {
     try {
       const res = await getApartmentPackageDetail(id);
