@@ -20,7 +20,7 @@ function Header() {
   const navigate = useNavigate();
   const linkAvt = localStorage.getItem("avatar");
   const [noticeCount, setNoticeCount] = useState(0);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  // const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const style = {
     position: "absolute",
@@ -59,7 +59,6 @@ function Header() {
       //   title: payload.notification.title,
       //   body: payload.notification.body,
       // });
-      console.log("check noti", payload);
       toast.info(payload.notification.body);
       countNewNotices();
     })
