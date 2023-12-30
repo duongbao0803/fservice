@@ -29,7 +29,6 @@ function NotiBody({ handleCountChange }) {
 
   useEffect(() => {
     const currentUrl = window.location.href;
-    console.log("check url", currentUrl);
     if (currentUrl.includes("/staff")) {
       setCurrentPage("staff");
     } else {
@@ -64,8 +63,10 @@ function NotiBody({ handleCountChange }) {
   //   // handleCountChange(newNotices);
   // };
 
-  const handleNotiClick = async (id, modelId, type) => {
-    await markNotificationRead(id);
+  const handleNotiClick = async (id, modelId, type, isRead) => {
+    if (!isRead) {
+      await markNotificationRead(id);
+    }
     await getNotification(page);
     if (type.includes("Order")) {
       navigate("/user/manage-order/");
@@ -135,7 +136,12 @@ function NotiBody({ handleCountChange }) {
                   }
                   style={{ display: "flex", alignItems: "center" }}
                   onClick={() =>
-                    handleNotiClick(noti.id, noti.modelId, noti.type)
+                    handleNotiClick(
+                      noti.id,
+                      noti.modelId,
+                      noti.type,
+                      noti.isRead
+                    )
                   }
                 >
                   <div style={{ flex: "1" }}>
