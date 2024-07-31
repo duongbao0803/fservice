@@ -1,7 +1,7 @@
 # FService - Student Home Membership Cart
 
 <div align="center">
-    <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1084829266581147658/1172830452499894272/logo_web.png" />
+    <img style="width: 100px;" src="https://firebasestorage.googleapis.com/v0/b/swp391-f3aae.appspot.com/o/Fservice%2Flogo_web_2.png?alt=media&token=8bfdfc00-53c4-417e-8044-3f62ef0b9fe4" />
     <p><a href="https://fservices.vercel.app/">FService</a> is a web application that provides service for students living in <a href="https://vinhome.com.vn/vinhomes-grand-park/">Vinhomes Grand Park</a> in Thu Duc, HCMC.</p>
 </div>
 
